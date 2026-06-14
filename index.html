@@ -3,1140 +3,970 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex,nofollow">
-<title>Alpha Research Ops Lab Dashboard</title>
+<title>Alpha Research Ops Lab 대시보드</title>
 <style>
-:root{--ink:#172033;--muted:#526070;--line:#d8e0ea;--soft:#f6f8fb;--panel:#fff;--accent:#0f766e;--warn:#92400e}
-*{box-sizing:border-box} body{font-family:Arial,"Malgun Gothic",sans-serif;margin:0;background:#eef2f6;color:var(--ink);line-height:1.5} main{max-width:1280px;margin:0 auto;padding:22px} h1{font-size:30px;margin:0 0 8px} h2{font-size:22px;margin:0 0 8px} p{margin:0 0 10px} .hero{padding:20px 0} .notice{background:#fff7ed;border:1px solid #fed7aa;padding:12px;margin:12px 0} .panel{background:var(--panel);border:1px solid var(--line);padding:16px;margin:16px 0} .cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:12px 0} .card{background:#fbfcfe;border:1px solid var(--line);padding:12px} .count{font-size:22px;font-weight:700;color:var(--accent)} .table-wrap{overflow-x:auto} table{border-collapse:collapse;width:100%;min-width:1160px;background:#fff} th,td{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top;font-size:13px} th{background:#eef3f8} small{display:block;color:var(--muted);margin-top:3px} details{margin-top:6px} summary{cursor:pointer;font-weight:700;color:#1f3a5f} .signal-list{margin:8px 0;padding-left:18px} .signal-list span{color:var(--muted);margin-left:6px} dl{display:grid;grid-template-columns:120px 1fr;gap:4px 8px;margin:8px 0 0} dt{font-weight:700} dd{margin:0} .muted{color:var(--muted)} a{color:#2563eb;font-weight:700;text-decoration:none} @media(max-width:840px){main{padding:14px} .cards{grid-template-columns:1fr} table{min-width:980px}}
+:root { color-scheme: dark; --bg:#0c1117; --panel:#151a22; --panel2:#10161d; --line:#29313d; --text:#e8edf7; --muted:#a8b1c1; --accent:#48d1c7; --warn:#d39a4a; }
+* { box-sizing: border-box; }
+body { margin:0; background:var(--bg); color:var(--text); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",Arial,sans-serif; line-height:1.55; }
+main { width:min(1380px, calc(100% - 28px)); margin:0 auto; padding:32px 0 56px; }
+header { margin-bottom:24px; }
+.kicker { color:var(--muted); font-size:14px; margin:0 0 10px; }
+h1 { font-size:clamp(30px,5vw,56px); line-height:1.05; margin:0 0 12px; letter-spacing:0; }
+p { margin:0 0 12px; }
+.notice { border:1px solid rgba(211,154,74,.45); background:#21170e; padding:16px 18px; margin:20px 0; }
+.stats { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; margin:18px 0 22px; }
+.stat { border:1px solid var(--line); background:var(--panel); padding:14px 16px; min-height:96px; }
+.stat strong { display:block; color:var(--accent); font-size:30px; line-height:1.1; }
+.stat span { color:var(--muted); font-size:14px; }
+section { margin-top:26px; }
+h2 { margin:0 0 12px; font-size:22px; }
+.table-wrap { overflow:auto; border:1px solid var(--line); background:var(--panel2); }
+table { width:100%; border-collapse:collapse; min-width:1180px; }
+th, td { padding:10px 12px; border-bottom:1px solid var(--line); vertical-align:top; text-align:left; }
+th { position:sticky; top:0; background:#151c26; color:#dce5f5; font-weight:700; }
+td.num { text-align:right; white-space:nowrap; font-variant-numeric:tabular-nums; }
+.strong { color:#fbf3cf; font-weight:700; }
+.muted { color:var(--muted); font-size:13px; }
+.signal-compact { max-width:280px; }
+details { margin-top:6px; }
+summary { color:var(--accent); cursor:pointer; }
+a { color:var(--accent); text-decoration:none; }
+a:hover { text-decoration:underline; }
+.policy-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+.policy-card { border:1px solid var(--line); background:var(--panel); padding:14px 16px; }
+.period-section { scroll-margin-top:18px; }
+.compact-table table { min-width:840px; }
+footer { margin-top:34px; color:var(--muted); font-size:13px; }
+@media (max-width: 760px) { main { width:min(100% - 24px, 1380px); padding-top:24px; } .stats { grid-template-columns:1fr; } .policy-grid { grid-template-columns:1fr; } th, td { padding:9px 10px; } }
 </style>
 </head>
 <body>
-<main id="top">
-<header class="hero">
-  <p class="muted">Public snapshot ? generated 2026-06-14T12:51:20Z</p>
-  <h1>Alpha Research Ops Lab ????</h1>
-  <p>???? ?? ????? ??? ??? ??/?? ?? ??? ???? ??? ?? ?????.</p>
+<main>
+<header>
+  <p class="kicker">공개용 스냅샷 &middot; 생성 2026-06-14T13:08:57Z</p>
+  <h1>Alpha Research Ops Lab 대시보드</h1>
+  <p>현재까지 탐색 백테스트가 완료된 전략을 입력/실행 순서 그대로 보여주는 공개용 요약 화면입니다.</p>
   <div class="notice">
-    <p>?? ?? ??? yfinance ?? ?????, ?? ?? ? ??/???? ??? ???? ?????.</p>
-    <p>?? ??: ??? ? ?? ?? / ?? ??: ?? ??? ?? / same-close ?? ??</p>
-    <p>??? ??, ??, ?? ??, ??/??/?? ?? ??? ???? ?????.</p>
-  </div>
-  <div class="cards">
-    <div class="card"><div class="count">27</div><p>?? ??</p></div>
-    <div class="card"><div class="count">2</div><p>?? ?? ??</p></div>
-    <div class="card"><div class="count">0</div><p>?? ?? ?? ??</p></div>
-    <div class="card"><div class="count">???</div><p>?? ??</p></div>
+    <p>현재 표의 결과는 yfinance 기반 탐색용이며, 최종 검토 전 감사/라이선스 데이터 재실행이 필요합니다.</p>
+    <p>신호 산출: 장마감 후 종가 기준 / 체결 가정: 다음 거래일 시가 / same-close 체결 없음</p>
+    <p>이 페이지는 로컬 감사 경로를 빼고 성과 검토용 요약만 보여줍니다.</p>
   </div>
 </header>
-<section class="panel">
-  <h2>???? ?? ???</h2>
-  <div class="table-wrap"><table><thead><tr><th>???</th><th>?? ??</th><th>?? ?</th><th>?? ??</th><th>?? ??? ??</th><th>?? ??</th><th>?? ??</th><th>CAGR</th><th>MDD</th><th>MAR</th><th>????</th><th>TQQQ ??</th><th>QQQ ??</th><th>?? ??</th><th>?? ??</th></tr></thead><tbody>
-<tr>
-  <td><strong>QQQ 200일선 추세 필터</strong><small>QSIG-001</small></td>
-  <td>QQQ 200일 추세<details><summary>?? ?? ??</summary><ul class="signal-list"><li>QQQ 200일 추세<span>진입 조건</span></li></ul><dl><dt>???</dt><dd>46.8%</dd><dt>?? ??</dt><dd>251.61</dd><dt>?? ???</dt><dd>QQQ, TQQQ</dd></dl></details></td>
-  <td>1</td>
-  <td>추세</td>
-  <td>2010-02-16 ~ 2026-06-12</td>
-  <td>종가 신호 → 다음 시가 체결</td>
-  <td>5802.9%</td>
-  <td>28.4%</td>
-  <td>-60.3%</td>
-  <td>0.47</td>
-  <td>87</td>
-  <td>-32181.7%</td>
-  <td>3992.6%</td>
-  <td>최종 검토 전 재실행 필요</td>
-  <td><a href="#period-compare-2010-02-16-2026-06-12">? ???? ??</a></td>
-</tr>
 
-<tr>
-  <td><strong>QQQ 10-month MA daily proxy</strong><small>QSIG-002</small></td>
-  <td>QQQ 추세<details><summary>?? ?? ??</summary><ul class="signal-list"><li>QQQ 추세<span>진입 조건</span></li></ul><dl><dt>???</dt><dd>47.0%</dd><dt>?? ??</dt><dd>269.60</dd><dt>?? ???</dt><dd>QQQ, TQQQ</dd></dl></details></td>
-  <td>1</td>
-  <td>추세</td>
-  <td>2010-02-16 ~ 2026-06-12</td>
-  <td>종가 신호 → 다음 시가 체결</td>
-  <td>5105.5%</td>
-  <td>27.4%</td>
-  <td>-59.5%</td>
-  <td>0.46</td>
-  <td>93</td>
-  <td>-32879.1%</td>
-  <td>3295.2%</td>
-  <td>최종 검토 전 재실행 필요</td>
-  <td><a href="#period-compare-2010-02-16-2026-06-12">? ???? ??</a></td>
-</tr>
+<div class="stats">
+  <div class="stat"><strong>27</strong><span>전략 수</span></div>
+  <div class="stat"><strong>2</strong><span>기간 비교 수</span></div>
+  <div class="stat"><strong>아님</strong><span>최종 검토 가능</span></div>
+  <div class="stat"><strong>yfinance</strong><span>데이터 기준 &middot; 탐색용</span></div>
+</div>
 
-<tr>
-  <td><strong>QQQ 12-month time-series momentum</strong><small>QSIG-003</small></td>
-  <td>QQQ 252일 모멘텀<details><summary>?? ?? ??</summary><ul class="signal-list"><li>QQQ 252일 모멘텀<span>진입 조건</span></li></ul><dl><dt>???</dt><dd>53.4%</dd><dt>?? ??</dt><dd>238.22</dd><dt>?? ???</dt><dd>QQQ, TQQQ</dd></dl></details></td>
-  <td>1</td>
-  <td>모멘텀</td>
-  <td>2010-02-16 ~ 2026-06-12</td>
-  <td>종가 신호 → 다음 시가 체결</td>
-  <td>8748.9%</td>
-  <td>31.6%</td>
-  <td>-66.6%</td>
-  <td>0.47</td>
-  <td>47</td>
-  <td>-29235.7%</td>
-  <td>6938.6%</td>
-  <td>최종 검토 전 재실행 필요</td>
-  <td><a href="#period-compare-2010-02-16-2026-06-12">? ???? ??</a></td>
-</tr>
-
-<tr>
-  <td><strong>QQQ SMA200 plus 63-day momentum confirmation</strong><small>QSIG-004</small></td>
-  <td>QQQ 200일 추세<details><summary>?? ?? ??</summary><ul class="signal-list"><li>QQQ 200일 추세<span>진입 조건</span></li></ul><dl><dt>???</dt><dd>41.7%</dd><dt>?? ??</dt><dd>293.05</dd><dt>?? ???</dt><dd>QQQ, TQQQ</dd></dl></details></td>
-  <td>1</td>
-  <td>추세, 모멘텀</td>
-  <td>2010-02-16 ~ 2026-06-12</td>
-  <td>종가 신호 → 다음 시가 체결</td>
-  <td>1773.5%</td>
-  <td>19.7%</td>
-  <td>-54.1%</td>
-  <td>0.36</td>
-  <td>145</td>
-  <td>-36211.1%</td>
-  <td>-36.8%</td>
-  <td>최종 검토 전 재실행 필요</td>
-  <td><a href="#period-compare-2010-02-16-2026-06-12">? ???? ??</a></td>
-</tr>
-
-<tr>
-  <td><strong>QQQ SMA200 with VXN high-volatility block</strong><small>QSIG-005</small></td>
-  <td>QQQ 200일 추세, VXN 고변동성 상태<details><summary>?? ?? ??</summary><ul class="signal-list"><li>QQQ 200일 추세<span>진입 조건</span></li><li>VXN 고변동성 상태<span>차단 조건</span></li></ul><dl><dt>???</dt><dd>36.4%</dd><dt>?? ??</dt><dd>824.90</dd><dt>?? ???</dt><dd>QQQ, TQQQ, ^VXN</dd></dl></details></td>
-  <td>2</td>
-  <td>추세, 변동성</td>
-  <td>2010-02-16 ~ 2026-06-12</td>
-  <td>종가 신호 → 다음 시가 체결</td>
-  <td>2373.2%</td>
-  <td>21.7%</td>
-  <td>-49.2%</td>
-  <td>0.44</td>
-  <td>270</td>
-  <td>-35611.4%</td>
-  <td>562.9%</td>
-  <td>최종 검토 전 재실행 필요</td>
-  <td><a href="#period-compare-2010-02-16-2026-06-12">? ???? ??</a></td>
-</tr>
-
-<tr>
-  <td><strong>QQQ SMA200 with overnight stress block</strong><small>QSIG-006</small></td>
-  <td>QQQ 200일 추세<details><summary>?? ?? ??</summary><ul class="signal-list"><li>QQQ 200일 추세<span>진입 조건</span></li></ul><dl><dt>???</dt><dd>45.7%</dd><dt>?? ??</dt><dd>419.63</dd><dt>?? ???</dt><dd>QQQ, TQQQ</dd></dl></details></td>
-  <td>1</td>
-  <td>추세</td>
-  <td>2010-02-16 ~ 2026-06-12</td>
-  <td>종가 신호 → 다음 시가 체결</td>
-  <td>3988.3%</td>
-  <td>25.5%</td>
-  <td>-58.9%</td>
-  <td>0.43</td>
-  <td>125</td>
-  <td>-33996.3%</td>
-  <td>2178.0%</td>
-  <td>최종 검토 전 재실행 필요</td>
-  <td><a href="#period-compare-2010-02-16-2026-06-12">? ???? ??</a></td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 20-day realized-volatility exposure scaling</strong><small>QSIG-007</small></td>
-  <td>volatility_managed_exposure<details><summary>?? ?? ??</summary><ul class="signal-list"><li>volatility_managed_exposure<span>참고 기준</span></li></ul><dl><dt>???</dt><dd>50.6%</dd><dt>?? ??</dt><dd>958.06</dd><dt>?? ???</dt><dd>QQQ, TQQQ</dd></dl></details></td>
-  <td>1</td>
-  <td>변동성</td>
-  <td>2010-02-16 ~ 2026-06-12</td>
-  <td>종가 신호 → 다음 시가 체결</td>
-  <td>31824.7%</td>
-  <td>42.4%</td>
-  <td>-68.6%</td>
-  <td>0.62</td>
-  <td>1284</td>
-  <td>-6159.9%</td>
-  <td>30014.4%</td>
-  <td>최종 검토 전 재실행 필요</td>
-  <td><a href="#period-compare-2010-02-16-2026-06-12">? ???? ??</a></td>
-</tr>
-
-<tr>
-  <td><strong>QQQ SMA200 plus volatility-managed exposure</strong><small>QSIG-008</small></td>
-  <td>QQQ 200일 추세<details><summary>?? ?? ??</summary><ul class="signal-list"><li>QQQ 200일 추세<span>진입 조건</span></li></ul><dl><dt>???</dt><dd>43.0%</dd><dt>?? ??</dt><dd>345.20</dd><dt>?? ???</dt><dd>QQQ, TQQQ</dd></dl></details></td>
-  <td>1</td>
-  <td>추세, 변동성</td>
-  <td>2010-02-16 ~ 2026-06-12</td>
-  <td>종가 신호 → 다음 시가 체결</td>
-  <td>6377.3%</td>
-  <td>29.1%</td>
-  <td>-59.5%</td>
-  <td>0.49</td>
-  <td>745</td>
-  <td>-31607.3%</td>
-  <td>4567.0%</td>
-  <td>최종 검토 전 재실행 필요</td>
-  <td><a href="#period-compare-2010-02-16-2026-06-12">? ???? ??</a></td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 추세 + XLK/SPY 상대강도</strong><small>STL-001</small></td>
-  <td>QQQ 200일 추세, XLK/SPY 상대강도<details><summary>?? ?? ??</summary><ul class="signal-list"><li>QQQ 200일 추세<span>진입 조건</span></li><li>XLK/SPY 상대강도<span>진입 조건</span></li></ul><dl><dt>???</dt><dd>44.4%</dd><dt>?? ??</dt><dd>85.45</dd><dt>?? ???</dt><dd>QQQ, TQQQ, XLK, SPY</dd></dl></details></td>
-  <td>2</td>
-  <td>추세, 섹터, 모멘텀</td>
-  <td>2018-06-21 ~ 2026-06-12</td>
-  <td>종가 신호 → 다음 시가 체결</td>
-  <td>360.8%</td>
-  <td>21.1%</td>
-  <td>-61.1%</td>
-  <td>0.35</td>
-  <td>103</td>
-  <td>-558.6%</td>
-  <td>34.2%</td>
-  <td>최종 검토 전 재실행 필요</td>
-  <td><a href="#period-compare-2018-06-21-2026-06-12">? ???? ??</a></td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 추세 + SMH relative strength vs QQQ</strong><small>STL-002</small></td>
-  <td>QQQ 200일 추세, SMH/SPY 상대강도<details><summary>?? ?? ??</summary><ul class="signal-list"><li>QQQ 200일 추세<span>진입 조건</span></li><li>SMH/SPY 상대강도<span>진입 조건</span></li></ul><dl><dt>???</dt><dd>39.3%</dd><dt>?? ??</dt><dd>133.86</dd><dt>?? ???</dt><dd>QQQ, TQQQ, SMH</dd></dl></details></td>
-  <td>2</td>
-  <td>추세, 섹터, 모멘텀</td>
-  <td>2018-06-21 ~ 2026-06-12</td>
-  <td>종가 신호 → 다음 시가 체결</td>
-  <td>791.1%</td>
-  <td>31.6%</td>
-  <td>-48.9%</td>
-  <td>0.65</td>
-  <td>97</td>
-  <td>-128.2%</td>
-  <td>464.5%</td>
-  <td>최종 검토 전 재실행 필요</td>
-  <td><a href="#period-compare-2018-06-21-2026-06-12">? ???? ??</a></td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 추세 + SOXX relative strength vs QQQ</strong><small>STL-003</small></td>
-  <td>QQQ 200일 추세, SOXX/SPY 상대강도<details><summary>?? ?? ??</summary><ul class="signal-list"><li>QQQ 200일 추세<span>진입 조건</span></li><li>SOXX/SPY 상대강도<span>진입 조건</span></li></ul><dl><dt>???</dt><dd>37.3%</dd><dt>?? ??</dt><dd>135.51</dd><dt>?? ???</dt><dd>QQQ, TQQQ, SOXX</dd></dl></details></td>
-  <td>2</td>
-  <td>추세, 섹터, 모멘텀</td>
-  <td>2018-06-21 ~ 2026-06-12</td>
-  <td>종가 신호 → 다음 시가 체결</td>
-  <td>660.2%</td>
-  <td>29.0%</td>
-  <td>-48.9%</td>
-  <td>0.59</td>
-  <td>85</td>
-  <td>-259.1%</td>
-  <td>333.6%</td>
-  <td>최종 검토 전 재실행 필요</td>
-  <td><a href="#period-compare-2018-06-21-2026-06-12">? ???? ??</a></td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 추세 + IGV relative strength vs QQQ</strong><small>STL-004</small></td>
-  <td>QQQ 200일 추세, IGV/SPY 상대강도<details><summary>?? ?? ??</summary><ul class="signal-list"><li>QQQ 200일 추세<span>진입 조건</span></li><li>IGV/SPY 상대강도<span>진입 조건</span></li></ul><dl><dt>???</dt><dd>32.5%</dd><dt>?? ??</dt><dd>104.87</dd><dt>?? ???</dt><dd>QQQ, TQQQ, IGV</dd></dl></details></td>
-  <td>2</td>
-  <td>추세, 섹터, 모멘텀</td>
-  <td>2018-06-21 ~ 2026-06-12</td>
-  <td>종가 신호 → 다음 시가 체결</td>
-  <td>633.2%</td>
-  <td>28.4%</td>
-  <td>-37.9%</td>
-  <td>0.75</td>
-  <td>76</td>
-  <td>-286.1%</td>
-  <td>306.6%</td>
-  <td>최종 검토 전 재실행 필요</td>
-  <td><a href="#period-compare-2018-06-21-2026-06-12">? ???? ??</a></td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 추세 + XLK/SMH/IGV leadership breadth</strong><small>STL-005</small></td>
-  <td>QQQ 200일 추세, XLK/SPY 상대강도 +2개<details><summary>?? ?? ??</summary><ul class="signal-list"><li>QQQ 200일 추세<span>진입 조건</span></li><li>XLK/SPY 상대강도<span>진입 조건</span></li><li>SMH/SPY 상대강도<span>진입 조건</span></li><li>IGV/SPY 상대강도<span>진입 조건</span></li></ul><dl><dt>???</dt><dd>40.9%</dd><dt>?? ??</dt><dd>204.95</dd><dt>?? ???</dt><dd>QQQ, TQQQ, XLK, SMH, IGV, SPY</dd></dl></details></td>
-  <td>4</td>
-  <td>추세, 섹터, breadth</td>
-  <td>2018-06-21 ~ 2026-06-12</td>
-  <td>종가 신호 → 다음 시가 체결</td>
-  <td>937.6%</td>
-  <td>34.1%</td>
-  <td>-48.9%</td>
-  <td>0.70</td>
-  <td>131</td>
-  <td>18.3%</td>
-  <td>611.0%</td>
-  <td>최종 검토 전 재실행 필요</td>
-  <td><a href="#period-compare-2018-06-21-2026-06-12">? ???? ??</a></td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 추세 + tech leadership deterioration block</strong><small>STL-006</small></td>
-  <td>QQQ 200일 추세, XLK/SPY 상대강도 +2개<details><summary>?? ?? ??</summary><ul class="signal-list"><li>QQQ 200일 추세<span>진입 조건</span></li><li>XLK/SPY 상대강도<span>진입 조건</span></li><li>SMH/SPY 상대강도<span>진입 조건</span></li><li>IGV/SPY 상대강도<span>진입 조건</span></li></ul><dl><dt>???</dt><dd>40.9%</dd><dt>?? ??</dt><dd>204.95</dd><dt>?? ???</dt><dd>QQQ, TQQQ, XLK, SMH, IGV, SPY</dd></dl></details></td>
-  <td>4</td>
-  <td>추세, 섹터</td>
-  <td>2018-06-21 ~ 2026-06-12</td>
-  <td>종가 신호 → 다음 시가 체결</td>
-  <td>937.6%</td>
-  <td>34.1%</td>
-  <td>-48.9%</td>
-  <td>0.70</td>
-  <td>131</td>
-  <td>18.3%</td>
-  <td>611.0%</td>
-  <td>최종 검토 전 재실행 필요</td>
-  <td><a href="#period-compare-2018-06-21-2026-06-12">? ???? ??</a></td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 추세 + semiconductor leadership confirmation</strong><small>STL-007</small></td>
-  <td>QQQ 200일 추세, SMH/SPY 상대강도 +1개<details><summary>?? ?? ??</summary><ul class="signal-list"><li>QQQ 200일 추세<span>진입 조건</span></li><li>SMH/SPY 상대강도<span>진입 조건</span></li><li>SOXX/SPY 상대강도<span>진입 조건</span></li></ul><dl><dt>???</dt><dd>36.5%</dd><dt>?? ??</dt><dd>140.84</dd><dt>?? ???</dt><dd>QQQ, TQQQ, SMH, SOXX</dd></dl></details></td>
-  <td>3</td>
-  <td>추세, 섹터</td>
-  <td>2018-06-21 ~ 2026-06-12</td>
-  <td>종가 신호 → 다음 시가 체결</td>
-  <td>704.7%</td>
-  <td>29.9%</td>
-  <td>-48.9%</td>
-  <td>0.61</td>
-  <td>89</td>
-  <td>-214.6%</td>
-  <td>378.1%</td>
-  <td>최종 검토 전 재실행 필요</td>
-  <td><a href="#period-compare-2018-06-21-2026-06-12">? ???? ??</a></td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 추세 + sector leadership rotation risk-off</strong><small>STL-008</small></td>
-  <td>QQQ 200일 추세, XLK/SPY 상대강도 +1개<details><summary>?? ?? ??</summary><ul class="signal-list"><li>QQQ 200일 추세<span>진입 조건</span></li><li>XLK/SPY 상대강도<span>진입 조건</span></li><li>XLC/SPY 상대강도<span>진입 조건</span></li></ul><dl><dt>???</dt><dd>49.5%</dd><dt>?? ??</dt><dd>95.59</dd><dt>?? ???</dt><dd>QQQ, TQQQ, XLK, XLC, SPY</dd></dl></details></td>
-  <td>3</td>
-  <td>추세, 섹터</td>
-  <td>2018-06-21 ~ 2026-06-12</td>
-  <td>종가 신호 → 다음 시가 체결</td>
-  <td>545.0%</td>
-  <td>26.3%</td>
-  <td>-58.0%</td>
-  <td>0.45</td>
-  <td>79</td>
-  <td>-374.3%</td>
-  <td>218.4%</td>
-  <td>최종 검토 전 재실행 필요</td>
-  <td><a href="#period-compare-2018-06-21-2026-06-12">? ???? ??</a></td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 추세 + VIX 고변동성 차단</strong><small>MRS-001</small></td>
-  <td>QQQ 200일 추세, VIX 고변동성 상태<details><summary>?? ?? ??</summary><ul class="signal-list"><li>QQQ 200일 추세<span>진입 조건</span></li><li>VIX 고변동성 상태<span>차단 조건</span></li></ul><dl><dt>???</dt><dd>37.8%</dd><dt>?? ??</dt><dd>1271.93</dd><dt>?? ???</dt><dd>QQQ, TQQQ, ^VIX</dd></dl></details></td>
-  <td>2</td>
-  <td>추세, 변동성, 매크로</td>
-  <td>2010-02-16 ~ 2026-06-12</td>
-  <td>종가 신호 → 다음 시가 체결</td>
-  <td>3514.7%</td>
-  <td>24.6%</td>
-  <td>-51.7%</td>
-  <td>0.48</td>
-  <td>264</td>
-  <td>-34469.9%</td>
-  <td>1704.4%</td>
-  <td>최종 검토 전 재실행 필요</td>
-  <td><a href="#period-compare-2010-02-16-2026-06-12">? ???? ??</a></td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 추세 + VXN 고변동성 차단</strong><small>MRS-002</small></td>
-  <td>QQQ 200일 추세, VXN 고변동성 상태<details><summary>?? ?? ??</summary><ul class="signal-list"><li>QQQ 200일 추세<span>진입 조건</span></li><li>VXN 고변동성 상태<span>차단 조건</span></li></ul><dl><dt>???</dt><dd>36.6%</dd><dt>?? ??</dt><dd>1067.07</dd><dt>?? ???</dt><dd>QQQ, TQQQ, ^VXN</dd></dl></details></td>
-  <td>2</td>
-  <td>추세, 변동성</td>
-  <td>2010-02-16 ~ 2026-06-12</td>
-  <td>종가 신호 → 다음 시가 체결</td>
-  <td>3099.7%</td>
-  <td>23.7%</td>
-  <td>-49.2%</td>
-  <td>0.48</td>
-  <td>270</td>
-  <td>-34884.9%</td>
-  <td>1289.4%</td>
-  <td>최종 검토 전 재실행 필요</td>
-  <td><a href="#period-compare-2010-02-16-2026-06-12">? ???? ??</a></td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 추세 + TLT/IEF 위험회피 차단</strong><small>MRS-003</small></td>
-  <td>QQQ 200일 추세, TLT/IEF 위험회피 확인<details><summary>?? ?? ??</summary><ul class="signal-list"><li>QQQ 200일 추세<span>진입 조건</span></li><li>TLT/IEF 위험회피 확인<span>차단 조건</span></li></ul><dl><dt>???</dt><dd>39.4%</dd><dt>?? ??</dt><dd>901.23</dd><dt>?? ???</dt><dd>QQQ, TQQQ, TLT, IEF</dd></dl></details></td>
-  <td>2</td>
-  <td>추세, 금리</td>
-  <td>2010-02-16 ~ 2026-06-12</td>
-  <td>종가 신호 → 다음 시가 체결</td>
-  <td>4601.0%</td>
-  <td>26.6%</td>
-  <td>-56.0%</td>
-  <td>0.48</td>
-  <td>205</td>
-  <td>-33383.6%</td>
-  <td>2790.7%</td>
-  <td>최종 검토 전 재실행 필요</td>
-  <td><a href="#period-compare-2010-02-16-2026-06-12">? ???? ??</a></td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 추세 + TLT 상대 약세 차단</strong><small>MRS-004</small></td>
-  <td>QQQ 200일 추세, TLT 금리 민감도<details><summary>?? ?? ??</summary><ul class="signal-list"><li>QQQ 200일 추세<span>진입 조건</span></li><li>TLT 금리 민감도<span>차단 조건</span></li></ul><dl><dt>???</dt><dd>38.2%</dd><dt>?? ??</dt><dd>788.41</dd><dt>?? ???</dt><dd>QQQ, TQQQ, TLT</dd></dl></details></td>
-  <td>2</td>
-  <td>추세, 금리, 모멘텀</td>
-  <td>2010-02-16 ~ 2026-06-12</td>
-  <td>종가 신호 → 다음 시가 체결</td>
-  <td>3690.5%</td>
-  <td>25.0%</td>
-  <td>-54.8%</td>
-  <td>0.46</td>
-  <td>171</td>
-  <td>-34294.1%</td>
-  <td>1880.2%</td>
-  <td>최종 검토 전 재실행 필요</td>
-  <td><a href="#period-compare-2010-02-16-2026-06-12">? ???? ??</a></td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 추세 + 달러 강세 차단</strong><small>MRS-005</small></td>
-  <td>QQQ 200일 추세, 달러 강세 상태<details><summary>?? ?? ??</summary><ul class="signal-list"><li>QQQ 200일 추세<span>진입 조건</span></li><li>달러 강세 상태<span>차단 조건</span></li></ul><dl><dt>???</dt><dd>42.6%</dd><dt>?? ??</dt><dd>355.99</dd><dt>?? ???</dt><dd>QQQ, TQQQ, UUP</dd></dl></details></td>
-  <td>2</td>
-  <td>추세, 매크로</td>
-  <td>2010-02-16 ~ 2026-06-12</td>
-  <td>종가 신호 → 다음 시가 체결</td>
-  <td>1360.5%</td>
-  <td>17.9%</td>
-  <td>-56.9%</td>
-  <td>0.31</td>
-  <td>223</td>
-  <td>-36624.1%</td>
-  <td>-449.8%</td>
-  <td>최종 검토 전 재실행 필요</td>
-  <td><a href="#period-compare-2010-02-16-2026-06-12">? ???? ??</a></td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 추세 + VIX/VXN 변동성 상태</strong><small>MRS-006</small></td>
-  <td>QQQ 200일 추세, VIX 고변동성 상태 +1개<details><summary>?? ?? ??</summary><ul class="signal-list"><li>QQQ 200일 추세<span>진입 조건</span></li><li>VIX 고변동성 상태<span>차단 조건</span></li><li>VXN 고변동성 상태<span>차단 조건</span></li></ul><dl><dt>???</dt><dd>29.7%</dd><dt>?? ??</dt><dd>842.79</dd><dt>?? ???</dt><dd>QQQ, TQQQ, ^VIX, ^VXN</dd></dl></details></td>
-  <td>3</td>
-  <td>추세, 변동성</td>
-  <td>2010-02-16 ~ 2026-06-12</td>
-  <td>종가 신호 → 다음 시가 체결</td>
-  <td>1858.4%</td>
-  <td>20.0%</td>
-  <td>-35.4%</td>
-  <td>0.56</td>
-  <td>420</td>
-  <td>-36126.2%</td>
-  <td>48.1%</td>
-  <td>최종 검토 전 재실행 필요</td>
-  <td><a href="#period-compare-2010-02-16-2026-06-12">? ???? ??</a></td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 추세 + 매크로/금리 스트레스</strong><small>MRS-007</small></td>
-  <td>QQQ 200일 추세, VIX 고변동성 상태 +4개<details><summary>?? ?? ??</summary><ul class="signal-list"><li>QQQ 200일 추세<span>진입 조건</span></li><li>VIX 고변동성 상태<span>차단 조건</span></li><li>VXN 고변동성 상태<span>차단 조건</span></li><li>TLT/IEF 위험회피 확인<span>차단 조건</span></li><li>달러 강세 상태<span>차단 조건</span></li><li>매크로/금리 스트레스<span>차단 조건</span></li></ul><dl><dt>???</dt><dd>36.4%</dd><dt>?? ??</dt><dd>1198.73</dd><dt>?? ???</dt><dd>QQQ, TQQQ, ^VIX, ^VXN, TLT, IEF, UUP</dd></dl></details></td>
-  <td>6</td>
-  <td>추세, 변동성, 금리, 매크로</td>
-  <td>2010-02-16 ~ 2026-06-12</td>
-  <td>종가 신호 → 다음 시가 체결</td>
-  <td>2876.8%</td>
-  <td>23.1%</td>
-  <td>-49.2%</td>
-  <td>0.47</td>
-  <td>312</td>
-  <td>-35107.8%</td>
-  <td>1066.5%</td>
-  <td>최종 검토 전 재실행 필요</td>
-  <td><a href="#period-compare-2010-02-16-2026-06-12">? ???? ??</a></td>
-</tr>
-
-<tr>
-  <td><strong>매크로 스트레스 노출 축소</strong><small>MRS-008</small></td>
-  <td>VIX 고변동성 상태, VXN 고변동성 상태 +3개<details><summary>?? ?? ??</summary><ul class="signal-list"><li>VIX 고변동성 상태<span>차단 조건</span></li><li>VXN 고변동성 상태<span>차단 조건</span></li><li>TLT/IEF 위험회피 확인<span>차단 조건</span></li><li>달러 강세 상태<span>차단 조건</span></li><li>매크로/금리 스트레스<span>노출 조절 조건</span></li></ul><dl><dt>???</dt><dd>35.2%</dd><dt>?? ??</dt><dd>3044.99</dd><dt>?? ???</dt><dd>TQQQ, ^VIX, ^VXN, TLT, IEF, UUP</dd></dl></details></td>
-  <td>5</td>
-  <td>변동성, 금리, 매크로</td>
-  <td>2010-02-16 ~ 2026-06-12</td>
-  <td>종가 신호 → 다음 시가 체결</td>
-  <td>6340.8%</td>
-  <td>29.1%</td>
-  <td>-56.2%</td>
-  <td>0.52</td>
-  <td>583</td>
-  <td>-31643.8%</td>
-  <td>4530.5%</td>
-  <td>최종 검토 전 재실행 필요</td>
-  <td><a href="#period-compare-2010-02-16-2026-06-12">? ???? ??</a></td>
-</tr>
-
-<tr>
-  <td><strong>추세 + 매크로 스트레스 노출 조절</strong><small>MRS-009</small></td>
-  <td>QQQ 추세, VIX 고변동성 상태 +4개<details><summary>?? ?? ??</summary><ul class="signal-list"><li>QQQ 추세<span>진입 조건</span></li><li>VIX 고변동성 상태<span>차단 조건</span></li><li>VXN 고변동성 상태<span>차단 조건</span></li><li>TLT/IEF 위험회피 확인<span>차단 조건</span></li><li>달러 강세 상태<span>차단 조건</span></li><li>매크로/금리 스트레스<span>노출 조절 조건</span></li></ul><dl><dt>???</dt><dd>33.3%</dd><dt>?? ??</dt><dd>989.65</dd><dt>?? ???</dt><dd>QQQ, TQQQ, ^VIX, ^VXN, TLT, IEF, UUP</dd></dl></details></td>
-  <td>6</td>
-  <td>추세, 변동성, 금리, 매크로</td>
-  <td>2010-02-16 ~ 2026-06-12</td>
-  <td>종가 신호 → 다음 시가 체결</td>
-  <td>2663.6%</td>
-  <td>22.6%</td>
-  <td>-48.5%</td>
-  <td>0.47</td>
-  <td>617</td>
-  <td>-35321.0%</td>
-  <td>853.3%</td>
-  <td>최종 검토 전 재실행 필요</td>
-  <td><a href="#period-compare-2010-02-16-2026-06-12">? ???? ??</a></td>
-</tr>
-
-<tr>
-  <td><strong>나스닥 변동성/거시 상태 신호 초안 (DRSIG-002)</strong><small>DRSIG-002</small></td>
-  <td>QQQ 200일 추세, VXN 고변동성 상태<details><summary>?? ?? ??</summary><ul class="signal-list"><li>QQQ 200일 추세<span>진입 조건</span></li><li>VXN 고변동성 상태<span>차단 조건</span></li></ul><dl><dt>???</dt><dd>36.4%</dd><dt>?? ??</dt><dd>824.91</dd><dt>?? ???</dt><dd>TQQQ, QQQ, ^NDX, ^VXN</dd></dl></details></td>
-  <td>2</td>
-  <td>추세, 변동성, 매크로</td>
-  <td>2010-02-16 ~ 2026-06-12</td>
-  <td>종가 신호 → 다음 시가 체결</td>
-  <td>2373.2%</td>
-  <td>21.7%</td>
-  <td>-49.2%</td>
-  <td>0.44</td>
-  <td>270</td>
-  <td>-35611.4%</td>
-  <td>562.9%</td>
-  <td>최종 검토 전 재실행 필요</td>
-  <td><a href="#period-compare-2010-02-16-2026-06-12">? ???? ??</a></td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 12-month momentum daily draft (DRSIG-003)</strong><small>DRSIG-003</small></td>
-  <td>QQQ 200일 추세, QQQ 252일 모멘텀 +2개<details><summary>?? ?? ??</summary><ul class="signal-list"><li>QQQ 200일 추세<span>진입 조건</span></li><li>QQQ 252일 모멘텀<span>진입 조건</span></li><li>VIX 고변동성 상태<span>차단 조건</span></li><li>VXN 고변동성 상태<span>차단 조건</span></li></ul><dl><dt>???</dt><dd>53.4%</dd><dt>?? ??</dt><dd>238.22</dd><dt>?? ???</dt><dd>QQQ, TQQQ</dd></dl></details></td>
-  <td>4</td>
-  <td>추세, 변동성, 모멘텀</td>
-  <td>2010-02-16 ~ 2026-06-12</td>
-  <td>종가 신호 → 다음 시가 체결</td>
-  <td>8748.9%</td>
-  <td>31.6%</td>
-  <td>-66.6%</td>
-  <td>0.47</td>
-  <td>47</td>
-  <td>-29235.7%</td>
-  <td>6938.6%</td>
-  <td>최종 검토 전 재실행 필요</td>
-  <td><a href="#period-compare-2010-02-16-2026-06-12">? ???? ??</a></td>
-</tr>
-</tbody></table></div>
+<section id="backtest-strategy-table">
+  <h2>백테스트 전략 성과표</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>전략명</th><th>신호 요약</th><th>신호 수</th><th>신호 묶음</th><th>공통 테스트 기간</th><th>매매 기준</th><th>토탈 리턴</th><th>CAGR</th><th>MDD</th><th>MAR</th><th>매매횟수</th><th>TQQQ 대비</th><th>QQQ 대비</th><th>검토 상태</th><th>기간 비교</th></tr></thead>
+      <tbody><tr id="strategy-row-001-qsig-001">
+<td><strong>QQQ 200일선 추세 필터</strong><div class="muted">QSIG-001</div></td>
+<td><div class="signal-compact">QQQ 200일 추세</div></td>
+<td class="num">1</td>
+<td>추세</td>
+<td>2010-02-16 ~ 2026-06-12</td>
+<td>종가 신호 → 다음 시가 체결</td>
+<td class="num strong">5,802.9%</td>
+<td class="num">28.4%</td>
+<td class="num">-60.3%</td>
+<td class="num">0.47</td>
+<td class="num">87</td>
+<td class="num">-32,181.7%</td>
+<td class="num">3,992.6%</td>
+<td>최종 검토 전 재실행 필요</td>
+<td><a href="#period-compare-2010-02-16-2026-06-12">이 기간으로 비교</a></td>
+</tr><tr id="strategy-row-002-qsig-002">
+<td><strong>QQQ 10-month MA daily proxy</strong><div class="muted">QSIG-002</div></td>
+<td><div class="signal-compact">QQQ 추세</div></td>
+<td class="num">1</td>
+<td>추세</td>
+<td>2010-02-16 ~ 2026-06-12</td>
+<td>종가 신호 → 다음 시가 체결</td>
+<td class="num strong">5,105.5%</td>
+<td class="num">27.4%</td>
+<td class="num">-59.5%</td>
+<td class="num">0.46</td>
+<td class="num">93</td>
+<td class="num">-32,879.1%</td>
+<td class="num">3,295.2%</td>
+<td>최종 검토 전 재실행 필요</td>
+<td><a href="#period-compare-2010-02-16-2026-06-12">이 기간으로 비교</a></td>
+</tr><tr id="strategy-row-003-qsig-003">
+<td><strong>QQQ 12-month time-series momentum</strong><div class="muted">QSIG-003</div></td>
+<td><div class="signal-compact">QQQ 252일 모멘텀</div></td>
+<td class="num">1</td>
+<td>모멘텀</td>
+<td>2010-02-16 ~ 2026-06-12</td>
+<td>종가 신호 → 다음 시가 체결</td>
+<td class="num strong">8,748.9%</td>
+<td class="num">31.6%</td>
+<td class="num">-66.6%</td>
+<td class="num">0.47</td>
+<td class="num">47</td>
+<td class="num">-29,235.7%</td>
+<td class="num">6,938.6%</td>
+<td>최종 검토 전 재실행 필요</td>
+<td><a href="#period-compare-2010-02-16-2026-06-12">이 기간으로 비교</a></td>
+</tr><tr id="strategy-row-004-qsig-004">
+<td><strong>QQQ SMA200 plus 63-day momentum confirmation</strong><div class="muted">QSIG-004</div></td>
+<td><div class="signal-compact">QQQ 200일 추세</div></td>
+<td class="num">1</td>
+<td>추세, 모멘텀</td>
+<td>2010-02-16 ~ 2026-06-12</td>
+<td>종가 신호 → 다음 시가 체결</td>
+<td class="num strong">1,773.5%</td>
+<td class="num">19.7%</td>
+<td class="num">-54.1%</td>
+<td class="num">0.36</td>
+<td class="num">145</td>
+<td class="num">-36,211.1%</td>
+<td class="num">-36.8%</td>
+<td>최종 검토 전 재실행 필요</td>
+<td><a href="#period-compare-2010-02-16-2026-06-12">이 기간으로 비교</a></td>
+</tr><tr id="strategy-row-005-qsig-005">
+<td><strong>QQQ SMA200 with VXN high-volatility block</strong><div class="muted">QSIG-005</div></td>
+<td><div class="signal-compact">QQQ 200일 추세 / VXN 고변동성 상태</div></td>
+<td class="num">2</td>
+<td>추세, 변동성</td>
+<td>2010-02-16 ~ 2026-06-12</td>
+<td>종가 신호 → 다음 시가 체결</td>
+<td class="num strong">2,373.2%</td>
+<td class="num">21.7%</td>
+<td class="num">-49.2%</td>
+<td class="num">0.44</td>
+<td class="num">270</td>
+<td class="num">-35,611.4%</td>
+<td class="num">562.9%</td>
+<td>최종 검토 전 재실행 필요</td>
+<td><a href="#period-compare-2010-02-16-2026-06-12">이 기간으로 비교</a></td>
+</tr><tr id="strategy-row-006-qsig-006">
+<td><strong>QQQ SMA200 with overnight stress block</strong><div class="muted">QSIG-006</div></td>
+<td><div class="signal-compact">QQQ 200일 추세</div></td>
+<td class="num">1</td>
+<td>추세</td>
+<td>2010-02-16 ~ 2026-06-12</td>
+<td>종가 신호 → 다음 시가 체결</td>
+<td class="num strong">3,988.3%</td>
+<td class="num">25.5%</td>
+<td class="num">-58.9%</td>
+<td class="num">0.43</td>
+<td class="num">125</td>
+<td class="num">-33,996.3%</td>
+<td class="num">2,178.0%</td>
+<td>최종 검토 전 재실행 필요</td>
+<td><a href="#period-compare-2010-02-16-2026-06-12">이 기간으로 비교</a></td>
+</tr><tr id="strategy-row-007-qsig-007">
+<td><strong>QQQ 20-day realized-volatility exposure scaling</strong><div class="muted">QSIG-007</div></td>
+<td><div class="signal-compact">volatility_managed_exposure</div></td>
+<td class="num">1</td>
+<td>변동성</td>
+<td>2010-02-16 ~ 2026-06-12</td>
+<td>종가 신호 → 다음 시가 체결</td>
+<td class="num strong">31,824.7%</td>
+<td class="num">42.4%</td>
+<td class="num">-68.6%</td>
+<td class="num">0.62</td>
+<td class="num">1,284</td>
+<td class="num">-6,159.9%</td>
+<td class="num">30,014.4%</td>
+<td>최종 검토 전 재실행 필요</td>
+<td><a href="#period-compare-2010-02-16-2026-06-12">이 기간으로 비교</a></td>
+</tr><tr id="strategy-row-008-qsig-008">
+<td><strong>QQQ SMA200 plus volatility-managed exposure</strong><div class="muted">QSIG-008</div></td>
+<td><div class="signal-compact">QQQ 200일 추세</div></td>
+<td class="num">1</td>
+<td>추세, 변동성</td>
+<td>2010-02-16 ~ 2026-06-12</td>
+<td>종가 신호 → 다음 시가 체결</td>
+<td class="num strong">6,377.3%</td>
+<td class="num">29.1%</td>
+<td class="num">-59.5%</td>
+<td class="num">0.49</td>
+<td class="num">745</td>
+<td class="num">-31,607.3%</td>
+<td class="num">4,567.0%</td>
+<td>최종 검토 전 재실행 필요</td>
+<td><a href="#period-compare-2010-02-16-2026-06-12">이 기간으로 비교</a></td>
+</tr><tr id="strategy-row-009-stl-001">
+<td><strong>QQQ 추세 + XLK/SPY 상대강도</strong><div class="muted">STL-001</div></td>
+<td><div class="signal-compact">QQQ 200일 추세 / XLK/SPY 상대강도</div></td>
+<td class="num">2</td>
+<td>추세, 섹터, 모멘텀</td>
+<td>2018-06-21 ~ 2026-06-12</td>
+<td>종가 신호 → 다음 시가 체결</td>
+<td class="num strong">360.8%</td>
+<td class="num">21.1%</td>
+<td class="num">-61.1%</td>
+<td class="num">0.35</td>
+<td class="num">103</td>
+<td class="num">-558.6%</td>
+<td class="num">34.2%</td>
+<td>최종 검토 전 재실행 필요</td>
+<td><a href="#period-compare-2018-06-21-2026-06-12">이 기간으로 비교</a></td>
+</tr><tr id="strategy-row-010-stl-002">
+<td><strong>QQQ 추세 + SMH relative strength vs QQQ</strong><div class="muted">STL-002</div></td>
+<td><div class="signal-compact">QQQ 200일 추세 / SMH/SPY 상대강도</div></td>
+<td class="num">2</td>
+<td>추세, 섹터, 모멘텀</td>
+<td>2018-06-21 ~ 2026-06-12</td>
+<td>종가 신호 → 다음 시가 체결</td>
+<td class="num strong">791.1%</td>
+<td class="num">31.6%</td>
+<td class="num">-48.9%</td>
+<td class="num">0.65</td>
+<td class="num">97</td>
+<td class="num">-128.2%</td>
+<td class="num">464.5%</td>
+<td>최종 검토 전 재실행 필요</td>
+<td><a href="#period-compare-2018-06-21-2026-06-12">이 기간으로 비교</a></td>
+</tr><tr id="strategy-row-011-stl-003">
+<td><strong>QQQ 추세 + SOXX relative strength vs QQQ</strong><div class="muted">STL-003</div></td>
+<td><div class="signal-compact">QQQ 200일 추세 / SOXX/SPY 상대강도</div></td>
+<td class="num">2</td>
+<td>추세, 섹터, 모멘텀</td>
+<td>2018-06-21 ~ 2026-06-12</td>
+<td>종가 신호 → 다음 시가 체결</td>
+<td class="num strong">660.2%</td>
+<td class="num">29.0%</td>
+<td class="num">-48.9%</td>
+<td class="num">0.59</td>
+<td class="num">85</td>
+<td class="num">-259.1%</td>
+<td class="num">333.6%</td>
+<td>최종 검토 전 재실행 필요</td>
+<td><a href="#period-compare-2018-06-21-2026-06-12">이 기간으로 비교</a></td>
+</tr><tr id="strategy-row-012-stl-004">
+<td><strong>QQQ 추세 + IGV relative strength vs QQQ</strong><div class="muted">STL-004</div></td>
+<td><div class="signal-compact">QQQ 200일 추세 / IGV/SPY 상대강도</div></td>
+<td class="num">2</td>
+<td>추세, 섹터, 모멘텀</td>
+<td>2018-06-21 ~ 2026-06-12</td>
+<td>종가 신호 → 다음 시가 체결</td>
+<td class="num strong">633.2%</td>
+<td class="num">28.4%</td>
+<td class="num">-37.9%</td>
+<td class="num">0.75</td>
+<td class="num">76</td>
+<td class="num">-286.1%</td>
+<td class="num">306.6%</td>
+<td>최종 검토 전 재실행 필요</td>
+<td><a href="#period-compare-2018-06-21-2026-06-12">이 기간으로 비교</a></td>
+</tr><tr id="strategy-row-013-stl-005">
+<td><strong>QQQ 추세 + XLK/SMH/IGV leadership breadth</strong><div class="muted">STL-005</div></td>
+<td><div class="signal-compact">QQQ 200일 추세 / XLK/SPY 상대강도 / SMH/SPY 상대강도 외 1개</div><details><summary>전체 신호 보기</summary><ul><li>QQQ 200일 추세 <span class="muted">(역할: 진입 조건)</span></li><li>XLK/SPY 상대강도 <span class="muted">(역할: 진입 조건)</span></li><li>SMH/SPY 상대강도 <span class="muted">(역할: 진입 조건)</span></li><li>IGV/SPY 상대강도 <span class="muted">(역할: 진입 조건)</span></li></ul></details></td>
+<td class="num">4</td>
+<td>추세, 섹터, breadth</td>
+<td>2018-06-21 ~ 2026-06-12</td>
+<td>종가 신호 → 다음 시가 체결</td>
+<td class="num strong">937.6%</td>
+<td class="num">34.1%</td>
+<td class="num">-48.9%</td>
+<td class="num">0.70</td>
+<td class="num">131</td>
+<td class="num">18.3%</td>
+<td class="num">611.0%</td>
+<td>최종 검토 전 재실행 필요</td>
+<td><a href="#period-compare-2018-06-21-2026-06-12">이 기간으로 비교</a></td>
+</tr><tr id="strategy-row-014-stl-006">
+<td><strong>QQQ 추세 + tech leadership deterioration block</strong><div class="muted">STL-006</div></td>
+<td><div class="signal-compact">QQQ 200일 추세 / XLK/SPY 상대강도 / SMH/SPY 상대강도 외 1개</div><details><summary>전체 신호 보기</summary><ul><li>QQQ 200일 추세 <span class="muted">(역할: 진입 조건)</span></li><li>XLK/SPY 상대강도 <span class="muted">(역할: 진입 조건)</span></li><li>SMH/SPY 상대강도 <span class="muted">(역할: 진입 조건)</span></li><li>IGV/SPY 상대강도 <span class="muted">(역할: 진입 조건)</span></li></ul></details></td>
+<td class="num">4</td>
+<td>추세, 섹터</td>
+<td>2018-06-21 ~ 2026-06-12</td>
+<td>종가 신호 → 다음 시가 체결</td>
+<td class="num strong">937.6%</td>
+<td class="num">34.1%</td>
+<td class="num">-48.9%</td>
+<td class="num">0.70</td>
+<td class="num">131</td>
+<td class="num">18.3%</td>
+<td class="num">611.0%</td>
+<td>최종 검토 전 재실행 필요</td>
+<td><a href="#period-compare-2018-06-21-2026-06-12">이 기간으로 비교</a></td>
+</tr><tr id="strategy-row-015-stl-007">
+<td><strong>QQQ 추세 + semiconductor leadership confirmation</strong><div class="muted">STL-007</div></td>
+<td><div class="signal-compact">QQQ 200일 추세 / SMH/SPY 상대강도 / SOXX/SPY 상대강도</div></td>
+<td class="num">3</td>
+<td>추세, 섹터</td>
+<td>2018-06-21 ~ 2026-06-12</td>
+<td>종가 신호 → 다음 시가 체결</td>
+<td class="num strong">704.7%</td>
+<td class="num">29.9%</td>
+<td class="num">-48.9%</td>
+<td class="num">0.61</td>
+<td class="num">89</td>
+<td class="num">-214.6%</td>
+<td class="num">378.1%</td>
+<td>최종 검토 전 재실행 필요</td>
+<td><a href="#period-compare-2018-06-21-2026-06-12">이 기간으로 비교</a></td>
+</tr><tr id="strategy-row-016-stl-008">
+<td><strong>QQQ 추세 + sector leadership rotation risk-off</strong><div class="muted">STL-008</div></td>
+<td><div class="signal-compact">QQQ 200일 추세 / XLK/SPY 상대강도 / XLC/SPY 상대강도</div></td>
+<td class="num">3</td>
+<td>추세, 섹터</td>
+<td>2018-06-21 ~ 2026-06-12</td>
+<td>종가 신호 → 다음 시가 체결</td>
+<td class="num strong">545.0%</td>
+<td class="num">26.3%</td>
+<td class="num">-58.0%</td>
+<td class="num">0.45</td>
+<td class="num">79</td>
+<td class="num">-374.3%</td>
+<td class="num">218.4%</td>
+<td>최종 검토 전 재실행 필요</td>
+<td><a href="#period-compare-2018-06-21-2026-06-12">이 기간으로 비교</a></td>
+</tr><tr id="strategy-row-017-mrs-001">
+<td><strong>QQQ 추세 + VIX 고변동성 차단</strong><div class="muted">MRS-001</div></td>
+<td><div class="signal-compact">QQQ 200일 추세 / VIX 고변동성 상태</div></td>
+<td class="num">2</td>
+<td>추세, 변동성, 매크로</td>
+<td>2010-02-16 ~ 2026-06-12</td>
+<td>종가 신호 → 다음 시가 체결</td>
+<td class="num strong">3,514.7%</td>
+<td class="num">24.6%</td>
+<td class="num">-51.7%</td>
+<td class="num">0.48</td>
+<td class="num">264</td>
+<td class="num">-34,469.9%</td>
+<td class="num">1,704.4%</td>
+<td>최종 검토 전 재실행 필요</td>
+<td><a href="#period-compare-2010-02-16-2026-06-12">이 기간으로 비교</a></td>
+</tr><tr id="strategy-row-018-mrs-002">
+<td><strong>QQQ 추세 + VXN 고변동성 차단</strong><div class="muted">MRS-002</div></td>
+<td><div class="signal-compact">QQQ 200일 추세 / VXN 고변동성 상태</div></td>
+<td class="num">2</td>
+<td>추세, 변동성</td>
+<td>2010-02-16 ~ 2026-06-12</td>
+<td>종가 신호 → 다음 시가 체결</td>
+<td class="num strong">3,099.7%</td>
+<td class="num">23.7%</td>
+<td class="num">-49.2%</td>
+<td class="num">0.48</td>
+<td class="num">270</td>
+<td class="num">-34,884.9%</td>
+<td class="num">1,289.4%</td>
+<td>최종 검토 전 재실행 필요</td>
+<td><a href="#period-compare-2010-02-16-2026-06-12">이 기간으로 비교</a></td>
+</tr><tr id="strategy-row-019-mrs-003">
+<td><strong>QQQ 추세 + TLT/IEF 위험회피 차단</strong><div class="muted">MRS-003</div></td>
+<td><div class="signal-compact">QQQ 200일 추세 / TLT/IEF 위험회피 확인</div></td>
+<td class="num">2</td>
+<td>추세, 금리</td>
+<td>2010-02-16 ~ 2026-06-12</td>
+<td>종가 신호 → 다음 시가 체결</td>
+<td class="num strong">4,601.0%</td>
+<td class="num">26.6%</td>
+<td class="num">-56.0%</td>
+<td class="num">0.48</td>
+<td class="num">205</td>
+<td class="num">-33,383.6%</td>
+<td class="num">2,790.7%</td>
+<td>최종 검토 전 재실행 필요</td>
+<td><a href="#period-compare-2010-02-16-2026-06-12">이 기간으로 비교</a></td>
+</tr><tr id="strategy-row-020-mrs-004">
+<td><strong>QQQ 추세 + TLT 상대 약세 차단</strong><div class="muted">MRS-004</div></td>
+<td><div class="signal-compact">QQQ 200일 추세 / TLT 금리 민감도</div></td>
+<td class="num">2</td>
+<td>추세, 금리, 모멘텀</td>
+<td>2010-02-16 ~ 2026-06-12</td>
+<td>종가 신호 → 다음 시가 체결</td>
+<td class="num strong">3,690.5%</td>
+<td class="num">25.0%</td>
+<td class="num">-54.8%</td>
+<td class="num">0.46</td>
+<td class="num">171</td>
+<td class="num">-34,294.1%</td>
+<td class="num">1,880.2%</td>
+<td>최종 검토 전 재실행 필요</td>
+<td><a href="#period-compare-2010-02-16-2026-06-12">이 기간으로 비교</a></td>
+</tr><tr id="strategy-row-021-mrs-005">
+<td><strong>QQQ 추세 + 달러 강세 차단</strong><div class="muted">MRS-005</div></td>
+<td><div class="signal-compact">QQQ 200일 추세 / 달러 강세 상태</div></td>
+<td class="num">2</td>
+<td>추세, 매크로</td>
+<td>2010-02-16 ~ 2026-06-12</td>
+<td>종가 신호 → 다음 시가 체결</td>
+<td class="num strong">1,360.5%</td>
+<td class="num">17.9%</td>
+<td class="num">-56.9%</td>
+<td class="num">0.31</td>
+<td class="num">223</td>
+<td class="num">-36,624.1%</td>
+<td class="num">-449.8%</td>
+<td>최종 검토 전 재실행 필요</td>
+<td><a href="#period-compare-2010-02-16-2026-06-12">이 기간으로 비교</a></td>
+</tr><tr id="strategy-row-022-mrs-006">
+<td><strong>QQQ 추세 + VIX/VXN 변동성 상태</strong><div class="muted">MRS-006</div></td>
+<td><div class="signal-compact">QQQ 200일 추세 / VIX 고변동성 상태 / VXN 고변동성 상태</div></td>
+<td class="num">3</td>
+<td>추세, 변동성</td>
+<td>2010-02-16 ~ 2026-06-12</td>
+<td>종가 신호 → 다음 시가 체결</td>
+<td class="num strong">1,858.4%</td>
+<td class="num">20.0%</td>
+<td class="num">-35.4%</td>
+<td class="num">0.56</td>
+<td class="num">420</td>
+<td class="num">-36,126.2%</td>
+<td class="num">48.1%</td>
+<td>최종 검토 전 재실행 필요</td>
+<td><a href="#period-compare-2010-02-16-2026-06-12">이 기간으로 비교</a></td>
+</tr><tr id="strategy-row-023-mrs-007">
+<td><strong>QQQ 추세 + 매크로/금리 스트레스</strong><div class="muted">MRS-007</div></td>
+<td><div class="signal-compact">QQQ 200일 추세 / VIX 고변동성 상태 / VXN 고변동성 상태 외 3개</div><details><summary>전체 신호 보기</summary><ul><li>QQQ 200일 추세 <span class="muted">(역할: 진입 조건)</span></li><li>VIX 고변동성 상태 <span class="muted">(역할: 차단 조건)</span></li><li>VXN 고변동성 상태 <span class="muted">(역할: 차단 조건)</span></li><li>TLT/IEF 위험회피 확인 <span class="muted">(역할: 차단 조건)</span></li><li>달러 강세 상태 <span class="muted">(역할: 차단 조건)</span></li><li>매크로/금리 스트레스 <span class="muted">(역할: 차단 조건)</span></li></ul></details></td>
+<td class="num">6</td>
+<td>추세, 변동성, 금리, 매크로</td>
+<td>2010-02-16 ~ 2026-06-12</td>
+<td>종가 신호 → 다음 시가 체결</td>
+<td class="num strong">2,876.8%</td>
+<td class="num">23.1%</td>
+<td class="num">-49.2%</td>
+<td class="num">0.47</td>
+<td class="num">312</td>
+<td class="num">-35,107.8%</td>
+<td class="num">1,066.5%</td>
+<td>최종 검토 전 재실행 필요</td>
+<td><a href="#period-compare-2010-02-16-2026-06-12">이 기간으로 비교</a></td>
+</tr><tr id="strategy-row-024-mrs-008">
+<td><strong>매크로 스트레스 노출 축소</strong><div class="muted">MRS-008</div></td>
+<td><div class="signal-compact">VIX 고변동성 상태 / VXN 고변동성 상태 / TLT/IEF 위험회피 확인 외 2개</div><details><summary>전체 신호 보기</summary><ul><li>VIX 고변동성 상태 <span class="muted">(역할: 차단 조건)</span></li><li>VXN 고변동성 상태 <span class="muted">(역할: 차단 조건)</span></li><li>TLT/IEF 위험회피 확인 <span class="muted">(역할: 차단 조건)</span></li><li>달러 강세 상태 <span class="muted">(역할: 차단 조건)</span></li><li>매크로/금리 스트레스 <span class="muted">(역할: 노출 조절 조건)</span></li></ul></details></td>
+<td class="num">5</td>
+<td>변동성, 금리, 매크로</td>
+<td>2010-02-16 ~ 2026-06-12</td>
+<td>종가 신호 → 다음 시가 체결</td>
+<td class="num strong">6,340.8%</td>
+<td class="num">29.1%</td>
+<td class="num">-56.2%</td>
+<td class="num">0.52</td>
+<td class="num">583</td>
+<td class="num">-31,643.8%</td>
+<td class="num">4,530.5%</td>
+<td>최종 검토 전 재실행 필요</td>
+<td><a href="#period-compare-2010-02-16-2026-06-12">이 기간으로 비교</a></td>
+</tr><tr id="strategy-row-025-mrs-009">
+<td><strong>추세 + 매크로 스트레스 노출 조절</strong><div class="muted">MRS-009</div></td>
+<td><div class="signal-compact">QQQ 추세 / VIX 고변동성 상태 / VXN 고변동성 상태 외 3개</div><details><summary>전체 신호 보기</summary><ul><li>QQQ 추세 <span class="muted">(역할: 진입 조건)</span></li><li>VIX 고변동성 상태 <span class="muted">(역할: 차단 조건)</span></li><li>VXN 고변동성 상태 <span class="muted">(역할: 차단 조건)</span></li><li>TLT/IEF 위험회피 확인 <span class="muted">(역할: 차단 조건)</span></li><li>달러 강세 상태 <span class="muted">(역할: 차단 조건)</span></li><li>매크로/금리 스트레스 <span class="muted">(역할: 노출 조절 조건)</span></li></ul></details></td>
+<td class="num">6</td>
+<td>추세, 변동성, 금리, 매크로</td>
+<td>2010-02-16 ~ 2026-06-12</td>
+<td>종가 신호 → 다음 시가 체결</td>
+<td class="num strong">2,663.6%</td>
+<td class="num">22.6%</td>
+<td class="num">-48.5%</td>
+<td class="num">0.47</td>
+<td class="num">617</td>
+<td class="num">-35,321.0%</td>
+<td class="num">853.3%</td>
+<td>최종 검토 전 재실행 필요</td>
+<td><a href="#period-compare-2010-02-16-2026-06-12">이 기간으로 비교</a></td>
+</tr><tr id="strategy-row-026-drsig-002">
+<td><strong>나스닥 변동성/거시 상태 신호 초안 (DRSIG-002)</strong><div class="muted">DRSIG-002</div></td>
+<td><div class="signal-compact">QQQ 200일 추세 / VXN 고변동성 상태</div></td>
+<td class="num">2</td>
+<td>추세, 변동성, 매크로</td>
+<td>2010-02-16 ~ 2026-06-12</td>
+<td>종가 신호 → 다음 시가 체결</td>
+<td class="num strong">2,373.2%</td>
+<td class="num">21.7%</td>
+<td class="num">-49.2%</td>
+<td class="num">0.44</td>
+<td class="num">270</td>
+<td class="num">-35,611.4%</td>
+<td class="num">562.9%</td>
+<td>최종 검토 전 재실행 필요</td>
+<td><a href="#period-compare-2010-02-16-2026-06-12">이 기간으로 비교</a></td>
+</tr><tr id="strategy-row-027-drsig-003">
+<td><strong>QQQ 12-month momentum daily draft (DRSIG-003)</strong><div class="muted">DRSIG-003</div></td>
+<td><div class="signal-compact">QQQ 200일 추세 / QQQ 252일 모멘텀 / VIX 고변동성 상태 외 1개</div><details><summary>전체 신호 보기</summary><ul><li>QQQ 200일 추세 <span class="muted">(역할: 진입 조건)</span></li><li>QQQ 252일 모멘텀 <span class="muted">(역할: 진입 조건)</span></li><li>VIX 고변동성 상태 <span class="muted">(역할: 차단 조건)</span></li><li>VXN 고변동성 상태 <span class="muted">(역할: 차단 조건)</span></li></ul></details></td>
+<td class="num">4</td>
+<td>추세, 변동성, 모멘텀</td>
+<td>2010-02-16 ~ 2026-06-12</td>
+<td>종가 신호 → 다음 시가 체결</td>
+<td class="num strong">8,748.9%</td>
+<td class="num">31.6%</td>
+<td class="num">-66.6%</td>
+<td class="num">0.47</td>
+<td class="num">47</td>
+<td class="num">-29,235.7%</td>
+<td class="num">6,938.6%</td>
+<td>최종 검토 전 재실행 필요</td>
+<td><a href="#period-compare-2010-02-16-2026-06-12">이 기간으로 비교</a></td>
+</tr></tbody>
+    </table>
+  </div>
 </section>
 
-<section class="panel" id="period-compare-2010-02-16-2026-06-12">
-  <h2>2010-02-16 ~ 2026-06-12 ?? ??</h2>
-  <p class="muted">?? ?? 19?, ?? ??? ?? 8?, ?? ?? 0?. ??? ??? ???? ?????.</p>
-  <div class="table-wrap"><table><thead><tr><th>???</th><th>?? ??</th><th>CAGR</th><th>MDD</th><th>MAR</th><th>TQQQ ??</th><th>QQQ ??</th><th>?? ??</th></tr></thead><tbody>
-<tr>
-  <td><strong>QQQ 200일선 추세 필터</strong><small>QSIG-001</small></td>
-  <td>5802.9%</td>
-  <td>28.4%</td>
-  <td>-60.3%</td>
-  <td>0.47</td>
-  <td>-32181.7%</td>
-  <td>3992.6%</td>
-  <td>같은 기간 원본 지표</td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 10-month MA daily proxy</strong><small>QSIG-002</small></td>
-  <td>5105.5%</td>
-  <td>27.4%</td>
-  <td>-59.5%</td>
-  <td>0.46</td>
-  <td>-32879.1%</td>
-  <td>3295.2%</td>
-  <td>같은 기간 원본 지표</td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 12-month time-series momentum</strong><small>QSIG-003</small></td>
-  <td>8748.9%</td>
-  <td>31.6%</td>
-  <td>-66.6%</td>
-  <td>0.47</td>
-  <td>-29235.7%</td>
-  <td>6938.6%</td>
-  <td>같은 기간 원본 지표</td>
-</tr>
-
-<tr>
-  <td><strong>QQQ SMA200 plus 63-day momentum confirmation</strong><small>QSIG-004</small></td>
-  <td>1773.5%</td>
-  <td>19.7%</td>
-  <td>-54.1%</td>
-  <td>0.36</td>
-  <td>-36211.1%</td>
-  <td>-36.8%</td>
-  <td>같은 기간 원본 지표</td>
-</tr>
-
-<tr>
-  <td><strong>QQQ SMA200 with VXN high-volatility block</strong><small>QSIG-005</small></td>
-  <td>2373.2%</td>
-  <td>21.7%</td>
-  <td>-49.2%</td>
-  <td>0.44</td>
-  <td>-35611.4%</td>
-  <td>562.9%</td>
-  <td>같은 기간 원본 지표</td>
-</tr>
-
-<tr>
-  <td><strong>QQQ SMA200 with overnight stress block</strong><small>QSIG-006</small></td>
-  <td>3988.3%</td>
-  <td>25.5%</td>
-  <td>-58.9%</td>
-  <td>0.43</td>
-  <td>-33996.3%</td>
-  <td>2178.0%</td>
-  <td>같은 기간 원본 지표</td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 20-day realized-volatility exposure scaling</strong><small>QSIG-007</small></td>
-  <td>31824.7%</td>
-  <td>42.4%</td>
-  <td>-68.6%</td>
-  <td>0.62</td>
-  <td>-6159.9%</td>
-  <td>30014.4%</td>
-  <td>같은 기간 원본 지표</td>
-</tr>
-
-<tr>
-  <td><strong>QQQ SMA200 plus volatility-managed exposure</strong><small>QSIG-008</small></td>
-  <td>6377.3%</td>
-  <td>29.1%</td>
-  <td>-59.5%</td>
-  <td>0.49</td>
-  <td>-31607.3%</td>
-  <td>4567.0%</td>
-  <td>같은 기간 원본 지표</td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 추세 + XLK/SPY 상대강도</strong><small>STL-001</small></td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>기간 데이터 부족</td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 추세 + SMH relative strength vs QQQ</strong><small>STL-002</small></td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>기간 데이터 부족</td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 추세 + SOXX relative strength vs QQQ</strong><small>STL-003</small></td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>기간 데이터 부족</td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 추세 + IGV relative strength vs QQQ</strong><small>STL-004</small></td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>기간 데이터 부족</td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 추세 + XLK/SMH/IGV leadership breadth</strong><small>STL-005</small></td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>기간 데이터 부족</td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 추세 + tech leadership deterioration block</strong><small>STL-006</small></td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>기간 데이터 부족</td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 추세 + semiconductor leadership confirmation</strong><small>STL-007</small></td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>기간 데이터 부족</td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 추세 + sector leadership rotation risk-off</strong><small>STL-008</small></td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>기간 데이터 부족</td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 추세 + VIX 고변동성 차단</strong><small>MRS-001</small></td>
-  <td>3514.7%</td>
-  <td>24.6%</td>
-  <td>-51.7%</td>
-  <td>0.48</td>
-  <td>-34469.9%</td>
-  <td>1704.4%</td>
-  <td>같은 기간 원본 지표</td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 추세 + VXN 고변동성 차단</strong><small>MRS-002</small></td>
-  <td>3099.7%</td>
-  <td>23.7%</td>
-  <td>-49.2%</td>
-  <td>0.48</td>
-  <td>-34884.9%</td>
-  <td>1289.4%</td>
-  <td>같은 기간 원본 지표</td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 추세 + TLT/IEF 위험회피 차단</strong><small>MRS-003</small></td>
-  <td>4601.0%</td>
-  <td>26.6%</td>
-  <td>-56.0%</td>
-  <td>0.48</td>
-  <td>-33383.6%</td>
-  <td>2790.7%</td>
-  <td>같은 기간 원본 지표</td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 추세 + TLT 상대 약세 차단</strong><small>MRS-004</small></td>
-  <td>3690.5%</td>
-  <td>25.0%</td>
-  <td>-54.8%</td>
-  <td>0.46</td>
-  <td>-34294.1%</td>
-  <td>1880.2%</td>
-  <td>같은 기간 원본 지표</td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 추세 + 달러 강세 차단</strong><small>MRS-005</small></td>
-  <td>1360.5%</td>
-  <td>17.9%</td>
-  <td>-56.9%</td>
-  <td>0.31</td>
-  <td>-36624.1%</td>
-  <td>-449.8%</td>
-  <td>같은 기간 원본 지표</td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 추세 + VIX/VXN 변동성 상태</strong><small>MRS-006</small></td>
-  <td>1858.4%</td>
-  <td>20.0%</td>
-  <td>-35.4%</td>
-  <td>0.56</td>
-  <td>-36126.2%</td>
-  <td>48.1%</td>
-  <td>같은 기간 원본 지표</td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 추세 + 매크로/금리 스트레스</strong><small>MRS-007</small></td>
-  <td>2876.8%</td>
-  <td>23.1%</td>
-  <td>-49.2%</td>
-  <td>0.47</td>
-  <td>-35107.8%</td>
-  <td>1066.5%</td>
-  <td>같은 기간 원본 지표</td>
-</tr>
-
-<tr>
-  <td><strong>매크로 스트레스 노출 축소</strong><small>MRS-008</small></td>
-  <td>6340.8%</td>
-  <td>29.1%</td>
-  <td>-56.2%</td>
-  <td>0.52</td>
-  <td>-31643.8%</td>
-  <td>4530.5%</td>
-  <td>같은 기간 원본 지표</td>
-</tr>
-
-<tr>
-  <td><strong>추세 + 매크로 스트레스 노출 조절</strong><small>MRS-009</small></td>
-  <td>2663.6%</td>
-  <td>22.6%</td>
-  <td>-48.5%</td>
-  <td>0.47</td>
-  <td>-35321.0%</td>
-  <td>853.3%</td>
-  <td>같은 기간 원본 지표</td>
-</tr>
-
-<tr>
-  <td><strong>나스닥 변동성/거시 상태 신호 초안 (DRSIG-002)</strong><small>DRSIG-002</small></td>
-  <td>2373.2%</td>
-  <td>21.7%</td>
-  <td>-49.2%</td>
-  <td>0.44</td>
-  <td>-35611.4%</td>
-  <td>562.9%</td>
-  <td>같은 기간 원본 지표</td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 12-month momentum daily draft (DRSIG-003)</strong><small>DRSIG-003</small></td>
-  <td>8748.9%</td>
-  <td>31.6%</td>
-  <td>-66.6%</td>
-  <td>0.47</td>
-  <td>-29235.7%</td>
-  <td>6938.6%</td>
-  <td>같은 기간 원본 지표</td>
-</tr>
-</tbody></table></div>
-  <p><a href="#top">???? ????</a></p>
+<section id="metric-notes">
+  <h2>지표 설명</h2>
+  <div class="policy-grid">
+    <div class="policy-card"><strong>정책</strong><p>기존 trace/equity artifact가 있는 경우만 같은 기간 기준으로 재계산합니다. 전체 series가 없는 행은 준비 부족으로 표시합니다.</p></div>
+    <div class="policy-card"><strong>지표 설명</strong><p>토탈 리턴은 전체 누적 수익, CAGR은 연평균 성장률, MDD는 가장 큰 낙폭, MAR은 CAGR을 MDD로 나눈 값입니다. 매매횟수는 포지션이 바뀌 횟수입니다.</p></div>
+  </div>
 </section>
 
-<section class="panel" id="period-compare-2018-06-21-2026-06-12">
-  <h2>2018-06-21 ~ 2026-06-12 ?? ??</h2>
-  <p class="muted">?? ?? 9?, ?? ??? ?? 0?, ?? ?? 18?. ??? ??? ???? ?????.</p>
-  <div class="table-wrap"><table><thead><tr><th>???</th><th>?? ??</th><th>CAGR</th><th>MDD</th><th>MAR</th><th>TQQQ ??</th><th>QQQ ??</th><th>?? ??</th></tr></thead><tbody>
-<tr>
-  <td><strong>QQQ 200일선 추세 필터</strong><small>QSIG-001</small></td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>기간 맞춤 비교 준비 부족</td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 10-month MA daily proxy</strong><small>QSIG-002</small></td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>기간 맞춤 비교 준비 부족</td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 12-month time-series momentum</strong><small>QSIG-003</small></td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>기간 맞춤 비교 준비 부족</td>
-</tr>
-
-<tr>
-  <td><strong>QQQ SMA200 plus 63-day momentum confirmation</strong><small>QSIG-004</small></td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>기간 맞춤 비교 준비 부족</td>
-</tr>
-
-<tr>
-  <td><strong>QQQ SMA200 with VXN high-volatility block</strong><small>QSIG-005</small></td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>기간 맞춤 비교 준비 부족</td>
-</tr>
-
-<tr>
-  <td><strong>QQQ SMA200 with overnight stress block</strong><small>QSIG-006</small></td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>기간 맞춤 비교 준비 부족</td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 20-day realized-volatility exposure scaling</strong><small>QSIG-007</small></td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>기간 맞춤 비교 준비 부족</td>
-</tr>
-
-<tr>
-  <td><strong>QQQ SMA200 plus volatility-managed exposure</strong><small>QSIG-008</small></td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>기간 맞춤 비교 준비 부족</td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 추세 + XLK/SPY 상대강도</strong><small>STL-001</small></td>
-  <td>360.8%</td>
-  <td>21.1%</td>
-  <td>-61.1%</td>
-  <td>0.35</td>
-  <td>-558.6%</td>
-  <td>34.2%</td>
-  <td>같은 기간 원본 지표</td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 추세 + SMH relative strength vs QQQ</strong><small>STL-002</small></td>
-  <td>791.1%</td>
-  <td>31.6%</td>
-  <td>-48.9%</td>
-  <td>0.65</td>
-  <td>-128.2%</td>
-  <td>464.5%</td>
-  <td>같은 기간 원본 지표</td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 추세 + SOXX relative strength vs QQQ</strong><small>STL-003</small></td>
-  <td>660.2%</td>
-  <td>29.0%</td>
-  <td>-48.9%</td>
-  <td>0.59</td>
-  <td>-259.1%</td>
-  <td>333.6%</td>
-  <td>같은 기간 원본 지표</td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 추세 + IGV relative strength vs QQQ</strong><small>STL-004</small></td>
-  <td>633.2%</td>
-  <td>28.4%</td>
-  <td>-37.9%</td>
-  <td>0.75</td>
-  <td>-286.1%</td>
-  <td>306.6%</td>
-  <td>같은 기간 원본 지표</td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 추세 + XLK/SMH/IGV leadership breadth</strong><small>STL-005</small></td>
-  <td>937.6%</td>
-  <td>34.1%</td>
-  <td>-48.9%</td>
-  <td>0.70</td>
-  <td>18.3%</td>
-  <td>611.0%</td>
-  <td>같은 기간 원본 지표</td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 추세 + tech leadership deterioration block</strong><small>STL-006</small></td>
-  <td>937.6%</td>
-  <td>34.1%</td>
-  <td>-48.9%</td>
-  <td>0.70</td>
-  <td>18.3%</td>
-  <td>611.0%</td>
-  <td>같은 기간 원본 지표</td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 추세 + semiconductor leadership confirmation</strong><small>STL-007</small></td>
-  <td>704.7%</td>
-  <td>29.9%</td>
-  <td>-48.9%</td>
-  <td>0.61</td>
-  <td>-214.6%</td>
-  <td>378.1%</td>
-  <td>같은 기간 원본 지표</td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 추세 + sector leadership rotation risk-off</strong><small>STL-008</small></td>
-  <td>545.0%</td>
-  <td>26.3%</td>
-  <td>-58.0%</td>
-  <td>0.45</td>
-  <td>-374.3%</td>
-  <td>218.4%</td>
-  <td>같은 기간 원본 지표</td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 추세 + VIX 고변동성 차단</strong><small>MRS-001</small></td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>기간 맞춤 비교 준비 부족</td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 추세 + VXN 고변동성 차단</strong><small>MRS-002</small></td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>기간 맞춤 비교 준비 부족</td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 추세 + TLT/IEF 위험회피 차단</strong><small>MRS-003</small></td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>기간 맞춤 비교 준비 부족</td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 추세 + TLT 상대 약세 차단</strong><small>MRS-004</small></td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>기간 맞춤 비교 준비 부족</td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 추세 + 달러 강세 차단</strong><small>MRS-005</small></td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>기간 맞춤 비교 준비 부족</td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 추세 + VIX/VXN 변동성 상태</strong><small>MRS-006</small></td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>기간 맞춤 비교 준비 부족</td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 추세 + 매크로/금리 스트레스</strong><small>MRS-007</small></td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>기간 맞춤 비교 준비 부족</td>
-</tr>
-
-<tr>
-  <td><strong>매크로 스트레스 노출 축소</strong><small>MRS-008</small></td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>기간 맞춤 비교 준비 부족</td>
-</tr>
-
-<tr>
-  <td><strong>추세 + 매크로 스트레스 노출 조절</strong><small>MRS-009</small></td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>기간 맞춤 비교 준비 부족</td>
-</tr>
-
-<tr>
-  <td><strong>나스닥 변동성/거시 상태 신호 초안 (DRSIG-002)</strong><small>DRSIG-002</small></td>
-  <td>665.8%</td>
-  <td>29.1%</td>
-  <td>-45.2%</td>
-  <td>0.64</td>
-  <td>-238.8%</td>
-  <td>341.3%</td>
-  <td>trace 재계산</td>
-</tr>
-
-<tr>
-  <td><strong>QQQ 12-month momentum daily draft (DRSIG-003)</strong><small>DRSIG-003</small></td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>-</td>
-  <td>기간 맞춤 비교 준비 부족</td>
-</tr>
-</tbody></table></div>
-  <p><a href="#top">???? ????</a></p>
+<section id="period-comparisons">
+  <h2>같은 기간 비교표</h2>
+  
+<section id="period-compare-2010-02-16-2026-06-12" class="period-section">
+  <h2>기간 비교: 2010-02-16 ~ 2026-06-12</h2>
+  <p class="muted">계산 가능: 19 / 27</p>
+  <div class="table-wrap compact-table">
+    <table>
+      <thead><tr><th>전략명</th><th>신호 묶음</th><th>상태</th><th>토탈 리턴</th><th>CAGR</th><th>MDD</th><th>MAR</th></tr></thead>
+      <tbody><tr>
+<td><strong>QQQ 200일선 추세 필터</strong><div class="muted">QSIG-001</div></td>
+<td>QQQ 신호</td>
+<td>같은 기간 원본 지표</td>
+<td class="num">5,802.9%</td>
+<td class="num">28.4%</td>
+<td class="num">-60.3%</td>
+<td class="num">0.47</td>
+</tr><tr>
+<td><strong>QQQ 10-month MA daily proxy</strong><div class="muted">QSIG-002</div></td>
+<td>QQQ 신호</td>
+<td>같은 기간 원본 지표</td>
+<td class="num">5,105.5%</td>
+<td class="num">27.4%</td>
+<td class="num">-59.5%</td>
+<td class="num">0.46</td>
+</tr><tr>
+<td><strong>QQQ 12-month time-series momentum</strong><div class="muted">QSIG-003</div></td>
+<td>QQQ 신호</td>
+<td>같은 기간 원본 지표</td>
+<td class="num">8,748.9%</td>
+<td class="num">31.6%</td>
+<td class="num">-66.6%</td>
+<td class="num">0.47</td>
+</tr><tr>
+<td><strong>QQQ SMA200 plus 63-day momentum confirmation</strong><div class="muted">QSIG-004</div></td>
+<td>QQQ 신호</td>
+<td>같은 기간 원본 지표</td>
+<td class="num">1,773.5%</td>
+<td class="num">19.7%</td>
+<td class="num">-54.1%</td>
+<td class="num">0.36</td>
+</tr><tr>
+<td><strong>QQQ SMA200 with VXN high-volatility block</strong><div class="muted">QSIG-005</div></td>
+<td>QQQ 신호</td>
+<td>같은 기간 원본 지표</td>
+<td class="num">2,373.2%</td>
+<td class="num">21.7%</td>
+<td class="num">-49.2%</td>
+<td class="num">0.44</td>
+</tr><tr>
+<td><strong>QQQ SMA200 with overnight stress block</strong><div class="muted">QSIG-006</div></td>
+<td>QQQ 신호</td>
+<td>같은 기간 원본 지표</td>
+<td class="num">3,988.3%</td>
+<td class="num">25.5%</td>
+<td class="num">-58.9%</td>
+<td class="num">0.43</td>
+</tr><tr>
+<td><strong>QQQ 20-day realized-volatility exposure scaling</strong><div class="muted">QSIG-007</div></td>
+<td>QQQ 신호</td>
+<td>같은 기간 원본 지표</td>
+<td class="num">31,824.7%</td>
+<td class="num">42.4%</td>
+<td class="num">-68.6%</td>
+<td class="num">0.62</td>
+</tr><tr>
+<td><strong>QQQ SMA200 plus volatility-managed exposure</strong><div class="muted">QSIG-008</div></td>
+<td>QQQ 신호</td>
+<td>같은 기간 원본 지표</td>
+<td class="num">6,377.3%</td>
+<td class="num">29.1%</td>
+<td class="num">-59.5%</td>
+<td class="num">0.49</td>
+</tr><tr>
+<td><strong>QQQ 추세 + XLK/SPY 상대강도</strong><div class="muted">STL-001</div></td>
+<td>섹터/기술주</td>
+<td>기간 데이터 부족</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+</tr><tr>
+<td><strong>QQQ 추세 + SMH relative strength vs QQQ</strong><div class="muted">STL-002</div></td>
+<td>섹터/기술주</td>
+<td>기간 데이터 부족</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+</tr><tr>
+<td><strong>QQQ 추세 + SOXX relative strength vs QQQ</strong><div class="muted">STL-003</div></td>
+<td>섹터/기술주</td>
+<td>기간 데이터 부족</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+</tr><tr>
+<td><strong>QQQ 추세 + IGV relative strength vs QQQ</strong><div class="muted">STL-004</div></td>
+<td>섹터/기술주</td>
+<td>기간 데이터 부족</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+</tr><tr>
+<td><strong>QQQ 추세 + XLK/SMH/IGV leadership breadth</strong><div class="muted">STL-005</div></td>
+<td>섹터/기술주</td>
+<td>기간 데이터 부족</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+</tr><tr>
+<td><strong>QQQ 추세 + tech leadership deterioration block</strong><div class="muted">STL-006</div></td>
+<td>섹터/기술주</td>
+<td>기간 데이터 부족</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+</tr><tr>
+<td><strong>QQQ 추세 + semiconductor leadership confirmation</strong><div class="muted">STL-007</div></td>
+<td>섹터/기술주</td>
+<td>기간 데이터 부족</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+</tr><tr>
+<td><strong>QQQ 추세 + sector leadership rotation risk-off</strong><div class="muted">STL-008</div></td>
+<td>섹터/기술주</td>
+<td>기간 데이터 부족</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+</tr><tr>
+<td><strong>QQQ 추세 + VIX 고변동성 차단</strong><div class="muted">MRS-001</div></td>
+<td>매크로/금리</td>
+<td>같은 기간 원본 지표</td>
+<td class="num">3,514.7%</td>
+<td class="num">24.6%</td>
+<td class="num">-51.7%</td>
+<td class="num">0.48</td>
+</tr><tr>
+<td><strong>QQQ 추세 + VXN 고변동성 차단</strong><div class="muted">MRS-002</div></td>
+<td>매크로/금리</td>
+<td>같은 기간 원본 지표</td>
+<td class="num">3,099.7%</td>
+<td class="num">23.7%</td>
+<td class="num">-49.2%</td>
+<td class="num">0.48</td>
+</tr><tr>
+<td><strong>QQQ 추세 + TLT/IEF 위험회피 차단</strong><div class="muted">MRS-003</div></td>
+<td>매크로/금리</td>
+<td>같은 기간 원본 지표</td>
+<td class="num">4,601.0%</td>
+<td class="num">26.6%</td>
+<td class="num">-56.0%</td>
+<td class="num">0.48</td>
+</tr><tr>
+<td><strong>QQQ 추세 + TLT 상대 약세 차단</strong><div class="muted">MRS-004</div></td>
+<td>매크로/금리</td>
+<td>같은 기간 원본 지표</td>
+<td class="num">3,690.5%</td>
+<td class="num">25.0%</td>
+<td class="num">-54.8%</td>
+<td class="num">0.46</td>
+</tr><tr>
+<td><strong>QQQ 추세 + 달러 강세 차단</strong><div class="muted">MRS-005</div></td>
+<td>매크로/금리</td>
+<td>같은 기간 원본 지표</td>
+<td class="num">1,360.5%</td>
+<td class="num">17.9%</td>
+<td class="num">-56.9%</td>
+<td class="num">0.31</td>
+</tr><tr>
+<td><strong>QQQ 추세 + VIX/VXN 변동성 상태</strong><div class="muted">MRS-006</div></td>
+<td>매크로/금리</td>
+<td>같은 기간 원본 지표</td>
+<td class="num">1,858.4%</td>
+<td class="num">20.0%</td>
+<td class="num">-35.4%</td>
+<td class="num">0.56</td>
+</tr><tr>
+<td><strong>QQQ 추세 + 매크로/금리 스트레스</strong><div class="muted">MRS-007</div></td>
+<td>매크로/금리</td>
+<td>같은 기간 원본 지표</td>
+<td class="num">2,876.8%</td>
+<td class="num">23.1%</td>
+<td class="num">-49.2%</td>
+<td class="num">0.47</td>
+</tr><tr>
+<td><strong>매크로 스트레스 노출 축소</strong><div class="muted">MRS-008</div></td>
+<td>매크로/금리</td>
+<td>같은 기간 원본 지표</td>
+<td class="num">6,340.8%</td>
+<td class="num">29.1%</td>
+<td class="num">-56.2%</td>
+<td class="num">0.52</td>
+</tr><tr>
+<td><strong>추세 + 매크로 스트레스 노출 조절</strong><div class="muted">MRS-009</div></td>
+<td>매크로/금리</td>
+<td>같은 기간 원본 지표</td>
+<td class="num">2,663.6%</td>
+<td class="num">22.6%</td>
+<td class="num">-48.5%</td>
+<td class="num">0.47</td>
+</tr><tr>
+<td><strong>나스닥 변동성/거시 상태 신호 초안 (DRSIG-002)</strong><div class="muted">DRSIG-002</div></td>
+<td>규칙 초안</td>
+<td>같은 기간 원본 지표</td>
+<td class="num">2,373.2%</td>
+<td class="num">21.7%</td>
+<td class="num">-49.2%</td>
+<td class="num">0.44</td>
+</tr><tr>
+<td><strong>QQQ 12-month momentum daily draft (DRSIG-003)</strong><div class="muted">DRSIG-003</div></td>
+<td>규칙 초안</td>
+<td>같은 기간 원본 지표</td>
+<td class="num">8,748.9%</td>
+<td class="num">31.6%</td>
+<td class="num">-66.6%</td>
+<td class="num">0.47</td>
+</tr></tbody>
+    </table>
+  </div>
 </section>
-
-<section class="panel">
-  <h2>?? ??</h2>
-  <dl>
-    <dt>?? ??</dt><dd>?? ??? ??? ?? ??????.</dd>
-    <dt>CAGR</dt><dd>??? ??????.</dd>
-    <dt>MDD</dt><dd>?? ?? ?? ?? ??? ?? ?????.</dd>
-    <dt>MAR</dt><dd>CAGR? MDD ????? ?? ??????.</dd>
-    <dt>????</dt><dd>?? ?? ??? ??? ????? ???? ?? ?????. ??, ??, ?? ??? ?????.</dd>
-  </dl>
+<section id="period-compare-2018-06-21-2026-06-12" class="period-section">
+  <h2>기간 비교: 2018-06-21 ~ 2026-06-12</h2>
+  <p class="muted">계산 가능: 9 / 27</p>
+  <div class="table-wrap compact-table">
+    <table>
+      <thead><tr><th>전략명</th><th>신호 묶음</th><th>상태</th><th>토탈 리턴</th><th>CAGR</th><th>MDD</th><th>MAR</th></tr></thead>
+      <tbody><tr>
+<td><strong>QQQ 200일선 추세 필터</strong><div class="muted">QSIG-001</div></td>
+<td>QQQ 신호</td>
+<td>기간 맞춤 비교 준비 부족</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+</tr><tr>
+<td><strong>QQQ 10-month MA daily proxy</strong><div class="muted">QSIG-002</div></td>
+<td>QQQ 신호</td>
+<td>기간 맞춤 비교 준비 부족</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+</tr><tr>
+<td><strong>QQQ 12-month time-series momentum</strong><div class="muted">QSIG-003</div></td>
+<td>QQQ 신호</td>
+<td>기간 맞춤 비교 준비 부족</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+</tr><tr>
+<td><strong>QQQ SMA200 plus 63-day momentum confirmation</strong><div class="muted">QSIG-004</div></td>
+<td>QQQ 신호</td>
+<td>기간 맞춤 비교 준비 부족</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+</tr><tr>
+<td><strong>QQQ SMA200 with VXN high-volatility block</strong><div class="muted">QSIG-005</div></td>
+<td>QQQ 신호</td>
+<td>기간 맞춤 비교 준비 부족</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+</tr><tr>
+<td><strong>QQQ SMA200 with overnight stress block</strong><div class="muted">QSIG-006</div></td>
+<td>QQQ 신호</td>
+<td>기간 맞춤 비교 준비 부족</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+</tr><tr>
+<td><strong>QQQ 20-day realized-volatility exposure scaling</strong><div class="muted">QSIG-007</div></td>
+<td>QQQ 신호</td>
+<td>기간 맞춤 비교 준비 부족</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+</tr><tr>
+<td><strong>QQQ SMA200 plus volatility-managed exposure</strong><div class="muted">QSIG-008</div></td>
+<td>QQQ 신호</td>
+<td>기간 맞춤 비교 준비 부족</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+</tr><tr>
+<td><strong>QQQ 추세 + XLK/SPY 상대강도</strong><div class="muted">STL-001</div></td>
+<td>섹터/기술주</td>
+<td>같은 기간 원본 지표</td>
+<td class="num">360.8%</td>
+<td class="num">21.1%</td>
+<td class="num">-61.1%</td>
+<td class="num">0.35</td>
+</tr><tr>
+<td><strong>QQQ 추세 + SMH relative strength vs QQQ</strong><div class="muted">STL-002</div></td>
+<td>섹터/기술주</td>
+<td>같은 기간 원본 지표</td>
+<td class="num">791.1%</td>
+<td class="num">31.6%</td>
+<td class="num">-48.9%</td>
+<td class="num">0.65</td>
+</tr><tr>
+<td><strong>QQQ 추세 + SOXX relative strength vs QQQ</strong><div class="muted">STL-003</div></td>
+<td>섹터/기술주</td>
+<td>같은 기간 원본 지표</td>
+<td class="num">660.2%</td>
+<td class="num">29.0%</td>
+<td class="num">-48.9%</td>
+<td class="num">0.59</td>
+</tr><tr>
+<td><strong>QQQ 추세 + IGV relative strength vs QQQ</strong><div class="muted">STL-004</div></td>
+<td>섹터/기술주</td>
+<td>같은 기간 원본 지표</td>
+<td class="num">633.2%</td>
+<td class="num">28.4%</td>
+<td class="num">-37.9%</td>
+<td class="num">0.75</td>
+</tr><tr>
+<td><strong>QQQ 추세 + XLK/SMH/IGV leadership breadth</strong><div class="muted">STL-005</div></td>
+<td>섹터/기술주</td>
+<td>같은 기간 원본 지표</td>
+<td class="num">937.6%</td>
+<td class="num">34.1%</td>
+<td class="num">-48.9%</td>
+<td class="num">0.70</td>
+</tr><tr>
+<td><strong>QQQ 추세 + tech leadership deterioration block</strong><div class="muted">STL-006</div></td>
+<td>섹터/기술주</td>
+<td>같은 기간 원본 지표</td>
+<td class="num">937.6%</td>
+<td class="num">34.1%</td>
+<td class="num">-48.9%</td>
+<td class="num">0.70</td>
+</tr><tr>
+<td><strong>QQQ 추세 + semiconductor leadership confirmation</strong><div class="muted">STL-007</div></td>
+<td>섹터/기술주</td>
+<td>같은 기간 원본 지표</td>
+<td class="num">704.7%</td>
+<td class="num">29.9%</td>
+<td class="num">-48.9%</td>
+<td class="num">0.61</td>
+</tr><tr>
+<td><strong>QQQ 추세 + sector leadership rotation risk-off</strong><div class="muted">STL-008</div></td>
+<td>섹터/기술주</td>
+<td>같은 기간 원본 지표</td>
+<td class="num">545.0%</td>
+<td class="num">26.3%</td>
+<td class="num">-58.0%</td>
+<td class="num">0.45</td>
+</tr><tr>
+<td><strong>QQQ 추세 + VIX 고변동성 차단</strong><div class="muted">MRS-001</div></td>
+<td>매크로/금리</td>
+<td>기간 맞춤 비교 준비 부족</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+</tr><tr>
+<td><strong>QQQ 추세 + VXN 고변동성 차단</strong><div class="muted">MRS-002</div></td>
+<td>매크로/금리</td>
+<td>기간 맞춤 비교 준비 부족</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+</tr><tr>
+<td><strong>QQQ 추세 + TLT/IEF 위험회피 차단</strong><div class="muted">MRS-003</div></td>
+<td>매크로/금리</td>
+<td>기간 맞춤 비교 준비 부족</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+</tr><tr>
+<td><strong>QQQ 추세 + TLT 상대 약세 차단</strong><div class="muted">MRS-004</div></td>
+<td>매크로/금리</td>
+<td>기간 맞춤 비교 준비 부족</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+</tr><tr>
+<td><strong>QQQ 추세 + 달러 강세 차단</strong><div class="muted">MRS-005</div></td>
+<td>매크로/금리</td>
+<td>기간 맞춤 비교 준비 부족</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+</tr><tr>
+<td><strong>QQQ 추세 + VIX/VXN 변동성 상태</strong><div class="muted">MRS-006</div></td>
+<td>매크로/금리</td>
+<td>기간 맞춤 비교 준비 부족</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+</tr><tr>
+<td><strong>QQQ 추세 + 매크로/금리 스트레스</strong><div class="muted">MRS-007</div></td>
+<td>매크로/금리</td>
+<td>기간 맞춤 비교 준비 부족</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+</tr><tr>
+<td><strong>매크로 스트레스 노출 축소</strong><div class="muted">MRS-008</div></td>
+<td>매크로/금리</td>
+<td>기간 맞춤 비교 준비 부족</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+</tr><tr>
+<td><strong>추세 + 매크로 스트레스 노출 조절</strong><div class="muted">MRS-009</div></td>
+<td>매크로/금리</td>
+<td>기간 맞춤 비교 준비 부족</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+</tr><tr>
+<td><strong>나스닥 변동성/거시 상태 신호 초안 (DRSIG-002)</strong><div class="muted">DRSIG-002</div></td>
+<td>규칙 초안</td>
+<td>trace 재계산</td>
+<td class="num">665.8%</td>
+<td class="num">29.1%</td>
+<td class="num">-45.2%</td>
+<td class="num">0.64</td>
+</tr><tr>
+<td><strong>QQQ 12-month momentum daily draft (DRSIG-003)</strong><div class="muted">DRSIG-003</div></td>
+<td>규칙 초안</td>
+<td>기간 맞춤 비교 준비 부족</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+<td class="num">미표시</td>
+</tr></tbody>
+    </table>
+  </div>
 </section>
+</section>
+<footer>Alpha Research Ops Lab &middot; static research snapshot</footer>
 </main>
 </body>
 </html>
