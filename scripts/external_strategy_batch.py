@@ -46,6 +46,7 @@ DERIVED_PLACEHOLDER_SYMBOLS = {
     "MOMENTUM",
     "RATIO",
     "SMA50",
+    "IF",
     "Z-SCORE",
     "ZSCORE",
 }
@@ -276,6 +277,55 @@ def parse_rule_text(rule: Any, default_symbol: Any = "") -> dict[str, Any] | Non
     lowered = text.lower()
     if any(token in lowered for token in ("p066_authority", "abl_authority", "authority engine", "health_score", "stress_score", "canonical grace")):
         return make_node("external_authority_state", symbol="P066_AUTHORITY")
+    if lowered.startswith("arm after ") and "set a 63-session tqqq window" in lowered:
+        return make_node(
+            "armed_crash_reentry_timer",
+            arm=make_node(
+                "logical_or",
+                children=[
+                    make_node("price_level_compare", symbol="^VIX", operator=">", threshold=35.0),
+                    make_node("trailing_drawdown", symbol="QQQ", operator="<", window=252, threshold=-0.18),
+                ],
+            ),
+            recovery=make_node(
+                "logical_and",
+                children=[
+                    make_node("price_change_threshold", symbol="^VIX", operator="<", window=10, threshold=0.0),
+                    make_node("roc_compare_zero", symbol="QQQ", operator=">", window=10, threshold=0.0),
+                    make_node("price_vs_sma", symbol="QQQ", operator=">", window=20),
+                ],
+            ),
+            window_sessions=63,
+            inside_half_condition=make_node("ratio_price_threshold", left_symbol="^VIX9D", right_symbol="^VIX3M", operator=">", threshold=1.15),
+            inside_half_exposure=0.5,
+            inside_full_exposure=1.0,
+            outside_condition=make_node("price_vs_sma", symbol="QQQ", operator=">", window=100),
+            outside_true_exposure=0.25,
+            outside_false_exposure=0.0,
+        )
+    count_improved_match = re.search(
+        r"count of (?P<symbols>[A-Z0-9./^,\s]+?) above (?P<sma>\d+)-day SMA has improved by at least (?P<threshold>\d+) versus (?P<lookback>\d+) sessions ago",
+        text,
+        re.I,
+    )
+    if count_improved_match:
+        raw_symbols = re.split(r"[/,\s]+", count_improved_match.group("symbols").strip())
+        symbols = []
+        for raw_symbol in raw_symbols:
+            symbol, status = normalize_symbol(raw_symbol)
+            if symbol and not status:
+                symbols.append(symbol)
+        if symbols:
+            count_node = make_node(
+                "count_above_sma_improved",
+                symbols=unique_strings(symbols),
+                sma_window=int(count_improved_match.group("sma")),
+                lookback=int(count_improved_match.group("lookback")),
+                threshold=int(count_improved_match.group("threshold")),
+            )
+            if "qqq close > qqq 100-day sma" in lowered:
+                return make_node("logical_and", children=[parse_rule_text("QQQ close > QQQ 100-day SMA", default_symbol), count_node])
+            return count_node
     if any(token in lowered for token in ("state machine", "hysteresis", "maintain prior state", "when armed")):
         return make_node("state_machine")
     if "target annualized volatility" in lowered or "target-vol" in lowered or "target volatility" in lowered:
@@ -608,6 +658,8 @@ def normalize_node(raw: Any, default_symbol: Any = "") -> tuple[dict[str, Any] |
             node[key], status = normalize_symbol(node[key])
             if status == "needs_data_source_mapping":
                 errors.append("needs_data_source_mapping")
+            elif status:
+                errors.append(status)
     if "operator" in node:
         node["operator"] = normalize_operator(node["operator"])
     if node_type in {"logical_and", "logical_or"}:
@@ -643,6 +695,34 @@ def normalize_node(raw: Any, default_symbol: Any = "") -> tuple[dict[str, Any] |
             if not parsed:
                 errors.append("unsupported_rule")
             node["condition"] = parsed
+    if node_type == "armed_crash_reentry_timer":
+        for key in ("arm", "recovery", "inside_half_condition", "outside_condition"):
+            parsed, child_errors = normalize_node(raw.get(key), default_symbol)
+            errors.extend(child_errors)
+            if not parsed:
+                errors.append("unsupported_rule")
+            node[key] = parsed
+        node["window_sessions"] = int(as_number(raw.get("window_sessions"), 0))
+        node["inside_half_exposure"] = as_number(raw.get("inside_half_exposure"), 0.5)
+        node["inside_full_exposure"] = as_number(raw.get("inside_full_exposure"), 1.0)
+        node["outside_true_exposure"] = as_number(raw.get("outside_true_exposure"), 0.25)
+        node["outside_false_exposure"] = as_number(raw.get("outside_false_exposure"), 0.0)
+        if node["window_sessions"] <= 0:
+            errors.append("unsupported_rule")
+    if node_type == "count_above_sma_improved":
+        symbols = []
+        for raw_symbol in raw.get("symbols") or []:
+            symbol, status = normalize_symbol(raw_symbol)
+            if status == "needs_data_source_mapping":
+                errors.append("needs_data_source_mapping")
+            if symbol:
+                symbols.append(symbol)
+        node["symbols"] = unique_strings(symbols)
+        node["sma_window"] = int(as_number(raw.get("sma_window"), 0))
+        node["lookback"] = int(as_number(raw.get("lookback"), 0))
+        node["threshold"] = int(as_number(raw.get("threshold"), 0))
+        if not node["symbols"] or node["sma_window"] <= 0 or node["lookback"] <= 0 or node["threshold"] <= 0:
+            errors.append("unsupported_rule")
     if node_type == "source_rule_text":
         return normalize_node(raw.get("text"), default_symbol)
     if node_type in {"vote", "votes", "hysteresis", "state_machine", "needs_state_machine_support"}:
@@ -665,9 +745,9 @@ def node_symbols(node: Any) -> list[str]:
             symbols.append(clean_text(node[key]))
     for child in node.get("children") or []:
         symbols.extend(node_symbols(child))
-    symbols.extend(node_symbols(node.get("child")))
-    symbols.extend(node_symbols(node.get("condition")))
-    symbols.extend(node_symbols(node.get("trigger")))
+    for key in ("child", "condition", "trigger", "arm", "recovery", "inside_half_condition", "outside_condition"):
+        symbols.extend(node_symbols(node.get(key)))
+    symbols.extend(clean_text(symbol) for symbol in node.get("symbols") or [])
     return unique_strings(symbols)
 
 
@@ -684,6 +764,81 @@ def node_leaf_count(node: Any) -> int:
             return sum(node_leaf_count(child) for child in node.get("children") or [])
         return node_leaf_count(node.get("condition"))
     return 1
+
+
+def node_types(node: Any) -> set[str]:
+    if not isinstance(node, dict):
+        return set()
+    output = {clean_text(node.get("type"))}
+    for key in ("children",):
+        for child in node.get(key) or []:
+            output.update(node_types(child))
+    for key in ("child", "condition", "trigger", "arm", "recovery", "inside_half_condition", "outside_condition"):
+        output.update(node_types(node.get(key)))
+    return {item for item in output if item}
+
+
+def is_bounded_daily_node(node: Any) -> bool:
+    allowed = {
+        "always_true",
+        "count_condition",
+        "count_above_sma_improved",
+        "distance_from_sma",
+        "down_day",
+        "logical_and",
+        "logical_not",
+        "logical_or",
+        "monthly_revalidation",
+        "percentile",
+        "price_change_threshold",
+        "price_level_compare",
+        "price_vs_sma",
+        "price_vs_sma_other_symbol",
+        "price_vs_trailing_percentile",
+        "ratio_price_threshold",
+        "ratio_price_vs_sma",
+        "ratio_return_threshold",
+        "realized_volatility",
+        "return_threshold",
+        "roc_compare_symbol",
+        "roc_compare_zero",
+        "rsi",
+        "sma_slope",
+        "trailing_drawdown",
+        "z_score",
+    }
+    symbols = {symbol.upper() for symbol in node_symbols(node)}
+    return bool(node) and node_types(node).issubset(allowed) and not symbols.intersection(DERIVED_PLACEHOLDER_SYMBOLS)
+
+
+def is_bounded_formula_pattern(strategy: dict[str, Any], combined_rule_text: str) -> bool:
+    if any(token in combined_rule_text for token in ("target-vol", "target volatility", "weight=min", "return to tqqq after")):
+        return False
+    exposure = strategy.get("exposure") or {}
+    allocation = strategy.get("allocation_rule") or {}
+    root = strategy.get("rule_spec")
+    if exposure.get("type") == "condition_fraction":
+        conditions = exposure.get("conditions") or []
+        return bool(conditions) and all(is_bounded_daily_node(condition) for condition in conditions)
+    if exposure.get("type") == "tiered":
+        tiers = exposure.get("tiers") or []
+        return bool(tiers) and all(is_bounded_daily_node(tier.get("when")) for tier in tiers)
+    if allocation and allocation.get("type") == "defensive_momentum_selector":
+        assets = set(allocation.get("assets") or [])
+        return assets.issubset({"SHY", "GLD", "LQD"}) and is_bounded_daily_node(allocation.get("condition") or root)
+    return is_bounded_daily_node(exposure.get("condition") or root)
+
+
+def is_bounded_state_pattern(strategy: dict[str, Any]) -> bool:
+    exposure = strategy.get("exposure") or {}
+    root = strategy.get("rule_spec")
+    state_node = exposure if exposure.get("type") == "armed_crash_reentry_timer" else root
+    if not isinstance(state_node, dict) or state_node.get("type") != "armed_crash_reentry_timer":
+        return False
+    return all(
+        is_bounded_daily_node(state_node.get(key))
+        for key in ("arm", "recovery", "inside_half_condition", "outside_condition")
+    )
 
 
 def skip_reason_for(status: str) -> str:
@@ -790,7 +945,9 @@ def normalize_exposure(strategy: dict[str, Any], root_node: dict[str, Any] | Non
             conditions = [condition for condition in conditions if condition]
             if conditions:
                 exposure = {"type": "condition_fraction", "conditions": conditions, "default_exposure": 0.0}
-    if exposure.get("type") == "tiered":
+    if root_node and root_node.get("type") == "armed_crash_reentry_timer":
+        exposure = dict(root_node)
+    elif exposure.get("type") == "tiered":
         tiers = []
         for tier in exposure.get("tiers") or []:
             node, node_errors = normalize_node(tier.get("when") or tier.get("condition"), "")
@@ -1025,14 +1182,21 @@ def normalize_strategy(strategy: dict[str, Any], index: int, total_ready_hint: i
     effective_parse_errors = list(parse_errors)
     if tiered_exposure_ready and not root_node:
         effective_parse_errors = [error for error in effective_parse_errors if error != "unsupported_rule"]
+    formula_context = {
+        "rule_spec": root_node,
+        "exposure": exposure,
+        "allocation_rule": allocation_rule,
+    }
+    bounded_formula_ready = is_bounded_formula_pattern(formula_context, combined_rule_text)
+    bounded_state_ready = is_bounded_state_pattern(formula_context)
 
     if errors:
         status = "invalid_required_field"
     elif data_mapping_needed:
         status = "needs_data_source_mapping"
-    elif "needs_state_machine_support" in effective_parse_errors or state_machine_needed:
+    elif ("needs_state_machine_support" in effective_parse_errors or state_machine_needed) and not (bounded_state_ready or bounded_formula_ready):
         status = "needs_state_machine_support"
-    elif "needs_formula_engine" in effective_parse_errors or formula_engine_needed:
+    elif ("needs_formula_engine" in effective_parse_errors or formula_engine_needed) and not bounded_formula_ready:
         status = "needs_formula_engine"
     elif unsupported_runtime_derived:
         status = "unsupported_rule"
@@ -1227,6 +1391,14 @@ def eval_node(node: dict[str, Any], frames: dict[str, pd.DataFrame]) -> pd.Serie
         condition = eval_node(node["condition"], frames).astype(float)
         count = condition.rolling(int(node.get("window", 1))).sum()
         return operator_apply(count, node.get("operator", ">="), float(node["threshold"]))
+    if node_type == "count_above_sma_improved":
+        values = []
+        for symbol in node.get("symbols") or []:
+            close = close_series(frames, symbol)
+            values.append((close > close.rolling(int(node["sma_window"])).mean()).astype(int))
+        count = pd.concat(values, axis=1).sum(axis=1)
+        improvement = count - count.shift(int(node["lookback"]))
+        return improvement >= int(node["threshold"])
     if node_type == "monthly_revalidation":
         child = eval_node(node["child"], frames).astype(bool)
         month_key = pd.Series(child.index.to_period("M"), index=child.index)
@@ -1267,7 +1439,28 @@ def apply_max_hold(exposure: pd.Series, max_hold: dict[str, Any] | None) -> pd.S
 def exposure_series(strategy: dict[str, Any], frames: dict[str, pd.DataFrame]) -> pd.Series:
     exposure = strategy.get("exposure") or {}
     root = strategy["rule_spec"]
-    if exposure.get("type") == "tiered":
+    if exposure.get("type") == "armed_crash_reentry_timer":
+        base_index = eval_node(exposure["outside_condition"], frames).index
+        arm = eval_node(exposure["arm"], frames).reindex(base_index).fillna(False).astype(bool)
+        recovery = eval_node(exposure["recovery"], frames).reindex(base_index).fillna(False).astype(bool)
+        half = eval_node(exposure["inside_half_condition"], frames).reindex(base_index).fillna(False).astype(bool)
+        outside = eval_node(exposure["outside_condition"], frames).reindex(base_index).fillna(False).astype(bool)
+        series = pd.Series(float(exposure.get("outside_false_exposure", 0.0)), index=base_index)
+        armed = False
+        window_left = 0
+        window_sessions = int(exposure["window_sessions"])
+        for idx, date in enumerate(base_index):
+            if bool(arm.iloc[idx]):
+                armed = True
+            if armed and bool(recovery.iloc[idx]):
+                window_left = window_sessions
+                armed = False
+            if window_left > 0:
+                series.loc[date] = float(exposure.get("inside_half_exposure", 0.5)) if bool(half.iloc[idx]) else float(exposure.get("inside_full_exposure", 1.0))
+                window_left -= 1
+            else:
+                series.loc[date] = float(exposure.get("outside_true_exposure", 0.25)) if bool(outside.iloc[idx]) else float(exposure.get("outside_false_exposure", 0.0))
+    elif exposure.get("type") == "tiered":
         if root:
             base_index = eval_node(root, frames).index
         else:

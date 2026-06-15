@@ -21,6 +21,24 @@ def strategy(rule: str, *, symbol: str = "QQQ", required_symbols: list[str] | No
     }
 
 
+def strategy_with(overrides: dict) -> dict:
+    base = strategy("QQQ close > QQQ 200-day simple moving average")
+    base.update(overrides)
+    return base
+
+
+def synthetic_frames(symbols: list[str]) -> dict[str, pd.DataFrame]:
+    dates = pd.bdate_range("2020-01-01", periods=320)
+    output = {}
+    for index, symbol in enumerate(symbols):
+        start = 80 + index * 5
+        values = pd.Series(range(start, start + len(dates)), index=dates, dtype=float)
+        if symbol in {"^VIX", "^VIX9D", "^VIX3M", "^VVIX"}:
+            values = pd.Series(20 + (index % 3), index=dates, dtype=float)
+        output[symbol] = pd.DataFrame({"Open": values, "Adj Close": values, "Close": values}, index=dates)
+    return output
+
+
 def test_multi_symbol_daily_rule_label_is_ready() -> None:
     normalized = batch.normalize_strategy(
         strategy(
@@ -90,6 +108,140 @@ def test_formula_and_state_machine_rows_remain_held() -> None:
 
     assert target_vol["validation_status"] == "needs_formula_engine"
     assert reentry["validation_status"] == "needs_state_machine_support"
+
+
+def test_bounded_formula_import_patterns_are_ready() -> None:
+    cases = [
+        strategy_with(
+            {
+                "strategy_name": "TQ041 Three-asset risk ladder",
+                "required_symbols": ["TQQQ", "QQQ", "GLD", "VIX"],
+                "rule_spec": {
+                    "type": "logical_and",
+                    "children": [
+                        {"type": "price_vs_sma", "symbol": "QQQ", "operator": ">", "window": 200},
+                        {"type": "roc_compare_zero", "symbol": "GLD", "operator": ">", "window": 63, "threshold": 0},
+                    ],
+                },
+            }
+        ),
+        strategy_with(
+            {
+                "strategy_name": "TQ051 Trend score exposure",
+                "required_symbols": ["TQQQ", "QQQ"],
+                "rule_spec": {"type": "always_true", "symbol": "QQQ"},
+                "exposure": {
+                    "type": "condition_fraction",
+                    "conditions": [
+                        {"type": "price_vs_sma", "symbol": "QQQ", "operator": ">", "window": 50},
+                        {"type": "price_vs_sma", "symbol": "QQQ", "operator": ">", "window": 100},
+                        {"type": "price_vs_sma", "symbol": "QQQ", "operator": ">", "window": 200},
+                    ],
+                },
+            }
+        ),
+        strategy_with(
+            {
+                "strategy_name": "P2_004 Volatility surface score",
+                "required_symbols": ["TQQQ", "QQQ", "VIX9D", "VIX3M"],
+                "rule_spec": {"type": "ratio_price_threshold", "left_symbol": "VIX9D", "right_symbol": "VIX3M", "operator": "<", "threshold": 0.95},
+            }
+        ),
+    ]
+
+    statuses = [batch.normalize_strategy(case, index)["validation_status"] for index, case in enumerate(cases)]
+
+    assert statuses == ["ready_to_backtest", "ready_to_backtest", "ready_to_backtest"]
+
+
+def test_bounded_formula_import_pattern_executes_with_synthetic_data(monkeypatch) -> None:
+    normalized = batch.normalize_strategy(
+        strategy_with(
+            {
+                "strategy_name": "TQ051 Trend score exposure",
+                "rule_spec": {"type": "always_true", "symbol": "QQQ"},
+                "exposure": {
+                    "type": "condition_fraction",
+                    "conditions": [
+                        {"type": "price_vs_sma", "symbol": "QQQ", "operator": ">", "window": 50},
+                        {"type": "price_vs_sma", "symbol": "QQQ", "operator": ">", "window": 100},
+                        {"type": "price_vs_sma", "symbol": "QQQ", "operator": ">", "window": 200},
+                    ],
+                },
+            }
+        ),
+        0,
+    )
+
+    monkeypatch.setattr(batch, "download_symbols", lambda symbols: (synthetic_frames(symbols), []))
+
+    result = batch.backtest(normalized)
+
+    assert normalized["validation_status"] == "ready_to_backtest"
+    assert result["status"] == "executed"
+    assert result["exposure_tiers_used"]
+
+
+def test_bounded_state_group_patterns_validate_and_execute(monkeypatch) -> None:
+    crash_timer = batch.normalize_strategy(
+        strategy(
+            "Arm after VIX > 35 OR QQQ 252-day drawdown < -0.18; when armed and VIX is lower than 10 sessions ago AND QQQ 10-day momentum > 0 AND QQQ close > QQQ 20-day SMA, set a 63-session TQQQ window; inside that window use 50% TQQQ if VIX9D > 1.15 * VIX3M, otherwise 100%; outside use 25% TQQQ if QQQ close > QQQ 100-day SMA else 0%",
+            symbol="QQQ, VIX, VIX9D, VIX3M",
+            required_symbols=["TQQQ", "QQQ", "VIX", "VIX9D", "VIX3M"],
+        ),
+        0,
+    )
+    breadth = batch.normalize_strategy(
+        strategy(
+            "Risk-on if QQQ close > QQQ 100-day SMA AND the count of QQQ, SPY, XLK, SOXX, IWM above 50-day SMA has improved by at least 2 versus 10 sessions ago",
+            symbol="QQQ, SPY, SOXX, XLK, IWM",
+            required_symbols=["TQQQ", "QQQ", "SPY", "SOXX", "XLK", "IWM"],
+        ),
+        1,
+    )
+
+    monkeypatch.setattr(batch, "download_symbols", lambda symbols: (synthetic_frames(symbols), []))
+
+    crash_result = batch.backtest(crash_timer)
+    breadth_result = batch.backtest(breadth)
+
+    assert crash_timer["validation_status"] == "ready_to_backtest"
+    assert breadth["validation_status"] == "ready_to_backtest"
+    assert crash_result["status"] == "executed"
+    assert breadth_result["status"] == "executed"
+
+
+def test_ambiguous_general_formula_and_hysteresis_remain_held() -> None:
+    target_vol = batch.normalize_strategy(
+        strategy("QQQ>SMA200; TQQQ weight=min(1,25%/RV21)", symbol="QQQ, RV", required_symbols=["QQQ", "RV", "TQQQ"]),
+        0,
+    )
+    hysteresis = batch.normalize_strategy(
+        strategy(
+            "Maintain prior state unless votes change: add one vote each for QQQ close > QQQ 100-day SMA, XLK 63-day momentum > 0, VIX9D/VIX3M < 1.0; switch to 100% TQQQ when votes >= 4 and switch to defense when votes <= 2",
+            symbol="QQQ, XLK, VIX9D, VIX3M",
+            required_symbols=["TQQQ", "QQQ", "XLK", "VIX9D", "VIX3M"],
+        ),
+        1,
+    )
+
+    assert target_vol["validation_status"] == "needs_formula_engine"
+    assert hysteresis["validation_status"] == "needs_state_machine_support"
+
+
+def test_derived_placeholder_symbol_in_structured_node_is_not_ready() -> None:
+    normalized = batch.normalize_strategy(
+        strategy_with(
+            {
+                "strategy_name": "TQQQ_QQQ200_RV21_LADDER QQQ trend + RV21 exposure ladder",
+                "required_symbols": ["TQQQ", "QQQ", "IF"],
+                "rule_spec": {"type": "realized_volatility", "symbol": "IF", "operator": "<", "window": 21, "threshold": 0.25},
+            }
+        ),
+        0,
+    )
+
+    assert normalized["validation_status"] == "needs_formula_engine"
 
 
 def test_ready_realized_volatility_rule_executes_with_synthetic_data(monkeypatch) -> None:
