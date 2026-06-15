@@ -182,6 +182,31 @@ def test_bounded_formula_import_pattern_executes_with_synthetic_data(monkeypatch
     assert result["exposure_tiers_used"]
 
 
+def test_backtest_uses_same_day_close_after_hours_proxy(monkeypatch) -> None:
+    normalized = batch.normalize_strategy(
+        strategy_with(
+            {
+                "strategy_name": "same-day close proxy timing",
+                "rule_spec": {"type": "always_true", "symbol": "QQQ"},
+                "exposure": {"type": "binary", "condition": {"type": "always_true", "symbol": "QQQ"}, "true_exposure": 1.0, "false_exposure": 0.0},
+            }
+        ),
+        0,
+    )
+    dates = pd.bdate_range("2020-01-01", periods=8)
+    qqq = pd.DataFrame({"Open": [100.0] * 8, "Adj Close": [100, 101, 102, 103, 104, 105, 106, 107], "Close": [100, 101, 102, 103, 104, 105, 106, 107]}, index=dates)
+    tqqq = pd.DataFrame({"Open": [100.0] * 8, "Adj Close": [100, 110, 121, 133.1, 146.41, 161.051, 177.1561, 194.87171], "Close": [100, 110, 121, 133.1, 146.41, 161.051, 177.1561, 194.87171]}, index=dates)
+
+    monkeypatch.setattr(batch, "download_symbols", lambda symbols: ({"QQQ": qqq, "TQQQ": tqqq}, []))
+
+    result = batch.backtest(normalized)
+
+    assert result["execution_timing"] == batch.DEFAULT_EXECUTION_TIMING
+    assert result["same_close_execution_allowed"] is True
+    assert result["execution_price_basis"] == "adjusted_close_after_hours_estimate"
+    assert result["metrics"]["total_return"] > 0.5
+
+
 def test_bounded_state_group_patterns_validate_and_execute(monkeypatch) -> None:
     crash_timer = batch.normalize_strategy(
         strategy(

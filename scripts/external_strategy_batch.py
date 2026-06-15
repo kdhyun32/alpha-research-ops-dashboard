@@ -65,6 +65,17 @@ BOUNDARY_FLAGS = {
     "recommendation": False,
     "automatic_selection": False,
 }
+DEFAULT_SIGNAL_TIMING = "after_close"
+DEFAULT_EXECUTION_TIMING = "same_day_close_after_hours"
+DEFAULT_SAME_CLOSE_EXECUTION_ALLOWED = True
+LEGACY_NEXT_OPEN_TIMINGS = {"next_session_open", "next_session_open_to_next_session_open"}
+ALLOWED_EXECUTION_TIMINGS = {
+    DEFAULT_EXECUTION_TIMING,
+    "same_day_close_after_hours_proxy",
+    "same_day_close_proxy",
+    "after_close_same_day_close_proxy",
+    *LEGACY_NEXT_OPEN_TIMINGS,
+}
 
 PUBLIC_TEXT_REPLACEMENTS = {
     "CUSTOM_P25_A100_RAW": "external authority state map",
@@ -75,6 +86,9 @@ PUBLIC_TEXT_REPLACEMENTS = {
     "ABL_AUTHORITY": "EXTERNAL_AUTHORITY",
     "ABL": "external authority",
     "Snowball": "external prior system",
+    "proxy": "대체지표",
+    "Proxy": "대체지표",
+    "PROXY": "대체지표",
 }
 
 
@@ -900,11 +914,11 @@ def export_record_to_strategy(row: dict[str, Any]) -> dict[str, Any]:
         ] or [
             {"name": row.get("strategy_name") or "imported signal", "symbol": "QQQ", "rule": rule.get("source_rule_text") or row.get("exposure_rule"), "role": "entry_filter"}
         ],
-        "entry_rule": rule.get("entry_rule") or "enter at next session open when signal is true",
-        "exit_rule": rule.get("exit_rule") or "exit at next session open when signal is false",
-        "signal_timing": rule.get("signal_timing") or "after_close",
-        "execution_timing": "next_session_open",
-        "same_close_execution_allowed": False,
+        "entry_rule": rule.get("entry_rule") or "enter at same-day close/after-hours estimate when signal is true",
+        "exit_rule": rule.get("exit_rule") or "exit at same-day close/after-hours estimate when signal is false",
+        "signal_timing": rule.get("signal_timing") or DEFAULT_SIGNAL_TIMING,
+        "execution_timing": DEFAULT_EXECUTION_TIMING,
+        "same_close_execution_allowed": DEFAULT_SAME_CLOSE_EXECUTION_ALLOWED,
         "benchmark": row.get("benchmark") or ["QQQ"],
         "costs": row.get("costs") or {"commission": 0, "slippage_per_trade": 0.0005},
         "exposure_rule": rule.get("exposure_rule") or row.get("exposure_rule"),
@@ -1201,12 +1215,12 @@ def normalize_strategy(strategy: dict[str, Any], index: int, total_ready_hint: i
     for key in ("strategy_name", "traded_instrument", "signal_timing", "execution_timing"):
         if not clean_text(strategy.get(key)):
             errors.append(f"{key} is required")
-    if strategy.get("signal_timing") != "after_close":
+    if strategy.get("signal_timing") != DEFAULT_SIGNAL_TIMING:
         errors.append("signal_timing must be after_close")
-    if strategy.get("execution_timing") not in {"next_session_open", "next_session_open_to_next_session_open"}:
-        errors.append("execution_timing must be next_session_open")
-    if strategy.get("same_close_execution_allowed") is not False:
-        errors.append("same_close_execution_allowed must be false")
+    if strategy.get("execution_timing") not in ALLOWED_EXECUTION_TIMINGS:
+        errors.append("execution_timing must be same_day_close_after_hours")
+    if "same_close_execution_allowed" not in strategy:
+        errors.append("same_close_execution_allowed is required")
 
     traded_symbol, traded_status = normalize_symbol(strategy.get("traded_instrument"))
     benchmarks, primary_benchmark, benchmark_needs_mapping = normalize_benchmarks(strategy)
@@ -1375,9 +1389,11 @@ def normalize_strategy(strategy: dict[str, Any], index: int, total_ready_hint: i
         "target_weights": allocation_rule,
         "cooldown": cooldown,
         "max_hold": max_hold,
-        "signal_timing": "after_close",
-        "execution_timing": "next_session_open",
-        "same_close_execution_allowed": False,
+        "signal_timing": DEFAULT_SIGNAL_TIMING,
+        "execution_timing": DEFAULT_EXECUTION_TIMING,
+        "same_close_execution_allowed": DEFAULT_SAME_CLOSE_EXECUTION_ALLOWED,
+        "timing_model": "after_close_signal_same_day_close_after_hours_execution",
+        "execution_price_basis": "adjusted_close_after_hours_estimate",
         "costs": strategy.get("costs") if isinstance(strategy.get("costs"), dict) else {"commission": 0, "slippage_per_trade": 0.0005},
         **BOUNDARY_FLAGS,
     }
@@ -1722,9 +1738,11 @@ def skipped_result(normalized: dict[str, Any], *, reason: str | None = None) -> 
         "benchmark": strategy.get("primary_benchmark", ""),
         "benchmarks": strategy.get("benchmarks", []),
         "primary_benchmark": strategy.get("primary_benchmark", ""),
-        "signal_timing": "after_close",
-        "execution_timing": "next_session_open",
-        "same_close_execution_allowed": False,
+        "signal_timing": DEFAULT_SIGNAL_TIMING,
+        "execution_timing": DEFAULT_EXECUTION_TIMING,
+        "same_close_execution_allowed": DEFAULT_SAME_CLOSE_EXECUTION_ALLOWED,
+        "timing_model": "after_close_signal_same_day_close_after_hours_execution",
+        "execution_price_basis": "adjusted_close_after_hours_estimate",
         "period": "",
         "test_date_range": {"start": "", "end": ""},
         "signal_count": node_leaf_count(strategy.get("rule_spec")),
@@ -1759,30 +1777,33 @@ def backtest(normalized: dict[str, Any]) -> dict[str, Any]:
     ])
     frames, source_audit = download_symbols(symbols)
     raw_weights, held_instruments, allocation_change_count = target_weight_frame(strategy, frames)
-    shifted_weights = raw_weights.shift(1, fill_value=0.0)
-    returns = pd.DataFrame(index=shifted_weights.index)
-    for symbol in shifted_weights.columns:
-        aligned = frames[symbol]["Open"].reindex(shifted_weights.index)
+    execution_timing = strategy.get("execution_timing") or DEFAULT_EXECUTION_TIMING
+    same_day_close_proxy = execution_timing not in LEGACY_NEXT_OPEN_TIMINGS
+    active_weights = raw_weights if same_day_close_proxy else raw_weights.shift(1, fill_value=0.0)
+    execution_price_column = "Adj Close" if same_day_close_proxy else "Open"
+    returns = pd.DataFrame(index=active_weights.index)
+    for symbol in active_weights.columns:
+        aligned = frames[symbol][execution_price_column].reindex(active_weights.index)
         returns[symbol] = aligned.shift(-1) / aligned - 1.0
-    df = pd.DataFrame(index=shifted_weights.index)
-    for symbol in shifted_weights.columns:
-        df[f"weight_{symbol}"] = shifted_weights[symbol]
+    df = pd.DataFrame(index=active_weights.index)
+    for symbol in active_weights.columns:
+        df[f"weight_{symbol}"] = active_weights[symbol]
         df[f"return_{symbol}"] = returns[symbol]
     benchmark_returns: dict[str, pd.Series] = {}
     for benchmark in strategy["benchmarks"]:
         if benchmark in frames:
-            aligned = frames[benchmark]["Open"].reindex(df.index)
+            aligned = frames[benchmark][execution_price_column].reindex(df.index)
             benchmark_returns[benchmark] = aligned.shift(-1) / aligned - 1.0
             df[f"benchmark_{benchmark}"] = benchmark_returns[benchmark]
-    return_columns = [f"return_{symbol}" for symbol in shifted_weights.columns]
+    return_columns = [f"return_{symbol}" for symbol in active_weights.columns]
     df = df.dropna(subset=return_columns, how="all")
     slippage = as_number((strategy.get("costs") or {}).get("slippage_per_trade"))
     commission = as_number((strategy.get("costs") or {}).get("commission"))
-    weight_columns = [f"weight_{symbol}" for symbol in shifted_weights.columns]
+    weight_columns = [f"weight_{symbol}" for symbol in active_weights.columns]
     weight_frame = df[weight_columns].copy()
-    weight_frame.columns = shifted_weights.columns
+    weight_frame.columns = active_weights.columns
     return_frame = df[return_columns].copy()
-    return_frame.columns = shifted_weights.columns
+    return_frame.columns = active_weights.columns
     trades = weight_frame.diff().abs().fillna(weight_frame.abs()).sum(axis=1)
     df["strategy_return"] = (return_frame.fillna(0.0) * weight_frame).sum(axis=1) - trades * (slippage + commission)
     equity = (1 + df["strategy_return"]).cumprod()
@@ -1816,9 +1837,11 @@ def backtest(normalized: dict[str, Any]) -> dict[str, Any]:
         "benchmark": primary,
         "benchmarks": strategy["benchmarks"],
         "primary_benchmark": primary,
-        "signal_timing": "after_close",
-        "execution_timing": "next_session_open",
-        "same_close_execution_allowed": False,
+        "signal_timing": DEFAULT_SIGNAL_TIMING,
+        "execution_timing": DEFAULT_EXECUTION_TIMING,
+        "same_close_execution_allowed": DEFAULT_SAME_CLOSE_EXECUTION_ALLOWED,
+        "timing_model": "after_close_signal_same_day_close_after_hours_execution",
+        "execution_price_basis": "adjusted_close_after_hours_estimate",
         "period": f"{df.index.min().strftime('%Y-%m-%d')} ~ {df.index.max().strftime('%Y-%m-%d')}",
         "test_date_range": {"start": df.index.min().strftime("%Y-%m-%d"), "end": df.index.max().strftime("%Y-%m-%d")},
         "signal_count": node_leaf_count(strategy["rule_spec"]),
@@ -1930,9 +1953,11 @@ def write_outputs(payload: dict[str, Any], output_dir: Path, mode: str) -> dict[
         "request_batch_hash": clean_text(payload.get("input_batch_hash")),
         "request_strategy_sequence_hash": clean_text(payload.get("input_strategy_sequence_hash")),
         **BOUNDARY_FLAGS,
-        "signal_timing": "after_close",
-        "execution_timing": "next_session_open",
-        "same_close_execution_allowed": False,
+        "signal_timing": DEFAULT_SIGNAL_TIMING,
+        "execution_timing": DEFAULT_EXECUTION_TIMING,
+        "same_close_execution_allowed": DEFAULT_SAME_CLOSE_EXECUTION_ALLOWED,
+        "timing_model": "after_close_signal_same_day_close_after_hours_execution",
+        "execution_price_basis": "adjusted_close_after_hours_estimate",
         "validation_summary": {
             "total_rows": len(validations),
             "ready_to_backtest": ready_count,
