@@ -3,6 +3,12 @@
   "schema_version": "1.0",
   "runs": [
     {
+      "run_id": "alpha-ext-20260615-043912Z",
+      "path": "external_strategy_results/runs/alpha-ext-20260615-043912Z.json",
+      "generated_at": "2026-06-15T04:39:12Z",
+      "mode": "validate"
+    },
+    {
       "run_id": "alpha-ext-20260615-012048Z",
       "path": "external_strategy_results/runs/alpha-ext-20260615-012048Z.json",
       "generated_at": "2026-06-15T01:20:49Z",
