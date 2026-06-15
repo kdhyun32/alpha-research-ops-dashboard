@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>TQQQ Challenger 연구 대시보드 v0.2.5</title>
+<title>Alpha Research Ops Lab - 전략 성과표</title>
 <style>
 :root{color-scheme:light;--ink:#172033;--muted:#526070;--line:#d8e0ea;--soft:#f6f8fb;--panel:#ffffff;--accent:#0f766e;--accent2:#2563eb;--warn:#b45309;--bad:#991b1b}
 *,*::before,*::after{box-sizing:border-box}
@@ -2149,8 +2149,8 @@ dl,.path-list li{grid-template-columns:1fr}
 </div>
 <p class="plain-note">매매횟수는 실제 주문 내역이 아니라 백테스트상 포지션이 바뀐 횟수입니다. 진입, 청산, 비중 변경이 포함됩니다.</p>
 <div class="export-panel strategy-import-panel" id="strategy-import-panel">
-<h3>전략 파일 import / 외부 실행</h3>
-<p><code>.strategy-idea.json</code>, <code>.strategy-ideas.json</code>, <code>.strategy-review.json</code> 파일을 가져와 여러 전략 row를 검증하거나 public GitHub Actions yfinance exploratory 실행으로 보낼 수 있습니다.</p>
+<h3>전략 파일 import / 백테스트 실행</h3>
+<p><code>.strategy-idea.json</code>, <code>.strategy-ideas.json</code>, <code>.strategy-review.json</code> 파일을 가져와 전략 파일을 검증하거나 public 실행 파이프라인으로 백테스트 요청을 보낼 수 있습니다.</p>
 <p>브라우저는 구조 검증과 dispatch 요청만 수행합니다. 결과는 <code>external_strategy_results/latest.json</code>에 반영된 뒤 다음 dashboard bundle 생성 때 같은 성과표에 합쳐집니다.</p>
 <div class="export-actions">
 <input type="file" id="strategy-import-file" accept=".json,.strategy-idea.json,.strategy-ideas.json,.strategy-review.json,application/json" multiple>
@@ -2158,11 +2158,10 @@ dl,.path-list li{grid-template-columns:1fr}
 <button type="button" class="export-button secondary" id="strategy-import-validate">검증 실행</button>
 <button type="button" class="export-button" id="strategy-import-backtest">백테스트 실행</button>
 </div>
-<p class="plain-note">백테스트 실행 키: 외부에서 무단 실행되는 것을 막기 위한 키입니다. 검증만 할 때는 필요 없고, 백테스트 실행 요청 시 필요합니다.</p>
+<p class="plain-note">백테스트 실행 키: 무단 백테스트 요청을 막기 위한 키입니다. 검증만 할 때는 필요 없고, 백테스트 실행 요청 시 필요합니다.</p>
 <div class="export-actions">
 <button type="button" class="export-button secondary" id="strategy-import-show-format">임포트 양식 보기</button>
 <button type="button" class="export-button secondary" id="strategy-import-download-sample">예시 파일 다운로드</button>
-<button type="button" class="export-button secondary" id="strategy-import-show-required">필수 항목 설명</button>
 </div>
 <p class="plain-note" id="strategy-import-file-name">선택된 파일 없음 · 여러 파일과 여러 전략 row 지원</p>
 <div class="import-status pending" id="strategy-import-status" aria-live="polite">아직 검증하지 않았습니다.</div>
@@ -2551,10 +2550,6 @@ dl,.path-list li{grid-template-columns:1fr}
   document.getElementById("strategy-import-validate")?.addEventListener("click", () => dispatch("validate"));
   document.getElementById("strategy-import-backtest")?.addEventListener("click", () => dispatch("backtest"));
   document.getElementById("strategy-import-show-format")?.addEventListener("click", () => {
-    const details = document.getElementById("strategy-import-format-details");
-    if (details) details.open = true;
-  });
-  document.getElementById("strategy-import-show-required")?.addEventListener("click", () => {
     const details = document.getElementById("strategy-import-format-details");
     if (details) details.open = true;
   });
