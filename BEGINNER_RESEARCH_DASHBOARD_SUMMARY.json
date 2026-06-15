@@ -15688,6 +15688,67 @@
         "unique_key": "import:alpha-ext-20260615-122339Z:143"
       }
     ],
+    "human_review_state_model": {
+      "affects_display_order": false,
+      "affects_performance_metrics": false,
+      "automatic_selection": false,
+      "candidate_watch_champion_mutation": false,
+      "default_status": "unreviewed",
+      "fields": [
+        "strategy_key",
+        "strategy_id",
+        "strategy_name",
+        "human_review_status",
+        "human_review_note",
+        "next_action",
+        "updated_at"
+      ],
+      "next_action_options": [
+        "선택 없음",
+        "AI 검토 요청",
+        "룰 보완",
+        "데이터 매핑",
+        "감사/라이선스 데이터 재실행",
+        "중복 확인",
+        "제외",
+        "보류 유지"
+      ],
+      "ranking_or_recommendation": false,
+      "schema_name": "alpha_research_human_review_state",
+      "schema_version": "1.0",
+      "scope": "research_review_record_only",
+      "status_options": [
+        {
+          "label": "미검토",
+          "value": "unreviewed"
+        },
+        {
+          "label": "관심",
+          "value": "interested"
+        },
+        {
+          "label": "보류",
+          "value": "hold"
+        },
+        {
+          "label": "추가정보 필요",
+          "value": "needs_more_evidence"
+        },
+        {
+          "label": "중복",
+          "value": "duplicate"
+        },
+        {
+          "label": "제외",
+          "value": "reject"
+        },
+        {
+          "label": "재실행 후보",
+          "value": "rerun_candidate"
+        }
+      ],
+      "storage_key": "alphaResearchOps.humanReviewState.v1"
+    },
     "import_latest_backtest_executed_count": 101,
     "import_latest_hold_row_count": 44,
     "import_latest_result_row_count": 101,
@@ -66976,6 +67037,68 @@
       "export_order_policy": "selected_rows_keep_dashboard_default_registration_input_order_not_current_screen_sort",
       "export_role": "reimport_backtest_request",
       "format_choice_rationale": "Canonical JSON keeps executable rule specs, required symbols, signal graphs, exposure, timing, costs, benchmarks, and source-tier boundaries without embedding performance metrics.",
+      "human_review_notes_included": false,
+      "human_review_state_model": {
+        "affects_display_order": false,
+        "affects_performance_metrics": false,
+        "automatic_selection": false,
+        "candidate_watch_champion_mutation": false,
+        "default_status": "unreviewed",
+        "fields": [
+          "strategy_key",
+          "strategy_id",
+          "strategy_name",
+          "human_review_status",
+          "human_review_note",
+          "next_action",
+          "updated_at"
+        ],
+        "next_action_options": [
+          "선택 없음",
+          "AI 검토 요청",
+          "룰 보완",
+          "데이터 매핑",
+          "감사/라이선스 데이터 재실행",
+          "중복 확인",
+          "제외",
+          "보류 유지"
+        ],
+        "ranking_or_recommendation": false,
+        "schema_name": "alpha_research_human_review_state",
+        "schema_version": "1.0",
+        "scope": "research_review_record_only",
+        "status_options": [
+          {
+            "label": "미검토",
+            "value": "unreviewed"
+          },
+          {
+            "label": "관심",
+            "value": "interested"
+          },
+          {
+            "label": "보류",
+            "value": "hold"
+          },
+          {
+            "label": "추가정보 필요",
+            "value": "needs_more_evidence"
+          },
+          {
+            "label": "중복",
+            "value": "duplicate"
+          },
+          {
+            "label": "제외",
+            "value": "reject"
+          },
+          {
+            "label": "재실행 후보",
+            "value": "rerun_candidate"
+          }
+        ],
+        "storage_key": "alphaResearchOps.humanReviewState.v1"
+      },
       "import_intent": "reimport_backtest_request",
       "legacy_aliases_accepted": [
         "benchmark"
@@ -66992,6 +67115,68 @@
       "review_export": {
         "default_filename": "alpha-research-selected-strategies.strategy-review.json",
         "export_role": "ai_review_handoff",
+        "human_review_state_model": {
+          "affects_display_order": false,
+          "affects_performance_metrics": false,
+          "automatic_selection": false,
+          "candidate_watch_champion_mutation": false,
+          "default_status": "unreviewed",
+          "fields": [
+            "strategy_key",
+            "strategy_id",
+            "strategy_name",
+            "human_review_status",
+            "human_review_note",
+            "next_action",
+            "updated_at"
+          ],
+          "next_action_options": [
+            "선택 없음",
+            "AI 검토 요청",
+            "룰 보완",
+            "데이터 매핑",
+            "감사/라이선스 데이터 재실행",
+            "중복 확인",
+            "제외",
+            "보류 유지"
+          ],
+          "ranking_or_recommendation": false,
+          "schema_name": "alpha_research_human_review_state",
+          "schema_version": "1.0",
+          "scope": "research_review_record_only",
+          "status_options": [
+            {
+              "label": "미검토",
+              "value": "unreviewed"
+            },
+            {
+              "label": "관심",
+              "value": "interested"
+            },
+            {
+              "label": "보류",
+              "value": "hold"
+            },
+            {
+              "label": "추가정보 필요",
+              "value": "needs_more_evidence"
+            },
+            {
+              "label": "중복",
+              "value": "duplicate"
+            },
+            {
+              "label": "제외",
+              "value": "reject"
+            },
+            {
+              "label": "재실행 후보",
+              "value": "rerun_candidate"
+            }
+          ],
+          "storage_key": "alphaResearchOps.humanReviewState.v1"
+        },
+        "human_review_state_source": "alphaResearchOps.humanReviewState.v1",
         "not_trading_instruction": true,
         "recommended_file_extension": ".strategy-review.json",
         "research_only": true,
@@ -67020,8 +67205,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -67093,8 +67287,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -67166,8 +67369,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -67239,8 +67451,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -67312,8 +67533,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -67385,8 +67615,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -67458,8 +67697,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -67531,8 +67779,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -67604,8 +67861,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -67677,8 +67943,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -67750,8 +68025,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -67823,8 +68107,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -67896,8 +68189,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -67969,8 +68271,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -68042,8 +68353,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -68115,8 +68435,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -68188,8 +68517,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -68265,8 +68603,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -68342,8 +68689,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -68419,8 +68775,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -68496,8 +68861,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -68573,8 +68947,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -68650,8 +69033,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -68727,8 +69119,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -68805,8 +69206,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -68883,8 +69293,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -68956,8 +69375,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -69029,8 +69457,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -69103,8 +69540,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -69177,8 +69623,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -69251,8 +69706,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -69325,8 +69789,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -69399,8 +69872,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -69473,8 +69955,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -69548,8 +70039,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -69622,8 +70122,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -69696,8 +70205,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -69770,8 +70288,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -69844,8 +70371,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -69918,8 +70454,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -69992,8 +70537,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -70066,8 +70620,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -70140,8 +70703,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -70214,8 +70786,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -70288,8 +70869,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -70362,8 +70952,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -70436,8 +71035,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -70510,8 +71118,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -70584,8 +71201,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -70659,8 +71285,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -70733,8 +71368,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -70807,8 +71451,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -70881,8 +71534,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -70955,8 +71617,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -71030,8 +71701,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -71104,8 +71784,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -71178,8 +71867,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -71252,8 +71950,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -71327,8 +72034,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -71401,8 +72117,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -71475,8 +72200,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -71549,8 +72283,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -71624,8 +72367,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -71699,8 +72451,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -71774,8 +72535,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -71849,8 +72619,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -71923,8 +72702,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -71997,8 +72785,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -72071,8 +72868,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -72145,8 +72951,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -72219,8 +73034,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -72293,8 +73117,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -72367,8 +73200,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -72441,8 +73283,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -72515,8 +73366,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -72589,8 +73449,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -72663,8 +73532,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -72737,8 +73615,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -72811,8 +73698,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -72885,8 +73781,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -72959,8 +73864,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -73033,8 +73947,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -73107,8 +74030,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -73181,8 +74113,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -73255,8 +74196,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -73329,8 +74279,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -73403,8 +74362,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -73477,8 +74445,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -73551,8 +74528,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -73625,8 +74611,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -73699,8 +74694,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -73773,8 +74777,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -73847,8 +74860,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -73921,8 +74943,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -73995,8 +75026,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -74069,8 +75109,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -74143,8 +75192,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -74217,8 +75275,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -74291,8 +75358,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -74365,8 +75441,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -74439,8 +75524,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -74513,8 +75607,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -74587,8 +75690,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -74661,8 +75773,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -74735,8 +75856,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -74809,8 +75939,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -74883,8 +76022,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -74957,8 +76105,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -75031,8 +76188,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -75105,8 +76271,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -75179,8 +76354,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -75253,8 +76437,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -75327,8 +76520,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -75401,8 +76603,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -75475,8 +76686,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -75549,8 +76769,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -75623,8 +76852,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -75697,8 +76935,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -75771,8 +77018,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -75845,8 +77101,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -75919,8 +77184,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -75993,8 +77267,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -76067,8 +77350,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -76141,8 +77433,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -76215,8 +77516,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -76289,8 +77599,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -76363,8 +77682,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -76437,8 +77765,17 @@
               "licensed_rerun_required": true
             },
             "human_review": {
+              "affects_display_order": false,
+              "affects_performance_metrics": false,
+              "automatic_selection": false,
+              "candidate_watch_champion_mutation": false,
               "final_review_allowed": false,
-              "status": "최종 검토 전 재실행 필요"
+              "human_review_note": "",
+              "human_review_status": "unreviewed",
+              "human_review_status_label": "미검토",
+              "next_action": "",
+              "record_scope": "research_review_only",
+              "updated_at": ""
             },
             "missing_information": [
               "audited_or_licensed_data_rerun",
@@ -97884,8 +99221,8 @@
     "title": "새 아이디어 준비 게이트"
   },
   "output_artifact_paths": {
-    "html": "artifacts/beginner_research_dashboard/20260616_import_export_schema_v21/INDEX.html",
-    "summary_json": "artifacts/beginner_research_dashboard/20260616_import_export_schema_v21/BEGINNER_RESEARCH_DASHBOARD_SUMMARY.json"
+    "html": "artifacts/beginner_research_dashboard/20260616_human_review_state_v1/INDEX.html",
+    "summary_json": "artifacts/beginner_research_dashboard/20260616_human_review_state_v1/BEGINNER_RESEARCH_DASHBOARD_SUMMARY.json"
   },
   "package_version": "0.2.0",
   "parameter_tuning_run": false,
@@ -98827,7 +100164,7 @@
     "git_commit": "0fdc2cf661ed97c2f8e4b9502557fef3dfc4b3bf",
     "input_paths": [],
     "metadata_schema_version": "artifact_run_metadata_v1",
-    "output_path": "artifacts/beginner_research_dashboard/20260616_import_export_schema_v21/BEGINNER_RESEARCH_DASHBOARD_SUMMARY.json",
+    "output_path": "artifacts/beginner_research_dashboard/20260616_human_review_state_v1/BEGINNER_RESEARCH_DASHBOARD_SUMMARY.json",
     "package_name": "alpha_research_ops",
     "package_version": "0.2.0",
     "repo_root": "D:\\projects\\Alpha Research Ops Lab",
