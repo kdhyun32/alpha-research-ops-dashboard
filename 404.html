@@ -18,12 +18,16 @@ p { margin:0 0 12px; }
 .stat { border:1px solid var(--line); background:var(--panel); padding:14px 16px; min-height:96px; }
 .stat strong { display:block; color:var(--accent); font-size:30px; line-height:1.1; }
 .stat span { color:var(--muted); font-size:14px; }
-.export-panel { border:1px solid rgba(72,209,199,.45); background:#0d2426; padding:16px 18px; margin:18px 0; }
+.export-panel,.import-panel { border:1px solid rgba(72,209,199,.45); background:#0d2426; padding:16px 18px; margin:18px 0; }
 .export-actions { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; }
 .export-button { border:1px solid var(--accent); background:var(--accent); color:#062022; font-weight:700; padding:9px 11px; cursor:pointer; }
 .export-button.secondary { background:transparent; color:var(--accent); }
 .strategy-select-control { display:flex; align-items:center; gap:6px; color:var(--accent); font-size:13px; font-weight:700; margin-bottom:5px; }
 .strategy-select-control input { width:16px; height:16px; accent-color:var(--accent); }
+.file-import-control { display:flex; flex-wrap:wrap; align-items:center; gap:8px; color:var(--accent); font-weight:700; }
+.file-import-control input { color:var(--text); max-width:260px; }
+.import-error-list { color:#ffb4a2; margin:8px 0 0; padding-left:20px; }
+.json-sample { white-space:pre-wrap; overflow:auto; background:#090d13; border:1px solid var(--line); padding:12px; color:#e8edf7; max-height:360px; }
 section { margin-top:26px; }
 h2 { margin:0 0 12px; font-size:22px; }
 .table-wrap { overflow:auto; border:1px solid var(--line); background:var(--panel2); }
@@ -68,6 +72,54 @@ footer { margin-top:34px; color:var(--muted); font-size:13px; }
 
 <section id="backtest-strategy-table">
   <h2>백테스트 전략 성과표</h2>
+
+  <div class="import-panel" id="strategy-import-panel">
+    <h3>전략 가져오기</h3>
+    <p>새 전략은 .strategy-idea.json 형식으로 준비하고, 이 화면에서 구조를 먼저 검증합니다. 실제 백테스트는 여기서 실행하지 않습니다.</p>
+    <div class="policy-grid">
+      <div class="policy-card"><strong>입력용 확장자: .strategy-idea.json</strong><p>요청용 확장자: .strategy-test-request.json</p></div>
+      <div class="policy-card"><strong>.strategy-review.json</strong><p>기존 표에서 선택한 전략을 AI 검토용으로 내보낼 때 쓰는 확장자입니다.</p></div>
+    </div>
+    <details>
+      <summary>가져오기 양식 보기</summary>
+      <pre class="json-sample" id="strategy-import-sample">{
+  &quot;benchmark&quot;: &quot;QQQ&quot;,
+  &quot;costs&quot;: {
+    &quot;commission&quot;: 0,
+    &quot;slippage_per_trade&quot;: 0.0005
+  },
+  &quot;entry_rule&quot;: &quot;신호를 장마감 후 확인하고 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출 테스트를 요청합니다.&quot;,
+  &quot;execution_timing&quot;: &quot;next_session_open&quot;,
+  &quot;exit_rule&quot;: &quot;신호를 장마감 후 확인하고 조건이 거짓이면 다음 거래일 시가 기준으로 TQQQ 노출 해제 테스트를 요청합니다.&quot;,
+  &quot;notes&quot;: &quot;탐색용 출처 등급은 별도 실행 단계에서 결정합니다. 이 파일은 브라우저 구조 검증과 테스트 요청 준비에만 씁니다.&quot;,
+  &quot;required_symbols&quot;: [
+    &quot;QQQ&quot;,
+    &quot;TQQQ&quot;
+  ],
+  &quot;same_close_execution_allowed&quot;: false,
+  &quot;signal_timing&quot;: &quot;after_close&quot;,
+  &quot;signals&quot;: [
+    {
+      &quot;name&quot;: &quot;QQQ 200일 추세&quot;,
+      &quot;role&quot;: &quot;entry_filter&quot;,
+      &quot;rule&quot;: &quot;QQQ close &gt; QQQ 200-day simple moving average&quot;,
+      &quot;symbol&quot;: &quot;QQQ&quot;
+    }
+  ],
+  &quot;strategy_name&quot;: &quot;QQQ 200일선 확인 후 TQQQ 테스트 아이디어&quot;,
+  &quot;traded_instrument&quot;: &quot;TQQQ&quot;
+}</pre>
+    </details>
+    <div class="export-actions">
+      <button type="button" class="export-button secondary" id="strategy-sample-download">샘플 .strategy-idea.json 다운로드</button>
+      <label class="file-import-control">내 전략 파일 선택<input type="file" id="strategy-import-file" accept=".json,.strategy-idea.json,application/json"></label>
+      <button type="button" class="export-button secondary" id="strategy-import-validate">검증만 하기</button>
+      <button type="button" class="export-button" id="strategy-test-request-download">테스트 요청 파일 생성</button>
+    </div>
+    <p class="muted" id="strategy-import-status">아직 파일을 선택하지 않았습니다.</p>
+    <ul class="import-error-list" id="strategy-import-errors"></ul>
+  </div>
+  <script type="application/json" id="strategy-import-config-data">{"browser_only": true, "input_extension": ".strategy-idea.json", "no_backtest_execution": true, "no_external_url": true, "no_python_execution": true, "recommended_values": {"execution_timing": "next_session_open", "same_close_execution_allowed": false, "signal_timing": "after_close", "traded_instrument": "TQQQ"}, "required_fields": ["strategy_name", "traded_instrument", "required_symbols", "signals[].name", "signals[].symbol", "signals[].rule", "signals[].role", "entry_rule", "exit_rule", "signal_timing", "execution_timing", "same_close_execution_allowed", "benchmark", "costs.commission", "costs.slippage_per_trade"], "sample": {"benchmark": "QQQ", "costs": {"commission": 0, "slippage_per_trade": 0.0005}, "entry_rule": "신호를 장마감 후 확인하고 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출 테스트를 요청합니다.", "execution_timing": "next_session_open", "exit_rule": "신호를 장마감 후 확인하고 조건이 거짓이면 다음 거래일 시가 기준으로 TQQQ 노출 해제 테스트를 요청합니다.", "notes": "탐색용 출처 등급은 별도 실행 단계에서 결정합니다. 이 파일은 브라우저 구조 검증과 테스트 요청 준비에만 씁니다.", "required_symbols": ["QQQ", "TQQQ"], "same_close_execution_allowed": false, "signal_timing": "after_close", "signals": [{"name": "QQQ 200일 추세", "role": "entry_filter", "rule": "QQQ close > QQQ 200-day simple moving average", "symbol": "QQQ"}], "strategy_name": "QQQ 200일선 확인 후 TQQQ 테스트 아이디어", "traded_instrument": "TQQQ"}, "sample_filename": "sample-tqqq.strategy-idea.json", "schema_name": "alpha_research_strategy_idea_import", "schema_version": "1.0", "selection_review_extension": ".strategy-review.json", "source_tier_note": "exploratory source tier는 별도 실행 단계에서 결정합니다.", "test_request_extension": ".strategy-test-request.json", "validation_scope": "structure_and_safety_only"}</script>
   <div class="export-panel" id="strategy-selection-export-panel">
     <h3>선택한 전략 내보내기</h3>
     <p>표에서 전략을 체크한 뒤 JSON으로 내보낼 수 있습니다. 내보낸 파일은 신호, 진입/청산/노출 규칙, 체결 가정, 성과 지표를 함께 담습니다.</p>
@@ -1030,6 +1082,130 @@ footer { margin-top:34px; color:var(--muted); font-size:13px; }
   if (clearButton) clearButton.addEventListener("click", () => setAll(false));
   if (exportButton) exportButton.addEventListener("click", exportJson);
   updateStatus();
+})();
+</script>
+<script>
+(() => {
+  const configNode = document.getElementById("strategy-import-config-data");
+  if (!configNode) return;
+  const importConfig = JSON.parse(configNode.textContent);
+  const fileInput = document.getElementById("strategy-import-file");
+  const status = document.getElementById("strategy-import-status");
+  const errorsNode = document.getElementById("strategy-import-errors");
+  let latestIdea = null;
+  let latestValidation = { valid: false, errors: [] };
+  const text = {
+    noFile: "\ud30c\uc77c\uc744 \uba3c\uc800 \uc120\ud0dd\ud558\uc138\uc694.",
+    parseFail: "JSON\uc744 \uc77d\uc744 \uc218 \uc5c6\uc2b5\ub2c8\ub2e4.",
+    valid: "\uac80\uc99d \ud1b5\uacfc: \ud14c\uc2a4\ud2b8 \uc694\uccad \ud30c\uc77c\uc744 \uc0dd\uc131\ud560 \uc218 \uc788\uc2b5\ub2c8\ub2e4.",
+    invalid: "\uac80\uc99d \uc2e4\ud328: \uc544\ub798 \ud56d\ubaa9\uc744 \uba3c\uc800 \uc218\uc815\ud558\uc138\uc694.",
+    requestBlocked: "\uac80\uc99d\uc744 \ud1b5\uacfc\ud55c \ud30c\uc77c\ub9cc \uc694\uccad \ud30c\uc77c\ub85c \ub0b4\ubcf4\ub0bc \uc218 \uc788\uc2b5\ub2c8\ub2e4.",
+    downloaded: "\ud14c\uc2a4\ud2b8 \uc694\uccad \ud30c\uc77c\uc744 \ub0b4\ubcf4\ub0c8\uc2b5\ub2c8\ub2e4."
+  };
+  const setStatus = (message) => { if (status) status.textContent = message; };
+  const showErrors = (errors) => {
+    if (!errorsNode) return;
+    errorsNode.innerHTML = "";
+    errors.forEach((error) => {
+      const li = document.createElement("li");
+      li.textContent = error;
+      errorsNode.appendChild(li);
+    });
+  };
+  const hasText = (value) => typeof value === "string" && value.trim().length > 0;
+  const validateIdea = (idea) => {
+    const errors = [];
+    if (!hasText(idea.strategy_name)) errors.push("strategy_name\uc774 \ud544\uc694\ud569\ub2c8\ub2e4.");
+    if (!hasText(idea.traded_instrument)) errors.push("traded_instrument\uac00 \ud544\uc694\ud569\ub2c8\ub2e4.");
+    if (!Array.isArray(idea.required_symbols) || !idea.required_symbols.length) errors.push("required_symbols\ub294 1\uac1c \uc774\uc0c1 \ud544\uc694\ud569\ub2c8\ub2e4.");
+    if (!Array.isArray(idea.signals) || !idea.signals.length) {
+      errors.push("signals\ub294 1\uac1c \uc774\uc0c1 \ud544\uc694\ud569\ub2c8\ub2e4.");
+    } else {
+      idea.signals.forEach((signal, index) => {
+        const prefix = `signals[${index}]`;
+        if (!hasText(signal.name)) errors.push(prefix + ".name\uc774 \ud544\uc694\ud569\ub2c8\ub2e4.");
+        if (!hasText(signal.symbol)) errors.push(prefix + ".symbol\uc774 \ud544\uc694\ud569\ub2c8\ub2e4.");
+        if (!hasText(signal.rule)) errors.push(prefix + ".rule\uc774 \ud544\uc694\ud569\ub2c8\ub2e4.");
+        if (!hasText(signal.role)) errors.push(prefix + ".role\uc774 \ud544\uc694\ud569\ub2c8\ub2e4.");
+      });
+    }
+    if (!hasText(idea.entry_rule)) errors.push("entry_rule\uc774 \ud544\uc694\ud569\ub2c8\ub2e4.");
+    if (!hasText(idea.exit_rule)) errors.push("exit_rule\uc774 \ud544\uc694\ud569\ub2c8\ub2e4.");
+    if (idea.signal_timing !== "after_close") errors.push("signal_timing\uc740 after_close\ub85c \uc9c0\uc815\ud558\uc138\uc694.");
+    if (idea.execution_timing !== "next_session_open") errors.push("execution_timing\uc740 next_session_open\uc73c\ub85c \uc9c0\uc815\ud558\uc138\uc694.");
+    if (idea.same_close_execution_allowed !== false) errors.push("same_close_execution_allowed\ub294 false\uc5ec\uc57c \ud569\ub2c8\ub2e4.");
+    if (!idea.benchmark) errors.push("benchmark\uac00 \ud544\uc694\ud569\ub2c8\ub2e4.");
+    if (!idea.costs || typeof idea.costs.commission !== "number") errors.push("costs.commission\uc774 \uc22b\uc790\ub85c \ud544\uc694\ud569\ub2c8\ub2e4.");
+    if (!idea.costs || typeof idea.costs.slippage_per_trade !== "number") errors.push("costs.slippage_per_trade\uac00 \uc22b\uc790\ub85c \ud544\uc694\ud569\ub2c8\ub2e4.");
+    return { valid: errors.length === 0, errors };
+  };
+  const downloadJson = (payload, filename) => {
+    const blob = new Blob([JSON.stringify(payload, null, 2)], {type: "application/json;charset=utf-8"});
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+  };
+  const validateSelectedFile = () => {
+    if (!fileInput || !fileInput.files || !fileInput.files.length) {
+      latestIdea = null;
+      latestValidation = { valid: false, errors: [text.noFile] };
+      setStatus(text.noFile);
+      showErrors(latestValidation.errors);
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = () => {
+      try {
+        latestIdea = JSON.parse(String(reader.result || ""));
+        latestValidation = validateIdea(latestIdea);
+      } catch (error) {
+        latestIdea = null;
+        latestValidation = { valid: false, errors: [text.parseFail] };
+      }
+      const validationStatus = (latestValidation.valid && text.valid) || text.invalid;
+      setStatus(validationStatus);
+      showErrors(latestValidation.errors);
+    };
+    reader.readAsText(fileInput.files[0], "utf-8");
+  };
+  const createRequest = () => {
+    if (!latestIdea || !latestValidation.valid) {
+      setStatus(text.requestBlocked);
+      const currentErrors = (latestValidation.errors && latestValidation.errors.length && latestValidation.errors) || [text.requestBlocked];
+      showErrors(currentErrors);
+      return;
+    }
+    const payload = {
+      schema_name: "alpha_research_strategy_test_request",
+      schema_version: "1.0",
+      requested_action: "exploratory_backtest_request",
+      data_source_tier_requested: "exploratory_unofficial",
+      final_review_allowed: false,
+      licensed_rerun_required: true,
+      same_close_execution_allowed: false,
+      research_only: true,
+      no_ranking_or_recommendation: true,
+      no_automatic_selection: true,
+      no_status_mutation: true,
+      generated_at_browser_time: new Date().toISOString(),
+      validation_result: latestValidation,
+      strategy_idea: latestIdea
+    };
+    const safeName = String(latestIdea.strategy_name || "strategy").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "strategy";
+    downloadJson(payload, safeName + ".strategy-test-request.json");
+    setStatus(text.downloaded);
+  };
+  const sampleButton = document.getElementById("strategy-sample-download");
+  const validateButton = document.getElementById("strategy-import-validate");
+  const requestButton = document.getElementById("strategy-test-request-download");
+  if (sampleButton) sampleButton.addEventListener("click", () => downloadJson(importConfig.sample || {}, importConfig.sample_filename || "sample.strategy-idea.json"));
+  if (validateButton) validateButton.addEventListener("click", validateSelectedFile);
+  if (requestButton) requestButton.addEventListener("click", createRequest);
 })();
 </script>
 </body>
