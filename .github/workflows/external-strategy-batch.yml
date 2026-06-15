@@ -30,15 +30,14 @@ jobs:
         run: python -m pip install --upgrade pandas numpy yfinance
       - name: Write payload
         shell: bash
+        env:
+          WORKFLOW_PAYLOAD_JSON: ${{ inputs.payload_json }}
+          DISPATCH_PAYLOAD_JSON: ${{ toJson(github.event.client_payload) }}
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            cat > payload.json <<'JSON'
-          ${{ inputs.payload_json }}
-          JSON
+            printf '%s' "$WORKFLOW_PAYLOAD_JSON" > payload.json
           else
-            cat > payload.json <<'JSON'
-          ${{ toJson(github.event.client_payload) }}
-          JSON
+            printf '%s' "$DISPATCH_PAYLOAD_JSON" > payload.json
           fi
       - name: Run external strategy batch
         run: |
