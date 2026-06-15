@@ -209,6 +209,16 @@
             "strategy_count": 1
           }
         ]
+      },
+      "schema_version": "2.1",
+      "input_schema_version": "2.1",
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
       }
     },
     {

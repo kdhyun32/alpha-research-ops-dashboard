@@ -1,8 +1,8 @@
 {
   "schema_name": "alpha_research_strategy_batch_result",
-  "schema_version": "2.0",
+  "schema_version": "2.1",
   "input_schema_name": "alpha_research_strategy_batch",
-  "input_schema_version": "2.0",
+  "input_schema_version": "2.1",
   "run_id": "alpha-ext-20260615-122339Z",
   "request_id": "alpha-public-1781507131079-c1d9aaaee21378",
   "generated_at": "2026-06-15T12:27:13Z",
@@ -371,7 +371,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 2,
@@ -499,7 +507,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 3,
@@ -693,7 +709,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 4,
@@ -827,7 +851,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 5,
@@ -1025,7 +1057,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 6,
@@ -1223,7 +1263,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 7,
@@ -1421,7 +1469,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 8,
@@ -1560,7 +1616,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 9,
@@ -1698,7 +1762,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 10,
@@ -1844,7 +1916,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 11,
@@ -1976,7 +2056,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 12,
@@ -2114,7 +2202,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 13,
@@ -2254,7 +2350,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 14,
@@ -2452,7 +2556,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 15,
@@ -2584,7 +2696,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 16,
@@ -2782,7 +2902,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 17,
@@ -2989,7 +3117,15 @@
       "parse_errors": [
         "needs_data_source_mapping"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 18,
@@ -3123,7 +3259,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 19,
@@ -3323,7 +3467,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 20,
@@ -3471,7 +3623,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 21,
@@ -3669,7 +3829,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 22,
@@ -3817,7 +3985,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 23,
@@ -4011,7 +4187,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 24,
@@ -4214,7 +4398,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 25,
@@ -4400,7 +4592,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 26,
@@ -4552,7 +4752,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 27,
@@ -4700,7 +4908,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 28,
@@ -4900,7 +5116,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 29,
@@ -5100,7 +5324,15 @@
       "parse_errors": [
         "needs_data_source_mapping"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 30,
@@ -5300,7 +5532,15 @@
       "parse_errors": [
         "needs_data_source_mapping"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 31,
@@ -5403,7 +5643,15 @@
         "needs_data_source_mapping",
         "unsupported_rule"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 32,
@@ -5603,7 +5851,15 @@
       "parse_errors": [
         "needs_data_source_mapping"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 33,
@@ -5809,7 +6065,15 @@
       "parse_errors": [
         "needs_data_source_mapping"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 34,
@@ -6018,7 +6282,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 35,
@@ -6164,7 +6436,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 36,
@@ -6306,7 +6586,15 @@
       "parse_errors": [
         "unsupported_rule"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 37,
@@ -6456,7 +6744,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 38,
@@ -6660,7 +6956,15 @@
       "parse_errors": [
         "needs_data_source_mapping"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 39,
@@ -6937,7 +7241,15 @@
       "parse_errors": [
         "unsupported_rule"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 40,
@@ -7335,7 +7647,15 @@
       "parse_errors": [
         "unsupported_rule"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 41,
@@ -7813,7 +8133,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 42,
@@ -8023,7 +8351,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 43,
@@ -8354,7 +8690,15 @@
       "parse_errors": [
         "unsupported_rule"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 44,
@@ -8511,7 +8855,15 @@
       "parse_errors": [
         "needs_formula_engine"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 45,
@@ -8648,7 +9000,15 @@
       "parse_errors": [
         "needs_state_machine_support"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 46,
@@ -8903,7 +9263,15 @@
       "parse_errors": [
         "unsupported_rule"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 47,
@@ -9176,7 +9544,15 @@
       "parse_errors": [
         "unsupported_rule"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 48,
@@ -9411,7 +9787,15 @@
       "parse_errors": [
         "unsupported_rule"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 49,
@@ -9627,7 +10011,15 @@
       "parse_errors": [
         "needs_data_source_mapping"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 50,
@@ -9843,7 +10235,15 @@
       "parse_errors": [
         "needs_data_source_mapping"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 51,
@@ -10059,7 +10459,15 @@
       "parse_errors": [
         "needs_data_source_mapping"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 52,
@@ -10275,7 +10683,15 @@
       "parse_errors": [
         "needs_data_source_mapping"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 53,
@@ -10491,7 +10907,15 @@
       "parse_errors": [
         "needs_data_source_mapping"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 54,
@@ -10707,7 +11131,15 @@
       "parse_errors": [
         "needs_data_source_mapping"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 55,
@@ -10923,7 +11355,15 @@
       "parse_errors": [
         "needs_data_source_mapping"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 56,
@@ -11139,7 +11579,15 @@
       "parse_errors": [
         "needs_data_source_mapping"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 57,
@@ -11355,7 +11803,15 @@
       "parse_errors": [
         "needs_data_source_mapping"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 58,
@@ -11571,7 +12027,15 @@
       "parse_errors": [
         "needs_data_source_mapping"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 59,
@@ -11787,7 +12251,15 @@
       "parse_errors": [
         "needs_data_source_mapping"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 60,
@@ -12003,7 +12475,15 @@
       "parse_errors": [
         "needs_data_source_mapping"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 61,
@@ -12219,7 +12699,15 @@
       "parse_errors": [
         "needs_data_source_mapping"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 62,
@@ -12435,7 +12923,15 @@
       "parse_errors": [
         "needs_data_source_mapping"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 63,
@@ -12651,7 +13147,15 @@
       "parse_errors": [
         "needs_data_source_mapping"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 64,
@@ -12867,7 +13371,15 @@
       "parse_errors": [
         "needs_data_source_mapping"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 65,
@@ -13083,7 +13595,15 @@
       "parse_errors": [
         "needs_data_source_mapping"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 66,
@@ -13299,7 +13819,15 @@
       "parse_errors": [
         "needs_data_source_mapping"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 67,
@@ -13469,7 +13997,15 @@
       "parse_errors": [
         "needs_data_source_mapping"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 68,
@@ -13639,7 +14175,15 @@
       "parse_errors": [
         "needs_data_source_mapping"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 69,
@@ -13809,7 +14353,15 @@
       "parse_errors": [
         "needs_data_source_mapping"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 70,
@@ -13939,7 +14491,15 @@
       "parse_errors": [
         "needs_data_source_mapping"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 71,
@@ -14066,7 +14626,15 @@
       "parse_errors": [
         "needs_data_source_mapping"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 72,
@@ -14193,7 +14761,15 @@
       "parse_errors": [
         "needs_data_source_mapping"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 73,
@@ -14320,7 +14896,15 @@
       "parse_errors": [
         "needs_data_source_mapping"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 74,
@@ -14447,7 +15031,15 @@
       "parse_errors": [
         "needs_data_source_mapping"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 75,
@@ -14623,7 +15215,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 76,
@@ -14799,7 +15399,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 77,
@@ -14975,7 +15583,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 78,
@@ -15151,7 +15767,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 79,
@@ -15327,7 +15951,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 80,
@@ -15507,7 +16139,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 81,
@@ -15687,7 +16327,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 82,
@@ -15867,7 +16515,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 83,
@@ -16043,7 +16699,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 84,
@@ -16339,7 +17003,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 85,
@@ -16635,7 +17307,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 86,
@@ -16931,7 +17611,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 87,
@@ -17227,7 +17915,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 88,
@@ -17523,7 +18219,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 89,
@@ -17819,7 +18523,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 90,
@@ -18019,7 +18731,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 91,
@@ -18223,7 +18943,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 92,
@@ -18427,7 +19155,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 93,
@@ -18809,7 +19545,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 94,
@@ -18997,7 +19741,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 95,
@@ -19189,7 +19941,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 96,
@@ -19317,7 +20077,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 97,
@@ -19525,7 +20293,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 98,
@@ -19922,7 +20698,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 99,
@@ -20130,7 +20914,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 100,
@@ -20338,7 +21130,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 101,
@@ -20546,7 +21346,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 102,
@@ -20754,7 +21562,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 103,
@@ -20962,7 +21778,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 104,
@@ -21170,7 +21994,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 105,
@@ -21371,7 +22203,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 106,
@@ -21572,7 +22412,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 107,
@@ -21773,7 +22621,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 108,
@@ -21974,7 +22830,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 109,
@@ -22119,7 +22983,15 @@
       "parse_errors": [
         "unsupported_rule"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 110,
@@ -22248,7 +23120,15 @@
       "valid": false,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 111,
@@ -22449,7 +23329,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 112,
@@ -22647,7 +23535,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 113,
@@ -22750,7 +23646,15 @@
       "parse_errors": [
         "unsupported_rule"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 114,
@@ -23054,7 +23958,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 115,
@@ -23262,7 +24174,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 116,
@@ -23470,7 +24390,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 117,
@@ -23672,7 +24600,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 118,
@@ -23880,7 +24816,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 119,
@@ -23983,7 +24927,15 @@
         "needs_data_source_mapping",
         "unsupported_rule"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 120,
@@ -24086,7 +25038,15 @@
         "needs_data_source_mapping",
         "unsupported_rule"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 121,
@@ -24201,7 +25161,15 @@
         "needs_data_source_mapping",
         "unsupported_rule"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 122,
@@ -24400,7 +25368,15 @@
       "parse_errors": [
         "needs_data_source_mapping"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 123,
@@ -24600,7 +25576,15 @@
       "parse_errors": [
         "needs_data_source_mapping"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 124,
@@ -24912,7 +25896,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 125,
@@ -25242,7 +26234,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 126,
@@ -25510,7 +26510,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 127,
@@ -25708,7 +26716,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 128,
@@ -25960,7 +26976,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 129,
@@ -26088,7 +27112,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 130,
@@ -26216,7 +27248,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 131,
@@ -26394,7 +27434,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 132,
@@ -26542,7 +27590,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 133,
@@ -26750,7 +27806,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 134,
@@ -26958,7 +28022,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 135,
@@ -27166,7 +28238,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 136,
@@ -27374,7 +28454,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 137,
@@ -27510,7 +28598,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 138,
@@ -27842,7 +28938,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 139,
@@ -28030,7 +29134,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 140,
@@ -28218,7 +29330,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 141,
@@ -28406,7 +29526,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 142,
@@ -28897,7 +30025,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 143,
@@ -29012,7 +30148,15 @@
       "parse_errors": [
         "unsupported_rule"
       ],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 144,
@@ -29323,7 +30467,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 145,
@@ -29625,7 +30777,15 @@
       "valid": true,
       "errors": [],
       "parse_errors": [],
-      "batch_split_required": true
+      "batch_split_required": true,
+      "execution_price_basis": "adjusted_close_after_hours_estimate",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     }
   ],
   "results": [
@@ -29929,7 +31089,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 2,
@@ -30231,7 +31398,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 3,
@@ -30610,7 +31784,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 4,
@@ -30919,7 +32100,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 5,
@@ -31320,7 +32508,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 6,
@@ -31721,7 +32916,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 7,
@@ -32122,7 +33324,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 8,
@@ -32474,7 +33683,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 9,
@@ -32805,7 +34021,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 10,
@@ -33128,7 +34351,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 11,
@@ -33458,7 +34688,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 12,
@@ -33795,7 +35032,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 13,
@@ -34125,7 +35369,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 14,
@@ -34532,7 +35783,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 15,
@@ -34862,7 +36120,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 16,
@@ -35269,7 +36534,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 17,
@@ -35480,7 +36752,15 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "validation_status": "needs_data_source_mapping"
+      "validation_status": "needs_data_source_mapping",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      },
+      "next_action": "Add approved local data/source mapping before rerun."
     },
     {
       "input_order": 18,
@@ -35789,7 +37069,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 19,
@@ -36175,7 +37462,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 20,
@@ -36497,7 +37791,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 21,
@@ -36898,7 +38199,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 22,
@@ -37220,7 +38528,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 23,
@@ -37599,7 +38914,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 24,
@@ -38052,7 +39374,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 25,
@@ -38413,7 +39742,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 26,
@@ -38743,7 +40079,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 27,
@@ -39065,7 +40408,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 28,
@@ -39451,7 +40801,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 29,
@@ -39658,7 +41015,15 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "validation_status": "needs_data_source_mapping"
+      "validation_status": "needs_data_source_mapping",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      },
+      "next_action": "Add approved local data/source mapping before rerun."
     },
     {
       "input_order": 30,
@@ -39865,7 +41230,15 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "validation_status": "needs_data_source_mapping"
+      "validation_status": "needs_data_source_mapping",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      },
+      "next_action": "Add approved local data/source mapping before rerun."
     },
     {
       "input_order": 31,
@@ -39974,7 +41347,15 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "validation_status": "needs_data_source_mapping"
+      "validation_status": "needs_data_source_mapping",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      },
+      "next_action": "Add approved local data/source mapping before rerun."
     },
     {
       "input_order": 32,
@@ -40181,7 +41562,15 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "validation_status": "needs_data_source_mapping"
+      "validation_status": "needs_data_source_mapping",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      },
+      "next_action": "Add approved local data/source mapping before rerun."
     },
     {
       "input_order": 33,
@@ -40394,7 +41783,15 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "validation_status": "needs_data_source_mapping"
+      "validation_status": "needs_data_source_mapping",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      },
+      "next_action": "Add approved local data/source mapping before rerun."
     },
     {
       "input_order": 34,
@@ -40845,7 +42242,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 35,
@@ -41165,7 +42569,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 36,
@@ -41498,7 +42909,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 37,
@@ -41846,7 +43264,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 38,
@@ -42055,7 +43480,15 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "validation_status": "needs_data_source_mapping"
+      "validation_status": "needs_data_source_mapping",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      },
+      "next_action": "Add approved local data/source mapping before rerun."
     },
     {
       "input_order": 39,
@@ -42610,7 +44043,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 40,
@@ -43195,7 +44635,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 41,
@@ -43961,7 +45408,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 42,
@@ -44454,7 +45908,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 43,
@@ -45063,7 +46524,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 44,
@@ -45482,7 +46950,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 45,
@@ -45617,7 +47092,15 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "validation_status": "needs_state_machine_support"
+      "validation_status": "needs_state_machine_support",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      },
+      "next_action": "Close deterministic state-machine semantics before rerun."
     },
     {
       "input_order": 46,
@@ -46123,7 +47606,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 47,
@@ -46404,7 +47894,15 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "validation_status": "needs_state_machine_support"
+      "validation_status": "needs_state_machine_support",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      },
+      "next_action": "Close deterministic state-machine semantics before rerun."
     },
     {
       "input_order": 48,
@@ -46845,7 +48343,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 49,
@@ -47065,7 +48570,15 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "validation_status": "needs_data_source_mapping"
+      "validation_status": "needs_data_source_mapping",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      },
+      "next_action": "Add approved local data/source mapping before rerun."
     },
     {
       "input_order": 50,
@@ -47285,7 +48798,15 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "validation_status": "needs_data_source_mapping"
+      "validation_status": "needs_data_source_mapping",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      },
+      "next_action": "Add approved local data/source mapping before rerun."
     },
     {
       "input_order": 51,
@@ -47505,7 +49026,15 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "validation_status": "needs_data_source_mapping"
+      "validation_status": "needs_data_source_mapping",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      },
+      "next_action": "Add approved local data/source mapping before rerun."
     },
     {
       "input_order": 52,
@@ -47725,7 +49254,15 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "validation_status": "needs_data_source_mapping"
+      "validation_status": "needs_data_source_mapping",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      },
+      "next_action": "Add approved local data/source mapping before rerun."
     },
     {
       "input_order": 53,
@@ -47945,7 +49482,15 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "validation_status": "needs_data_source_mapping"
+      "validation_status": "needs_data_source_mapping",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      },
+      "next_action": "Add approved local data/source mapping before rerun."
     },
     {
       "input_order": 54,
@@ -48165,7 +49710,15 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "validation_status": "needs_data_source_mapping"
+      "validation_status": "needs_data_source_mapping",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      },
+      "next_action": "Add approved local data/source mapping before rerun."
     },
     {
       "input_order": 55,
@@ -48385,7 +49938,15 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "validation_status": "needs_data_source_mapping"
+      "validation_status": "needs_data_source_mapping",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      },
+      "next_action": "Add approved local data/source mapping before rerun."
     },
     {
       "input_order": 56,
@@ -48605,7 +50166,15 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "validation_status": "needs_data_source_mapping"
+      "validation_status": "needs_data_source_mapping",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      },
+      "next_action": "Add approved local data/source mapping before rerun."
     },
     {
       "input_order": 57,
@@ -48825,7 +50394,15 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "validation_status": "needs_data_source_mapping"
+      "validation_status": "needs_data_source_mapping",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      },
+      "next_action": "Add approved local data/source mapping before rerun."
     },
     {
       "input_order": 58,
@@ -49045,7 +50622,15 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "validation_status": "needs_data_source_mapping"
+      "validation_status": "needs_data_source_mapping",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      },
+      "next_action": "Add approved local data/source mapping before rerun."
     },
     {
       "input_order": 59,
@@ -49265,7 +50850,15 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "validation_status": "needs_data_source_mapping"
+      "validation_status": "needs_data_source_mapping",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      },
+      "next_action": "Add approved local data/source mapping before rerun."
     },
     {
       "input_order": 60,
@@ -49485,7 +51078,15 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "validation_status": "needs_data_source_mapping"
+      "validation_status": "needs_data_source_mapping",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      },
+      "next_action": "Add approved local data/source mapping before rerun."
     },
     {
       "input_order": 61,
@@ -49705,7 +51306,15 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "validation_status": "needs_data_source_mapping"
+      "validation_status": "needs_data_source_mapping",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      },
+      "next_action": "Add approved local data/source mapping before rerun."
     },
     {
       "input_order": 62,
@@ -49925,7 +51534,15 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "validation_status": "needs_data_source_mapping"
+      "validation_status": "needs_data_source_mapping",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      },
+      "next_action": "Add approved local data/source mapping before rerun."
     },
     {
       "input_order": 63,
@@ -50145,7 +51762,15 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "validation_status": "needs_data_source_mapping"
+      "validation_status": "needs_data_source_mapping",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      },
+      "next_action": "Add approved local data/source mapping before rerun."
     },
     {
       "input_order": 64,
@@ -50365,7 +51990,15 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "validation_status": "needs_data_source_mapping"
+      "validation_status": "needs_data_source_mapping",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      },
+      "next_action": "Add approved local data/source mapping before rerun."
     },
     {
       "input_order": 65,
@@ -50585,7 +52218,15 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "validation_status": "needs_data_source_mapping"
+      "validation_status": "needs_data_source_mapping",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      },
+      "next_action": "Add approved local data/source mapping before rerun."
     },
     {
       "input_order": 66,
@@ -50805,7 +52446,15 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "validation_status": "needs_data_source_mapping"
+      "validation_status": "needs_data_source_mapping",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      },
+      "next_action": "Add approved local data/source mapping before rerun."
     },
     {
       "input_order": 67,
@@ -50960,7 +52609,15 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "validation_status": "needs_data_source_mapping"
+      "validation_status": "needs_data_source_mapping",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      },
+      "next_action": "Add approved local data/source mapping before rerun."
     },
     {
       "input_order": 68,
@@ -51115,7 +52772,15 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "validation_status": "needs_data_source_mapping"
+      "validation_status": "needs_data_source_mapping",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      },
+      "next_action": "Add approved local data/source mapping before rerun."
     },
     {
       "input_order": 69,
@@ -51270,7 +52935,15 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "validation_status": "needs_data_source_mapping"
+      "validation_status": "needs_data_source_mapping",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      },
+      "next_action": "Add approved local data/source mapping before rerun."
     },
     {
       "input_order": 70,
@@ -51405,7 +53078,15 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "validation_status": "needs_data_source_mapping"
+      "validation_status": "needs_data_source_mapping",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      },
+      "next_action": "Add approved local data/source mapping before rerun."
     },
     {
       "input_order": 71,
@@ -51538,7 +53219,15 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "validation_status": "needs_data_source_mapping"
+      "validation_status": "needs_data_source_mapping",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      },
+      "next_action": "Add approved local data/source mapping before rerun."
     },
     {
       "input_order": 72,
@@ -51671,7 +53360,15 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "validation_status": "needs_data_source_mapping"
+      "validation_status": "needs_data_source_mapping",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      },
+      "next_action": "Add approved local data/source mapping before rerun."
     },
     {
       "input_order": 73,
@@ -51804,7 +53501,15 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "validation_status": "needs_data_source_mapping"
+      "validation_status": "needs_data_source_mapping",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      },
+      "next_action": "Add approved local data/source mapping before rerun."
     },
     {
       "input_order": 74,
@@ -51937,7 +53642,15 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "validation_status": "needs_data_source_mapping"
+      "validation_status": "needs_data_source_mapping",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      },
+      "next_action": "Add approved local data/source mapping before rerun."
     },
     {
       "input_order": 75,
@@ -52287,7 +54000,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 76,
@@ -52637,7 +54357,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 77,
@@ -52987,7 +54714,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 78,
@@ -53337,7 +55071,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 79,
@@ -53687,7 +55428,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 80,
@@ -54059,7 +55807,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 81,
@@ -54431,7 +56186,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 82,
@@ -54803,7 +56565,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 83,
@@ -55153,7 +56922,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 84,
@@ -55635,7 +57411,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 85,
@@ -56117,7 +57900,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 86,
@@ -56599,7 +58389,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 87,
@@ -57081,7 +58878,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 88,
@@ -57563,7 +59367,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 89,
@@ -58045,7 +59856,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 90,
@@ -58431,7 +60249,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 91,
@@ -58839,7 +60664,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 92,
@@ -59247,7 +61079,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 93,
@@ -59879,7 +61718,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 94,
@@ -60300,7 +62146,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 95,
@@ -60723,7 +62576,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 96,
@@ -61025,7 +62885,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 97,
@@ -61419,7 +63286,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 98,
@@ -62106,7 +63980,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 99,
@@ -62500,7 +64381,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 100,
@@ -62894,7 +64782,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 101,
@@ -63288,7 +65183,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 102,
@@ -63682,7 +65584,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 103,
@@ -64076,7 +65985,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 104,
@@ -64470,7 +66386,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 105,
@@ -64856,7 +66779,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 106,
@@ -65242,7 +67172,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 107,
@@ -65628,7 +67565,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 108,
@@ -66014,7 +67958,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 109,
@@ -66167,7 +68118,15 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "validation_status": "needs_formula_engine"
+      "validation_status": "needs_formula_engine",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      },
+      "next_action": "Translate formula sizing into bounded rule_spec/exposure."
     },
     {
       "input_order": 110,
@@ -66306,7 +68265,15 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "validation_status": "needs_formula_engine"
+      "validation_status": "needs_formula_engine",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      },
+      "next_action": "Translate formula sizing into bounded rule_spec/exposure."
     },
     {
       "input_order": 111,
@@ -66692,7 +68659,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 112,
@@ -67093,7 +69067,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 113,
@@ -67202,7 +69183,15 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "validation_status": "needs_formula_engine"
+      "validation_status": "needs_formula_engine",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      },
+      "next_action": "Translate formula sizing into bounded rule_spec/exposure."
     },
     {
       "input_order": 114,
@@ -67728,7 +69717,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 115,
@@ -68164,7 +70160,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 116,
@@ -68594,7 +70597,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 117,
@@ -69028,7 +71038,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 118,
@@ -69458,7 +71475,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 119,
@@ -69567,7 +71591,15 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "validation_status": "needs_data_source_mapping"
+      "validation_status": "needs_data_source_mapping",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      },
+      "next_action": "Add approved local data/source mapping before rerun."
     },
     {
       "input_order": 120,
@@ -69676,7 +71708,15 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "validation_status": "needs_data_source_mapping"
+      "validation_status": "needs_data_source_mapping",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      },
+      "next_action": "Add approved local data/source mapping before rerun."
     },
     {
       "input_order": 121,
@@ -69791,7 +71831,15 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "validation_status": "needs_data_source_mapping"
+      "validation_status": "needs_data_source_mapping",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      },
+      "next_action": "Add approved local data/source mapping before rerun."
     },
     {
       "input_order": 122,
@@ -69998,7 +72046,15 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "validation_status": "needs_data_source_mapping"
+      "validation_status": "needs_data_source_mapping",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      },
+      "next_action": "Add approved local data/source mapping before rerun."
     },
     {
       "input_order": 123,
@@ -70205,7 +72261,15 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "validation_status": "needs_data_source_mapping"
+      "validation_status": "needs_data_source_mapping",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      },
+      "next_action": "Add approved local data/source mapping before rerun."
     },
     {
       "input_order": 124,
@@ -70760,7 +72824,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 125,
@@ -71367,7 +73438,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 126,
@@ -71867,7 +73945,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 127,
@@ -72268,7 +74353,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 128,
@@ -72784,7 +74876,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 129,
@@ -73086,7 +75185,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 130,
@@ -73388,7 +75494,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 131,
@@ -73741,7 +75854,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 132,
@@ -74063,7 +76183,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 133,
@@ -74457,7 +76584,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 134,
@@ -74851,7 +76985,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 135,
@@ -75245,7 +77386,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 136,
@@ -75639,7 +77787,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 137,
@@ -75949,7 +78104,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 138,
@@ -76545,7 +78707,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 139,
@@ -76946,7 +79115,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 140,
@@ -77347,7 +79523,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 141,
@@ -77748,7 +79931,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 142,
@@ -78461,7 +80651,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 143,
@@ -78576,7 +80773,15 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "validation_status": "needs_formula_engine"
+      "validation_status": "needs_formula_engine",
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      },
+      "next_action": "Translate formula sizing into bounded rule_spec/exposure."
     },
     {
       "input_order": 144,
@@ -79183,7 +81388,14 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     },
     {
       "input_order": 145,
@@ -79746,7 +81958,21 @@
       "ranking_applied": false,
       "recommendation_applied": false,
       "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "broker_live_order_alert_paper_automation": false,
+      "same_close_exception": {
+        "allowed_for_exploratory_only": true,
+        "daily_adjusted_close_proxy_used": true,
+        "after_hours_price_source": "none",
+        "final_review_allowed": false,
+        "warning": "daily data cannot verify actual after-hours fill"
+      }
     }
-  ]
+  ],
+  "same_close_exception": {
+    "allowed_for_exploratory_only": true,
+    "daily_adjusted_close_proxy_used": true,
+    "after_hours_price_source": "none",
+    "final_review_allowed": false,
+    "warning": "daily data cannot verify actual after-hours fill"
+  }
 }

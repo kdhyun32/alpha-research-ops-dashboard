@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import json
+
 import pandas as pd
 import pytest
 
@@ -205,6 +207,9 @@ def test_backtest_uses_same_day_close_after_hours_proxy(monkeypatch) -> None:
     assert result["execution_timing"] == batch.DEFAULT_EXECUTION_TIMING
     assert result["same_close_execution_allowed"] is True
     assert result["execution_price_basis"] == "adjusted_close_after_hours_estimate"
+    assert result["same_close_exception"]["daily_adjusted_close_proxy_used"] is True
+    assert result["same_close_exception"]["after_hours_price_source"] == "none"
+    assert result["same_close_exception"]["final_review_allowed"] is False
     assert result["metrics"]["total_return"] > 0.5
 
 
@@ -433,3 +438,36 @@ def test_ready_realized_volatility_rule_executes_with_synthetic_data(monkeypatch
     assert normalized["validation_status"] == "ready_to_backtest"
     assert result["status"] == "executed"
     assert result["metrics"]
+
+
+def test_validate_output_schema_v21_has_same_close_audit_fields(tmp_path) -> None:
+    payload = {
+        "schema_name": "alpha_research_strategy_batch",
+        "schema_version": "2.1",
+        "strategies": [
+            strategy_with(
+                {
+                    "benchmarks": ["QQQ", "TQQQ"],
+                    "primary_benchmark": "QQQ",
+                    "rule_spec": {"type": "always_true", "symbol": "QQQ"},
+                    "exposure": {
+                        "type": "binary",
+                        "condition": {"type": "always_true", "symbol": "QQQ"},
+                        "true_exposure": 1.0,
+                        "false_exposure": 0.0,
+                    },
+                }
+            )
+        ],
+    }
+
+    summary = batch.write_outputs(payload, tmp_path, "validate")
+    latest = json.loads((tmp_path / "latest.json").read_text(encoding="utf-8"))
+
+    assert summary["latest_path"].endswith("latest.json")
+    assert latest["schema_name"] == "alpha_research_strategy_batch_result"
+    assert latest["schema_version"] == "2.1"
+    assert latest["input_schema_version"] == "2.1"
+    assert latest["execution_price_basis"] == "adjusted_close_after_hours_estimate"
+    assert latest["same_close_exception"]["warning"] == "daily data cannot verify actual after-hours fill"
+    assert latest["results"][0]["same_close_exception"]["allowed_for_exploratory_only"] is True

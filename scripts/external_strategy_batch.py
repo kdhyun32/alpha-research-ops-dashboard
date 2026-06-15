@@ -15,9 +15,9 @@ import yfinance as yf
 
 
 CANONICAL_SCHEMA_NAME = "alpha_research_strategy_batch"
-CANONICAL_SCHEMA_VERSION = "2.0"
+CANONICAL_SCHEMA_VERSION = "2.1"
 RESULT_SCHEMA_NAME = "alpha_research_strategy_batch_result"
-RESULT_SCHEMA_VERSION = "2.0"
+RESULT_SCHEMA_VERSION = "2.1"
 MAX_WORKER_BATCH_SIZE = 10
 SUPPORTED_STATUS = "ready_to_backtest"
 
@@ -68,6 +68,7 @@ BOUNDARY_FLAGS = {
 DEFAULT_SIGNAL_TIMING = "after_close"
 DEFAULT_EXECUTION_TIMING = "same_day_close_after_hours"
 DEFAULT_SAME_CLOSE_EXECUTION_ALLOWED = True
+DEFAULT_EXECUTION_PRICE_BASIS = "adjusted_close_after_hours_estimate"
 LEGACY_NEXT_OPEN_TIMINGS = {"next_session_open", "next_session_open_to_next_session_open"}
 ALLOWED_EXECUTION_TIMINGS = {
     DEFAULT_EXECUTION_TIMING,
@@ -76,6 +77,16 @@ ALLOWED_EXECUTION_TIMINGS = {
     "after_close_same_day_close_proxy",
     *LEGACY_NEXT_OPEN_TIMINGS,
 }
+
+
+def same_close_exception() -> dict[str, Any]:
+    return {
+        "allowed_for_exploratory_only": True,
+        "daily_adjusted_close_proxy_used": True,
+        "after_hours_price_source": "none",
+        "final_review_allowed": False,
+        "warning": "daily data cannot verify actual after-hours fill",
+    }
 
 PUBLIC_TEXT_REPLACEMENTS = {
     "CUSTOM_P25_A100_RAW": "external authority state map",
@@ -919,7 +930,10 @@ def export_record_to_strategy(row: dict[str, Any]) -> dict[str, Any]:
         "signal_timing": rule.get("signal_timing") or DEFAULT_SIGNAL_TIMING,
         "execution_timing": DEFAULT_EXECUTION_TIMING,
         "same_close_execution_allowed": DEFAULT_SAME_CLOSE_EXECUTION_ALLOWED,
-        "benchmark": row.get("benchmark") or ["QQQ"],
+        "benchmarks": row.get("benchmarks") or ["QQQ", "TQQQ"],
+        "primary_benchmark": row.get("primary_benchmark") or "QQQ",
+        "execution_price_basis": DEFAULT_EXECUTION_PRICE_BASIS,
+        "same_close_exception": same_close_exception(),
         "costs": row.get("costs") or {"commission": 0, "slippage_per_trade": 0.0005},
         "exposure_rule": rule.get("exposure_rule") or row.get("exposure_rule"),
     }
@@ -1393,7 +1407,8 @@ def normalize_strategy(strategy: dict[str, Any], index: int, total_ready_hint: i
         "execution_timing": DEFAULT_EXECUTION_TIMING,
         "same_close_execution_allowed": DEFAULT_SAME_CLOSE_EXECUTION_ALLOWED,
         "timing_model": "after_close_signal_same_day_close_after_hours_execution",
-        "execution_price_basis": "adjusted_close_after_hours_estimate",
+        "execution_price_basis": DEFAULT_EXECUTION_PRICE_BASIS,
+        "same_close_exception": same_close_exception(),
         "costs": strategy.get("costs") if isinstance(strategy.get("costs"), dict) else {"commission": 0, "slippage_per_trade": 0.0005},
         **BOUNDARY_FLAGS,
     }
@@ -1807,7 +1822,8 @@ def skipped_result(normalized: dict[str, Any], *, reason: str | None = None) -> 
         "execution_timing": DEFAULT_EXECUTION_TIMING,
         "same_close_execution_allowed": DEFAULT_SAME_CLOSE_EXECUTION_ALLOWED,
         "timing_model": "after_close_signal_same_day_close_after_hours_execution",
-        "execution_price_basis": "adjusted_close_after_hours_estimate",
+        "execution_price_basis": DEFAULT_EXECUTION_PRICE_BASIS,
+        "same_close_exception": same_close_exception(),
         "period": "",
         "test_date_range": {"start": "", "end": ""},
         "signal_count": node_leaf_count(strategy.get("rule_spec")),
@@ -1824,6 +1840,7 @@ def skipped_result(normalized: dict[str, Any], *, reason: str | None = None) -> 
         "candidate_watch_champion_mutation": False,
         "normalized_strategy": strategy,
         "validation_status": normalized.get("validation_status"),
+        "next_action": skip_reason_for(normalized.get("validation_status") or status),
     }
 
 
@@ -1922,7 +1939,8 @@ def backtest(normalized: dict[str, Any]) -> dict[str, Any]:
         "execution_timing": DEFAULT_EXECUTION_TIMING,
         "same_close_execution_allowed": DEFAULT_SAME_CLOSE_EXECUTION_ALLOWED,
         "timing_model": "after_close_signal_same_day_close_after_hours_execution",
-        "execution_price_basis": "adjusted_close_after_hours_estimate",
+        "execution_price_basis": DEFAULT_EXECUTION_PRICE_BASIS,
+        "same_close_exception": same_close_exception(),
         "period": f"{strategy_effective_start} ~ {strategy_effective_end}",
         "test_date_range": {"start": strategy_effective_start, "end": strategy_effective_end},
         "strategy_effective_start": strategy_effective_start,
@@ -2059,7 +2077,8 @@ def write_outputs(payload: dict[str, Any], output_dir: Path, mode: str) -> dict[
         "execution_timing": DEFAULT_EXECUTION_TIMING,
         "same_close_execution_allowed": DEFAULT_SAME_CLOSE_EXECUTION_ALLOWED,
         "timing_model": "after_close_signal_same_day_close_after_hours_execution",
-        "execution_price_basis": "adjusted_close_after_hours_estimate",
+        "execution_price_basis": DEFAULT_EXECUTION_PRICE_BASIS,
+        "same_close_exception": same_close_exception(),
         "validation_summary": {
             "total_rows": len(validations),
             "ready_to_backtest": ready_count,
