@@ -2154,11 +2154,9 @@ dl,.path-list li{grid-template-columns:1fr}
 <p>브라우저는 구조 검증과 dispatch 요청만 수행합니다. 결과는 <code>external_strategy_results/latest.json</code>에 반영된 뒤 다음 dashboard bundle 생성 때 같은 성과표에 합쳐집니다.</p>
 <div class="export-actions">
 <input type="file" id="strategy-import-file" accept=".json,.strategy-idea.json,.strategy-ideas.json,.strategy-review.json,application/json" multiple>
-<input type="password" id="strategy-execution-token" autocomplete="off" placeholder="백테스트 실행 키">
 <button type="button" class="export-button secondary" id="strategy-import-validate">검증 실행</button>
 <button type="button" class="export-button" id="strategy-import-backtest">백테스트 실행</button>
 </div>
-<p class="plain-note">백테스트 실행 키: 무단 백테스트 요청을 막기 위한 키입니다. 검증만 할 때는 필요 없고, 백테스트 실행 요청 시 필요합니다.</p>
 <div class="export-actions">
 <button type="button" class="export-button secondary" id="strategy-import-show-format">임포트 양식 보기</button>
 <button type="button" class="export-button secondary" id="strategy-import-download-sample">예시 파일 다운로드</button>
@@ -2166,7 +2164,7 @@ dl,.path-list li{grid-template-columns:1fr}
 <p class="plain-note" id="strategy-import-file-name">선택된 파일 없음 · 여러 파일과 여러 전략 row 지원</p>
 <div class="import-status pending" id="strategy-import-status" aria-live="polite">아직 검증하지 않았습니다.</div>
 <ul class="validation-list" id="strategy-import-errors"></ul>
-<script type="application/json" id="strategy-import-config">{"browser_only": false, "input_extension": ".strategy-idea.json", "no_backtest_execution_in_browser": true, "no_external_url": false, "no_python_execution_in_browser": true, "public_execution_config": {"bundle_name": "Unified Alpha Dashboard v1", "canonical_source_repo": "Alpha Research Ops Lab", "github_dispatch_event_backtest": "external_strategy_backtest", "github_dispatch_event_validate": "external_strategy_validate", "github_dispatch_repo": "kdhyun32/alpha-research-ops-dashboard", "public_repo_role": "generated_dashboard_bundle_deployment_target_only", "result_index_json_path": "external_strategy_results/index.json", "result_json_path": "external_strategy_results/latest.json", "token_persistence": "browser_memory_only", "token_transport": "x-alpha-execution-token header or bearer token", "worker_endpoint": "https://alpha-strategy-dispatch.kdhyun32.workers.dev"}, "recommended_values": {"execution_timing": "next_session_open", "same_close_execution_allowed": false, "signal_timing": "after_close", "traded_instrument": "TQQQ"}, "required_fields": ["strategy_name", "traded_instrument", "required_symbols", "signals[].name", "signals[].symbol", "signals[].rule", "signals[].role", "entry_rule", "exit_rule", "signal_timing", "execution_timing", "same_close_execution_allowed", "benchmark", "costs.commission", "costs.slippage_per_trade"], "sample": {"benchmark": "QQQ", "costs": {"commission": 0, "slippage_per_trade": 0.0005}, "entry_rule": "신호를 장마감 후 확인하고 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출 테스트를 요청합니다.", "execution_timing": "next_session_open", "exit_rule": "신호를 장마감 후 확인하고 조건이 거짓이면 다음 거래일 시가 기준으로 TQQQ 노출 해제 테스트를 요청합니다.", "notes": "탐색용 출처 등급은 별도 실행 단계에서 결정합니다. 이 파일은 브라우저 구조 검증과 테스트 요청 준비에만 씁니다.", "required_symbols": ["QQQ", "TQQQ"], "same_close_execution_allowed": false, "signal_timing": "after_close", "signals": [{"name": "QQQ 200일 추세", "role": "entry_filter", "rule": "QQQ close > QQQ 200-day simple moving average", "symbol": "QQQ"}], "strategy_name": "QQQ 200일선 확인 후 TQQQ 테스트 아이디어", "traded_instrument": "TQQQ"}, "sample_filename": "sample-tqqq.strategy-idea.json", "schema_name": "alpha_research_strategy_idea_import", "schema_version": "1.0", "selection_review_extension": ".strategy-review.json", "source_tier_note": "exploratory source tier는 별도 실행 단계에서 결정합니다.", "test_request_extension": ".strategy-test-request.json", "validation_scope": "browser_structure_check_then_worker_dispatch"}</script>
+<script type="application/json" id="strategy-import-config">{"browser_only": false, "input_extension": ".strategy-idea.json", "no_backtest_execution_in_browser": true, "no_external_url": false, "no_python_execution_in_browser": true, "public_execution_config": {"bundle_name": "Unified Alpha Dashboard v1", "canonical_source_repo": "Alpha Research Ops Lab", "execution_token_required": false, "github_dispatch_event_backtest": "external_strategy_backtest", "github_dispatch_event_validate": "external_strategy_validate", "github_dispatch_repo": "kdhyun32/alpha-research-ops-dashboard", "public_repo_role": "generated_dashboard_bundle_deployment_target_only", "result_index_json_path": "external_strategy_results/index.json", "result_json_path": "external_strategy_results/latest.json", "worker_endpoint": "https://alpha-strategy-dispatch.kdhyun32.workers.dev"}, "recommended_values": {"execution_timing": "next_session_open", "same_close_execution_allowed": false, "signal_timing": "after_close", "traded_instrument": "TQQQ"}, "required_fields": ["strategy_name", "traded_instrument", "required_symbols", "signals[].name", "signals[].symbol", "signals[].rule", "signals[].role", "entry_rule", "exit_rule", "signal_timing", "execution_timing", "same_close_execution_allowed", "benchmark", "costs.commission", "costs.slippage_per_trade"], "sample": {"benchmark": "QQQ", "costs": {"commission": 0, "slippage_per_trade": 0.0005}, "entry_rule": "신호를 장마감 후 확인하고 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출 테스트를 요청합니다.", "execution_timing": "next_session_open", "exit_rule": "신호를 장마감 후 확인하고 조건이 거짓이면 다음 거래일 시가 기준으로 TQQQ 노출 해제 테스트를 요청합니다.", "notes": "탐색용 출처 등급은 별도 실행 단계에서 결정합니다. 이 파일은 브라우저 구조 검증과 테스트 요청 준비에만 씁니다.", "required_symbols": ["QQQ", "TQQQ"], "same_close_execution_allowed": false, "signal_timing": "after_close", "signals": [{"name": "QQQ 200일 추세", "role": "entry_filter", "rule": "QQQ close > QQQ 200-day simple moving average", "symbol": "QQQ"}], "strategy_name": "QQQ 200일선 확인 후 TQQQ 테스트 아이디어", "traded_instrument": "TQQQ"}, "sample_filename": "sample-tqqq.strategy-idea.json", "schema_name": "alpha_research_strategy_idea_import", "schema_version": "1.0", "selection_review_extension": ".strategy-review.json", "source_tier_note": "exploratory source tier는 별도 실행 단계에서 결정합니다.", "test_request_extension": ".strategy-test-request.json", "validation_scope": "browser_structure_check_then_worker_dispatch"}</script>
 <details class="raw-details" id="strategy-import-format-details">
 <summary>임포트 양식 보기</summary>
 <div class="details-body">
@@ -2287,7 +2285,6 @@ dl,.path-list li{grid-template-columns:1fr}
   const fileName = document.getElementById("strategy-import-file-name");
   const status = document.getElementById("strategy-import-status");
   const errorList = document.getElementById("strategy-import-errors");
-  const tokenInput = document.getElementById("strategy-execution-token");
   const externalStatus = document.getElementById("external-result-status");
   const externalBody = document.getElementById("external-result-body");
   const externalDetails = document.getElementById("external-result-details");
@@ -2449,11 +2446,6 @@ dl,.path-list li{grid-template-columns:1fr}
       setStatus("검증을 통과한 전략 row가 없습니다.", "failed");
       return;
     }
-    const token = (tokenInput?.value || "").trim();
-    if (mode === "backtest" && !token) {
-      setStatus("백테스트 실행 키를 입력하세요.", "failed");
-      return;
-    }
     const endpoint = publicConfig.worker_endpoint;
     if (!endpoint) {
       setStatus("Worker endpoint config가 없습니다.", "failed");
@@ -2462,7 +2454,7 @@ dl,.path-list li{grid-template-columns:1fr}
     setStatus(mode === "backtest" ? "백테스트 실행 요청 중입니다." : "검증 실행 요청 중입니다.", "pending");
     const response = await fetch(endpoint, {
       method: "POST",
-      headers: token ? {"content-type": "application/json", "x-alpha-execution-token": token} : {"content-type": "application/json"},
+      headers: {"content-type": "application/json"},
       body: JSON.stringify({mode, strategy_batch: {...latestBatch, strategies}}),
     });
     const payload = await response.json().catch(() => ({ok: false, error: "응답 JSON을 읽지 못했습니다."}));
@@ -6352,8 +6344,8 @@ dl,.path-list li{grid-template-columns:1fr}
 </ul>
 <h3>Generated artifacts</h3>
 <ul class="path-list">
-<li><span>Beginner dashboard HTML</span><code>artifacts/beginner_research_dashboard/20260615_unified_alpha_dashboard_v1/INDEX.html</code></li>
-<li><span>Beginner dashboard summary JSON</span><code>artifacts/beginner_research_dashboard/20260615_unified_alpha_dashboard_v1/BEGINNER_RESEARCH_DASHBOARD_SUMMARY.json</code></li>
+<li><span>Beginner dashboard HTML</span><code>artifacts/beginner_research_dashboard/20260615_no_token_import_ux/INDEX.html</code></li>
+<li><span>Beginner dashboard summary JSON</span><code>artifacts/beginner_research_dashboard/20260615_no_token_import_ux/BEGINNER_RESEARCH_DASHBOARD_SUMMARY.json</code></li>
 </ul>
 </div>
 </details>

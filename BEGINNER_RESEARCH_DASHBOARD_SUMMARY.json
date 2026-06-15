@@ -15108,8 +15108,8 @@
     "title": "새 아이디어 준비 게이트"
   },
   "output_artifact_paths": {
-    "html": "artifacts/beginner_research_dashboard/20260615_unified_alpha_dashboard_v1/INDEX.html",
-    "summary_json": "artifacts/beginner_research_dashboard/20260615_unified_alpha_dashboard_v1/BEGINNER_RESEARCH_DASHBOARD_SUMMARY.json"
+    "html": "artifacts/beginner_research_dashboard/20260615_no_token_import_ux/INDEX.html",
+    "summary_json": "artifacts/beginner_research_dashboard/20260615_no_token_import_ux/BEGINNER_RESEARCH_DASHBOARD_SUMMARY.json"
   },
   "package_version": "0.2.0",
   "parameter_tuning_run": false,
@@ -16051,7 +16051,7 @@
     "git_commit": "0fdc2cf661ed97c2f8e4b9502557fef3dfc4b3bf",
     "input_paths": [],
     "metadata_schema_version": "artifact_run_metadata_v1",
-    "output_path": "artifacts/beginner_research_dashboard/20260615_unified_alpha_dashboard_v1/BEGINNER_RESEARCH_DASHBOARD_SUMMARY.json",
+    "output_path": "artifacts/beginner_research_dashboard/20260615_no_token_import_ux/BEGINNER_RESEARCH_DASHBOARD_SUMMARY.json",
     "package_name": "alpha_research_ops",
     "package_version": "0.2.0",
     "repo_root": "D:\\projects\\Alpha Research Ops Lab",
@@ -16427,14 +16427,13 @@
     "public_execution_config": {
       "bundle_name": "Unified Alpha Dashboard v1",
       "canonical_source_repo": "Alpha Research Ops Lab",
+      "execution_token_required": false,
       "github_dispatch_event_backtest": "external_strategy_backtest",
       "github_dispatch_event_validate": "external_strategy_validate",
       "github_dispatch_repo": "kdhyun32/alpha-research-ops-dashboard",
       "public_repo_role": "generated_dashboard_bundle_deployment_target_only",
       "result_index_json_path": "external_strategy_results/index.json",
       "result_json_path": "external_strategy_results/latest.json",
-      "token_persistence": "browser_memory_only",
-      "token_transport": "x-alpha-execution-token header or bearer token",
       "worker_endpoint": "https://alpha-strategy-dispatch.kdhyun32.workers.dev"
     },
     "recommended_values": {
@@ -16503,6 +16502,7 @@
       "rule_draft_batch_results",
       "external_strategy_backtest_results"
     ],
+    "execution_token_required": false,
     "github_dispatch_event_backtest": "external_strategy_backtest",
     "github_dispatch_event_validate": "external_strategy_validate",
     "github_dispatch_repo": "kdhyun32/alpha-research-ops-dashboard",
@@ -16510,8 +16510,6 @@
     "public_repo_role": "generated_dashboard_bundle_deployment_target_only",
     "result_index_json_path": "external_strategy_results/index.json",
     "result_json_path": "external_strategy_results/latest.json",
-    "token_persistence": "browser_memory_only",
-    "token_transport": "x-alpha-execution-token header or bearer token",
     "worker_endpoint": "https://alpha-strategy-dispatch.kdhyun32.workers.dev"
   },
   "worksheet_item_count": 16,
