@@ -197,8 +197,14 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "SPY"
+        ],
+        "raw_strategy_name": "TQ005 SPY confirmation trend",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -429,8 +435,14 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "XLK"
+        ],
+        "raw_strategy_name": "TQ006 XLK leadership trend",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -661,8 +673,14 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "SOXX"
+        ],
+        "raw_strategy_name": "TQ007 SOXX semiconductor confirmation",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -883,8 +901,14 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "GLD"
+        ],
+        "raw_strategy_name": "TQ008 QQQ GLD relative momentum switch",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -1105,8 +1129,14 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "SPY"
+        ],
+        "raw_strategy_name": "TQ009 QQQ SPY relative strength gate",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -1324,8 +1354,16 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "^VIX",
+          "QQQ, VIX",
+          "AGO"
+        ],
+        "raw_strategy_name": "TQ013 VIX spike cooldown",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -1558,8 +1596,14 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "^VIX"
+        ],
+        "raw_strategy_name": "TQ016 Volatility contraction reentry",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -1790,8 +1834,14 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "^VIX"
+        ],
+        "raw_strategy_name": "TQ018 VIX and trend conjunction",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -2015,15 +2065,23 @@
         "full_trace_available": false,
         "has_performance_metrics": false,
         "hold_reason_code": "needs_data_source_mapping",
-        "hold_reason_label": "현재 yfinance만으로는 필요한 데이터가 없어 보류",
+        "hold_reason_label": "외부 신호 매핑이 필요해 현재 yfinance만으로는 보류",
         "hold_reason_raw": "requires a non-yfinance or separately mapped data source",
         "implementation_note": "{'type': 'binary', 'true_exposure': 1.0, 'false_exposure': 0.0, 'condition': {'type': 'logical_and', 'children': [{'type': 'price_level_compare', 'symbol': '^VIX', 'operator': '<=', 'threshold': 25.0}, {'type': 'price_level_compare', 'symbol': 'CHANGE', 'operator': '<', 'threshold': 0.25}]}}",
         "licensed_rerun_required": true,
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "^VIX",
+          "DGS10",
+          "QQQ",
+          "CHANGE"
+        ],
+        "raw_strategy_name": "TQ019 VIX plus rates stress proxy",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "^VIX",
@@ -2245,8 +2303,14 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "VOLATILITY"
+        ],
+        "raw_strategy_name": "TQ020 Crash-volatility lockout",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -2477,8 +2541,14 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "SPY"
+        ],
+        "raw_strategy_name": "TQ023 QQQ SPY crash breadth proxy",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -2698,8 +2768,14 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "RETURN"
+        ],
+        "raw_strategy_name": "TQ024 Gap-risk holdoff",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -2930,8 +3006,15 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "^VIX",
+          "GLD"
+        ],
+        "raw_strategy_name": "TQ026 Defensive GLD crash switch",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -3156,15 +3239,21 @@
         "full_trace_available": false,
         "has_performance_metrics": false,
         "hold_reason_code": "needs_data_source_mapping",
-        "hold_reason_label": "현재 yfinance만으로는 필요한 데이터가 없어 보류",
+        "hold_reason_label": "외부 신호 매핑이 필요해 현재 yfinance만으로는 보류",
         "hold_reason_raw": "requires a non-yfinance or separately mapped data source",
         "implementation_note": "{'type': 'binary', 'true_exposure': 1.0, 'false_exposure': 0.0, 'condition': {'type': 'logical_and', 'children': [{'type': 'price_vs_sma', 'symbol': 'QQQ', 'operator': '>', 'window': 100}, {'type': 'price_level_compare', 'symbol': 'HY_SPREAD', 'operator': '<', 'threshold': 6.0}]}}",
         "licensed_rerun_required": true,
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "HY_SPREAD"
+        ],
+        "raw_strategy_name": "TQ031 High-yield spread stress gate",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -3388,15 +3477,21 @@
         "full_trace_available": false,
         "has_performance_metrics": false,
         "hold_reason_code": "needs_data_source_mapping",
-        "hold_reason_label": "현재 yfinance만으로는 필요한 데이터가 없어 보류",
+        "hold_reason_label": "외부 신호 매핑이 필요해 현재 yfinance만으로는 보류",
         "hold_reason_raw": "requires a non-yfinance or separately mapped data source",
         "implementation_note": "{'type': 'binary', 'true_exposure': 1.0, 'false_exposure': 0.0, 'condition': {'type': 'logical_and', 'children': [{'type': 'price_level_compare', 'symbol': 'T10Y2Y', 'operator': '>', 'threshold': -1.0}, {'type': 'price_vs_sma', 'symbol': 'QQQ', 'operator': '>', 'window': 100}]}}",
         "licensed_rerun_required": true,
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "T10Y2Y"
+        ],
+        "raw_strategy_name": "TQ032 Yield curve stress gate",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -3603,15 +3698,21 @@
         "full_trace_available": false,
         "has_performance_metrics": false,
         "hold_reason_code": "needs_data_source_mapping",
-        "hold_reason_label": "현재 yfinance만으로는 필요한 데이터가 없어 보류",
+        "hold_reason_label": "외부 신호 매핑이 필요해 현재 yfinance만으로는 보류",
         "hold_reason_raw": "requires a non-yfinance or separately mapped data source",
         "implementation_note": "{'type': 'binary', 'true_exposure': 1.0, 'false_exposure': 0.0}",
         "licensed_rerun_required": true,
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "DTB3"
+        ],
+        "raw_strategy_name": "TQ033 Cash yield hurdle",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -3835,15 +3936,21 @@
         "full_trace_available": false,
         "has_performance_metrics": false,
         "hold_reason_code": "needs_data_source_mapping",
-        "hold_reason_label": "현재 yfinance만으로는 필요한 데이터가 없어 보류",
+        "hold_reason_label": "외부 신호 매핑이 필요해 현재 yfinance만으로는 보류",
         "hold_reason_raw": "requires a non-yfinance or separately mapped data source",
         "implementation_note": "{'type': 'binary', 'true_exposure': 1.0, 'false_exposure': 0.0, 'condition': {'type': 'logical_and', 'children': [{'type': 'price_level_compare', 'symbol': 'NFCI', 'operator': '<', 'threshold': 0.5}, {'type': 'price_vs_sma', 'symbol': 'QQQ', 'operator': '>', 'window': 100}]}}",
         "licensed_rerun_required": true,
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "NFCI"
+        ],
+        "raw_strategy_name": "TQ034 Financial conditions gate",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -4067,15 +4174,22 @@
         "full_trace_available": false,
         "has_performance_metrics": false,
         "hold_reason_code": "needs_data_source_mapping",
-        "hold_reason_label": "현재 yfinance만으로는 필요한 데이터가 없어 보류",
+        "hold_reason_label": "외부 신호 매핑이 필요해 현재 yfinance만으로는 보류",
         "hold_reason_raw": "requires a non-yfinance or separately mapped data source",
         "implementation_note": "{'type': 'binary', 'true_exposure': 1.0, 'false_exposure': 0.0, 'condition': {'type': 'logical_and', 'children': [{'type': 'price_level_compare', 'symbol': 'AGO', 'operator': '<', 'threshold': 1.0}, {'type': 'price_vs_sma', 'symbol': 'QQQ', 'operator': '>', 'window': 100}]}}",
         "licensed_rerun_required": true,
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "DGS10",
+          "AGO"
+        ],
+        "raw_strategy_name": "TQ035 Rate shock filter",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -4308,8 +4422,15 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "GLD",
+          "^VIX"
+        ],
+        "raw_strategy_name": "TQ041 Three-asset risk ladder",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -4543,8 +4664,14 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "^VIX"
+        ],
+        "raw_strategy_name": "TQ052 VIX-scaled exposure",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -4777,8 +4904,15 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "^VIX",
+          "QQQ, VIX"
+        ],
+        "raw_strategy_name": "TQ081 Trend-volatility score",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -5003,15 +5137,22 @@
         "full_trace_available": false,
         "has_performance_metrics": false,
         "hold_reason_code": "needs_data_source_mapping",
-        "hold_reason_label": "현재 yfinance만으로는 필요한 데이터가 없어 보류",
+        "hold_reason_label": "외부 신호 매핑이 필요해 현재 yfinance만으로는 보류",
         "hold_reason_raw": "requires a non-yfinance or separately mapped data source",
         "implementation_note": "{'type': 'binary', 'true_exposure': 1.0, 'false_exposure': 0.0, 'condition': {'type': 'logical_and', 'children': [{'type': 'price_vs_sma', 'symbol': 'QQQ', 'operator': '>', 'window': 100}, {'type': 'price_level_compare', 'symbol': 'HY_SPREAD', 'operator': '<', 'threshold': 6.0}]}}",
         "licensed_rerun_required": true,
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "^VIX",
+          "HY_SPREAD"
+        ],
+        "raw_strategy_name": "TQ083 Three-vote risk-on committee",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -5226,8 +5367,18 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "^VIX",
+          "^VIX9D",
+          "^VIX3M",
+          "^VVIX",
+          "GLD"
+        ],
+        "raw_strategy_name": "P2_001 Vol term-structure state machine",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -5445,8 +5596,14 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "^VIX"
+        ],
+        "raw_strategy_name": "P2_002 Damage recovery state machine",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -5663,8 +5820,16 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "^VIX",
+          "^VIX9D",
+          "^VIX3M"
+        ],
+        "raw_strategy_name": "P2_003 Crash reentry timer",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -5887,8 +6052,19 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "^VIX",
+          "^VIX9D",
+          "^VIX3M",
+          "^VIX6M",
+          "^VVIX",
+          "^VXN"
+        ],
+        "raw_strategy_name": "P2_004 Volatility surface score",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -6107,8 +6283,18 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "SPY",
+          "SOXX",
+          "XLK",
+          "^VIX",
+          "GLD"
+        ],
+        "raw_strategy_name": "P2_005 Breadth recovery ladder",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -6329,8 +6515,17 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "^VIX",
+          "^VIX9D",
+          "^VIX3M",
+          "GLD"
+        ],
+        "raw_strategy_name": "P2_006 Variance drag allocator",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -6550,8 +6745,19 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "XLK",
+          "^VIX",
+          "^VIX9D",
+          "^VIX3M",
+          "^VVIX",
+          "GLD"
+        ],
+        "raw_strategy_name": "P2_007 Hysteresis risk committee",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -6770,8 +6976,16 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "^VIX",
+          "^VVIX",
+          "GLD"
+        ],
+        "raw_strategy_name": "P2_008 Adaptive defensive rotation",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -7016,8 +7230,12 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "외부 신호 매핑 필요"
+        ],
+        "raw_strategy_name": "A03 MA100 break exit MA200 reentry",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -7068,7 +7286,7 @@
         "source_group_label": "Import/latest",
         "source_signal_id": "import-047",
         "strategy_id": "import-047",
-        "strategy_name": "A03 MA100 break exit MA200 reentry",
+        "strategy_name": "외부 권한 데이터 의존 전략 #047",
         "summary_json_path": "D:\\projects\\alpha-research-ops-dashboard\\external_strategy_results\\latest.json",
         "total_return": null,
         "trace_path": "",
@@ -7233,8 +7451,14 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "GLD"
+        ],
+        "raw_strategy_name": "C04 Three-feature minimal regime",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -7458,15 +7682,19 @@
         "full_trace_available": false,
         "has_performance_metrics": false,
         "hold_reason_code": "needs_data_source_mapping",
-        "hold_reason_label": "현재 yfinance만으로는 필요한 데이터가 없어 보류",
+        "hold_reason_label": "외부 신호 매핑이 필요해 현재 yfinance만으로는 보류",
         "hold_reason_raw": "requires a non-yfinance or separately mapped data source",
         "implementation_note": "{'type': 'binary', 'true_exposure': 1.0, 'false_exposure': 0.0, 'condition': {'type': 'logical_and', 'children': [{'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}, {'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}, {'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}]}}",
         "licensed_rerun_required": true,
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "외부 신호 매핑 필요"
+        ],
+        "raw_strategy_name": "CUSTOM_P25_A100_RAW external authority ABL state map",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "EXTERNAL_AUTHORITY",
@@ -7517,7 +7745,7 @@
         "source_group_label": "Import/latest",
         "source_signal_id": "import-049",
         "strategy_id": "import-049",
-        "strategy_name": "CUSTOM_P25_A100_RAW external authority ABL state map",
+        "strategy_name": "외부 신호 매핑 필요 전략 #049",
         "summary_json_path": "D:\\projects\\alpha-research-ops-dashboard\\external_strategy_results\\latest.json",
         "total_return": null,
         "trace_path": "",
@@ -7692,15 +7920,19 @@
         "full_trace_available": false,
         "has_performance_metrics": false,
         "hold_reason_code": "needs_data_source_mapping",
-        "hold_reason_label": "현재 yfinance만으로는 필요한 데이터가 없어 보류",
+        "hold_reason_label": "외부 신호 매핑이 필요해 현재 yfinance만으로는 보류",
         "hold_reason_raw": "requires a non-yfinance or separately mapped data source",
         "implementation_note": "{'type': 'binary', 'true_exposure': 1.0, 'false_exposure': 0.0, 'condition': {'type': 'logical_and', 'children': [{'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}, {'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}, {'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}]}}",
         "licensed_rerun_required": true,
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "외부 신호 매핑 필요"
+        ],
+        "raw_strategy_name": "REF_ABL_ONLY ABL authority reference",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "EXTERNAL_AUTHORITY",
@@ -7751,7 +7983,7 @@
         "source_group_label": "Import/latest",
         "source_signal_id": "import-050",
         "strategy_id": "import-050",
-        "strategy_name": "REF_ABL_ONLY ABL authority reference",
+        "strategy_name": "외부 신호 매핑 필요 전략 #050",
         "summary_json_path": "D:\\projects\\alpha-research-ops-dashboard\\external_strategy_results\\latest.json",
         "total_return": null,
         "trace_path": "",
@@ -7926,15 +8158,19 @@
         "full_trace_available": false,
         "has_performance_metrics": false,
         "hold_reason_code": "needs_data_source_mapping",
-        "hold_reason_label": "현재 yfinance만으로는 필요한 데이터가 없어 보류",
+        "hold_reason_label": "외부 신호 매핑이 필요해 현재 yfinance만으로는 보류",
         "hold_reason_raw": "requires a non-yfinance or separately mapped data source",
         "implementation_note": "{'type': 'binary', 'true_exposure': 1.0, 'false_exposure': 0.0, 'condition': {'type': 'logical_and', 'children': [{'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}, {'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}, {'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}]}}",
         "licensed_rerun_required": true,
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "외부 신호 매핑 필요"
+        ],
+        "raw_strategy_name": "REF_external authority_ONLY external authority authority reference",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "EXTERNAL_AUTHORITY",
@@ -7985,7 +8221,7 @@
         "source_group_label": "Import/latest",
         "source_signal_id": "import-051",
         "strategy_id": "import-051",
-        "strategy_name": "REF_external authority_ONLY external authority authority reference",
+        "strategy_name": "외부 신호 매핑 필요 전략 #051",
         "summary_json_path": "D:\\projects\\alpha-research-ops-dashboard\\external_strategy_results\\latest.json",
         "total_return": null,
         "trace_path": "",
@@ -8160,15 +8396,19 @@
         "full_trace_available": false,
         "has_performance_metrics": false,
         "hold_reason_code": "needs_data_source_mapping",
-        "hold_reason_label": "현재 yfinance만으로는 필요한 데이터가 없어 보류",
+        "hold_reason_label": "외부 신호 매핑이 필요해 현재 yfinance만으로는 보류",
         "hold_reason_raw": "requires a non-yfinance or separately mapped data source",
         "implementation_note": "{'type': 'binary', 'true_exposure': 1.0, 'false_exposure': 0.0, 'condition': {'type': 'logical_and', 'children': [{'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}, {'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}, {'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}]}}",
         "licensed_rerun_required": true,
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "외부 신호 매핑 필요"
+        ],
+        "raw_strategy_name": "CONSENSUS_ONLY external authority ABL consensus",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "EXTERNAL_AUTHORITY",
@@ -8219,7 +8459,7 @@
         "source_group_label": "Import/latest",
         "source_signal_id": "import-052",
         "strategy_id": "import-052",
-        "strategy_name": "CONSENSUS_ONLY external authority ABL consensus",
+        "strategy_name": "외부 신호 매핑 필요 전략 #052",
         "summary_json_path": "D:\\projects\\alpha-research-ops-dashboard\\external_strategy_results\\latest.json",
         "total_return": null,
         "trace_path": "",
@@ -8394,15 +8634,19 @@
         "full_trace_available": false,
         "has_performance_metrics": false,
         "hold_reason_code": "needs_data_source_mapping",
-        "hold_reason_label": "현재 yfinance만으로는 필요한 데이터가 없어 보류",
+        "hold_reason_label": "외부 신호 매핑이 필요해 현재 yfinance만으로는 보류",
         "hold_reason_raw": "requires a non-yfinance or separately mapped data source",
         "implementation_note": "{'type': 'binary', 'true_exposure': 1.0, 'false_exposure': 0.0, 'condition': {'type': 'logical_and', 'children': [{'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}, {'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}, {'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}]}}",
         "licensed_rerun_required": true,
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "외부 신호 매핑 필요"
+        ],
+        "raw_strategy_name": "EITHER_ON_SIMPLE external authority ABL either-on",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "EXTERNAL_AUTHORITY",
@@ -8453,7 +8697,7 @@
         "source_group_label": "Import/latest",
         "source_signal_id": "import-053",
         "strategy_id": "import-053",
-        "strategy_name": "EITHER_ON_SIMPLE external authority ABL either-on",
+        "strategy_name": "외부 신호 매핑 필요 전략 #053",
         "summary_json_path": "D:\\projects\\alpha-research-ops-dashboard\\external_strategy_results\\latest.json",
         "total_return": null,
         "trace_path": "",
@@ -8628,15 +8872,19 @@
         "full_trace_available": false,
         "has_performance_metrics": false,
         "hold_reason_code": "needs_data_source_mapping",
-        "hold_reason_label": "현재 yfinance만으로는 필요한 데이터가 없어 보류",
+        "hold_reason_label": "외부 신호 매핑이 필요해 현재 yfinance만으로는 보류",
         "hold_reason_raw": "requires a non-yfinance or separately mapped data source",
         "implementation_note": "{'type': 'binary', 'true_exposure': 1.0, 'false_exposure': 0.0, 'condition': {'type': 'logical_and', 'children': [{'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}, {'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}, {'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}]}}",
         "licensed_rerun_required": true,
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "외부 신호 매핑 필요"
+        ],
+        "raw_strategy_name": "A_SYM_ONE_025 symmetric external authority ABL disagreement",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "EXTERNAL_AUTHORITY",
@@ -8687,7 +8935,7 @@
         "source_group_label": "Import/latest",
         "source_signal_id": "import-054",
         "strategy_id": "import-054",
-        "strategy_name": "A_SYM_ONE_025 symmetric external authority ABL disagreement",
+        "strategy_name": "외부 신호 매핑 필요 전략 #054",
         "summary_json_path": "D:\\projects\\alpha-research-ops-dashboard\\external_strategy_results\\latest.json",
         "total_return": null,
         "trace_path": "",
@@ -8862,15 +9110,19 @@
         "full_trace_available": false,
         "has_performance_metrics": false,
         "hold_reason_code": "needs_data_source_mapping",
-        "hold_reason_label": "현재 yfinance만으로는 필요한 데이터가 없어 보류",
+        "hold_reason_label": "외부 신호 매핑이 필요해 현재 yfinance만으로는 보류",
         "hold_reason_raw": "requires a non-yfinance or separately mapped data source",
         "implementation_note": "{'type': 'binary', 'true_exposure': 1.0, 'false_exposure': 0.0, 'condition': {'type': 'logical_and', 'children': [{'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}, {'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}, {'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}]}}",
         "licensed_rerun_required": true,
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "외부 신호 매핑 필요"
+        ],
+        "raw_strategy_name": "A_SYM_ONE_050 symmetric external authority ABL disagreement",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "EXTERNAL_AUTHORITY",
@@ -8921,7 +9173,7 @@
         "source_group_label": "Import/latest",
         "source_signal_id": "import-055",
         "strategy_id": "import-055",
-        "strategy_name": "A_SYM_ONE_050 symmetric external authority ABL disagreement",
+        "strategy_name": "외부 신호 매핑 필요 전략 #055",
         "summary_json_path": "D:\\projects\\alpha-research-ops-dashboard\\external_strategy_results\\latest.json",
         "total_return": null,
         "trace_path": "",
@@ -9096,15 +9348,19 @@
         "full_trace_available": false,
         "has_performance_metrics": false,
         "hold_reason_code": "needs_data_source_mapping",
-        "hold_reason_label": "현재 yfinance만으로는 필요한 데이터가 없어 보류",
+        "hold_reason_label": "외부 신호 매핑이 필요해 현재 yfinance만으로는 보류",
         "hold_reason_raw": "requires a non-yfinance or separately mapped data source",
         "implementation_note": "{'type': 'binary', 'true_exposure': 1.0, 'false_exposure': 0.0, 'condition': {'type': 'logical_and', 'children': [{'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}, {'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}, {'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}]}}",
         "licensed_rerun_required": true,
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "외부 신호 매핑 필요"
+        ],
+        "raw_strategy_name": "A_SYM_ONE_075 symmetric external authority ABL disagreement",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "EXTERNAL_AUTHORITY",
@@ -9155,7 +9411,7 @@
         "source_group_label": "Import/latest",
         "source_signal_id": "import-056",
         "strategy_id": "import-056",
-        "strategy_name": "A_SYM_ONE_075 symmetric external authority ABL disagreement",
+        "strategy_name": "외부 신호 매핑 필요 전략 #056",
         "summary_json_path": "D:\\projects\\alpha-research-ops-dashboard\\external_strategy_results\\latest.json",
         "total_return": null,
         "trace_path": "",
@@ -9330,15 +9586,19 @@
         "full_trace_available": false,
         "has_performance_metrics": false,
         "hold_reason_code": "needs_data_source_mapping",
-        "hold_reason_label": "현재 yfinance만으로는 필요한 데이터가 없어 보류",
+        "hold_reason_label": "외부 신호 매핑이 필요해 현재 yfinance만으로는 보류",
         "hold_reason_raw": "requires a non-yfinance or separately mapped data source",
         "implementation_note": "{'type': 'binary', 'true_exposure': 1.0, 'false_exposure': 0.0, 'condition': {'type': 'logical_and', 'children': [{'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}, {'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}, {'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}]}}",
         "licensed_rerun_required": true,
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "외부 신호 매핑 필요"
+        ],
+        "raw_strategy_name": "B_ABL_CAP_050_external authoritySLEEVE_025",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "EXTERNAL_AUTHORITY",
@@ -9389,7 +9649,7 @@
         "source_group_label": "Import/latest",
         "source_signal_id": "import-057",
         "strategy_id": "import-057",
-        "strategy_name": "B_ABL_CAP_050_external authoritySLEEVE_025",
+        "strategy_name": "외부 신호 매핑 필요 전략 #057",
         "summary_json_path": "D:\\projects\\alpha-research-ops-dashboard\\external_strategy_results\\latest.json",
         "total_return": null,
         "trace_path": "",
@@ -9564,15 +9824,19 @@
         "full_trace_available": false,
         "has_performance_metrics": false,
         "hold_reason_code": "needs_data_source_mapping",
-        "hold_reason_label": "현재 yfinance만으로는 필요한 데이터가 없어 보류",
+        "hold_reason_label": "외부 신호 매핑이 필요해 현재 yfinance만으로는 보류",
         "hold_reason_raw": "requires a non-yfinance or separately mapped data source",
         "implementation_note": "{'type': 'binary', 'true_exposure': 1.0, 'false_exposure': 0.0, 'condition': {'type': 'logical_and', 'children': [{'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}, {'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}, {'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}]}}",
         "licensed_rerun_required": true,
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "외부 신호 매핑 필요"
+        ],
+        "raw_strategy_name": "B_ABL_CAP_075_external authoritySLEEVE_025",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "EXTERNAL_AUTHORITY",
@@ -9623,7 +9887,7 @@
         "source_group_label": "Import/latest",
         "source_signal_id": "import-058",
         "strategy_id": "import-058",
-        "strategy_name": "B_ABL_CAP_075_external authoritySLEEVE_025",
+        "strategy_name": "외부 신호 매핑 필요 전략 #058",
         "summary_json_path": "D:\\projects\\alpha-research-ops-dashboard\\external_strategy_results\\latest.json",
         "total_return": null,
         "trace_path": "",
@@ -9798,15 +10062,19 @@
         "full_trace_available": false,
         "has_performance_metrics": false,
         "hold_reason_code": "needs_data_source_mapping",
-        "hold_reason_label": "현재 yfinance만으로는 필요한 데이터가 없어 보류",
+        "hold_reason_label": "외부 신호 매핑이 필요해 현재 yfinance만으로는 보류",
         "hold_reason_raw": "requires a non-yfinance or separately mapped data source",
         "implementation_note": "{'type': 'binary', 'true_exposure': 1.0, 'false_exposure': 0.0, 'condition': {'type': 'logical_and', 'children': [{'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}, {'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}, {'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}]}}",
         "licensed_rerun_required": true,
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "외부 신호 매핑 필요"
+        ],
+        "raw_strategy_name": "C_external authority_SLEEVE_010_ABL100",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "EXTERNAL_AUTHORITY",
@@ -9857,7 +10125,7 @@
         "source_group_label": "Import/latest",
         "source_signal_id": "import-059",
         "strategy_id": "import-059",
-        "strategy_name": "C_external authority_SLEEVE_010_ABL100",
+        "strategy_name": "외부 신호 매핑 필요 전략 #059",
         "summary_json_path": "D:\\projects\\alpha-research-ops-dashboard\\external_strategy_results\\latest.json",
         "total_return": null,
         "trace_path": "",
@@ -10032,15 +10300,19 @@
         "full_trace_available": false,
         "has_performance_metrics": false,
         "hold_reason_code": "needs_data_source_mapping",
-        "hold_reason_label": "현재 yfinance만으로는 필요한 데이터가 없어 보류",
+        "hold_reason_label": "외부 신호 매핑이 필요해 현재 yfinance만으로는 보류",
         "hold_reason_raw": "requires a non-yfinance or separately mapped data source",
         "implementation_note": "{'type': 'binary', 'true_exposure': 1.0, 'false_exposure': 0.0, 'condition': {'type': 'logical_and', 'children': [{'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}, {'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}, {'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}]}}",
         "licensed_rerun_required": true,
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "외부 신호 매핑 필요"
+        ],
+        "raw_strategy_name": "C_external authority_SLEEVE_020_ABL100",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "EXTERNAL_AUTHORITY",
@@ -10091,7 +10363,7 @@
         "source_group_label": "Import/latest",
         "source_signal_id": "import-060",
         "strategy_id": "import-060",
-        "strategy_name": "C_external authority_SLEEVE_020_ABL100",
+        "strategy_name": "외부 신호 매핑 필요 전략 #060",
         "summary_json_path": "D:\\projects\\alpha-research-ops-dashboard\\external_strategy_results\\latest.json",
         "total_return": null,
         "trace_path": "",
@@ -10266,15 +10538,19 @@
         "full_trace_available": false,
         "has_performance_metrics": false,
         "hold_reason_code": "needs_data_source_mapping",
-        "hold_reason_label": "현재 yfinance만으로는 필요한 데이터가 없어 보류",
+        "hold_reason_label": "외부 신호 매핑이 필요해 현재 yfinance만으로는 보류",
         "hold_reason_raw": "requires a non-yfinance or separately mapped data source",
         "implementation_note": "{'type': 'binary', 'true_exposure': 1.0, 'false_exposure': 0.0, 'condition': {'type': 'logical_and', 'children': [{'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}, {'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}, {'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}]}}",
         "licensed_rerun_required": true,
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "외부 신호 매핑 필요"
+        ],
+        "raw_strategy_name": "C_external authority_SLEEVE_033_ABL100",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "EXTERNAL_AUTHORITY",
@@ -10325,7 +10601,7 @@
         "source_group_label": "Import/latest",
         "source_signal_id": "import-061",
         "strategy_id": "import-061",
-        "strategy_name": "C_external authority_SLEEVE_033_ABL100",
+        "strategy_name": "외부 신호 매핑 필요 전략 #061",
         "summary_json_path": "D:\\projects\\alpha-research-ops-dashboard\\external_strategy_results\\latest.json",
         "total_return": null,
         "trace_path": "",
@@ -10500,15 +10776,19 @@
         "full_trace_available": false,
         "has_performance_metrics": false,
         "hold_reason_code": "needs_data_source_mapping",
-        "hold_reason_label": "현재 yfinance만으로는 필요한 데이터가 없어 보류",
+        "hold_reason_label": "외부 신호 매핑이 필요해 현재 yfinance만으로는 보류",
         "hold_reason_raw": "requires a non-yfinance or separately mapped data source",
         "implementation_note": "{'type': 'binary', 'true_exposure': 1.0, 'false_exposure': 0.0, 'condition': {'type': 'logical_and', 'children': [{'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}, {'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}, {'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}]}}",
         "licensed_rerun_required": true,
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "외부 신호 매핑 필요"
+        ],
+        "raw_strategy_name": "C_external authority_SLEEVE_050_ABL100",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "EXTERNAL_AUTHORITY",
@@ -10559,7 +10839,7 @@
         "source_group_label": "Import/latest",
         "source_signal_id": "import-062",
         "strategy_id": "import-062",
-        "strategy_name": "C_external authority_SLEEVE_050_ABL100",
+        "strategy_name": "외부 신호 매핑 필요 전략 #062",
         "summary_json_path": "D:\\projects\\alpha-research-ops-dashboard\\external_strategy_results\\latest.json",
         "total_return": null,
         "trace_path": "",
@@ -10734,15 +11014,19 @@
         "full_trace_available": false,
         "has_performance_metrics": false,
         "hold_reason_code": "needs_data_source_mapping",
-        "hold_reason_label": "현재 yfinance만으로는 필요한 데이터가 없어 보류",
+        "hold_reason_label": "외부 신호 매핑이 필요해 현재 yfinance만으로는 보류",
         "hold_reason_raw": "requires a non-yfinance or separately mapped data source",
         "implementation_note": "{'type': 'binary', 'true_exposure': 1.0, 'false_exposure': 0.0, 'condition': {'type': 'logical_and', 'children': [{'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}, {'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}, {'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}]}}",
         "licensed_rerun_required": true,
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "외부 신호 매핑 필요"
+        ],
+        "raw_strategy_name": "C_external authority_SLEEVE_075_ABL100",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "EXTERNAL_AUTHORITY",
@@ -10793,7 +11077,7 @@
         "source_group_label": "Import/latest",
         "source_signal_id": "import-063",
         "strategy_id": "import-063",
-        "strategy_name": "C_external authority_SLEEVE_075_ABL100",
+        "strategy_name": "외부 신호 매핑 필요 전략 #063",
         "summary_json_path": "D:\\projects\\alpha-research-ops-dashboard\\external_strategy_results\\latest.json",
         "total_return": null,
         "trace_path": "",
@@ -10968,15 +11252,19 @@
         "full_trace_available": false,
         "has_performance_metrics": false,
         "hold_reason_code": "needs_data_source_mapping",
-        "hold_reason_label": "현재 yfinance만으로는 필요한 데이터가 없어 보류",
+        "hold_reason_label": "외부 신호 매핑이 필요해 현재 yfinance만으로는 보류",
         "hold_reason_raw": "requires a non-yfinance or separately mapped data source",
         "implementation_note": "{'type': 'binary', 'true_exposure': 1.0, 'false_exposure': 0.0, 'condition': {'type': 'logical_and', 'children': [{'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}, {'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}, {'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}]}}",
         "licensed_rerun_required": true,
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "외부 신호 매핑 필요"
+        ],
+        "raw_strategy_name": "D_ABL_050_external authority_000",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "EXTERNAL_AUTHORITY",
@@ -11027,7 +11315,7 @@
         "source_group_label": "Import/latest",
         "source_signal_id": "import-064",
         "strategy_id": "import-064",
-        "strategy_name": "D_ABL_050_external authority_000",
+        "strategy_name": "외부 신호 매핑 필요 전략 #064",
         "summary_json_path": "D:\\projects\\alpha-research-ops-dashboard\\external_strategy_results\\latest.json",
         "total_return": null,
         "trace_path": "",
@@ -11202,15 +11490,19 @@
         "full_trace_available": false,
         "has_performance_metrics": false,
         "hold_reason_code": "needs_data_source_mapping",
-        "hold_reason_label": "현재 yfinance만으로는 필요한 데이터가 없어 보류",
+        "hold_reason_label": "외부 신호 매핑이 필요해 현재 yfinance만으로는 보류",
         "hold_reason_raw": "requires a non-yfinance or separately mapped data source",
         "implementation_note": "{'type': 'binary', 'true_exposure': 1.0, 'false_exposure': 0.0, 'condition': {'type': 'logical_and', 'children': [{'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}, {'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}, {'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}]}}",
         "licensed_rerun_required": true,
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "외부 신호 매핑 필요"
+        ],
+        "raw_strategy_name": "D_ABL_075_external authority_000",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "EXTERNAL_AUTHORITY",
@@ -11261,7 +11553,7 @@
         "source_group_label": "Import/latest",
         "source_signal_id": "import-065",
         "strategy_id": "import-065",
-        "strategy_name": "D_ABL_075_external authority_000",
+        "strategy_name": "외부 신호 매핑 필요 전략 #065",
         "summary_json_path": "D:\\projects\\alpha-research-ops-dashboard\\external_strategy_results\\latest.json",
         "total_return": null,
         "trace_path": "",
@@ -11436,15 +11728,19 @@
         "full_trace_available": false,
         "has_performance_metrics": false,
         "hold_reason_code": "needs_data_source_mapping",
-        "hold_reason_label": "현재 yfinance만으로는 필요한 데이터가 없어 보류",
+        "hold_reason_label": "외부 신호 매핑이 필요해 현재 yfinance만으로는 보류",
         "hold_reason_raw": "requires a non-yfinance or separately mapped data source",
         "implementation_note": "{'type': 'binary', 'true_exposure': 1.0, 'false_exposure': 0.0, 'condition': {'type': 'logical_and', 'children': [{'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}, {'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}, {'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}]}}",
         "licensed_rerun_required": true,
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "외부 신호 매핑 필요"
+        ],
+        "raw_strategy_name": "D_ABL_075_external authority_050",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "EXTERNAL_AUTHORITY",
@@ -11495,7 +11791,7 @@
         "source_group_label": "Import/latest",
         "source_signal_id": "import-066",
         "strategy_id": "import-066",
-        "strategy_name": "D_ABL_075_external authority_050",
+        "strategy_name": "외부 신호 매핑 필요 전략 #066",
         "summary_json_path": "D:\\projects\\alpha-research-ops-dashboard\\external_strategy_results\\latest.json",
         "total_return": null,
         "trace_path": "",
@@ -11657,15 +11953,19 @@
         "full_trace_available": false,
         "has_performance_metrics": false,
         "hold_reason_code": "needs_data_source_mapping",
-        "hold_reason_label": "현재 yfinance만으로는 필요한 데이터가 없어 보류",
+        "hold_reason_label": "외부 신호 매핑이 필요해 현재 yfinance만으로는 보류",
         "hold_reason_raw": "requires a non-yfinance or separately mapped data source",
         "implementation_note": "{'type': 'binary', 'true_exposure': 1.0, 'false_exposure': 0.0, 'condition': {'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}}",
         "licensed_rerun_required": true,
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "외부 신호 매핑 필요"
+        ],
+        "raw_strategy_name": "ENGINE_LITE_ABL_HEALTH4_STRESS1_BINARY",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "ABL_AUTHORITY",
@@ -11716,7 +12016,7 @@
         "source_group_label": "Import/latest",
         "source_signal_id": "import-067",
         "strategy_id": "import-067",
-        "strategy_name": "ENGINE_LITE_ABL_HEALTH4_STRESS1_BINARY",
+        "strategy_name": "외부 신호 매핑 필요 전략 #067",
         "summary_json_path": "D:\\projects\\alpha-research-ops-dashboard\\external_strategy_results\\latest.json",
         "total_return": null,
         "trace_path": "",
@@ -11878,15 +12178,19 @@
         "full_trace_available": false,
         "has_performance_metrics": false,
         "hold_reason_code": "needs_data_source_mapping",
-        "hold_reason_label": "현재 yfinance만으로는 필요한 데이터가 없어 보류",
+        "hold_reason_label": "외부 신호 매핑이 필요해 현재 yfinance만으로는 보류",
         "hold_reason_raw": "requires a non-yfinance or separately mapped data source",
         "implementation_note": "{'type': 'binary', 'true_exposure': 1.0, 'false_exposure': 0.0, 'condition': {'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}}",
         "licensed_rerun_required": true,
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "외부 신호 매핑 필요"
+        ],
+        "raw_strategy_name": "ENGINE_LITE_ABL_HEALTH5_STRESS1_BINARY",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "ABL_AUTHORITY",
@@ -11937,7 +12241,7 @@
         "source_group_label": "Import/latest",
         "source_signal_id": "import-068",
         "strategy_id": "import-068",
-        "strategy_name": "ENGINE_LITE_ABL_HEALTH5_STRESS1_BINARY",
+        "strategy_name": "외부 신호 매핑 필요 전략 #068",
         "summary_json_path": "D:\\projects\\alpha-research-ops-dashboard\\external_strategy_results\\latest.json",
         "total_return": null,
         "trace_path": "",
@@ -12099,15 +12403,19 @@
         "full_trace_available": false,
         "has_performance_metrics": false,
         "hold_reason_code": "needs_data_source_mapping",
-        "hold_reason_label": "현재 yfinance만으로는 필요한 데이터가 없어 보류",
+        "hold_reason_label": "외부 신호 매핑이 필요해 현재 yfinance만으로는 보류",
         "hold_reason_raw": "requires a non-yfinance or separately mapped data source",
         "implementation_note": "{'type': 'binary', 'true_exposure': 1.0, 'false_exposure': 0.0, 'condition': {'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}}",
         "licensed_rerun_required": true,
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "외부 신호 매핑 필요"
+        ],
+        "raw_strategy_name": "ENGINE_LITE_ABL_HEALTH4_STRESS2_BINARY",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "ABL_AUTHORITY",
@@ -12158,7 +12466,7 @@
         "source_group_label": "Import/latest",
         "source_signal_id": "import-069",
         "strategy_id": "import-069",
-        "strategy_name": "ENGINE_LITE_ABL_HEALTH4_STRESS2_BINARY",
+        "strategy_name": "외부 신호 매핑 필요 전략 #069",
         "summary_json_path": "D:\\projects\\alpha-research-ops-dashboard\\external_strategy_results\\latest.json",
         "total_return": null,
         "trace_path": "",
@@ -12320,15 +12628,19 @@
         "full_trace_available": false,
         "has_performance_metrics": false,
         "hold_reason_code": "needs_data_source_mapping",
-        "hold_reason_label": "현재 yfinance만으로는 필요한 데이터가 없어 보류",
+        "hold_reason_label": "외부 신호 매핑이 필요해 현재 yfinance만으로는 보류",
         "hold_reason_raw": "requires a non-yfinance or separately mapped data source",
         "implementation_note": "{'type': 'binary', 'true_exposure': 1.0, 'false_exposure': 0.0, 'condition': {'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}}",
         "licensed_rerun_required": true,
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "외부 신호 매핑 필요"
+        ],
+        "raw_strategy_name": "ENGINE_LITE_ABL_STATEFUL_H4S1_EXIT_S2",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "ABL_AUTHORITY",
@@ -12379,7 +12691,7 @@
         "source_group_label": "Import/latest",
         "source_signal_id": "import-070",
         "strategy_id": "import-070",
-        "strategy_name": "ENGINE_LITE_ABL_STATEFUL_H4S1_EXIT_S2",
+        "strategy_name": "외부 신호 매핑 필요 전략 #070",
         "summary_json_path": "D:\\projects\\alpha-research-ops-dashboard\\external_strategy_results\\latest.json",
         "total_return": null,
         "trace_path": "",
@@ -12541,15 +12853,19 @@
         "full_trace_available": false,
         "has_performance_metrics": false,
         "hold_reason_code": "needs_data_source_mapping",
-        "hold_reason_label": "현재 yfinance만으로는 필요한 데이터가 없어 보류",
+        "hold_reason_label": "외부 신호 매핑이 필요해 현재 yfinance만으로는 보류",
         "hold_reason_raw": "requires a non-yfinance or separately mapped data source",
         "implementation_note": "{'type': 'binary', 'true_exposure': 1.0, 'false_exposure': 0.0, 'condition': {'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}}",
         "licensed_rerun_required": true,
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "외부 신호 매핑 필요"
+        ],
+        "raw_strategy_name": "ENGINE_LITE_external authority_NO_GRACE",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "EXTERNAL_AUTHORITY",
@@ -12599,7 +12915,7 @@
         "source_group_label": "Import/latest",
         "source_signal_id": "import-071",
         "strategy_id": "import-071",
-        "strategy_name": "ENGINE_LITE_external authority_NO_GRACE",
+        "strategy_name": "외부 신호 매핑 필요 전략 #071",
         "summary_json_path": "D:\\projects\\alpha-research-ops-dashboard\\external_strategy_results\\latest.json",
         "total_return": null,
         "trace_path": "",
@@ -12761,15 +13077,19 @@
         "full_trace_available": false,
         "has_performance_metrics": false,
         "hold_reason_code": "needs_data_source_mapping",
-        "hold_reason_label": "현재 yfinance만으로는 필요한 데이터가 없어 보류",
+        "hold_reason_label": "외부 신호 매핑이 필요해 현재 yfinance만으로는 보류",
         "hold_reason_raw": "requires a non-yfinance or separately mapped data source",
         "implementation_note": "{'type': 'binary', 'true_exposure': 1.0, 'false_exposure': 0.0, 'condition': {'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}}",
         "licensed_rerun_required": true,
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "외부 신호 매핑 필요"
+        ],
+        "raw_strategy_name": "ENGINE_LITE_external authority_GRACE_CAP_05",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "EXTERNAL_AUTHORITY",
@@ -12819,7 +13139,7 @@
         "source_group_label": "Import/latest",
         "source_signal_id": "import-072",
         "strategy_id": "import-072",
-        "strategy_name": "ENGINE_LITE_external authority_GRACE_CAP_05",
+        "strategy_name": "외부 신호 매핑 필요 전략 #072",
         "summary_json_path": "D:\\projects\\alpha-research-ops-dashboard\\external_strategy_results\\latest.json",
         "total_return": null,
         "trace_path": "",
@@ -12981,15 +13301,19 @@
         "full_trace_available": false,
         "has_performance_metrics": false,
         "hold_reason_code": "needs_data_source_mapping",
-        "hold_reason_label": "현재 yfinance만으로는 필요한 데이터가 없어 보류",
+        "hold_reason_label": "외부 신호 매핑이 필요해 현재 yfinance만으로는 보류",
         "hold_reason_raw": "requires a non-yfinance or separately mapped data source",
         "implementation_note": "{'type': 'binary', 'true_exposure': 1.0, 'false_exposure': 0.0, 'condition': {'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}}",
         "licensed_rerun_required": true,
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "외부 신호 매핑 필요"
+        ],
+        "raw_strategy_name": "ENGINE_LITE_external authority_GRACE_CAP_10",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "EXTERNAL_AUTHORITY",
@@ -13039,7 +13363,7 @@
         "source_group_label": "Import/latest",
         "source_signal_id": "import-073",
         "strategy_id": "import-073",
-        "strategy_name": "ENGINE_LITE_external authority_GRACE_CAP_10",
+        "strategy_name": "외부 신호 매핑 필요 전략 #073",
         "summary_json_path": "D:\\projects\\alpha-research-ops-dashboard\\external_strategy_results\\latest.json",
         "total_return": null,
         "trace_path": "",
@@ -13201,15 +13525,19 @@
         "full_trace_available": false,
         "has_performance_metrics": false,
         "hold_reason_code": "needs_data_source_mapping",
-        "hold_reason_label": "현재 yfinance만으로는 필요한 데이터가 없어 보류",
+        "hold_reason_label": "외부 신호 매핑이 필요해 현재 yfinance만으로는 보류",
         "hold_reason_raw": "requires a non-yfinance or separately mapped data source",
         "implementation_note": "{'type': 'binary', 'true_exposure': 1.0, 'false_exposure': 0.0, 'condition': {'type': 'external_authority_state', 'symbol': 'EXTERNAL_AUTHORITY'}}",
         "licensed_rerun_required": true,
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "외부 신호 매핑 필요"
+        ],
+        "raw_strategy_name": "ENGINE_LITE_external authority_GRACE_CAP_15",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "EXTERNAL_AUTHORITY",
@@ -13259,7 +13587,7 @@
         "source_group_label": "Import/latest",
         "source_signal_id": "import-074",
         "strategy_id": "import-074",
-        "strategy_name": "ENGINE_LITE_external authority_GRACE_CAP_15",
+        "strategy_name": "외부 신호 매핑 필요 전략 #074",
         "summary_json_path": "D:\\projects\\alpha-research-ops-dashboard\\external_strategy_results\\latest.json",
         "total_return": null,
         "trace_path": "",
@@ -13430,8 +13758,14 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "SPY"
+        ],
+        "raw_strategy_name": "TQQQ_SPY150_CASH SPY SMA150 -> TQQQ/cash",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -13651,8 +13985,14 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "SPY"
+        ],
+        "raw_strategy_name": "TQQQ_SPY200_CASH SPY SMA200 -> TQQQ/cash",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -13872,8 +14212,14 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "SPY"
+        ],
+        "raw_strategy_name": "TQQQ_SPY250_CASH SPY SMA250 -> TQQQ/cash",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -14105,8 +14451,14 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "SPY"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ200_REL_SPY126 QQQ trend + QQQ>SPY relative strength",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -14338,8 +14690,14 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "GLD"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ200_REL_GLD126 QQQ trend + QQQ>GLD relative strength",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -14578,8 +14936,15 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "SHY",
+          "LQD"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ200_REL_LQD_SHY QQQ trend + QQQ>LQD/SHY canary",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -14800,8 +15165,14 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "SPY"
+        ],
+        "raw_strategy_name": "TQQQ_SPY200_BIL_PROXY SPY>200DMA -> TQQQ/BIL proxy",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -15021,8 +15392,15 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "SPY",
+          "SHY"
+        ],
+        "raw_strategy_name": "TQQQ_SPY200_SHY SPY>200DMA -> TQQQ/SHY",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -15261,8 +15639,17 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "GLD",
+          "SHY",
+          "LQD",
+          "^VIX"
+        ],
+        "raw_strategy_name": "TQQQ_TMF_CRASH_FILTER_GLD_PROXY TQQQ/TMF crash-filter comparison proxy",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -15497,8 +15884,13 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ200_RV10_CAP QQQ trend + RV10 cap",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ"
@@ -15729,8 +16121,13 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ200_RV21_CAP QQQ trend + RV21 cap",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ"
@@ -15961,8 +16358,13 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ200_RV42_CAP QQQ trend + RV42 cap",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ"
@@ -16193,8 +16595,13 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ200_RV63_CAP QQQ trend + RV63 cap",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ"
@@ -16414,8 +16821,14 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "IF"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ200_RV21_LADDER QQQ trend + RV21 exposure ladder",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -16635,8 +17048,13 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ200_TARGETVOL_RV21 QQQ trend + target-vol/RV sizing",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ"
@@ -16867,8 +17285,13 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQQQ_SELF_RV21_DIAGNOSTIC TQQQ self RV21 diagnostic",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ"
@@ -17098,8 +17521,14 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "^VXN"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ200_VXN35 QQQ trend + VXN<35",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -17313,8 +17742,14 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "^VXN"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ200_RV21_VXN_LADDER QQQ trend + RV21/VXN ladder",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -17546,8 +17981,15 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "^VIX",
+          "^VVIX"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ200_VVIX_SPIKE_DERISK QQQ trend + VVIX spike de-risk",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -17779,8 +18221,15 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "^VIX",
+          "^VIX3M"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ200_VIX_TERMSTRUCTURE QQQ trend + VIX term structure",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -18013,8 +18462,16 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "^VIX",
+          "^VXN",
+          "QQQ, VIX, VXN"
+        ],
+        "raw_strategy_name": "TQQQ_VIX_SPIKE_RSI_SWING VIX/VXN spike + RSI oversold swing",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -18247,8 +18704,16 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "SHY",
+          "LQD",
+          "RATIO"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ200_BOND_CANARY QQQ trend + LQD/SHY canary",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -18482,8 +18947,15 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "SHY",
+          "LQD"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ200_LQD_MOM QQQ trend + LQD momentum canary",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -18691,15 +19163,21 @@
         "full_trace_available": false,
         "has_performance_metrics": false,
         "hold_reason_code": "needs_data_source_mapping",
-        "hold_reason_label": "현재 yfinance만으로는 필요한 데이터가 없어 보류",
+        "hold_reason_label": "외부 신호 매핑이 필요해 현재 yfinance만으로는 보류",
         "hold_reason_raw": "requires a non-yfinance or separately mapped data source",
         "implementation_note": "{'type': 'binary', 'true_exposure': 1.0, 'false_exposure': 0.0}",
         "licensed_rerun_required": true,
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "DGS10"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ200_DGS10_RATE_SHOCK QQQ trend + 10Y rate-shock veto",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -18906,15 +19384,21 @@
         "full_trace_available": false,
         "has_performance_metrics": false,
         "hold_reason_code": "needs_data_source_mapping",
-        "hold_reason_label": "현재 yfinance만으로는 필요한 데이터가 없어 보류",
+        "hold_reason_label": "외부 신호 매핑이 필요해 현재 yfinance만으로는 보류",
         "hold_reason_raw": "requires a non-yfinance or separately mapped data source",
         "implementation_note": "{'type': 'binary', 'true_exposure': 1.0, 'false_exposure': 0.0}",
         "licensed_rerun_required": true,
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "T10Y2Y"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ200_CURVE_FILTER QQQ trend + curve spread filter",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -19121,15 +19605,24 @@
         "full_trace_available": false,
         "has_performance_metrics": false,
         "hold_reason_code": "needs_data_source_mapping",
-        "hold_reason_label": "현재 yfinance만으로는 필요한 데이터가 없어 보류",
+        "hold_reason_label": "외부 신호 매핑이 필요해 현재 yfinance만으로는 보류",
         "hold_reason_raw": "requires a non-yfinance or separately mapped data source",
         "implementation_note": "{'type': 'binary', 'true_exposure': 1.0, 'false_exposure': 0.0}",
         "licensed_rerun_required": true,
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "GLD",
+          "SHY",
+          "LQD",
+          "DGS10"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ200_DYNAMIC_DEF_RATE QQQ trend + dynamic defensive by rate regime",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -19356,15 +19849,21 @@
         "full_trace_available": false,
         "has_performance_metrics": false,
         "hold_reason_code": "needs_data_source_mapping",
-        "hold_reason_label": "현재 yfinance만으로는 필요한 데이터가 없어 보류",
+        "hold_reason_label": "외부 신호 매핑이 필요해 현재 yfinance만으로는 보류",
         "hold_reason_raw": "requires a non-yfinance or separately mapped data source",
         "implementation_note": "{'type': 'binary', 'true_exposure': 1.0, 'false_exposure': 0.0, 'condition': {'type': 'logical_and', 'children': [{'type': 'price_vs_sma', 'symbol': 'QQQ', 'operator': '>', 'window': 100}, {'type': 'price_level_compare', 'symbol': 'HY_SPREAD', 'operator': '<', 'threshold': 6.0}]}}",
         "licensed_rerun_required": true,
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "HY_SPREAD"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ200_CREDIT_STRESS QQQ trend + credit stress veto",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -19588,15 +20087,21 @@
         "full_trace_available": false,
         "has_performance_metrics": false,
         "hold_reason_code": "needs_data_source_mapping",
-        "hold_reason_label": "현재 yfinance만으로는 필요한 데이터가 없어 보류",
+        "hold_reason_label": "외부 신호 매핑이 필요해 현재 yfinance만으로는 보류",
         "hold_reason_raw": "requires a non-yfinance or separately mapped data source",
         "implementation_note": "{'type': 'binary', 'true_exposure': 1.0, 'false_exposure': 0.0, 'condition': {'type': 'logical_and', 'children': [{'type': 'price_vs_sma', 'symbol': 'QQQ', 'operator': '>', 'window': 200}, {'type': 'price_level_compare', 'symbol': 'NFCI', 'operator': '<', 'threshold': 0.5}]}}",
         "licensed_rerun_required": true,
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "NFCI"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ200_NFCI_STRESS QQQ trend + NFCI stress veto",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -19828,8 +20333,15 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "SHY",
+          "LQD"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ200_LQD_SHY_CREDIT QQQ trend + LQD/SHY credit proxy",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -20062,8 +20574,17 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "SPY",
+          "SOXX",
+          "XLK",
+          "IWM"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ200_BREADTH_CONFIRM QQQ trend + proxy breadth confirm",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -20280,8 +20801,15 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "SOXX",
+          "XLK"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ200_XLK_SOXX_CONFIRM QQQ trend + XLK/SOXX confirmation",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -20513,8 +21041,14 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "IWM"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ200_IWM_RISK_CONFIRM QQQ trend + IWM risk confirmation",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -20728,8 +21262,17 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "SPY",
+          "SOXX",
+          "XLK",
+          "IWM"
+        ],
+        "raw_strategy_name": "TQQQ_BREADTH_THRUST_REENTRY_PROXY ETF breadth thrust re-entry proxy",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -20952,8 +21495,14 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "SMA50"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ50_DISTANCE_DERISK QQQ price/SMA50 overextension derisk",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -21173,8 +21722,14 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "Z-SCORE"
+        ],
+        "raw_strategy_name": "TQQQ_OVEREXTENSION_COOLDOWN Overextension + cooldown",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -21406,8 +21961,16 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "GLD",
+          "SHY",
+          "LQD"
+        ],
+        "raw_strategy_name": "TQQQ_DYNAMIC_DEFENSIVE_SELECTOR Dynamic defensive selector",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -21629,8 +22192,14 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "SHY"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ200_SHY_DEFENSIVE Fixed SHY defensive",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -21850,8 +22419,14 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "GLD"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ200_GLD_DEFENSIVE Fixed GLD defensive",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -22071,8 +22646,14 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "LQD"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ200_LQD_DEFENSIVE Fixed LQD defensive",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -22322,8 +22903,15 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "^VXN",
+          "VOLATILITY"
+        ],
+        "raw_strategy_name": "TQQQ_COMPOSITE_REGIME_LADDER Composite regime ladder",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -22538,8 +23126,17 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "GLD",
+          "SHY",
+          "LQD",
+          "^VXN"
+        ],
+        "raw_strategy_name": "TQQQ_COMPOSITE_DEFENSIVE_LADDER Composite ladder + defensive selector",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -22788,8 +23385,19 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "SPY",
+          "SOXX",
+          "XLK",
+          "IWM",
+          "^VIX",
+          "VOLATILITY"
+        ],
+        "raw_strategy_name": "TQQQ_VOTE_3_OF_5 Strict 3-of-5 vote",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -23041,8 +23649,16 @@
         "mar": null,
         "max_drawdown": null,
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ",
+          "SHY",
+          "LQD",
+          "^VIX"
+        ],
+        "raw_strategy_name": "TQQQ_VOTE_2_OF_4 Strict 2-of-4 vote",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -23102,8 +23718,10 @@
         "unique_key": "import:alpha-ext-20260615-073353Z:145"
       }
     ],
+    "import_latest_backtest_executed_count": 44,
     "import_latest_hold_row_count": 101,
     "import_latest_result_row_count": 44,
+    "import_latest_validation_ready_count": 44,
     "licensed_rerun_required_count": 71,
     "metric_sort_applied": false,
     "period_comparison_count": 3,
@@ -23644,7 +24262,7 @@
             "max_drawdown": null,
             "source_group_label": "Import/latest",
             "strategy_id": "import-075",
-            "strategy_name": "TQQQ_QQQ100_CASH QQQ SMA100 -> TQQQ/cash",
+            "strategy_name": "외부 권한 데이터 의존 전략 #075",
             "total_return": null
           },
           {
@@ -24508,7 +25126,7 @@
             "max_drawdown": null,
             "source_group_label": "Import/latest",
             "strategy_id": "import-075",
-            "strategy_name": "TQQQ_QQQ100_CASH QQQ SMA100 -> TQQQ/cash",
+            "strategy_name": "외부 권한 데이터 의존 전략 #075",
             "total_return": null
           },
           {
@@ -25372,7 +25990,7 @@
             "max_drawdown": -0.5928697467801487,
             "source_group_label": "Import/latest",
             "strategy_id": "import-075",
-            "strategy_name": "TQQQ_QQQ100_CASH QQQ SMA100 -> TQQQ/cash",
+            "strategy_name": "외부 권한 데이터 의존 전략 #075",
             "total_return": 13.949609407746186
           },
           {
@@ -25728,7 +26346,7 @@
         "period_compare_anchor": "period-compare-2010-02-16-2026-06-12",
         "period_recalc_source": "전체 equity series 없음",
         "registered_at": "2026-06-14T05:02:05.917196Z",
-        "registered_date_display": "2026-06-14 05:02",
+        "registered_date_display": "2026-06-14 14:02",
         "required_inputs": [
           "QQQ",
           "TQQQ"
@@ -25807,7 +26425,7 @@
         "period_compare_anchor": "period-compare-2010-02-16-2026-06-12",
         "period_recalc_source": "전체 equity series 없음",
         "registered_at": "2026-06-14T05:02:05.917196Z",
-        "registered_date_display": "2026-06-14 05:02",
+        "registered_date_display": "2026-06-14 14:02",
         "required_inputs": [
           "QQQ",
           "TQQQ"
@@ -25886,7 +26504,7 @@
         "period_compare_anchor": "period-compare-2010-02-16-2026-06-12",
         "period_recalc_source": "전체 equity series 없음",
         "registered_at": "2026-06-14T05:02:05.917196Z",
-        "registered_date_display": "2026-06-14 05:02",
+        "registered_date_display": "2026-06-14 14:02",
         "required_inputs": [
           "QQQ",
           "TQQQ"
@@ -25965,7 +26583,7 @@
         "period_compare_anchor": "period-compare-2010-02-16-2026-06-12",
         "period_recalc_source": "전체 equity series 없음",
         "registered_at": "2026-06-14T05:02:05.917196Z",
-        "registered_date_display": "2026-06-14 05:02",
+        "registered_date_display": "2026-06-14 14:02",
         "required_inputs": [
           "QQQ",
           "TQQQ"
@@ -26045,7 +26663,7 @@
         "period_compare_anchor": "period-compare-2010-02-16-2026-06-12",
         "period_recalc_source": "전체 equity series 없음",
         "registered_at": "2026-06-14T05:02:05.917196Z",
-        "registered_date_display": "2026-06-14 05:02",
+        "registered_date_display": "2026-06-14 14:02",
         "required_inputs": [
           "QQQ",
           "TQQQ",
@@ -26130,7 +26748,7 @@
         "period_compare_anchor": "period-compare-2010-02-16-2026-06-12",
         "period_recalc_source": "전체 equity series 없음",
         "registered_at": "2026-06-14T05:02:05.917196Z",
-        "registered_date_display": "2026-06-14 05:02",
+        "registered_date_display": "2026-06-14 14:02",
         "required_inputs": [
           "QQQ",
           "TQQQ"
@@ -26209,7 +26827,7 @@
         "period_compare_anchor": "period-compare-2010-02-16-2026-06-12",
         "period_recalc_source": "전체 equity series 없음",
         "registered_at": "2026-06-14T05:02:05.917196Z",
-        "registered_date_display": "2026-06-14 05:02",
+        "registered_date_display": "2026-06-14 14:02",
         "required_inputs": [
           "QQQ",
           "TQQQ"
@@ -26288,7 +26906,7 @@
         "period_compare_anchor": "period-compare-2010-02-16-2026-06-12",
         "period_recalc_source": "전체 equity series 없음",
         "registered_at": "2026-06-14T05:02:05.917196Z",
-        "registered_date_display": "2026-06-14 05:02",
+        "registered_date_display": "2026-06-14 14:02",
         "required_inputs": [
           "QQQ",
           "TQQQ"
@@ -26368,7 +26986,7 @@
         "period_compare_anchor": "period-compare-2018-06-21-2026-06-12",
         "period_recalc_source": "전체 equity series 없음",
         "registered_at": "2026-06-14T05:38:09.286621Z",
-        "registered_date_display": "2026-06-14 05:38",
+        "registered_date_display": "2026-06-14 14:38",
         "required_inputs": [
           "QQQ",
           "TQQQ",
@@ -26455,7 +27073,7 @@
         "period_compare_anchor": "period-compare-2018-06-21-2026-06-12",
         "period_recalc_source": "전체 equity series 없음",
         "registered_at": "2026-06-14T05:38:09.286621Z",
-        "registered_date_display": "2026-06-14 05:38",
+        "registered_date_display": "2026-06-14 14:38",
         "required_inputs": [
           "QQQ",
           "TQQQ",
@@ -26541,7 +27159,7 @@
         "period_compare_anchor": "period-compare-2018-06-21-2026-06-12",
         "period_recalc_source": "전체 equity series 없음",
         "registered_at": "2026-06-14T05:38:09.286621Z",
-        "registered_date_display": "2026-06-14 05:38",
+        "registered_date_display": "2026-06-14 14:38",
         "required_inputs": [
           "QQQ",
           "TQQQ",
@@ -26627,7 +27245,7 @@
         "period_compare_anchor": "period-compare-2018-06-21-2026-06-12",
         "period_recalc_source": "전체 equity series 없음",
         "registered_at": "2026-06-14T05:38:09.286621Z",
-        "registered_date_display": "2026-06-14 05:38",
+        "registered_date_display": "2026-06-14 14:38",
         "required_inputs": [
           "QQQ",
           "TQQQ",
@@ -26713,7 +27331,7 @@
         "period_compare_anchor": "period-compare-2018-06-21-2026-06-12",
         "period_recalc_source": "전체 equity series 없음",
         "registered_at": "2026-06-14T05:38:09.286621Z",
-        "registered_date_display": "2026-06-14 05:38",
+        "registered_date_display": "2026-06-14 14:38",
         "required_inputs": [
           "QQQ",
           "TQQQ",
@@ -26810,7 +27428,7 @@
         "period_compare_anchor": "period-compare-2018-06-21-2026-06-12",
         "period_recalc_source": "전체 equity series 없음",
         "registered_at": "2026-06-14T05:38:09.286621Z",
-        "registered_date_display": "2026-06-14 05:38",
+        "registered_date_display": "2026-06-14 14:38",
         "required_inputs": [
           "QQQ",
           "TQQQ",
@@ -26906,7 +27524,7 @@
         "period_compare_anchor": "period-compare-2018-06-21-2026-06-12",
         "period_recalc_source": "전체 equity series 없음",
         "registered_at": "2026-06-14T05:38:09.286621Z",
-        "registered_date_display": "2026-06-14 05:38",
+        "registered_date_display": "2026-06-14 14:38",
         "required_inputs": [
           "QQQ",
           "TQQQ",
@@ -26996,7 +27614,7 @@
         "period_compare_anchor": "period-compare-2018-06-21-2026-06-12",
         "period_recalc_source": "전체 equity series 없음",
         "registered_at": "2026-06-14T05:38:09.286621Z",
-        "registered_date_display": "2026-06-14 05:38",
+        "registered_date_display": "2026-06-14 14:38",
         "required_inputs": [
           "QQQ",
           "TQQQ",
@@ -27087,7 +27705,7 @@
         "period_compare_anchor": "period-compare-2010-02-16-2026-06-12",
         "period_recalc_source": "전체 equity series 없음",
         "registered_at": "2026-06-14T06:04:55.829782Z",
-        "registered_date_display": "2026-06-14 06:04",
+        "registered_date_display": "2026-06-14 15:04",
         "required_inputs": [
           "QQQ",
           "TQQQ",
@@ -27177,7 +27795,7 @@
         "period_compare_anchor": "period-compare-2010-02-16-2026-06-12",
         "period_recalc_source": "전체 equity series 없음",
         "registered_at": "2026-06-14T06:04:55.829782Z",
-        "registered_date_display": "2026-06-14 06:04",
+        "registered_date_display": "2026-06-14 15:04",
         "required_inputs": [
           "QQQ",
           "TQQQ",
@@ -27266,7 +27884,7 @@
         "period_compare_anchor": "period-compare-2010-02-16-2026-06-12",
         "period_recalc_source": "전체 equity series 없음",
         "registered_at": "2026-06-14T06:04:55.829782Z",
-        "registered_date_display": "2026-06-14 06:04",
+        "registered_date_display": "2026-06-14 15:04",
         "required_inputs": [
           "QQQ",
           "TQQQ",
@@ -27356,7 +27974,7 @@
         "period_compare_anchor": "period-compare-2010-02-16-2026-06-12",
         "period_recalc_source": "전체 equity series 없음",
         "registered_at": "2026-06-14T06:04:55.829782Z",
-        "registered_date_display": "2026-06-14 06:04",
+        "registered_date_display": "2026-06-14 15:04",
         "required_inputs": [
           "QQQ",
           "TQQQ",
@@ -27446,7 +28064,7 @@
         "period_compare_anchor": "period-compare-2010-02-16-2026-06-12",
         "period_recalc_source": "전체 equity series 없음",
         "registered_at": "2026-06-14T06:04:55.829782Z",
-        "registered_date_display": "2026-06-14 06:04",
+        "registered_date_display": "2026-06-14 15:04",
         "required_inputs": [
           "QQQ",
           "TQQQ",
@@ -27535,7 +28153,7 @@
         "period_compare_anchor": "period-compare-2010-02-16-2026-06-12",
         "period_recalc_source": "전체 equity series 없음",
         "registered_at": "2026-06-14T06:04:55.829782Z",
-        "registered_date_display": "2026-06-14 06:04",
+        "registered_date_display": "2026-06-14 15:04",
         "required_inputs": [
           "QQQ",
           "TQQQ",
@@ -27629,7 +28247,7 @@
         "period_compare_anchor": "period-compare-2010-02-16-2026-06-12",
         "period_recalc_source": "전체 equity series 없음",
         "registered_at": "2026-06-14T06:04:55.829782Z",
-        "registered_date_display": "2026-06-14 06:04",
+        "registered_date_display": "2026-06-14 15:04",
         "required_inputs": [
           "QQQ",
           "TQQQ",
@@ -27740,7 +28358,7 @@
         "period_compare_anchor": "period-compare-2010-02-16-2026-06-12",
         "period_recalc_source": "전체 equity series 없음",
         "registered_at": "2026-06-14T06:04:55.829782Z",
-        "registered_date_display": "2026-06-14 06:04",
+        "registered_date_display": "2026-06-14 15:04",
         "required_inputs": [
           "TQQQ",
           "^VIX",
@@ -27846,7 +28464,7 @@
         "period_compare_anchor": "period-compare-2010-02-16-2026-06-12",
         "period_recalc_source": "전체 equity series 없음",
         "registered_at": "2026-06-14T06:04:55.829782Z",
-        "registered_date_display": "2026-06-14 06:04",
+        "registered_date_display": "2026-06-14 15:04",
         "required_inputs": [
           "QQQ",
           "TQQQ",
@@ -27958,7 +28576,7 @@
         "period_compare_anchor": "period-compare-2010-02-16-2026-06-12",
         "period_recalc_source": "단일 초안 trace",
         "registered_at": "2026-06-14T11:40:51.262018Z",
-        "registered_date_display": "2026-06-14 11:40",
+        "registered_date_display": "2026-06-14 20:40",
         "required_inputs": [
           "TQQQ",
           "QQQ",
@@ -28046,7 +28664,7 @@
         "period_compare_anchor": "period-compare-2010-02-16-2026-06-12",
         "period_recalc_source": "전체 equity series 없음",
         "registered_at": "2026-06-14T11:40:51.262018Z",
-        "registered_date_display": "2026-06-14 11:40",
+        "registered_date_display": "2026-06-14 20:40",
         "required_inputs": [
           "QQQ",
           "TQQQ"
@@ -28280,8 +28898,13 @@
         "max_drawdown": -0.6032005387947044,
         "period_compare_anchor": "period-compare-2010-02-11-2026-06-11",
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQ001 QQQ 200d trend gate",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ"
@@ -28504,8 +29127,13 @@
         "max_drawdown": -0.4754475943862747,
         "period_compare_anchor": "period-compare-2010-02-11-2026-06-11",
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQ002 TQQQ 200d self-trend gate",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ"
@@ -28739,8 +29367,13 @@
         "max_drawdown": -0.6376477094133026,
         "period_compare_anchor": "period-compare-2010-02-11-2026-06-11",
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQ003 QQQ dual SMA confirmation",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ"
@@ -28964,8 +29597,13 @@
         "max_drawdown": -0.6239120623411958,
         "period_compare_anchor": "period-compare-2010-02-11-2026-06-11",
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQ004 QQQ absolute momentum",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ"
@@ -29191,8 +29829,13 @@
         "max_drawdown": -0.7465668223111877,
         "period_compare_anchor": "period-compare-2010-02-11-2026-06-11",
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQ010 Monthly trend revalidation",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ"
@@ -29415,8 +30058,14 @@
         "max_drawdown": -0.7528923089050408,
         "period_compare_anchor": "period-compare-2010-02-11-2026-06-11",
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "^VIX",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQ011 VIX level risk brake",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "^VIX",
@@ -29641,8 +30290,14 @@
         "max_drawdown": -0.77687407906987,
         "period_compare_anchor": "period-compare-2010-02-11-2026-06-11",
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "^VIX",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQ012 VIX percentile brake",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "^VIX",
@@ -29866,8 +30521,14 @@
         "max_drawdown": -0.766022117083548,
         "period_compare_anchor": "period-compare-2010-02-11-2026-06-11",
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "^VIX",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQ017 Volatility trend filter",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "^VIX",
@@ -30103,8 +30764,13 @@
         "max_drawdown": -0.6132555568106024,
         "period_compare_anchor": "period-compare-2010-02-11-2026-06-11",
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQ021 Trailing drawdown stop",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ"
@@ -30327,8 +30993,13 @@
         "max_drawdown": -0.573066834461304,
         "period_compare_anchor": "period-compare-2010-02-11-2026-06-11",
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQ022 Fast loss shock stop",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ"
@@ -30562,8 +31233,13 @@
         "max_drawdown": -0.5947281046404771,
         "period_compare_anchor": "period-compare-2010-02-11-2026-06-11",
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQ025 Recovery confirmation gate",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ"
@@ -30787,8 +31463,13 @@
         "max_drawdown": -0.6066178173687604,
         "period_compare_anchor": "period-compare-2010-02-11-2026-06-11",
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQ027 Two-step de-risking",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ"
@@ -31015,8 +31696,13 @@
         "max_drawdown": -0.9131841461369331,
         "period_compare_anchor": "period-compare-2010-02-11-2026-06-11",
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQ028 Loss-cluster detector",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ"
@@ -31239,8 +31925,13 @@
         "max_drawdown": -0.6650711748089386,
         "period_compare_anchor": "period-compare-2010-02-11-2026-06-11",
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQ029 Max pain month veto",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ"
@@ -31475,8 +32166,13 @@
         "max_drawdown": -0.5646170350534222,
         "period_compare_anchor": "period-compare-2010-02-11-2026-06-11",
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQ030 Underwater duration brake",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ"
@@ -31712,8 +32408,13 @@
         "max_drawdown": -0.5199593287208477,
         "period_compare_anchor": "period-compare-2010-02-11-2026-06-11",
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQ051 Trend score exposure",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ"
@@ -31936,8 +32637,12 @@
         "max_drawdown": -0.5928697467801487,
         "period_compare_anchor": "period-compare-2010-02-11-2026-06-11",
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "외부 신호 매핑 필요"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ100_CASH QQQ SMA100 -> TQQQ/cash",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ"
@@ -31988,7 +32693,7 @@
         "source_group_label": "Import/latest",
         "source_signal_id": "import-075",
         "strategy_id": "import-075",
-        "strategy_name": "TQQQ_QQQ100_CASH QQQ SMA100 -> TQQQ/cash",
+        "strategy_name": "외부 권한 데이터 의존 전략 #075",
         "summary_json_path": "D:\\projects\\alpha-research-ops-dashboard\\external_strategy_results\\latest.json",
         "total_return": 13.949609407746186,
         "trace_path": "",
@@ -32160,8 +32865,13 @@
         "max_drawdown": -0.5646170350534222,
         "period_compare_anchor": "period-compare-2010-02-11-2026-06-11",
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ150_CASH QQQ SMA150 -> TQQQ/cash",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ"
@@ -32384,8 +33094,13 @@
         "max_drawdown": -0.5798586716571235,
         "period_compare_anchor": "period-compare-2010-02-11-2026-06-11",
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ180_CASH QQQ SMA180 -> TQQQ/cash",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ"
@@ -32608,8 +33323,13 @@
         "max_drawdown": -0.6545240373368877,
         "period_compare_anchor": "period-compare-2010-02-11-2026-06-11",
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ220_CASH QQQ SMA220 -> TQQQ/cash",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ"
@@ -32832,8 +33552,13 @@
         "max_drawdown": -0.6835806325415035,
         "period_compare_anchor": "period-compare-2010-02-11-2026-06-11",
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ250_CASH QQQ SMA250 -> TQQQ/cash",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ"
@@ -33056,8 +33781,13 @@
         "max_drawdown": -0.5954707341475621,
         "period_compare_anchor": "period-compare-2010-02-11-2026-06-11",
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ_10M_SMA QQQ 10-month SMA proxy",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ"
@@ -33292,8 +34022,13 @@
         "max_drawdown": -0.5338469898860714,
         "period_compare_anchor": "period-compare-2010-02-11-2026-06-11",
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ200_ROC20 QQQ SMA200 + ROC20",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ"
@@ -33528,8 +34263,13 @@
         "max_drawdown": -0.569540961359674,
         "period_compare_anchor": "period-compare-2010-02-11-2026-06-11",
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ200_ROC40 QQQ SMA200 + ROC40",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ"
@@ -33764,8 +34504,13 @@
         "max_drawdown": -0.4754475943862747,
         "period_compare_anchor": "period-compare-2010-02-11-2026-06-11",
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ200_ROC60 QQQ SMA200 + ROC60",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ"
@@ -34000,8 +34745,13 @@
         "max_drawdown": -0.6145596607611125,
         "period_compare_anchor": "period-compare-2010-02-11-2026-06-11",
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ200_ROC90 QQQ SMA200 + ROC90",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ"
@@ -34236,8 +34986,13 @@
         "max_drawdown": -0.5798586716571235,
         "period_compare_anchor": "period-compare-2010-02-11-2026-06-11",
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ200_ROC126 QQQ SMA200 + ROC126",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ"
@@ -34472,8 +35227,13 @@
         "max_drawdown": -0.6008789534737846,
         "period_compare_anchor": "period-compare-2010-02-11-2026-06-11",
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ200_ROC252 QQQ SMA200 + ROC252",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ"
@@ -34708,8 +35468,13 @@
         "max_drawdown": -0.5798586716571235,
         "period_compare_anchor": "period-compare-2010-02-11-2026-06-11",
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ10M_ROC252 QQQ 10M SMA + 12M momentum",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ"
@@ -34932,8 +35697,13 @@
         "max_drawdown": -0.6032005387947044,
         "period_compare_anchor": "period-compare-2010-02-11-2026-06-11",
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQQQ_BUFFER_DCA_ADAPT QQQ SMA200 buffer + DCA adapted",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ"
@@ -35168,8 +35938,13 @@
         "max_drawdown": -0.4025053297118806,
         "period_compare_anchor": "period-compare-2010-02-11-2026-06-11",
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQQQ_R3_MEAN_REVERSION R3-style mean reversion",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ"
@@ -35404,8 +36179,13 @@
         "max_drawdown": -0.4255236901645594,
         "period_compare_anchor": "period-compare-2010-02-11-2026-06-11",
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ200_RSI2_PB3 QQQ SMA200 + RSI2<3",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ"
@@ -35640,8 +36420,13 @@
         "max_drawdown": -0.40787169225495845,
         "period_compare_anchor": "period-compare-2010-02-11-2026-06-11",
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ200_RSI2_PB5 QQQ SMA200 + RSI2<5",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ"
@@ -35876,8 +36661,13 @@
         "max_drawdown": -0.40250532971188013,
         "period_compare_anchor": "period-compare-2010-02-11-2026-06-11",
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ200_RSI2_PB10 QQQ SMA200 + RSI2<10",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ"
@@ -36112,8 +36902,13 @@
         "max_drawdown": -0.5784948654060025,
         "period_compare_anchor": "period-compare-2010-02-11-2026-06-11",
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ200_RSI3_PB10 QQQ SMA200 + RSI3<10",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ"
@@ -36348,8 +37143,13 @@
         "max_drawdown": -0.46479515100162405,
         "period_compare_anchor": "period-compare-2010-02-11-2026-06-11",
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ200_RSI5_PB15 QQQ SMA200 + RSI5<15",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ"
@@ -36584,8 +37384,13 @@
         "max_drawdown": -0.32065364430854904,
         "period_compare_anchor": "period-compare-2010-02-11-2026-06-11",
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ200_RSI14_PB30 QQQ SMA200 + RSI14<30",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ"
@@ -36808,8 +37613,13 @@
         "max_drawdown": -0.6032005387947044,
         "period_compare_anchor": "period-compare-2010-02-11-2026-06-11",
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ200_OVEREXTENSION_DERISK QQQ trend + z-score derisk",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ"
@@ -37032,8 +37842,13 @@
         "max_drawdown": -0.6032005387947044,
         "period_compare_anchor": "period-compare-2010-02-11-2026-06-11",
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQQQ_QQQ200_RSI14_DERISK QQQ trend + RSI14 overheat derisk",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ"
@@ -37268,8 +38083,13 @@
         "max_drawdown": -0.4025053297118806,
         "period_compare_anchor": "period-compare-2010-02-11-2026-06-11",
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQQQ_PULLBACK_MAXHOLD_5 RSI pullback max hold 5",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ"
@@ -37504,8 +38324,13 @@
         "max_drawdown": -0.4092517799952572,
         "period_compare_anchor": "period-compare-2010-02-11-2026-06-11",
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQQQ_PULLBACK_MAXHOLD_10 RSI pullback max hold 10",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ"
@@ -37740,8 +38565,13 @@
         "max_drawdown": -0.4092517799952572,
         "period_compare_anchor": "period-compare-2010-02-11-2026-06-11",
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQQQ_PULLBACK_MAXHOLD_15 RSI pullback max hold 15",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ"
@@ -37976,8 +38806,13 @@
         "max_drawdown": -0.4092517799952572,
         "period_compare_anchor": "period-compare-2010-02-11-2026-06-11",
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQQQ_PULLBACK_MAXHOLD_20 RSI pullback max hold 20",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ"
@@ -38200,8 +39035,13 @@
         "max_drawdown": -0.6405050892528028,
         "period_compare_anchor": "period-compare-2010-02-11-2026-06-11",
         "period_recalc_source": "기간 맞춤 계산 불가",
+        "public_required_inputs": [
+          "TQQQ",
+          "QQQ"
+        ],
+        "raw_strategy_name": "TQQQ_TREND_MAXHOLD20_COOLDOWN5 Trend max-hold auxiliary diagnostic",
         "registered_at": "2026-06-15T07:34:59Z",
-        "registered_date_display": "2026-06-15 07:34",
+        "registered_date_display": "2026-06-15 16:34",
         "required_inputs": [
           "TQQQ",
           "QQQ"
@@ -42493,7 +43333,7 @@
           },
           "strategy_id": "import-075",
           "strategy_key": "import:alpha-ext-20260615-073353Z:75",
-          "strategy_name": "TQQQ_QQQ100_CASH QQQ SMA100 -> TQQQ/cash",
+          "strategy_name": "외부 권한 데이터 의존 전략 #075",
           "traded_instrument": "TQQQ"
         },
         {
@@ -53039,8 +53879,8 @@
     "title": "새 아이디어 준비 게이트"
   },
   "output_artifact_paths": {
-    "html": "artifacts/beginner_research_dashboard/20260615_public_dashboard_fix/INDEX.html",
-    "summary_json": "artifacts/beginner_research_dashboard/20260615_public_dashboard_fix/BEGINNER_RESEARCH_DASHBOARD_SUMMARY.json"
+    "html": "artifacts/beginner_research_dashboard/20260615_public_canonical_closeout/INDEX.html",
+    "summary_json": "artifacts/beginner_research_dashboard/20260615_public_canonical_closeout/BEGINNER_RESEARCH_DASHBOARD_SUMMARY.json"
   },
   "package_version": "0.2.0",
   "parameter_tuning_run": false,
@@ -53982,7 +54822,7 @@
     "git_commit": "0fdc2cf661ed97c2f8e4b9502557fef3dfc4b3bf",
     "input_paths": [],
     "metadata_schema_version": "artifact_run_metadata_v1",
-    "output_path": "artifacts/beginner_research_dashboard/20260615_public_dashboard_fix/BEGINNER_RESEARCH_DASHBOARD_SUMMARY.json",
+    "output_path": "artifacts/beginner_research_dashboard/20260615_public_canonical_closeout/BEGINNER_RESEARCH_DASHBOARD_SUMMARY.json",
     "package_name": "alpha_research_ops",
     "package_version": "0.2.0",
     "repo_root": "D:\\projects\\Alpha Research Ops Lab",
