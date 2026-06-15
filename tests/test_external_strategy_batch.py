@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import pandas as pd
+import pytest
 
 from scripts import external_strategy_batch as batch
 
@@ -205,6 +206,75 @@ def test_backtest_uses_same_day_close_after_hours_proxy(monkeypatch) -> None:
     assert result["same_close_execution_allowed"] is True
     assert result["execution_price_basis"] == "adjusted_close_after_hours_estimate"
     assert result["metrics"]["total_return"] > 0.5
+
+
+def test_benchmark_metrics_use_full_strategy_effective_period(monkeypatch) -> None:
+    normalized = batch.normalize_strategy(
+        strategy_with(
+            {
+                "strategy_name": "allocation with an internal data gap",
+                "required_symbols": ["QQQ", "TQQQ", "XLK"],
+                "benchmark": ["QQQ", "TQQQ"],
+                "rule_spec": {"type": "always_true", "symbol": "QQQ"},
+                "allocation_rule": {
+                    "condition": {"type": "always_true", "symbol": "QQQ"},
+                    "risk_on": {"XLK": 1.0},
+                    "risk_off": {},
+                },
+            }
+        ),
+        0,
+    )
+    dates = pd.bdate_range("2020-01-01", periods=6)
+    qqq = pd.DataFrame(
+        {
+            "Open": [100, 101, 102, 103, 104, 105],
+            "Adj Close": [100, 101, 102, 103, 104, 105],
+            "Close": [100, 101, 102, 103, 104, 105],
+        },
+        index=dates,
+    )
+    tqqq = pd.DataFrame(
+        {
+            "Open": [100, 110, 121, 133.1, 146.41, 161.051],
+            "Adj Close": [100, 110, 121, 133.1, 146.41, 161.051],
+            "Close": [100, 110, 121, 133.1, 146.41, 161.051],
+        },
+        index=dates,
+    )
+    xlk = pd.DataFrame(
+        {
+            "Open": [50, 55, None, 66, 72.6, 79.86],
+            "Adj Close": [50, 55, None, 66, 72.6, 79.86],
+            "Close": [50, 55, None, 66, 72.6, 79.86],
+        },
+        index=dates,
+    )
+
+    monkeypatch.setattr(
+        batch, "download_symbols", lambda symbols: ({"QQQ": qqq, "TQQQ": tqqq, "XLK": xlk}, [])
+    )
+
+    result = batch.backtest(normalized)
+    metrics = result["metrics"]
+    tqqq_benchmark = metrics["benchmark_returns"]["TQQQ"]
+
+    assert result["strategy_effective_start"] == "2020-01-01"
+    assert result["strategy_effective_end"] == "2020-01-07"
+    assert result["strategy_effective_trading_days"] == 3
+    assert result["benchmark_basis"] == "strategy_effective_period"
+    assert result["benchmark_effective_trading_days"]["TQQQ"] == 5
+    assert result["benchmark_missing_days"]["TQQQ"] == 0
+    assert result["benchmark_first_valid_date"]["TQQQ"] == "2020-01-01"
+    assert result["benchmark_last_valid_date"]["TQQQ"] == "2020-01-07"
+    assert tqqq_benchmark["total_return"] == pytest.approx((1.1**5) - 1)
+    assert metrics["difference_vs_tqqq_total_return"] == pytest.approx(
+        metrics["total_return"] - tqqq_benchmark["total_return"]
+    )
+    assert metrics["difference_vs_tqqq_reference"] == metrics["difference_vs_tqqq_total_return"]
+    assert metrics["difference_vs_tqqq_cagr"] == pytest.approx(
+        metrics["cagr"] - tqqq_benchmark["cagr"]
+    )
 
 
 def test_bounded_state_group_patterns_validate_and_execute(monkeypatch) -> None:

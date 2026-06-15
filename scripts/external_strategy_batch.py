@@ -1723,6 +1723,71 @@ def cagr(equity: pd.Series) -> float:
     return float(equity.iloc[-1] ** (1 / years) - 1) if years > 0 else 0.0
 
 
+def benchmark_metrics_for_strategy_period(
+    *,
+    benchmark_returns: dict[str, pd.Series],
+    benchmark_symbols: list[str],
+    strategy_index: pd.Index,
+) -> tuple[dict[str, dict[str, Any]], dict[str, int], dict[str, str | None], dict[str, str | None], dict[str, int], dict[str, list[str]]]:
+    strategy_dates = pd.Index(strategy_index)
+    benchmark_metrics: dict[str, dict[str, Any]] = {}
+    benchmark_missing_days: dict[str, int] = {}
+    benchmark_first_valid_date: dict[str, str | None] = {}
+    benchmark_last_valid_date: dict[str, str | None] = {}
+    benchmark_effective_trading_days: dict[str, int] = {}
+    benchmark_missing_date_samples: dict[str, list[str]] = {}
+
+    for benchmark in benchmark_symbols:
+        series = benchmark_returns.get(benchmark)
+        if series is None:
+            benchmark_missing_days[benchmark] = len(strategy_dates)
+            benchmark_first_valid_date[benchmark] = None
+            benchmark_last_valid_date[benchmark] = None
+            benchmark_effective_trading_days[benchmark] = 0
+            benchmark_missing_date_samples[benchmark] = [
+                date.strftime("%Y-%m-%d") for date in strategy_dates[:20]
+            ]
+            continue
+
+        aligned = series.reindex(strategy_dates)
+        valid = aligned.dropna()
+        missing = aligned[aligned.isna()]
+        benchmark_missing_days[benchmark] = int(missing.shape[0])
+        benchmark_missing_date_samples[benchmark] = [
+            date.strftime("%Y-%m-%d") for date in missing.index[:20]
+        ]
+        benchmark_effective_trading_days[benchmark] = int(valid.shape[0])
+        benchmark_first_valid_date[benchmark] = (
+            valid.index[0].strftime("%Y-%m-%d") if not valid.empty else None
+        )
+        benchmark_last_valid_date[benchmark] = (
+            valid.index[-1].strftime("%Y-%m-%d") if not valid.empty else None
+        )
+        if valid.empty:
+            continue
+
+        bench_equity = (1 + valid).cumprod()
+        benchmark_metrics[benchmark] = {
+            "total_return": float(bench_equity.iloc[-1] - 1),
+            "cagr": cagr(bench_equity),
+            "max_drawdown": max_drawdown(bench_equity),
+            "effective_trading_days": benchmark_effective_trading_days[benchmark],
+            "first_valid_date": benchmark_first_valid_date[benchmark],
+            "last_valid_date": benchmark_last_valid_date[benchmark],
+            "missing_days": benchmark_missing_days[benchmark],
+            "benchmark_basis": "strategy_effective_period",
+        }
+
+    return (
+        benchmark_metrics,
+        benchmark_missing_days,
+        benchmark_first_valid_date,
+        benchmark_last_valid_date,
+        benchmark_effective_trading_days,
+        benchmark_missing_date_samples,
+    )
+
+
 def skipped_result(normalized: dict[str, Any], *, reason: str | None = None) -> dict[str, Any]:
     strategy = normalized.get("normalized_strategy") or {}
     skip_reason = reason or normalized.get("skip_reason") or ""
@@ -1765,15 +1830,14 @@ def skipped_result(normalized: dict[str, Any], *, reason: str | None = None) -> 
 def backtest(normalized: dict[str, Any]) -> dict[str, Any]:
     strategy = normalized["normalized_strategy"]
     allocation = strategy.get("allocation_rule") or {}
+    benchmark_symbols = unique_strings([*strategy["benchmarks"], "TQQQ", "QQQ"])
     symbols = unique_strings([
         *strategy.get("required_symbols", []),
         strategy["traded_instrument"],
-        *strategy["benchmarks"],
+        *benchmark_symbols,
         *list((allocation.get("risk_on") or {}).keys()),
         *list((allocation.get("risk_off") or {}).keys()),
         *(allocation.get("assets") or []),
-        "QQQ",
-        "TQQQ",
     ])
     frames, source_audit = download_symbols(symbols)
     raw_weights, held_instruments, allocation_change_count = target_weight_frame(strategy, frames)
@@ -1790,13 +1854,15 @@ def backtest(normalized: dict[str, Any]) -> dict[str, Any]:
         df[f"weight_{symbol}"] = active_weights[symbol]
         df[f"return_{symbol}"] = returns[symbol]
     benchmark_returns: dict[str, pd.Series] = {}
-    for benchmark in strategy["benchmarks"]:
+    for benchmark in benchmark_symbols:
         if benchmark in frames:
             aligned = frames[benchmark][execution_price_column].reindex(df.index)
             benchmark_returns[benchmark] = aligned.shift(-1) / aligned - 1.0
             df[f"benchmark_{benchmark}"] = benchmark_returns[benchmark]
     return_columns = [f"return_{symbol}" for symbol in active_weights.columns]
     df = df.dropna(subset=return_columns, how="all")
+    if df.empty:
+        raise RuntimeError("data_unavailable: no valid strategy return rows")
     slippage = as_number((strategy.get("costs") or {}).get("slippage_per_trade"))
     commission = as_number((strategy.get("costs") or {}).get("commission"))
     weight_columns = [f"weight_{symbol}" for symbol in active_weights.columns]
@@ -1810,22 +1876,37 @@ def backtest(normalized: dict[str, Any]) -> dict[str, Any]:
     total_return = float(equity.iloc[-1] - 1)
     cagr_value = cagr(equity)
     mdd = max_drawdown(equity)
-    benchmark_metrics: dict[str, dict[str, float]] = {}
-    for benchmark in strategy["benchmarks"]:
-        column = f"benchmark_{benchmark}"
-        if column in df:
-            bench_equity = (1 + df[column]).cumprod()
-            benchmark_metrics[benchmark] = {
-                "total_return": float(bench_equity.iloc[-1] - 1),
-                "cagr": cagr(bench_equity),
-                "max_drawdown": max_drawdown(bench_equity),
-            }
+    benchmark_basis_index = active_weights.loc[df.index.min() : df.index.max()].index
+    (
+        benchmark_metrics,
+        benchmark_missing_days,
+        benchmark_first_valid_date,
+        benchmark_last_valid_date,
+        benchmark_effective_trading_days,
+        benchmark_missing_date_samples,
+    ) = benchmark_metrics_for_strategy_period(
+        benchmark_returns=benchmark_returns,
+        benchmark_symbols=benchmark_symbols,
+        strategy_index=benchmark_basis_index,
+    )
     primary = strategy.get("primary_benchmark") or strategy["benchmarks"][0]
     primary_return = benchmark_metrics.get(primary, {}).get("total_return")
+    primary_cagr = benchmark_metrics.get(primary, {}).get("cagr")
     qqq_return = benchmark_metrics.get("QQQ", {}).get("total_return")
+    qqq_cagr = benchmark_metrics.get("QQQ", {}).get("cagr")
     tqqq_return = benchmark_metrics.get("TQQQ", {}).get("total_return")
+    tqqq_cagr = benchmark_metrics.get("TQQQ", {}).get("cagr")
     exposure_totals = weight_frame.sum(axis=1)
     tiers = sorted({float(value) for value in exposure_totals.dropna().unique().tolist()})
+    difference_vs_primary_total_return = total_return - primary_return if primary_return is not None else None
+    difference_vs_tqqq_total_return = total_return - tqqq_return if tqqq_return is not None else None
+    difference_vs_qqq_total_return = total_return - qqq_return if qqq_return is not None else None
+    difference_vs_primary_cagr = cagr_value - primary_cagr if primary_cagr is not None else None
+    difference_vs_tqqq_cagr = cagr_value - tqqq_cagr if tqqq_cagr is not None else None
+    difference_vs_qqq_cagr = cagr_value - qqq_cagr if qqq_cagr is not None else None
+    strategy_effective_start = df.index.min().strftime("%Y-%m-%d")
+    strategy_effective_end = df.index.max().strftime("%Y-%m-%d")
+    strategy_effective_trading_days = int(df.shape[0])
     return {
         "input_order": normalized["input_order"],
         "strategy_id": strategy["strategy_id"],
@@ -1835,15 +1916,24 @@ def backtest(normalized: dict[str, Any]) -> dict[str, Any]:
         "traded_instrument": strategy["traded_instrument"],
         "required_symbols": strategy["required_symbols"],
         "benchmark": primary,
-        "benchmarks": strategy["benchmarks"],
+        "benchmarks": benchmark_symbols,
         "primary_benchmark": primary,
         "signal_timing": DEFAULT_SIGNAL_TIMING,
         "execution_timing": DEFAULT_EXECUTION_TIMING,
         "same_close_execution_allowed": DEFAULT_SAME_CLOSE_EXECUTION_ALLOWED,
         "timing_model": "after_close_signal_same_day_close_after_hours_execution",
         "execution_price_basis": "adjusted_close_after_hours_estimate",
-        "period": f"{df.index.min().strftime('%Y-%m-%d')} ~ {df.index.max().strftime('%Y-%m-%d')}",
-        "test_date_range": {"start": df.index.min().strftime("%Y-%m-%d"), "end": df.index.max().strftime("%Y-%m-%d")},
+        "period": f"{strategy_effective_start} ~ {strategy_effective_end}",
+        "test_date_range": {"start": strategy_effective_start, "end": strategy_effective_end},
+        "strategy_effective_start": strategy_effective_start,
+        "strategy_effective_end": strategy_effective_end,
+        "strategy_effective_trading_days": strategy_effective_trading_days,
+        "benchmark_effective_trading_days": benchmark_effective_trading_days,
+        "benchmark_basis": "strategy_effective_period",
+        "benchmark_missing_days": benchmark_missing_days,
+        "benchmark_first_valid_date": benchmark_first_valid_date,
+        "benchmark_last_valid_date": benchmark_last_valid_date,
+        "benchmark_missing_date_samples": benchmark_missing_date_samples,
         "signal_count": node_leaf_count(strategy["rule_spec"]),
         "signal_summary": strategy.get("strategy_name"),
         "structured_rule_spec": strategy["rule_spec"],
@@ -1868,11 +1958,23 @@ def backtest(normalized: dict[str, Any]) -> dict[str, Any]:
             "allocation_change_count": allocation_change_count,
             "benchmark_returns": benchmark_metrics,
             "primary_benchmark_total_return": primary_return,
-            "difference_vs_primary_benchmark": total_return - primary_return if primary_return is not None else None,
-            "difference_vs_tqqq": total_return - tqqq_return if tqqq_return is not None else None,
-            "difference_vs_qqq": total_return - qqq_return if qqq_return is not None else None,
-            "difference_vs_tqqq_reference": total_return - tqqq_return if tqqq_return is not None else None,
-            "difference_vs_qqq_reference": total_return - qqq_return if qqq_return is not None else None,
+            "primary_benchmark_cagr": primary_cagr,
+            "difference_vs_primary_benchmark": difference_vs_primary_total_return,
+            "difference_vs_primary_benchmark_total_return": difference_vs_primary_total_return,
+            "difference_vs_primary_benchmark_cagr": difference_vs_primary_cagr,
+            "difference_vs_tqqq": difference_vs_tqqq_total_return,
+            "difference_vs_qqq": difference_vs_qqq_total_return,
+            "difference_vs_tqqq_reference": difference_vs_tqqq_total_return,
+            "difference_vs_qqq_reference": difference_vs_qqq_total_return,
+            "difference_vs_tqqq_total_return": difference_vs_tqqq_total_return,
+            "difference_vs_qqq_total_return": difference_vs_qqq_total_return,
+            "difference_vs_tqqq_cagr": difference_vs_tqqq_cagr,
+            "difference_vs_qqq_cagr": difference_vs_qqq_cagr,
+            "benchmark_effective_trading_days": benchmark_effective_trading_days,
+            "benchmark_basis": "strategy_effective_period",
+            "benchmark_missing_days": benchmark_missing_days,
+            "benchmark_first_valid_date": benchmark_first_valid_date,
+            "benchmark_last_valid_date": benchmark_last_valid_date,
         },
         "data_source_tier": "exploratory_unofficial",
         "final_review_allowed": False,
