@@ -3,2042 +3,366 @@
   "schema_version": "1.0",
   "runs": [
     {
-      "run_id": "alpha-ext-20260615-073353Z",
+      "run_id": "alpha-ext-20260615-084641Z",
       "request_id": "alpha-public-1781507131079-c1d9aaaee21378",
-      "path": "external_strategy_results/runs/alpha-ext-20260615-073353Z.json",
-      "generated_at": "2026-06-15T07:34:59Z",
+      "path": "external_strategy_results/runs/alpha-ext-20260615-084641Z.json",
+      "generated_at": "2026-06-15T08:49:29Z",
       "mode": "backtest",
       "input_batch_hash": "6ebb72b1a4d1aa81d7ebbdd8412fa376c8a24bd1f9272f53456221b107f48fbc",
       "input_strategy_sequence_hash": "6293db7fd50757eb4645ff305cebfe6cee0f93ccce4cd83af8d0fca906b0775e",
       "strategy_count": 145,
       "validation_summary": {
         "total_rows": 145,
-        "ready_to_backtest": 44,
-        "skipped_or_held": 101,
+        "ready_to_backtest": 87,
+        "skipped_or_held": 58,
         "status_counts": {
-          "ready_to_backtest": 44,
-          "unsupported_rule": 49,
+          "ready_to_backtest": 87,
           "needs_data_source_mapping": 38,
-          "needs_formula_engine": 10,
-          "needs_state_machine_support": 4
+          "needs_formula_engine": 14,
+          "needs_state_machine_support": 6
         },
         "hold_reason_counts": {
-          "unsupported_rule": 49,
           "needs_data_source_mapping": 38,
-          "needs_formula_engine": 10,
-          "needs_state_machine_support": 4
+          "needs_formula_engine": 14,
+          "needs_state_machine_support": 6
         },
         "batch_size_limit": 10,
         "batch_split_required": true,
-        "batch_count": 5,
+        "batch_count": 9,
         "batch_plan": [
           {
             "batch_index": 1,
-            "row_range": "1-20",
+            "row_range": "1-10",
             "input_orders": [
               1,
               2,
               3,
               4,
-              10,
-              11,
-              12,
-              15,
-              19,
-              20
+              5,
+              6,
+              7,
+              8,
+              9,
+              10
             ],
             "strategy_count": 10
           },
           {
             "batch_index": 2,
-            "row_range": "23-78",
+            "row_range": "11-21",
             "input_orders": [
-              23,
-              25,
-              26,
-              27,
-              28,
-              35,
-              75,
-              76,
-              77,
-              78
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              18,
+              19,
+              20,
+              21
             ],
             "strategy_count": 10
           },
           {
             "batch_index": 3,
-            "row_range": "79-96",
+            "row_range": "22-76",
             "input_orders": [
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              36,
+              75,
+              76
+            ],
+            "strategy_count": 10
+          },
+          {
+            "batch_index": 4,
+            "row_range": "77-86",
+            "input_orders": [
+              77,
+              78,
               79,
+              80,
+              81,
+              82,
               83,
               84,
               85,
-              86,
+              86
+            ],
+            "strategy_count": 10
+          },
+          {
+            "batch_index": 5,
+            "row_range": "87-96",
+            "input_orders": [
               87,
               88,
               89,
               90,
+              91,
+              92,
+              93,
+              94,
+              95,
               96
             ],
             "strategy_count": 10
           },
           {
-            "batch_index": 4,
-            "row_range": "97-133",
+            "batch_index": 6,
+            "row_range": "97-106",
             "input_orders": [
               97,
+              98,
               99,
               100,
               101,
               102,
               103,
               104,
-              129,
-              130,
-              133
+              105,
+              106
             ],
             "strategy_count": 10
           },
           {
-            "batch_index": 5,
-            "row_range": "134-137",
+            "batch_index": 7,
+            "row_range": "107-124",
             "input_orders": [
-              134,
-              135,
-              136,
-              137
+              107,
+              108,
+              111,
+              112,
+              114,
+              115,
+              116,
+              117,
+              118,
+              124
             ],
-            "strategy_count": 4
+            "strategy_count": 10
+          },
+          {
+            "batch_index": 8,
+            "row_range": "125-135",
+            "input_orders": [
+              125,
+              126,
+              127,
+              129,
+              130,
+              131,
+              132,
+              133,
+              134,
+              135
+            ],
+            "strategy_count": 10
+          },
+          {
+            "batch_index": 9,
+            "row_range": "136-145",
+            "input_orders": [
+              136,
+              137,
+              139,
+              140,
+              141,
+              144,
+              145
+            ],
+            "strategy_count": 7
           }
         ]
       }
     },
     {
-      "run_id": "alpha-ext-20260615-073054Z",
+      "run_id": "alpha-ext-20260615-084244Z",
       "request_id": "alpha-public-1781507131079-c1d9aaaee21378",
-      "path": "external_strategy_results/runs/alpha-ext-20260615-073054Z.json",
-      "generated_at": "2026-06-15T07:32:13Z",
+      "path": "external_strategy_results/runs/alpha-ext-20260615-084244Z.json",
+      "generated_at": "2026-06-15T08:45:31Z",
       "mode": "backtest",
       "input_batch_hash": "6ebb72b1a4d1aa81d7ebbdd8412fa376c8a24bd1f9272f53456221b107f48fbc",
       "input_strategy_sequence_hash": "6293db7fd50757eb4645ff305cebfe6cee0f93ccce4cd83af8d0fca906b0775e",
       "strategy_count": 145,
       "validation_summary": {
         "total_rows": 145,
-        "ready_to_backtest": 44,
-        "skipped_or_held": 101,
+        "ready_to_backtest": 87,
+        "skipped_or_held": 58,
         "status_counts": {
-          "ready_to_backtest": 44,
-          "unsupported_rule": 49,
+          "ready_to_backtest": 87,
           "needs_data_source_mapping": 38,
-          "needs_formula_engine": 10,
-          "needs_state_machine_support": 4
+          "needs_formula_engine": 14,
+          "needs_state_machine_support": 6
         },
         "hold_reason_counts": {
-          "unsupported_rule": 49,
           "needs_data_source_mapping": 38,
-          "needs_formula_engine": 10,
-          "needs_state_machine_support": 4
+          "needs_formula_engine": 14,
+          "needs_state_machine_support": 6
         },
         "batch_size_limit": 10,
         "batch_split_required": true,
-        "batch_count": 5,
+        "batch_count": 9,
         "batch_plan": [
           {
             "batch_index": 1,
-            "row_range": "1-20",
+            "row_range": "1-10",
             "input_orders": [
               1,
               2,
               3,
               4,
-              10,
-              11,
-              12,
-              15,
-              19,
-              20
+              5,
+              6,
+              7,
+              8,
+              9,
+              10
             ],
             "strategy_count": 10
           },
           {
             "batch_index": 2,
-            "row_range": "23-78",
+            "row_range": "11-21",
             "input_orders": [
-              23,
-              25,
-              26,
-              27,
-              28,
-              35,
-              75,
-              76,
-              77,
-              78
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              18,
+              19,
+              20,
+              21
             ],
             "strategy_count": 10
           },
           {
             "batch_index": 3,
-            "row_range": "79-96",
+            "row_range": "22-76",
             "input_orders": [
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              36,
+              75,
+              76
+            ],
+            "strategy_count": 10
+          },
+          {
+            "batch_index": 4,
+            "row_range": "77-86",
+            "input_orders": [
+              77,
+              78,
               79,
+              80,
+              81,
+              82,
               83,
               84,
               85,
-              86,
+              86
+            ],
+            "strategy_count": 10
+          },
+          {
+            "batch_index": 5,
+            "row_range": "87-96",
+            "input_orders": [
               87,
               88,
               89,
               90,
+              91,
+              92,
+              93,
+              94,
+              95,
               96
             ],
             "strategy_count": 10
           },
           {
-            "batch_index": 4,
-            "row_range": "97-133",
+            "batch_index": 6,
+            "row_range": "97-106",
             "input_orders": [
               97,
+              98,
               99,
               100,
               101,
               102,
               103,
               104,
-              129,
-              130,
-              133
+              105,
+              106
             ],
             "strategy_count": 10
           },
           {
-            "batch_index": 5,
-            "row_range": "134-137",
+            "batch_index": 7,
+            "row_range": "107-124",
             "input_orders": [
-              134,
-              135,
-              136,
-              137
-            ],
-            "strategy_count": 4
-          }
-        ]
-      }
-    },
-    {
-      "run_id": "alpha-ext-20260615-072914Z",
-      "request_id": "alpha-public-1781507131079-c1d9aaaee21378",
-      "path": "external_strategy_results/runs/alpha-ext-20260615-072914Z.json",
-      "generated_at": "2026-06-15T07:30:22Z",
-      "mode": "backtest",
-      "input_batch_hash": "6ebb72b1a4d1aa81d7ebbdd8412fa376c8a24bd1f9272f53456221b107f48fbc",
-      "input_strategy_sequence_hash": "6293db7fd50757eb4645ff305cebfe6cee0f93ccce4cd83af8d0fca906b0775e",
-      "strategy_count": 145,
-      "validation_summary": {
-        "total_rows": 145,
-        "ready_to_backtest": 45,
-        "skipped_or_held": 100,
-        "status_counts": {
-          "ready_to_backtest": 45,
-          "unsupported_rule": 48,
-          "needs_data_source_mapping": 38,
-          "needs_formula_engine": 10,
-          "needs_state_machine_support": 4
-        },
-        "hold_reason_counts": {
-          "unsupported_rule": 48,
-          "needs_data_source_mapping": 38,
-          "needs_formula_engine": 10,
-          "needs_state_machine_support": 4
-        },
-        "batch_size_limit": 10,
-        "batch_split_required": true,
-        "batch_count": 5,
-        "batch_plan": [
-          {
-            "batch_index": 1,
-            "row_range": "1-20",
-            "input_orders": [
-              1,
-              2,
-              3,
-              4,
-              10,
-              11,
-              12,
-              15,
-              19,
-              20
+              107,
+              108,
+              111,
+              112,
+              114,
+              115,
+              116,
+              117,
+              118,
+              124
             ],
             "strategy_count": 10
           },
           {
-            "batch_index": 2,
-            "row_range": "22-77",
+            "batch_index": 8,
+            "row_range": "125-135",
             "input_orders": [
-              22,
-              23,
-              25,
-              26,
-              27,
-              28,
-              35,
-              75,
-              76,
-              77
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 3,
-            "row_range": "78-90",
-            "input_orders": [
-              78,
-              79,
-              83,
-              84,
-              85,
-              86,
-              87,
-              88,
-              89,
-              90
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 4,
-            "row_range": "96-130",
-            "input_orders": [
-              96,
-              97,
-              99,
-              100,
-              101,
-              102,
-              103,
-              104,
-              129,
-              130
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 5,
-            "row_range": "133-137",
-            "input_orders": [
-              133,
-              134,
-              135,
-              136,
-              137
-            ],
-            "strategy_count": 5
-          }
-        ]
-      }
-    },
-    {
-      "run_id": "alpha-ext-20260615-072709Z",
-      "request_id": "alpha-public-1781507131079-c1d9aaaee21378",
-      "path": "external_strategy_results/runs/alpha-ext-20260615-072709Z.json",
-      "generated_at": "2026-06-15T07:28:28Z",
-      "mode": "backtest",
-      "input_batch_hash": "6ebb72b1a4d1aa81d7ebbdd8412fa376c8a24bd1f9272f53456221b107f48fbc",
-      "input_strategy_sequence_hash": "6293db7fd50757eb4645ff305cebfe6cee0f93ccce4cd83af8d0fca906b0775e",
-      "strategy_count": 145,
-      "validation_summary": {
-        "total_rows": 145,
-        "ready_to_backtest": 49,
-        "skipped_or_held": 96,
-        "status_counts": {
-          "ready_to_backtest": 49,
-          "unsupported_rule": 44,
-          "needs_data_source_mapping": 38,
-          "needs_formula_engine": 10,
-          "needs_state_machine_support": 4
-        },
-        "hold_reason_counts": {
-          "unsupported_rule": 44,
-          "needs_data_source_mapping": 38,
-          "needs_formula_engine": 10,
-          "needs_state_machine_support": 4,
-          "data_unavailable": 3
-        },
-        "batch_size_limit": 10,
-        "batch_split_required": true,
-        "batch_count": 5,
-        "batch_plan": [
-          {
-            "batch_index": 1,
-            "row_range": "1-19",
-            "input_orders": [
-              1,
-              2,
-              3,
-              4,
-              10,
-              11,
-              12,
-              15,
-              18,
-              19
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 2,
-            "row_range": "20-75",
-            "input_orders": [
-              20,
-              22,
-              23,
-              25,
-              26,
-              27,
-              28,
-              35,
-              47,
-              75
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 3,
-            "row_range": "76-88",
-            "input_orders": [
-              76,
-              77,
-              78,
-              79,
-              83,
-              84,
-              85,
-              86,
-              87,
-              88
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 4,
-            "row_range": "89-104",
-            "input_orders": [
-              89,
-              90,
-              96,
-              97,
-              99,
-              100,
-              101,
-              102,
-              103,
-              104
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 5,
-            "row_range": "129-137",
-            "input_orders": [
+              125,
+              126,
+              127,
               129,
               130,
               131,
               132,
               133,
               134,
-              135,
-              136,
-              137
-            ],
-            "strategy_count": 9
-          }
-        ]
-      }
-    },
-    {
-      "run_id": "alpha-ext-20260615-070553Z",
-      "request_id": "alpha-public-1781507131079-c1d9aaaee21378",
-      "path": "external_strategy_results/runs/alpha-ext-20260615-070553Z.json",
-      "generated_at": "2026-06-15T07:06:59Z",
-      "mode": "backtest",
-      "input_batch_hash": "6ebb72b1a4d1aa81d7ebbdd8412fa376c8a24bd1f9272f53456221b107f48fbc",
-      "input_strategy_sequence_hash": "6293db7fd50757eb4645ff305cebfe6cee0f93ccce4cd83af8d0fca906b0775e",
-      "strategy_count": 145,
-      "validation_summary": {
-        "total_rows": 145,
-        "ready_to_backtest": 94,
-        "skipped_or_held": 51,
-        "status_counts": {
-          "ready_to_backtest": 94,
-          "needs_data_source_mapping": 38,
-          "unsupported_rule": 5,
-          "needs_state_machine_support": 4,
-          "needs_formula_engine": 4
-        },
-        "hold_reason_counts": {
-          "needs_data_source_mapping": 38,
-          "unsupported_rule": 5,
-          "needs_state_machine_support": 4,
-          "needs_formula_engine": 4,
-          "data_unavailable": 9
-        },
-        "batch_size_limit": 10,
-        "batch_split_required": true,
-        "batch_count": 10,
-        "batch_plan": [
-          {
-            "batch_index": 1,
-            "row_range": "1-10",
-            "input_orders": [
-              1,
-              2,
-              3,
-              4,
-              5,
-              6,
-              7,
-              8,
-              9,
-              10
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 2,
-            "row_range": "11-21",
-            "input_orders": [
-              11,
-              12,
-              13,
-              14,
-              15,
-              16,
-              18,
-              19,
-              20,
-              21
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 3,
-            "row_range": "22-37",
-            "input_orders": [
-              22,
-              23,
-              24,
-              25,
-              26,
-              27,
-              28,
-              34,
-              35,
-              37
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 4,
-            "row_range": "42-82",
-            "input_orders": [
-              42,
-              47,
-              75,
-              76,
-              77,
-              78,
-              79,
-              80,
-              81,
-              82
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 5,
-            "row_range": "83-92",
-            "input_orders": [
-              83,
-              84,
-              85,
-              86,
-              87,
-              88,
-              89,
-              90,
-              91,
-              92
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 6,
-            "row_range": "93-102",
-            "input_orders": [
-              93,
-              94,
-              95,
-              96,
-              97,
-              98,
-              99,
-              100,
-              101,
-              102
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 7,
-            "row_range": "103-112",
-            "input_orders": [
-              103,
-              104,
-              105,
-              106,
-              107,
-              108,
-              109,
-              110,
-              111,
-              112
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 8,
-            "row_range": "114-130",
-            "input_orders": [
-              114,
-              115,
-              116,
-              117,
-              118,
-              124,
-              125,
-              127,
-              129,
-              130
+              135
             ],
             "strategy_count": 10
           },
           {
             "batch_index": 9,
-            "row_range": "131-140",
+            "row_range": "136-145",
             "input_orders": [
-              131,
-              132,
-              133,
-              134,
-              135,
               136,
               137,
-              138,
               139,
-              140
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 10,
-            "row_range": "141-145",
-            "input_orders": [
+              140,
               141,
-              142,
               144,
               145
             ],
-            "strategy_count": 4
+            "strategy_count": 7
           }
         ]
       }
-    },
-    {
-      "run_id": "alpha-ext-20260615-070333Z",
-      "request_id": "alpha-public-1781506982642-05a69d509debd8",
-      "path": "external_strategy_results/runs/alpha-ext-20260615-070333Z.json",
-      "generated_at": "2026-06-15T07:03:33Z",
-      "mode": "validate",
-      "input_batch_hash": "6ebb72b1a4d1aa81d7ebbdd8412fa376c8a24bd1f9272f53456221b107f48fbc",
-      "input_strategy_sequence_hash": "6293db7fd50757eb4645ff305cebfe6cee0f93ccce4cd83af8d0fca906b0775e",
-      "strategy_count": 145,
-      "validation_summary": {
-        "total_rows": 145,
-        "ready_to_backtest": 94,
-        "skipped_or_held": 51,
-        "status_counts": {
-          "ready_to_backtest": 94,
-          "needs_data_source_mapping": 38,
-          "unsupported_rule": 5,
-          "needs_state_machine_support": 4,
-          "needs_formula_engine": 4
-        },
-        "hold_reason_counts": {
-          "needs_data_source_mapping": 38,
-          "unsupported_rule": 5,
-          "needs_state_machine_support": 4,
-          "needs_formula_engine": 4
-        },
-        "batch_size_limit": 10,
-        "batch_split_required": true,
-        "batch_count": 10,
-        "batch_plan": [
-          {
-            "batch_index": 1,
-            "row_range": "1-10",
-            "input_orders": [
-              1,
-              2,
-              3,
-              4,
-              5,
-              6,
-              7,
-              8,
-              9,
-              10
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 2,
-            "row_range": "11-21",
-            "input_orders": [
-              11,
-              12,
-              13,
-              14,
-              15,
-              16,
-              18,
-              19,
-              20,
-              21
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 3,
-            "row_range": "22-37",
-            "input_orders": [
-              22,
-              23,
-              24,
-              25,
-              26,
-              27,
-              28,
-              34,
-              35,
-              37
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 4,
-            "row_range": "42-82",
-            "input_orders": [
-              42,
-              47,
-              75,
-              76,
-              77,
-              78,
-              79,
-              80,
-              81,
-              82
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 5,
-            "row_range": "83-92",
-            "input_orders": [
-              83,
-              84,
-              85,
-              86,
-              87,
-              88,
-              89,
-              90,
-              91,
-              92
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 6,
-            "row_range": "93-102",
-            "input_orders": [
-              93,
-              94,
-              95,
-              96,
-              97,
-              98,
-              99,
-              100,
-              101,
-              102
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 7,
-            "row_range": "103-112",
-            "input_orders": [
-              103,
-              104,
-              105,
-              106,
-              107,
-              108,
-              109,
-              110,
-              111,
-              112
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 8,
-            "row_range": "114-130",
-            "input_orders": [
-              114,
-              115,
-              116,
-              117,
-              118,
-              124,
-              125,
-              127,
-              129,
-              130
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 9,
-            "row_range": "131-140",
-            "input_orders": [
-              131,
-              132,
-              133,
-              134,
-              135,
-              136,
-              137,
-              138,
-              139,
-              140
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 10,
-            "row_range": "141-145",
-            "input_orders": [
-              141,
-              142,
-              144,
-              145
-            ],
-            "strategy_count": 4
-          }
-        ]
-      }
-    },
-    {
-      "run_id": "alpha-ext-20260615-070156Z",
-      "request_id": "alpha-public-1781506893314-f3c8afee0cd438",
-      "path": "external_strategy_results/runs/alpha-ext-20260615-070156Z.json",
-      "generated_at": "2026-06-15T07:01:57Z",
-      "mode": "validate",
-      "input_batch_hash": "6ebb72b1a4d1aa81d7ebbdd8412fa376c8a24bd1f9272f53456221b107f48fbc",
-      "input_strategy_sequence_hash": "6293db7fd50757eb4645ff305cebfe6cee0f93ccce4cd83af8d0fca906b0775e",
-      "strategy_count": 145,
-      "validation_summary": {
-        "total_rows": 145,
-        "ready_to_backtest": 94,
-        "skipped_or_held": 51,
-        "status_counts": {
-          "ready_to_backtest": 94,
-          "needs_data_source_mapping": 38,
-          "unsupported_rule": 5,
-          "needs_state_machine_support": 4,
-          "needs_formula_engine": 4
-        },
-        "hold_reason_counts": {
-          "needs_data_source_mapping": 38,
-          "unsupported_rule": 5,
-          "needs_state_machine_support": 4,
-          "needs_formula_engine": 4
-        },
-        "batch_size_limit": 10,
-        "batch_split_required": true,
-        "batch_count": 10,
-        "batch_plan": [
-          {
-            "batch_index": 1,
-            "row_range": "1-10",
-            "input_orders": [
-              1,
-              2,
-              3,
-              4,
-              5,
-              6,
-              7,
-              8,
-              9,
-              10
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 2,
-            "row_range": "11-21",
-            "input_orders": [
-              11,
-              12,
-              13,
-              14,
-              15,
-              16,
-              18,
-              19,
-              20,
-              21
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 3,
-            "row_range": "22-37",
-            "input_orders": [
-              22,
-              23,
-              24,
-              25,
-              26,
-              27,
-              28,
-              34,
-              35,
-              37
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 4,
-            "row_range": "42-82",
-            "input_orders": [
-              42,
-              47,
-              75,
-              76,
-              77,
-              78,
-              79,
-              80,
-              81,
-              82
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 5,
-            "row_range": "83-92",
-            "input_orders": [
-              83,
-              84,
-              85,
-              86,
-              87,
-              88,
-              89,
-              90,
-              91,
-              92
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 6,
-            "row_range": "93-102",
-            "input_orders": [
-              93,
-              94,
-              95,
-              96,
-              97,
-              98,
-              99,
-              100,
-              101,
-              102
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 7,
-            "row_range": "103-112",
-            "input_orders": [
-              103,
-              104,
-              105,
-              106,
-              107,
-              108,
-              109,
-              110,
-              111,
-              112
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 8,
-            "row_range": "114-130",
-            "input_orders": [
-              114,
-              115,
-              116,
-              117,
-              118,
-              124,
-              125,
-              127,
-              129,
-              130
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 9,
-            "row_range": "131-140",
-            "input_orders": [
-              131,
-              132,
-              133,
-              134,
-              135,
-              136,
-              137,
-              138,
-              139,
-              140
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 10,
-            "row_range": "141-145",
-            "input_orders": [
-              141,
-              142,
-              144,
-              145
-            ],
-            "strategy_count": 4
-          }
-        ]
-      }
-    },
-    {
-      "run_id": "alpha-ext-20260615-065003Z",
-      "request_id": "manual-public-validate-1781506181635",
-      "path": "external_strategy_results/runs/alpha-ext-20260615-065003Z.json",
-      "generated_at": "2026-06-15T06:50:03Z",
-      "mode": "validate",
-      "input_batch_hash": "5d98bcb4fbb16ec1433caaddfae9f2557725fb1cd5a4b79fb9897b611754dade",
-      "input_strategy_sequence_hash": "4b5ef322fac5b3a0617a66ebfae11a0174552466dae9c2db72696a90b70228b9",
-      "strategy_count": 145,
-      "validation_summary": {
-        "total_rows": 145,
-        "ready_to_backtest": 94,
-        "skipped_or_held": 51,
-        "status_counts": {
-          "ready_to_backtest": 94,
-          "needs_data_source_mapping": 38,
-          "unsupported_rule": 5,
-          "needs_state_machine_support": 4,
-          "needs_formula_engine": 4
-        },
-        "hold_reason_counts": {
-          "needs_data_source_mapping": 38,
-          "unsupported_rule": 5,
-          "needs_state_machine_support": 4,
-          "needs_formula_engine": 4
-        },
-        "batch_size_limit": 10,
-        "batch_split_required": true,
-        "batch_count": 10,
-        "batch_plan": [
-          {
-            "batch_index": 1,
-            "row_range": "1-10",
-            "input_orders": [
-              1,
-              2,
-              3,
-              4,
-              5,
-              6,
-              7,
-              8,
-              9,
-              10
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 2,
-            "row_range": "11-21",
-            "input_orders": [
-              11,
-              12,
-              13,
-              14,
-              15,
-              16,
-              18,
-              19,
-              20,
-              21
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 3,
-            "row_range": "22-37",
-            "input_orders": [
-              22,
-              23,
-              24,
-              25,
-              26,
-              27,
-              28,
-              34,
-              35,
-              37
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 4,
-            "row_range": "42-82",
-            "input_orders": [
-              42,
-              47,
-              75,
-              76,
-              77,
-              78,
-              79,
-              80,
-              81,
-              82
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 5,
-            "row_range": "83-92",
-            "input_orders": [
-              83,
-              84,
-              85,
-              86,
-              87,
-              88,
-              89,
-              90,
-              91,
-              92
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 6,
-            "row_range": "93-102",
-            "input_orders": [
-              93,
-              94,
-              95,
-              96,
-              97,
-              98,
-              99,
-              100,
-              101,
-              102
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 7,
-            "row_range": "103-112",
-            "input_orders": [
-              103,
-              104,
-              105,
-              106,
-              107,
-              108,
-              109,
-              110,
-              111,
-              112
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 8,
-            "row_range": "114-130",
-            "input_orders": [
-              114,
-              115,
-              116,
-              117,
-              118,
-              124,
-              125,
-              127,
-              129,
-              130
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 9,
-            "row_range": "131-140",
-            "input_orders": [
-              131,
-              132,
-              133,
-              134,
-              135,
-              136,
-              137,
-              138,
-              139,
-              140
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 10,
-            "row_range": "141-145",
-            "input_orders": [
-              141,
-              142,
-              144,
-              145
-            ],
-            "strategy_count": 4
-          }
-        ]
-      }
-    },
-    {
-      "run_id": "alpha-ext-20260615-063516Z",
-      "request_id": "alpha-ext-20260615-063516Z",
-      "path": "external_strategy_results/runs/alpha-ext-20260615-063516Z.json",
-      "generated_at": "2026-06-15T06:38:29Z",
-      "mode": "backtest",
-      "input_batch_hash": "5d98bcb4fbb16ec1433caaddfae9f2557725fb1cd5a4b79fb9897b611754dade",
-      "input_strategy_sequence_hash": "4b5ef322fac5b3a0617a66ebfae11a0174552466dae9c2db72696a90b70228b9",
-      "strategy_count": 145,
-      "validation_summary": {
-        "total_rows": 145,
-        "ready_to_backtest": 94,
-        "skipped_or_held": 51,
-        "status_counts": {
-          "ready_to_backtest": 94,
-          "needs_data_source_mapping": 38,
-          "unsupported_rule": 5,
-          "needs_state_machine_support": 4,
-          "needs_formula_engine": 4
-        },
-        "hold_reason_counts": {
-          "needs_data_source_mapping": 38,
-          "unsupported_rule": 5,
-          "needs_state_machine_support": 4,
-          "needs_formula_engine": 4,
-          "data_unavailable": 9
-        },
-        "batch_size_limit": 10,
-        "batch_split_required": true,
-        "batch_count": 10,
-        "batch_plan": [
-          {
-            "batch_index": 1,
-            "row_range": "1-10",
-            "input_orders": [
-              1,
-              2,
-              3,
-              4,
-              5,
-              6,
-              7,
-              8,
-              9,
-              10
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 2,
-            "row_range": "11-21",
-            "input_orders": [
-              11,
-              12,
-              13,
-              14,
-              15,
-              16,
-              18,
-              19,
-              20,
-              21
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 3,
-            "row_range": "22-37",
-            "input_orders": [
-              22,
-              23,
-              24,
-              25,
-              26,
-              27,
-              28,
-              34,
-              35,
-              37
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 4,
-            "row_range": "42-82",
-            "input_orders": [
-              42,
-              47,
-              75,
-              76,
-              77,
-              78,
-              79,
-              80,
-              81,
-              82
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 5,
-            "row_range": "83-92",
-            "input_orders": [
-              83,
-              84,
-              85,
-              86,
-              87,
-              88,
-              89,
-              90,
-              91,
-              92
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 6,
-            "row_range": "93-102",
-            "input_orders": [
-              93,
-              94,
-              95,
-              96,
-              97,
-              98,
-              99,
-              100,
-              101,
-              102
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 7,
-            "row_range": "103-112",
-            "input_orders": [
-              103,
-              104,
-              105,
-              106,
-              107,
-              108,
-              109,
-              110,
-              111,
-              112
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 8,
-            "row_range": "114-130",
-            "input_orders": [
-              114,
-              115,
-              116,
-              117,
-              118,
-              124,
-              125,
-              127,
-              129,
-              130
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 9,
-            "row_range": "131-140",
-            "input_orders": [
-              131,
-              132,
-              133,
-              134,
-              135,
-              136,
-              137,
-              138,
-              139,
-              140
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 10,
-            "row_range": "141-145",
-            "input_orders": [
-              141,
-              142,
-              144,
-              145
-            ],
-            "strategy_count": 4
-          }
-        ]
-      }
-    },
-    {
-      "run_id": "alpha-ext-20260615-063447Z",
-      "request_id": "alpha-ext-20260615-063447Z",
-      "path": "external_strategy_results/runs/alpha-ext-20260615-063447Z.json",
-      "generated_at": "2026-06-15T06:34:47Z",
-      "mode": "validate",
-      "input_batch_hash": "5d98bcb4fbb16ec1433caaddfae9f2557725fb1cd5a4b79fb9897b611754dade",
-      "input_strategy_sequence_hash": "4b5ef322fac5b3a0617a66ebfae11a0174552466dae9c2db72696a90b70228b9",
-      "strategy_count": 145,
-      "validation_summary": {
-        "total_rows": 145,
-        "ready_to_backtest": 94,
-        "skipped_or_held": 51,
-        "status_counts": {
-          "ready_to_backtest": 94,
-          "needs_data_source_mapping": 38,
-          "unsupported_rule": 5,
-          "needs_state_machine_support": 4,
-          "needs_formula_engine": 4
-        },
-        "hold_reason_counts": {
-          "needs_data_source_mapping": 38,
-          "unsupported_rule": 5,
-          "needs_state_machine_support": 4,
-          "needs_formula_engine": 4
-        },
-        "batch_size_limit": 10,
-        "batch_split_required": true,
-        "batch_count": 10,
-        "batch_plan": [
-          {
-            "batch_index": 1,
-            "row_range": "1-10",
-            "input_orders": [
-              1,
-              2,
-              3,
-              4,
-              5,
-              6,
-              7,
-              8,
-              9,
-              10
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 2,
-            "row_range": "11-21",
-            "input_orders": [
-              11,
-              12,
-              13,
-              14,
-              15,
-              16,
-              18,
-              19,
-              20,
-              21
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 3,
-            "row_range": "22-37",
-            "input_orders": [
-              22,
-              23,
-              24,
-              25,
-              26,
-              27,
-              28,
-              34,
-              35,
-              37
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 4,
-            "row_range": "42-82",
-            "input_orders": [
-              42,
-              47,
-              75,
-              76,
-              77,
-              78,
-              79,
-              80,
-              81,
-              82
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 5,
-            "row_range": "83-92",
-            "input_orders": [
-              83,
-              84,
-              85,
-              86,
-              87,
-              88,
-              89,
-              90,
-              91,
-              92
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 6,
-            "row_range": "93-102",
-            "input_orders": [
-              93,
-              94,
-              95,
-              96,
-              97,
-              98,
-              99,
-              100,
-              101,
-              102
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 7,
-            "row_range": "103-112",
-            "input_orders": [
-              103,
-              104,
-              105,
-              106,
-              107,
-              108,
-              109,
-              110,
-              111,
-              112
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 8,
-            "row_range": "114-130",
-            "input_orders": [
-              114,
-              115,
-              116,
-              117,
-              118,
-              124,
-              125,
-              127,
-              129,
-              130
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 9,
-            "row_range": "131-140",
-            "input_orders": [
-              131,
-              132,
-              133,
-              134,
-              135,
-              136,
-              137,
-              138,
-              139,
-              140
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 10,
-            "row_range": "141-145",
-            "input_orders": [
-              141,
-              142,
-              144,
-              145
-            ],
-            "strategy_count": 4
-          }
-        ]
-      }
-    },
-    {
-      "run_id": "alpha-ext-20260615-061624Z",
-      "path": "external_strategy_results/runs/alpha-ext-20260615-061624Z.json",
-      "generated_at": "2026-06-15T06:16:24Z",
-      "mode": "validate",
-      "validation_summary": {
-        "total_rows": 145,
-        "ready_to_backtest": 94,
-        "skipped_or_held": 51,
-        "status_counts": {
-          "ready_to_backtest": 94,
-          "needs_data_source_mapping": 38,
-          "unsupported_rule": 5,
-          "needs_state_machine_support": 4,
-          "needs_formula_engine": 4
-        },
-        "hold_reason_counts": {
-          "needs_data_source_mapping": 38,
-          "unsupported_rule": 5,
-          "needs_state_machine_support": 4,
-          "needs_formula_engine": 4
-        },
-        "batch_size_limit": 10,
-        "batch_split_required": true,
-        "batch_count": 10,
-        "batch_plan": [
-          {
-            "batch_index": 1,
-            "row_range": "1-10",
-            "input_orders": [
-              1,
-              2,
-              3,
-              4,
-              5,
-              6,
-              7,
-              8,
-              9,
-              10
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 2,
-            "row_range": "11-21",
-            "input_orders": [
-              11,
-              12,
-              13,
-              14,
-              15,
-              16,
-              18,
-              19,
-              20,
-              21
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 3,
-            "row_range": "22-37",
-            "input_orders": [
-              22,
-              23,
-              24,
-              25,
-              26,
-              27,
-              28,
-              34,
-              35,
-              37
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 4,
-            "row_range": "42-82",
-            "input_orders": [
-              42,
-              47,
-              75,
-              76,
-              77,
-              78,
-              79,
-              80,
-              81,
-              82
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 5,
-            "row_range": "83-92",
-            "input_orders": [
-              83,
-              84,
-              85,
-              86,
-              87,
-              88,
-              89,
-              90,
-              91,
-              92
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 6,
-            "row_range": "93-102",
-            "input_orders": [
-              93,
-              94,
-              95,
-              96,
-              97,
-              98,
-              99,
-              100,
-              101,
-              102
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 7,
-            "row_range": "103-112",
-            "input_orders": [
-              103,
-              104,
-              105,
-              106,
-              107,
-              108,
-              109,
-              110,
-              111,
-              112
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 8,
-            "row_range": "114-130",
-            "input_orders": [
-              114,
-              115,
-              116,
-              117,
-              118,
-              124,
-              125,
-              127,
-              129,
-              130
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 9,
-            "row_range": "131-140",
-            "input_orders": [
-              131,
-              132,
-              133,
-              134,
-              135,
-              136,
-              137,
-              138,
-              139,
-              140
-            ],
-            "strategy_count": 10
-          },
-          {
-            "batch_index": 10,
-            "row_range": "141-145",
-            "input_orders": [
-              141,
-              142,
-              144,
-              145
-            ],
-            "strategy_count": 4
-          }
-        ]
-      }
-    },
-    {
-      "run_id": "alpha-ext-20260615-054209Z",
-      "path": "external_strategy_results/runs/alpha-ext-20260615-054209Z.json",
-      "generated_at": "2026-06-15T05:42:23Z",
-      "mode": "backtest",
-      "validation_summary": {
-        "total_rows": 9,
-        "ready_to_backtest": 8,
-        "skipped_or_held": 1,
-        "status_counts": {
-          "ready_to_backtest": 8,
-          "needs_data_source_mapping": 1
-        },
-        "hold_reason_counts": {
-          "needs_data_source_mapping": 1
-        },
-        "batch_size_limit": 10,
-        "batch_split_required": false,
-        "batch_count": 1,
-        "batch_plan": [
-          {
-            "batch_index": 1,
-            "row_range": "1-8",
-            "input_orders": [
-              1,
-              2,
-              3,
-              4,
-              5,
-              6,
-              7,
-              8
-            ],
-            "strategy_count": 8
-          }
-        ]
-      }
-    },
-    {
-      "run_id": "alpha-ext-20260615-054143Z",
-      "path": "external_strategy_results/runs/alpha-ext-20260615-054143Z.json",
-      "generated_at": "2026-06-15T05:41:57Z",
-      "mode": "backtest",
-      "validation_summary": {
-        "total_rows": 9,
-        "ready_to_backtest": 8,
-        "skipped_or_held": 1,
-        "status_counts": {
-          "ready_to_backtest": 8,
-          "needs_data_source_mapping": 1
-        },
-        "hold_reason_counts": {
-          "needs_data_source_mapping": 1
-        },
-        "batch_size_limit": 10,
-        "batch_split_required": false,
-        "batch_count": 1,
-        "batch_plan": [
-          {
-            "batch_index": 1,
-            "row_range": "1-8",
-            "input_orders": [
-              1,
-              2,
-              3,
-              4,
-              5,
-              6,
-              7,
-              8
-            ],
-            "strategy_count": 8
-          }
-        ]
-      }
-    },
-    {
-      "run_id": "alpha-ext-20260615-053229Z",
-      "path": "external_strategy_results/runs/alpha-ext-20260615-053229Z.json",
-      "generated_at": "2026-06-15T05:32:43Z",
-      "mode": "backtest",
-      "validation_summary": {
-        "total_rows": 9,
-        "ready_to_backtest": 8,
-        "skipped_or_held": 1,
-        "status_counts": {
-          "ready_to_backtest": 8,
-          "needs_data_source_mapping": 1
-        },
-        "hold_reason_counts": {
-          "needs_data_source_mapping": 1
-        },
-        "batch_size_limit": 10,
-        "batch_split_required": false,
-        "batch_count": 1,
-        "batch_plan": [
-          {
-            "batch_index": 1,
-            "row_range": "1-8",
-            "input_orders": [
-              1,
-              2,
-              3,
-              4,
-              5,
-              6,
-              7,
-              8
-            ],
-            "strategy_count": 8
-          }
-        ]
-      }
-    },
-    {
-      "run_id": "alpha-ext-20260615-053224Z",
-      "path": "external_strategy_results/runs/alpha-ext-20260615-053224Z.json",
-      "generated_at": "2026-06-15T05:32:24Z",
-      "mode": "validate",
-      "validation_summary": {
-        "total_rows": 9,
-        "ready_to_backtest": 8,
-        "skipped_or_held": 1,
-        "status_counts": {
-          "ready_to_backtest": 8,
-          "needs_data_source_mapping": 1
-        },
-        "hold_reason_counts": {
-          "needs_data_source_mapping": 1
-        },
-        "batch_size_limit": 10,
-        "batch_split_required": false,
-        "batch_count": 1,
-        "batch_plan": [
-          {
-            "batch_index": 1,
-            "row_range": "1-8",
-            "input_orders": [
-              1,
-              2,
-              3,
-              4,
-              5,
-              6,
-              7,
-              8
-            ],
-            "strategy_count": 8
-          }
-        ]
-      }
-    },
-    {
-      "run_id": "alpha-ext-20260615-050112Z",
-      "path": "external_strategy_results/runs/alpha-ext-20260615-050112Z.json",
-      "generated_at": "2026-06-15T05:01:16Z",
-      "mode": "backtest",
-      "validation_summary": {
-        "total_rows": 4,
-        "ready_to_backtest": 2,
-        "skipped_or_held": 2,
-        "status_counts": {
-          "ready_to_backtest": 2,
-          "needs_data_source_mapping": 1,
-          "unsupported_rule": 1
-        },
-        "batch_size_limit": 10,
-        "batch_split_required": false,
-        "batch_count": 1,
-        "batch_plan": [
-          {
-            "batch_index": 1,
-            "row_range": "1-2",
-            "input_orders": [
-              1,
-              2
-            ],
-            "strategy_count": 2
-          }
-        ]
-      }
-    },
-    {
-      "run_id": "alpha-ext-20260615-043912Z",
-      "path": "external_strategy_results/runs/alpha-ext-20260615-043912Z.json",
-      "generated_at": "2026-06-15T04:39:12Z",
-      "mode": "validate"
-    },
-    {
-      "run_id": "alpha-ext-20260615-012048Z",
-      "path": "external_strategy_results/runs/alpha-ext-20260615-012048Z.json",
-      "generated_at": "2026-06-15T01:20:49Z",
-      "mode": "backtest"
-    },
-    {
-      "run_id": "alpha-ext-20260615-011529Z",
-      "path": "external_strategy_results/runs/alpha-ext-20260615-011529Z.json",
-      "generated_at": "2026-06-15T01:15:32Z",
-      "mode": "backtest"
-    },
-    {
-      "run_id": "alpha-ext-20260615-011515Z",
-      "path": "external_strategy_results/runs/alpha-ext-20260615-011515Z.json",
-      "generated_at": "2026-06-15T01:15:18Z",
-      "mode": "backtest"
     }
   ]
 }

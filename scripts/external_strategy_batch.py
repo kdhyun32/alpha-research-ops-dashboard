@@ -66,8 +66,13 @@ BOUNDARY_FLAGS = {
 }
 
 PUBLIC_TEXT_REPLACEMENTS = {
+    "CUSTOM_P25_A100_RAW": "external authority state map",
+    "P25": "external parameter",
+    "A100": "external parameter",
     "P066_AUTHORITY": "EXTERNAL_AUTHORITY",
     "P066": "external authority",
+    "ABL_AUTHORITY": "EXTERNAL_AUTHORITY",
+    "ABL": "external authority",
     "Snowball": "external prior system",
 }
 
@@ -169,6 +174,8 @@ def normalize_symbols(values: list[Any]) -> tuple[list[str], bool]:
     needs_mapping = False
     for value in values:
         for part in split_symbol_field(value):
+            if part.strip().upper() in DERIVED_PLACEHOLDER_SYMBOLS or part.strip().upper() == "RV":
+                continue
             symbol, status = normalize_symbol(part)
             if status == "needs_data_source_mapping":
                 needs_mapping = True
@@ -251,6 +258,15 @@ def parse_rule_text(rule: Any, default_symbol: Any = "") -> dict[str, Any] | Non
         return None
     text = re.sub(r"\s+", " ", text)
     text = re.sub(r"(?<=\w)(<=|>=|<|>)(?=\w|\d)", r" \1 ", text)
+    ratio_sma_match = re.search(
+        r"\b(?P<left>\^?[A-Za-z][A-Za-z0-9.\-_]*)/(?P<right>\^?[A-Za-z][A-Za-z0-9.\-_]*)\s+(?:ratio\s*)?>\s*SMA(?P<window>\d+)\b",
+        text,
+        re.I,
+    )
+    if ratio_sma_match:
+        left, _ = normalize_symbol(ratio_sma_match.group("left"))
+        right, _ = normalize_symbol(ratio_sma_match.group("right"))
+        return make_node("ratio_price_vs_sma", left_symbol=left, right_symbol=right, operator=">", window=int(ratio_sma_match.group("window")))
     text = re.sub(r"\b(\^?[A-Za-z][A-Za-z0-9.\-_]*)\s*>\s*SMA(\d+)\b", r"\1 close > \1 \2-day simple moving average", text, flags=re.I)
     text = re.sub(r"\b(\^?[A-Za-z][A-Za-z0-9.\-_]*)\s*<\s*SMA(\d+)\b", r"\1 close < \1 \2-day simple moving average", text, flags=re.I)
     text = re.sub(r"\bROC(\d+)\s*>\s*0\b", lambda m: f"{clean_text(default_symbol) or 'QQQ'} {m.group(1)}-day rate of change > 0", text, flags=re.I)
@@ -269,7 +285,7 @@ def parse_rule_text(rule: Any, default_symbol: Any = "") -> dict[str, Any] | Non
     if lowered.startswith("hold tqqq if ") and "otherwise select" in lowered:
         condition_text = re.split(r"\botherwise select\b", text[13:], flags=re.I, maxsplit=1)[0]
         return parse_rule_text(condition_text, default_symbol)
-    if lowered.startswith("tqqq in trend"):
+    if lowered.startswith("tqqq in trend") or lowered.startswith("tqqq in sma200 trend"):
         return parse_rule_text("QQQ close > QQQ 200-day simple moving average", default_symbol)
     if lowered.startswith("use qqq 200-day sma trend gate"):
         return parse_rule_text("QQQ close > QQQ 200-day simple moving average", default_symbol)
@@ -300,7 +316,7 @@ def parse_rule_text(rule: Any, default_symbol: Any = "") -> dict[str, Any] | Non
             parse_rule_text("QQQ 63-day rate of change > LQD 63-day rate of change", default_symbol),
             parse_rule_text("QQQ 63-day rate of change > SHY 63-day rate of change", default_symbol),
         ])
-    if "xlk or soxx" in lowered and "sma100" in lowered:
+    if "xlk or soxx" in lowered and ("sma100" in lowered or "100-day" in lowered):
         return make_node("logical_and", children=[
             parse_rule_text("QQQ close > QQQ 200-day simple moving average", default_symbol),
             make_node("logical_or", children=[
@@ -325,6 +341,19 @@ def parse_rule_text(rule: Any, default_symbol: Any = "") -> dict[str, Any] | Non
         if match:
             children = [parse_rule_text(part, default_symbol) for part in re.split(r";", match.group("body")) if part.strip()]
             return make_node("count_condition", children=[child for child in children if child], operator=">=", threshold=int(match.group("threshold")))
+    count_above_match = re.search(
+        r"at least\s+(?P<threshold>\d+)\s+of\s+(?P<symbols>[A-Z0-9./^,\s]+?)\s+above\s+(?:their\s+)?SMA(?P<window>\d+)",
+        text,
+        re.I,
+    )
+    if count_above_match:
+        raw_symbols = re.split(r"[/,\s]+", count_above_match.group("symbols").strip())
+        children = []
+        for raw_symbol in raw_symbols:
+            symbol, status = normalize_symbol(raw_symbol)
+            if symbol and not status:
+                children.append(make_node("price_vs_sma", symbol=symbol, operator=">", window=int(count_above_match.group("window"))))
+        return make_node("count_condition", children=children, operator=">=", threshold=int(count_above_match.group("threshold"))) if children else None
     if lowered.startswith("set tqqq exposure to the fraction"):
         return make_node("always_true", symbol=clean_text(default_symbol) or "QQQ")
     parts = split_logical(text, "or")
@@ -340,6 +369,9 @@ def parse_rule_text(rule: Any, default_symbol: Any = "") -> dict[str, Any] | Non
         return make_node("logical_not", child=child) if child else None
 
     default, _ = normalize_symbol(default_symbol)
+    if not default and "," in clean_text(default_symbol):
+        default_symbols, _ = normalize_symbols([default_symbol])
+        default = default_symbols[0] if default_symbols else "QQQ"
     symbol = r"(?P<symbol>\^?[A-Za-z][A-Za-z0-9.\-_]*)"
     op = r"(?P<op><=|>=|<|>|==|=)"
 
@@ -349,6 +381,30 @@ def parse_rule_text(rule: Any, default_symbol: Any = "") -> dict[str, Any] | Non
     if match:
         left, _ = normalize_symbol(match.group("symbol"))
         return make_node("price_vs_sma", symbol=left, operator=normalize_operator(match.group("op")), window=int(match.group("window")))
+
+    match = re.search(rf"{symbol}\s+(?P<window>\d+){day}\s+annualized\s+realized\s+volatility\s+{op}\s+(?P<threshold>\d+(?:\.\d+)?%?)", text, re.I)
+    if match:
+        left, _ = normalize_symbol(match.group("symbol"))
+        return make_node("realized_volatility", symbol=left, operator=normalize_operator(match.group("op")), window=int(match.group("window")), threshold=as_number(match.group("threshold")))
+
+    match = re.search(
+        rf"{symbol}\s+close\s*-\s*(?P=symbol)\s+close\s+(?P<window>\d+)\s+sessions?\s+ago\s+{op}\s+(?P<threshold>-?\d+(?:\.\d+)?)",
+        text,
+        re.I,
+    )
+    if match:
+        left, _ = normalize_symbol(match.group("symbol"))
+        return make_node("price_change_threshold", symbol=left, operator=normalize_operator(match.group("op")), window=int(match.group("window")), threshold=float(match.group("threshold")))
+
+    match = re.search(rf"{symbol}\s+one{day}\s+(?:rate of change|roc|total return|return)\s+{op}\s+(?P<threshold>-?\d+(?:\.\d+)?%?)", text, re.I)
+    if match:
+        left, _ = normalize_symbol(match.group("symbol"))
+        return make_node("return_threshold", symbol=left, operator=normalize_operator(match.group("op")), window=1, threshold=as_number(match.group("threshold")))
+
+    match = re.search(rf"(?P<symbol>\^?[A-Za-z][A-Za-z0-9.\-_]*)\s+(?P<window>\d+)-day\s+z-score\s*{op}\s*(?P<threshold>\d+(?:\.\d+)?)", text, re.I)
+    if match:
+        left, _ = normalize_symbol(match.group("symbol"))
+        return make_node("z_score", symbol=left, operator=normalize_operator(match.group("op")), window=int(match.group("window")), threshold=float(match.group("threshold")))
 
     match = re.search(rf"{symbol}\s+close\s+percentile\s+over\s+the\s+trailing\s+(?P<window>\d+)(?:\s+trading)?\s+days\s+{op}\s+(?P<threshold>\d+(?:\.\d+)?)", text, re.I)
     if match:
@@ -395,6 +451,31 @@ def parse_rule_text(rule: Any, default_symbol: Any = "") -> dict[str, Any] | Non
         right, _ = normalize_symbol(match.group("right"))
         return make_node("roc_compare_symbol", left_symbol=left, right_symbol=right, operator=normalize_operator(match.group("op")), window=int(match.group("window")))
 
+    match = re.search(
+        rf"(?P<left>\^?[A-Za-z][A-Za-z0-9.\-_]*)/(?P<right>\^?[A-Za-z][A-Za-z0-9.\-_]*)\s+ROC(?P<window>\d+)\s*{op}\s*(?P<threshold>-?\d+(?:\.\d+)?%?)",
+        text,
+        re.I,
+    )
+    if match:
+        left, _ = normalize_symbol(match.group("left"))
+        right, _ = normalize_symbol(match.group("right"))
+        return make_node("ratio_return_threshold", left_symbol=left, right_symbol=right, operator=normalize_operator(match.group("op")), window=int(match.group("window")), threshold=as_number(match.group("threshold")))
+
+    match = re.search(rf"(?P<symbol>\^?[A-Za-z][A-Za-z0-9.\-_]*)/SMA(?P<window>\d+)\s*{op}\s*(?P<threshold>\d+(?:\.\d+)?)", text, re.I)
+    if match:
+        left, _ = normalize_symbol(match.group("symbol"))
+        return make_node("distance_from_sma", symbol=left, operator=normalize_operator(match.group("op")), window=int(match.group("window")), threshold=float(match.group("threshold")) - 1.0)
+
+    match = re.search(
+        rf"(?P<left>\^?[A-Za-z][A-Za-z0-9.\-_]*)/(?P<right>\^?[A-Za-z][A-Za-z0-9.\-_]*)\s*{op}\s*(?P<threshold>-?\d+(?:\.\d+)?)",
+        text,
+        re.I,
+    )
+    if match:
+        left, _ = normalize_symbol(match.group("left"))
+        right, _ = normalize_symbol(match.group("right"))
+        return make_node("ratio_price_threshold", left_symbol=left, right_symbol=right, operator=normalize_operator(match.group("op")), threshold=float(match.group("threshold")))
+
     match = re.search(rf"{symbol}\s+close\s+{op}\s+(?P<threshold>-?\d+(?:\.\d+)?)$", text, re.I)
     if match:
         left, _ = normalize_symbol(match.group("symbol"))
@@ -417,11 +498,6 @@ def parse_rule_text(rule: Any, default_symbol: Any = "") -> dict[str, Any] | Non
         left, _ = normalize_symbol(match.group("left"))
         sma_symbol, _ = normalize_symbol(match.group("right"))
         return make_node("price_vs_sma_other_symbol", symbol=left, sma_symbol=sma_symbol, operator=normalize_operator(match.group("op")), window=int(match.group("window")))
-
-    match = re.search(rf"{symbol}\s+(?P<window>\d+){day}\s+annualized\s+realized\s+volatility\s+{op}\s+(?P<threshold>\d+(?:\.\d+)?%?)", text, re.I)
-    if match:
-        left, _ = normalize_symbol(match.group("symbol"))
-        return make_node("realized_volatility", symbol=left, operator=normalize_operator(match.group("op")), window=int(match.group("window")), threshold=as_number(match.group("threshold")))
 
     match = re.search(rf"{symbol}\s+(?P<window>\d+){day}\s+drawdown\s+{op}\s+(?P<threshold>-?\d+(?:\.\d+)?%?)", text, re.I)
     if match:
@@ -575,6 +651,8 @@ def normalize_node(raw: Any, default_symbol: Any = "") -> tuple[dict[str, Any] |
         errors.append("needs_formula_engine")
     if node_type == "external_authority_state":
         errors.append("needs_data_source_mapping")
+    if node_type == "price_level_compare" and clean_text(node.get("symbol")).upper() in DERIVED_PLACEHOLDER_SYMBOLS:
+        errors.append("unsupported_rule")
     return node, errors
 
 
@@ -695,6 +773,17 @@ def normalize_exposure(strategy: dict[str, Any], root_node: dict[str, Any] | Non
                     {"when": {"type": "price_level_compare", "symbol": "VIX", "operator": "<", "threshold": 25}, "exposure": 0.5},
                 ],
             }
+        if "half exposure when qqq/sma50" in text.lower():
+            trend = parse_rule_text("QQQ close > QQQ 200-day simple moving average", "QQQ")
+            overextended = parse_rule_text("QQQ/SMA50 > 1.12", "QQQ")
+            exposure = {
+                "type": "tiered",
+                "default_exposure": 0.0,
+                "tiers": [
+                    {"when": trend, "exposure": 1.0},
+                    {"when": make_node("logical_and", children=[trend, overextended]), "exposure": 0.5},
+                ],
+            }
         if "fraction of these true conditions" in text.lower():
             body = text.split(":", 1)[1] if ":" in text else text
             conditions = [normalize_node(part.strip(), "")[0] for part in re.split(r",", body) if part.strip()]
@@ -710,6 +799,8 @@ def normalize_exposure(strategy: dict[str, Any], root_node: dict[str, Any] | Non
                 tiers.append({"when": node, "exposure": as_number(tier.get("exposure"))})
         exposure["tiers"] = tiers
         exposure["default_exposure"] = as_number(exposure.get("default_exposure"), 0.0)
+        if not root_node and tiers:
+            exposure["base_symbol"] = node_symbols({"children": [tier["when"] for tier in tiers]})[0]
     elif exposure.get("type") == "condition_fraction":
         conditions = []
         for condition in exposure.get("conditions") or []:
@@ -847,8 +938,15 @@ def normalize_strategy(strategy: dict[str, Any], index: int, total_ready_hint: i
                     if not clean_text(signal.get(key)):
                         errors.append(f"signal.{key} is required")
                 source_symbols.extend(split_symbol_field(signal.get("symbol")))
-                symbol, symbol_status = normalize_symbol(signal.get("symbol"))
-                if symbol_status:
+                symbol_values, symbol_needs_mapping = normalize_symbols([signal.get("symbol")])
+                symbol = symbol_values[0] if symbol_values else clean_text(signal.get("symbol"))
+                if symbol_needs_mapping:
+                    parse_errors.append("needs_data_source_mapping")
+                if clean_text(signal.get("symbol")) and "," in clean_text(signal.get("symbol")) and symbol_values:
+                    symbol_status = None
+                else:
+                    symbol, symbol_status = normalize_symbol(signal.get("symbol"))
+                if symbol_status and symbol_status != "unsupported_signal_shape":
                     parse_errors.append(symbol_status)
                 node, node_errors = normalize_node(signal.get("rule"), symbol)
                 parse_errors.extend(node_errors)
@@ -879,6 +977,7 @@ def normalize_strategy(strategy: dict[str, Any], index: int, total_ready_hint: i
         "QQQ",
         "TQQQ",
     ])
+    normalized_symbols = [symbol for symbol in normalized_symbols if symbol.upper() not in DERIVED_PLACEHOLDER_SYMBOLS]
     source_symbols = unique_strings([*source_symbols, *strategy.get("required_symbols", []), strategy.get("traded_instrument"), *benchmarks])
     mapping_symbols = {symbol.upper() for symbol in normalized_symbols if symbol.upper() in NEEDS_DATA_SOURCE_MAPPING}
     unsupported_placeholder_symbols = {
@@ -894,26 +993,50 @@ def normalize_strategy(strategy: dict[str, Any], index: int, total_ready_hint: i
         or bool(mapping_symbols)
     )
     combined_rule_text = " ".join([clean_text(strategy.get("strategy_name")), clean_text(strategy.get("exposure_rule"))] + [clean_text(signal.get("rule")) for signal in strategy.get("signals") or [] if isinstance(signal, dict)]).lower()
-    unsupported_runtime_derived = bool(unsupported_placeholder_symbols) or (
-        "cooldown" in combined_rule_text
-        and ("one-day return" in combined_rule_text or "z-score" in combined_rule_text)
+    unsupported_runtime_derived = bool(unsupported_placeholder_symbols)
+    formula_engine_needed = any(
+        token in combined_rule_text
+        for token in (
+            "target-vol",
+            "target volatility",
+            "weight=min",
+            "ladder",
+            "fraction of these true conditions",
+            "dynamic defensive",
+            "composite",
+            "risk count adds",
+            "0% tqqq when",
+        )
+    ) or bool(re.search(r"\b(?:health|stress|trend[- ]volatility|volatility surface|trend)\s+score\b|score exposure", combined_rule_text))
+    state_machine_needed = any(
+        token in combined_rule_text
+        for token in (
+            "state machine",
+            "stateful",
+            "hysteresis",
+            "maintain prior state",
+            "when armed",
+            "return to tqqq after",
+            "re-entry",
+            "improved by",
+        )
     )
+    tiered_exposure_ready = exposure.get("type") == "tiered" and bool(exposure.get("tiers"))
+    effective_parse_errors = list(parse_errors)
+    if tiered_exposure_ready and not root_node:
+        effective_parse_errors = [error for error in effective_parse_errors if error != "unsupported_rule"]
 
     if errors:
         status = "invalid_required_field"
     elif data_mapping_needed:
         status = "needs_data_source_mapping"
-    elif "needs_state_machine_support" in parse_errors:
+    elif "needs_state_machine_support" in effective_parse_errors or state_machine_needed:
         status = "needs_state_machine_support"
-    elif "needs_formula_engine" in parse_errors:
-        status = "needs_formula_engine"
-    elif any(token in combined_rule_text for token in ("state machine", "stateful", "hysteresis", "maintain prior state", "when armed")):
-        status = "needs_state_machine_support"
-    elif any(token in combined_rule_text for token in ("score", "fraction of these true conditions", "compute ", "dynamic", "ladder")) and (parse_errors or not root_node):
+    elif "needs_formula_engine" in effective_parse_errors or formula_engine_needed:
         status = "needs_formula_engine"
     elif unsupported_runtime_derived:
         status = "unsupported_rule"
-    elif parse_errors or not root_node:
+    elif effective_parse_errors or (not root_node and not tiered_exposure_ready):
         status = "unsupported_rule"
     else:
         status = SUPPORTED_STATUS
@@ -1038,6 +1161,10 @@ def eval_node(node: dict[str, Any], frames: dict[str, pd.DataFrame]) -> pd.Serie
     if node_type == "price_level_compare":
         close = close_series(frames, node["symbol"])
         return operator_apply(close, node.get("operator", "<="), float(node["threshold"]))
+    if node_type == "price_change_threshold":
+        close = close_series(frames, node["symbol"])
+        change = close - close.shift(int(node["window"]))
+        return operator_apply(change, node.get("operator", ">"), float(node["threshold"]))
     if node_type == "price_vs_sma_other_symbol":
         close = close_series(frames, node["symbol"])
         other = close_series(frames, node.get("sma_symbol") or node["symbol"]).rolling(int(node["window"])).mean()
@@ -1141,7 +1268,11 @@ def exposure_series(strategy: dict[str, Any], frames: dict[str, pd.DataFrame]) -
     exposure = strategy.get("exposure") or {}
     root = strategy["rule_spec"]
     if exposure.get("type") == "tiered":
-        base_index = eval_node(root, frames).index
+        if root:
+            base_index = eval_node(root, frames).index
+        else:
+            base_symbol = exposure.get("base_symbol") or strategy.get("traded_instrument") or "QQQ"
+            base_index = close_series(frames, base_symbol).index
         series = pd.Series(float(exposure.get("default_exposure", 0.0)), index=base_index)
         for tier in exposure.get("tiers") or []:
             mask = eval_node(tier["when"], frames).reindex(series.index).fillna(False).astype(bool)
