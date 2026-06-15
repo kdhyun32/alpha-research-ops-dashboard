@@ -31,14 +31,29 @@ jobs:
       - name: Write payload
         shell: bash
         env:
+          GITHUB_EVENT_NAME: ${{ github.event_name }}
           WORKFLOW_PAYLOAD_JSON: ${{ inputs.payload_json }}
           DISPATCH_PAYLOAD_JSON: ${{ toJson(github.event.client_payload) }}
         run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            printf '%s' "$WORKFLOW_PAYLOAD_JSON" > payload.json
-          else
-            printf '%s' "$DISPATCH_PAYLOAD_JSON" > payload.json
-          fi
+          python - <<'PY'
+          import json
+          import os
+          import shutil
+          from pathlib import Path
+
+          if os.environ["GITHUB_EVENT_NAME"] == "workflow_dispatch":
+              Path("payload.json").write_text(os.environ["WORKFLOW_PAYLOAD_JSON"], encoding="utf-8")
+          else:
+              payload = json.loads(os.environ["DISPATCH_PAYLOAD_JSON"])
+              request_path = payload.get("strategy_batch_path")
+              if request_path:
+                  source = Path(request_path)
+                  if not source.is_file():
+                      raise SystemExit(f"strategy_batch_path not found: {request_path}")
+                  shutil.copyfile(source, "payload.json")
+              else:
+                  Path("payload.json").write_text(json.dumps(payload), encoding="utf-8")
+          PY
       - name: Run external strategy batch
         run: |
           MODE="${{ inputs.mode }}"

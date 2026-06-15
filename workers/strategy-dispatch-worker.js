@@ -21,6 +21,30 @@ function json(body, status, origin) {
   return new Response(JSON.stringify(body), { status, headers: cors(origin) });
 }
 
+function githubHeaders(token) {
+  return {
+    "accept": "application/vnd.github+json",
+    "authorization": `Bearer ${token}`,
+    "content-type": "application/json",
+    "user-agent": "alpha-research-ops-dashboard-dispatch-worker",
+    "x-github-api-version": "2022-11-28"
+  };
+}
+
+function safePathPart(value) {
+  return String(value || "").replace(/[^A-Za-z0-9._-]/g, "-").slice(0, 120);
+}
+
+function base64EncodeUtf8(text) {
+  const bytes = new TextEncoder().encode(text);
+  let binary = "";
+  const chunkSize = 0x8000;
+  for (let index = 0; index < bytes.length; index += chunkSize) {
+    binary += String.fromCharCode(...bytes.subarray(index, index + chunkSize));
+  }
+  return btoa(binary);
+}
+
 function validatePayload(body) {
   if (body.mode !== "validate" && body.mode !== "backtest") {
     return "mode must be validate or backtest.";
@@ -79,19 +103,39 @@ export default {
       input_batch_hash: body.input_batch_hash || body.strategy_batch.input_batch_hash || "",
       input_strategy_sequence_hash: body.input_strategy_sequence_hash || body.strategy_batch.input_strategy_sequence_hash || ""
     };
+    const requestPath = `external_strategy_requests/${safePathPart(requestId)}.json`;
+    const requestContent = JSON.stringify(strategyBatch, null, 2) + "\n";
+    const uploadResponse = await fetch(`https://api.github.com/repos/kdhyun32/alpha-research-ops-dashboard/contents/${requestPath}`, {
+      method: "PUT",
+      headers: githubHeaders(githubToken),
+      body: JSON.stringify({
+        message: `Store external strategy request ${requestId}`,
+        content: base64EncodeUtf8(requestContent),
+        branch: "main"
+      })
+    });
+
+    if (!uploadResponse.ok) {
+      const text = await uploadResponse.text();
+      return json({
+        ok: false,
+        error: "GitHub request payload upload failed.",
+        github_status: uploadResponse.status,
+        github_response: text.slice(0, 500)
+      }, 502, origin);
+    }
+
     const response = await fetch("https://api.github.com/repos/kdhyun32/alpha-research-ops-dashboard/dispatches", {
       method: "POST",
-      headers: {
-        "accept": "application/vnd.github+json",
-        "authorization": `Bearer ${githubToken}`,
-        "content-type": "application/json",
-        "user-agent": "alpha-research-ops-dashboard-dispatch-worker",
-        "x-github-api-version": "2022-11-28"
-      },
+      headers: githubHeaders(githubToken),
       body: JSON.stringify({
         event_type: eventType,
         client_payload: {
-          strategy_batch: strategyBatch,
+          request_id: requestId,
+          strategy_batch_path: requestPath,
+          input_batch_hash: strategyBatch.input_batch_hash,
+          input_strategy_sequence_hash: strategyBatch.input_strategy_sequence_hash,
+          strategy_count: strategyBatch.strategies.length,
           requested_at: new Date().toISOString(),
           request_guard: { max_strategies: MAX_STRATEGIES, max_payload_bytes: MAX_PAYLOAD_BYTES }
         }
@@ -112,6 +156,7 @@ export default {
       ok: true,
       github_event_type: eventType,
       request_id: requestId,
+      request_path: requestPath,
       result_path: "external_strategy_results/latest.json",
       result_index_path: "external_strategy_results/index.json"
     }, 202, origin);
