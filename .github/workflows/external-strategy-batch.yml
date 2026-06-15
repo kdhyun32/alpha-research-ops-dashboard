@@ -1,0 +1,60 @@
+name: External strategy batch
+
+on:
+  repository_dispatch:
+    types:
+      - external_strategy_validate
+      - external_strategy_backtest
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: validate or backtest
+        required: true
+        default: validate
+      payload_json:
+        description: Strategy batch JSON
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install runner dependencies
+        run: python -m pip install --upgrade pandas numpy yfinance
+      - name: Write payload
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            cat > payload.json <<'JSON'
+          ${{ inputs.payload_json }}
+          JSON
+          else
+            cat > payload.json <<'JSON'
+          ${{ toJson(github.event.client_payload) }}
+          JSON
+          fi
+      - name: Run external strategy batch
+        run: |
+          MODE="${{ inputs.mode }}"
+          if [ -z "$MODE" ]; then
+            if [ "${{ github.event.action }}" = "external_strategy_backtest" ]; then MODE="backtest"; else MODE="validate"; fi
+          fi
+          python scripts/external_strategy_batch.py --mode "$MODE" --payload-file payload.json --output-dir external_strategy_results
+      - name: Commit result JSON
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add external_strategy_results
+          if git diff --cached --quiet; then
+            echo "No result changes to commit."
+          else
+            git commit -m "Append external exploratory strategy batch result"
+            git push
+          fi

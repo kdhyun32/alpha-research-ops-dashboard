@@ -1,0 +1,38 @@
+{
+  "schema_name": "external_strategy_ideas",
+  "schema_version": "1.0",
+  "strategies": [
+    {
+      "strategy_name": "Sample QQQ SMA20 TQQQ exposure",
+      "traded_instrument": "TQQQ",
+      "benchmark": "QQQ",
+      "required_symbols": ["QQQ", "TQQQ"],
+      "signal_timing": "after_close",
+      "execution_timing": "next_session_open",
+      "same_close_execution_allowed": false,
+      "entry_rule": "If the signal is true after close, enter at the next session open.",
+      "exit_rule": "If the signal is false after close, exit at the next session open.",
+      "exposure_rule": "Exposure is 1 when QQQ close is above its 20-day simple moving average; otherwise 0.",
+      "costs": {"commission": 0, "slippage_per_trade": 0.0005},
+      "signals": [
+        {"name": "QQQ SMA20", "symbol": "QQQ", "role": "entry_filter", "rule": "QQQ close > QQQ 20-day simple moving average"}
+      ]
+    },
+    {
+      "strategy_name": "Sample QQQ 60-day momentum TQQQ exposure",
+      "traded_instrument": "TQQQ",
+      "benchmark": "QQQ",
+      "required_symbols": ["QQQ", "TQQQ"],
+      "signal_timing": "after_close",
+      "execution_timing": "next_session_open",
+      "same_close_execution_allowed": false,
+      "entry_rule": "If momentum is positive after close, enter at the next session open.",
+      "exit_rule": "If momentum is not positive after close, exit at the next session open.",
+      "exposure_rule": "Exposure is 1 when QQQ 60-day return is positive; otherwise 0.",
+      "costs": {"commission": 0, "slippage_per_trade": 0.0005},
+      "signals": [
+        {"name": "QQQ 60-day momentum", "symbol": "QQQ", "role": "entry_filter", "rule": "QQQ 60-day return is positive"}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+name = "alpha-strategy-dispatch"
+main = "workers/strategy-dispatch-worker.js"
+compatibility_date = "2026-06-15"
+
+[observability]
+enabled = true

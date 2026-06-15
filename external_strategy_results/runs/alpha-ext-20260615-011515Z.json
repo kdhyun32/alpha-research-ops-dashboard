@@ -1,0 +1,184 @@
+{
+  "schema_name": "external_strategy_results",
+  "schema_version": "1.0",
+  "run_id": "alpha-ext-20260615-011515Z",
+  "generated_at": "2026-06-15T01:15:18Z",
+  "mode": "backtest",
+  "data_source_tier": "exploratory_unofficial",
+  "final_decision_allowed": false,
+  "final_review_allowed": false,
+  "licensed_rerun_required": true,
+  "candidate_watch_champion_evidence": false,
+  "ranking_applied": false,
+  "recommendation_applied": false,
+  "automatic_selection_applied": false,
+  "candidate_watch_champion_mutation": false,
+  "broker_live_order_alert_paper_automation": false,
+  "signal_timing": "after_close",
+  "execution_timing": "next_session_open",
+  "same_close_execution_allowed": false,
+  "validations": [
+    {
+      "input_order": 1,
+      "strategy_name": "Sample QQQ SMA20 TQQQ exposure",
+      "valid": true,
+      "errors": []
+    },
+    {
+      "input_order": 2,
+      "strategy_name": "Sample QQQ 60-day momentum TQQQ exposure",
+      "valid": true,
+      "errors": []
+    }
+  ],
+  "results": [
+    {
+      "input_order": 1,
+      "strategy_name": "Sample QQQ SMA20 TQQQ exposure",
+      "signal_summary": "QQQ SMA20",
+      "signal_count": 1,
+      "period": "2010-02-11 ~ 2026-06-11",
+      "trading_basis": "after_close signal / next_session_open execution",
+      "status": "실행 완료",
+      "metrics": {
+        "total_return": 28.06819724224841,
+        "cagr": 0.22920216537383653,
+        "max_drawdown": -0.5382982960252914,
+        "mar": 0.42579024876398214,
+        "trade_count": 448,
+        "difference_vs_tqqq": -346.18124855493926,
+        "difference_vs_qqq": 12.391227553445422
+      },
+      "signals": [
+        {
+          "name": "QQQ SMA20",
+          "symbol": "QQQ",
+          "role": "entry_filter",
+          "rule": "QQQ close > QQQ 20-day simple moving average"
+        }
+      ],
+      "entry_rule": "If the signal is true after close, enter at the next session open.",
+      "exit_rule": "If the signal is false after close, exit at the next session open.",
+      "exposure_rule": "Exposure is 1 when QQQ close is above its 20-day simple moving average; otherwise 0.",
+      "required_symbols": [
+        "QQQ",
+        "TQQQ"
+      ],
+      "cost_assumption": "commission=0.0, slippage_per_trade=0.0005",
+      "data_source_tier": "exploratory_unofficial",
+      "limitations": [
+        "탐색용 yfinance/Yahoo-family 결과입니다.",
+        "최종 검토나 후보/watch/Champion 증거가 아닙니다."
+      ],
+      "source_audit": [
+        {
+          "symbol": "QQQ",
+          "source_provider": "yfinance/Yahoo-family",
+          "access_timestamp": "2026-06-15T01:15:15Z",
+          "yfinance_package": {
+            "version": "0.2.66"
+          },
+          "row_count": 4136,
+          "date_range": {
+            "start": "2010-01-04",
+            "end": "2026-06-12"
+          },
+          "adjusted_unadjusted_basis": "adjusted",
+          "data_source_tier": "exploratory_unofficial"
+        },
+        {
+          "symbol": "TQQQ",
+          "source_provider": "yfinance/Yahoo-family",
+          "access_timestamp": "2026-06-15T01:15:15Z",
+          "yfinance_package": {
+            "version": "0.2.66"
+          },
+          "row_count": 4109,
+          "date_range": {
+            "start": "2010-02-11",
+            "end": "2026-06-12"
+          },
+          "adjusted_unadjusted_basis": "adjusted",
+          "data_source_tier": "exploratory_unofficial"
+        }
+      ],
+      "signal_timing": "after_close",
+      "execution_timing": "next_session_open",
+      "same_close_execution_allowed": false
+    },
+    {
+      "input_order": 2,
+      "strategy_name": "Sample QQQ 60-day momentum TQQQ exposure",
+      "signal_summary": "QQQ 60-day momentum",
+      "signal_count": 1,
+      "period": "2010-02-11 ~ 2026-06-11",
+      "trading_basis": "after_close signal / next_session_open execution",
+      "status": "실행 완료",
+      "metrics": {
+        "total_return": 18.815655054357197,
+        "cagr": 0.20069300430142878,
+        "max_drawdown": -0.47910897579232337,
+        "mar": 0.4188880076177534,
+        "trade_count": 175,
+        "difference_vs_tqqq": -355.43379074283047,
+        "difference_vs_qqq": 3.1386853655542097
+      },
+      "signals": [
+        {
+          "name": "QQQ 60-day momentum",
+          "symbol": "QQQ",
+          "role": "entry_filter",
+          "rule": "QQQ 60-day return is positive"
+        }
+      ],
+      "entry_rule": "If momentum is positive after close, enter at the next session open.",
+      "exit_rule": "If momentum is not positive after close, exit at the next session open.",
+      "exposure_rule": "Exposure is 1 when QQQ 60-day return is positive; otherwise 0.",
+      "required_symbols": [
+        "QQQ",
+        "TQQQ"
+      ],
+      "cost_assumption": "commission=0.0, slippage_per_trade=0.0005",
+      "data_source_tier": "exploratory_unofficial",
+      "limitations": [
+        "탐색용 yfinance/Yahoo-family 결과입니다.",
+        "최종 검토나 후보/watch/Champion 증거가 아닙니다."
+      ],
+      "source_audit": [
+        {
+          "symbol": "QQQ",
+          "source_provider": "yfinance/Yahoo-family",
+          "access_timestamp": "2026-06-15T01:15:17Z",
+          "yfinance_package": {
+            "version": "0.2.66"
+          },
+          "row_count": 4136,
+          "date_range": {
+            "start": "2010-01-04",
+            "end": "2026-06-12"
+          },
+          "adjusted_unadjusted_basis": "adjusted",
+          "data_source_tier": "exploratory_unofficial"
+        },
+        {
+          "symbol": "TQQQ",
+          "source_provider": "yfinance/Yahoo-family",
+          "access_timestamp": "2026-06-15T01:15:17Z",
+          "yfinance_package": {
+            "version": "0.2.66"
+          },
+          "row_count": 4109,
+          "date_range": {
+            "start": "2010-02-11",
+            "end": "2026-06-12"
+          },
+          "adjusted_unadjusted_basis": "adjusted",
+          "data_source_tier": "exploratory_unofficial"
+        }
+      ],
+      "signal_timing": "after_close",
+      "execution_timing": "next_session_open",
+      "same_close_execution_allowed": false
+    }
+  ]
+}

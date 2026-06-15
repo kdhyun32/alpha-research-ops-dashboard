@@ -1,0 +1,18 @@
+{
+  "schema_name": "external_strategy_results_index",
+  "schema_version": "1.0",
+  "runs": [
+    {
+      "run_id": "alpha-ext-20260615-011529Z",
+      "path": "external_strategy_results/runs/alpha-ext-20260615-011529Z.json",
+      "generated_at": "2026-06-15T01:15:32Z",
+      "mode": "backtest"
+    },
+    {
+      "run_id": "alpha-ext-20260615-011515Z",
+      "path": "external_strategy_results/runs/alpha-ext-20260615-011515Z.json",
+      "generated_at": "2026-06-15T01:15:18Z",
+      "mode": "backtest"
+    }
+  ]
+}

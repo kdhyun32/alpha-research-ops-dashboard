@@ -3,1210 +3,143 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Alpha Research Ops Lab 대시보드</title>
+<title>Alpha Research Ops Lab Dashboard</title>
 <style>
-:root { color-scheme: dark; --bg:#0c1117; --panel:#151a22; --panel2:#10161d; --line:#29313d; --text:#e8edf7; --muted:#a8b1c1; --accent:#48d1c7; --warn:#d39a4a; }
-* { box-sizing: border-box; }
-body { margin:0; background:var(--bg); color:var(--text); font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",Arial,sans-serif; line-height:1.55; }
-main { width:min(1380px, calc(100% - 28px)); margin:0 auto; padding:32px 0 56px; }
-header { margin-bottom:24px; }
-.kicker { color:var(--muted); font-size:14px; margin:0 0 10px; }
-h1 { font-size:clamp(30px,5vw,56px); line-height:1.05; margin:0 0 12px; letter-spacing:0; }
-p { margin:0 0 12px; }
-.notice { border:1px solid rgba(211,154,74,.45); background:#21170e; padding:16px 18px; margin:20px 0; }
-.stats { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; margin:18px 0 22px; }
-.stat { border:1px solid var(--line); background:var(--panel); padding:14px 16px; min-height:96px; }
-.stat strong { display:block; color:var(--accent); font-size:30px; line-height:1.1; }
-.stat span { color:var(--muted); font-size:14px; }
-.export-panel,.import-panel { border:1px solid rgba(72,209,199,.45); background:#0d2426; padding:16px 18px; margin:18px 0; }
-.export-actions { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; }
-.export-button { border:1px solid var(--accent); background:var(--accent); color:#062022; font-weight:700; padding:9px 11px; cursor:pointer; }
-.export-button.secondary { background:transparent; color:var(--accent); }
-.strategy-select-control { display:flex; align-items:center; gap:6px; color:var(--accent); font-size:13px; font-weight:700; margin-bottom:5px; }
-.strategy-select-control input { width:16px; height:16px; accent-color:var(--accent); }
-.file-import-control { display:flex; flex-wrap:wrap; align-items:center; gap:8px; color:var(--accent); font-weight:700; }
-.file-import-control input { color:var(--text); max-width:260px; }
-.import-error-list { color:#ffb4a2; margin:8px 0 0; padding-left:20px; }
-.json-sample { white-space:pre-wrap; overflow:auto; background:#090d13; border:1px solid var(--line); padding:12px; color:#e8edf7; max-height:360px; }
-section { margin-top:26px; }
-h2 { margin:0 0 12px; font-size:22px; }
-.table-wrap { overflow:auto; border:1px solid var(--line); background:var(--panel2); }
-table { width:100%; border-collapse:collapse; min-width:1180px; }
-th, td { padding:10px 12px; border-bottom:1px solid var(--line); vertical-align:top; text-align:left; }
-th { position:sticky; top:0; background:#151c26; color:#dce5f5; font-weight:700; }
-td.num { text-align:right; white-space:nowrap; font-variant-numeric:tabular-nums; }
-.strong { color:#fbf3cf; font-weight:700; }
-.muted { color:var(--muted); font-size:13px; }
-.signal-compact { max-width:280px; }
-details { margin-top:6px; }
-summary { color:var(--accent); cursor:pointer; }
-a { color:var(--accent); text-decoration:none; }
-a:hover { text-decoration:underline; }
-.policy-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
-.policy-card { border:1px solid var(--line); background:var(--panel); padding:14px 16px; }
-.period-section { scroll-margin-top:18px; }
-.compact-table table { min-width:840px; }
-footer { margin-top:34px; color:var(--muted); font-size:13px; }
-@media (max-width: 760px) { main { width:min(100% - 24px, 1380px); padding-top:24px; } .stats { grid-template-columns:1fr; } .policy-grid { grid-template-columns:1fr; } th, td { padding:9px 10px; } }
+:root{color-scheme:light;--bg:#f6f7f9;--panel:#fff;--ink:#151922;--muted:#667085;--line:#d9dee7;--accent:#0f766e;--bad:#b42318;--warn:#b54708;--ok:#047857}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans KR",Arial,sans-serif;line-height:1.5}main{width:min(1440px,calc(100% - 28px));margin:0 auto;padding:18px 0 44px}header{display:flex;justify-content:space-between;gap:16px;align-items:flex-end;margin-bottom:14px}h1{font-size:24px;margin:0;letter-spacing:0}p{margin:0 0 8px}.muted{color:var(--muted);font-size:13px}.band{background:var(--panel);border:1px solid var(--line);padding:14px;margin:12px 0}.table-wrap{overflow:auto;background:var(--panel);border:1px solid var(--line)}table{width:100%;border-collapse:collapse;min-width:1280px}th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{background:#eef2f6;font-size:13px;white-space:nowrap}td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}.status-ok{color:var(--ok);font-weight:700}.status-bad{color:var(--bad);font-weight:700}.status-warn{color:var(--warn);font-weight:700}.toolbar{display:grid;grid-template-columns:minmax(220px,1.2fr) minmax(180px,.8fr) auto auto;gap:8px;align-items:end}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:4px}.field input{width:100%;padding:9px;border:1px solid var(--line);background:#fff;color:var(--ink)}button{border:1px solid var(--accent);background:var(--accent);color:#fff;font-weight:700;padding:10px 12px;cursor:pointer;white-space:nowrap}button.secondary{background:#fff;color:var(--accent)}button:disabled{opacity:.45;cursor:not-allowed}.messages{margin-top:10px}.validation-list{display:grid;gap:8px;margin-top:10px}.validation-item{border:1px solid var(--line);background:#fff;padding:10px}.detail-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:6px}.detail-grid div{border:1px solid var(--line);padding:8px;background:#fafbfc}details{margin-top:6px}summary{color:var(--accent);cursor:pointer;font-weight:700}.small-table{min-width:720px}footer{margin-top:20px;color:var(--muted);font-size:12px}@media(max-width:860px){header{display:block}.toolbar{grid-template-columns:1fr}table{min-width:1180px}.detail-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <main>
 <header>
-  <p class="kicker">공개용 스냅샷 &middot; 생성 2026-06-14T13:25:47Z</p>
-  <h1>Alpha Research Ops Lab 대시보드</h1>
-  <p>현재까지 탐색 백테스트가 완료된 전략을 입력/실행 순서 그대로 보여주는 공개용 요약 화면입니다.</p>
-  <div class="notice">
-    <p>현재 표의 결과는 yfinance 기반 탐색용이며, 최종 검토 전 감사/라이선스 데이터 재실행이 필요합니다.</p>
-    <p>신호 산출: 장마감 후 종가 기준 / 체결 가정: 다음 거래일 시가 / same-close 체결 없음</p>
-    <p>이 페이지는 로컬 감사 경로를 빼고 성과 검토용 요약만 보여줍니다.</p>
+  <div>
+    <h1>Alpha Research Ops Lab 전략 성과표</h1>
+    <p class="muted">외부 전략 import, 구조 검증, 탐색용 yfinance 백테스트 결과를 입력 순서 그대로 표시합니다.</p>
   </div>
+  <p class="muted">same-close 실행 금지 · 신호 after_close · 체결 next_session_open</p>
 </header>
 
-<div class="stats">
-  <div class="stat"><strong>27</strong><span>전략 수</span></div>
-  <div class="stat"><strong>2</strong><span>기간 비교 수</span></div>
-  <div class="stat"><strong>아님</strong><span>최종 검토 가능</span></div>
-  <div class="stat"><strong>yfinance</strong><span>데이터 기준 &middot; 탐색용</span></div>
-</div>
+<section class="table-wrap" aria-label="전략 성과표">
+  <table>
+    <thead><tr><th>전략명</th><th>신호 요약</th><th>신호 수</th><th>기간</th><th>매매 기준</th><th>토탈 리턴</th><th>CAGR</th><th>MDD</th><th>MAR</th><th>매매횟수</th><th>TQQQ 대비</th><th>QQQ 대비</th><th>상태</th></tr></thead>
+    <tbody id="result-body">
+      <tr><td colspan="13" class="muted">결과 JSON을 불러오는 중입니다.</td></tr>
+    </tbody>
+  </table>
+</section>
 
-<section id="backtest-strategy-table">
-  <h2>백테스트 전략 성과표</h2>
-
-  <div class="import-panel" id="strategy-import-panel">
-    <h3>전략 가져오기</h3>
-    <p>새 전략은 .strategy-idea.json 형식으로 준비하고, 이 화면에서 구조를 먼저 검증합니다. 실제 백테스트는 여기서 실행하지 않습니다.</p>
-    <div class="policy-grid">
-      <div class="policy-card"><strong>입력용 확장자: .strategy-idea.json</strong><p>요청용 확장자: .strategy-test-request.json</p></div>
-      <div class="policy-card"><strong>.strategy-review.json</strong><p>기존 표에서 선택한 전략을 AI 검토용으로 내보낼 때 쓰는 확장자입니다.</p></div>
-    </div>
-    <details>
-      <summary>가져오기 양식 보기</summary>
-      <pre class="json-sample" id="strategy-import-sample">{
-  &quot;benchmark&quot;: &quot;QQQ&quot;,
-  &quot;costs&quot;: {
-    &quot;commission&quot;: 0,
-    &quot;slippage_per_trade&quot;: 0.0005
-  },
-  &quot;entry_rule&quot;: &quot;신호를 장마감 후 확인하고 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출 테스트를 요청합니다.&quot;,
-  &quot;execution_timing&quot;: &quot;next_session_open&quot;,
-  &quot;exit_rule&quot;: &quot;신호를 장마감 후 확인하고 조건이 거짓이면 다음 거래일 시가 기준으로 TQQQ 노출 해제 테스트를 요청합니다.&quot;,
-  &quot;notes&quot;: &quot;탐색용 출처 등급은 별도 실행 단계에서 결정합니다. 이 파일은 브라우저 구조 검증과 테스트 요청 준비에만 씁니다.&quot;,
-  &quot;required_symbols&quot;: [
-    &quot;QQQ&quot;,
-    &quot;TQQQ&quot;
-  ],
-  &quot;same_close_execution_allowed&quot;: false,
-  &quot;signal_timing&quot;: &quot;after_close&quot;,
-  &quot;signals&quot;: [
-    {
-      &quot;name&quot;: &quot;QQQ 200일 추세&quot;,
-      &quot;role&quot;: &quot;entry_filter&quot;,
-      &quot;rule&quot;: &quot;QQQ close &gt; QQQ 200-day simple moving average&quot;,
-      &quot;symbol&quot;: &quot;QQQ&quot;
-    }
-  ],
-  &quot;strategy_name&quot;: &quot;QQQ 200일선 확인 후 TQQQ 테스트 아이디어&quot;,
-  &quot;traded_instrument&quot;: &quot;TQQQ&quot;
-}</pre>
-    </details>
-    <div class="export-actions">
-      <button type="button" class="export-button secondary" id="strategy-sample-download">샘플 .strategy-idea.json 다운로드</button>
-      <label class="file-import-control">내 전략 파일 선택<input type="file" id="strategy-import-file" accept=".json,.strategy-idea.json,application/json"></label>
-      <button type="button" class="export-button secondary" id="strategy-import-validate">검증만 하기</button>
-      <button type="button" class="export-button" id="strategy-test-request-download">테스트 요청 파일 생성</button>
-    </div>
-    <p class="muted" id="strategy-import-status">아직 파일을 선택하지 않았습니다.</p>
-    <ul class="import-error-list" id="strategy-import-errors"></ul>
+<section class="band" id="import-panel">
+  <h2>전략 파일 import</h2>
+  <p class="muted">단일 파일은 <code>.strategy-idea.json</code>, 복수 파일은 <code>.strategy-ideas.json</code>을 사용합니다. 실행 토큰은 브라우저에 저장하지 않으며 서버에서만 검증합니다.</p>
+  <div class="toolbar">
+    <div class="field"><label for="strategy-file">전략 JSON 파일</label><input id="strategy-file" type="file" accept=".json,.strategy-idea.json,.strategy-ideas.json,application/json"></div>
+    <div class="field"><label for="execution-token">실행 토큰</label><input id="execution-token" type="password" autocomplete="off" placeholder="서버 검증 토큰"></div>
+    <button id="validate-button" type="button" class="secondary">검증 실행</button>
+    <button id="backtest-button" type="button">백테스트 실행</button>
   </div>
-  <script type="application/json" id="strategy-import-config-data">{"browser_only": true, "input_extension": ".strategy-idea.json", "no_backtest_execution": true, "no_external_url": true, "no_python_execution": true, "recommended_values": {"execution_timing": "next_session_open", "same_close_execution_allowed": false, "signal_timing": "after_close", "traded_instrument": "TQQQ"}, "required_fields": ["strategy_name", "traded_instrument", "required_symbols", "signals[].name", "signals[].symbol", "signals[].rule", "signals[].role", "entry_rule", "exit_rule", "signal_timing", "execution_timing", "same_close_execution_allowed", "benchmark", "costs.commission", "costs.slippage_per_trade"], "sample": {"benchmark": "QQQ", "costs": {"commission": 0, "slippage_per_trade": 0.0005}, "entry_rule": "신호를 장마감 후 확인하고 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출 테스트를 요청합니다.", "execution_timing": "next_session_open", "exit_rule": "신호를 장마감 후 확인하고 조건이 거짓이면 다음 거래일 시가 기준으로 TQQQ 노출 해제 테스트를 요청합니다.", "notes": "탐색용 출처 등급은 별도 실행 단계에서 결정합니다. 이 파일은 브라우저 구조 검증과 테스트 요청 준비에만 씁니다.", "required_symbols": ["QQQ", "TQQQ"], "same_close_execution_allowed": false, "signal_timing": "after_close", "signals": [{"name": "QQQ 200일 추세", "role": "entry_filter", "rule": "QQQ close > QQQ 200-day simple moving average", "symbol": "QQQ"}], "strategy_name": "QQQ 200일선 확인 후 TQQQ 테스트 아이디어", "traded_instrument": "TQQQ"}, "sample_filename": "sample-tqqq.strategy-idea.json", "schema_name": "alpha_research_strategy_idea_import", "schema_version": "1.0", "selection_review_extension": ".strategy-review.json", "source_tier_note": "exploratory source tier는 별도 실행 단계에서 결정합니다.", "test_request_extension": ".strategy-test-request.json", "validation_scope": "structure_and_safety_only"}</script>
-  <div class="export-panel" id="strategy-selection-export-panel">
-    <h3>선택한 전략 내보내기</h3>
-    <p>표에서 전략을 체크한 뒤 JSON으로 내보낼 수 있습니다. 내보낸 파일은 신호, 진입/청산/노출 규칙, 체결 가정, 성과 지표를 함께 담습니다.</p>
-    <div class="export-actions">
-      <button type="button" class="export-button secondary" id="strategy-select-all">전체 선택</button>
-      <button type="button" class="export-button secondary" id="strategy-clear-selection">선택 해제</button>
-      <button type="button" class="export-button" id="strategy-export-json">선택 항목 JSON 내보내기</button>
-    </div>
-    <p class="muted" id="strategy-export-status">선택된 전략 0개 &middot; 권장 확장자 .strategy-review.json</p>
-  </div>
-  <script type="application/json" id="strategy-selection-export-data">{"automatic_selection_applied": false, "default_filename": "alpha-research-selected-strategies.strategy-review.json", "format_choice_rationale": "JSON preserves nested signal lists, rule semantics, metrics, and audit context better than CSV.", "local_paths_included": false, "metric_sort_applied": false, "not_trading_instruction": true, "public_sanitized_export": true, "recommended_file_extension": ".strategy-review.json", "recommended_mime_type": "application/json", "research_only": true, "row_order_policy": "selected_rows_keep_dashboard_input_order", "schema_name": "alpha_research_strategy_selection_export", "schema_version": "1.0", "strategies": [{"metrics": {"annualized_volatility": 0.4684438515, "cagr": 0.2839172707, "difference_vs_qqq_reference": 39.9257165986, "difference_vs_tqqq_reference": -321.8174796436, "estimated_cost_impact": 251.6126714576, "mar": 0.47068462576456244, "max_drawdown": -0.6032006468, "total_return": 58.0286712131, "trade_count": 87}, "public_export_note": "이 페이지는 로컬 감사 경로를 빼고 성과 검토용 요약만 보여줍니다.", "research_boundary": {"candidate_watch_champion_mutation": false, "data_source_tier": "exploratory_unofficial", "data_source_tier_label": "탐색용 비공식 데이터", "final_review_allowed": false, "licensed_rerun_required": true, "no_ranking_or_recommendation": true, "not_trading_instruction": true}, "review": {"period_compare_anchor": "period-compare-2010-02-16-2026-06-12", "period_recalc_source": "전체 equity series 없음", "review_status": "최종 검토 전 재실행 필요", "risk_flags": ["노출 변경 많음 - 비용 영향 확인"]}, "rule_semantics": {"cost_assumption_summary": "수수료 0, 노출 변경당 슬리피지 0.05% 가정", "entry_rule": "진입/노출 ON: 장마감 후 계산한 신호 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 적용합니다.", "execution_timing": "next_session_open_to_next_session_open", "exit_rule": "청산/노출 OFF: 장마감 후 계산한 신호 조건이 거짓이거나 차단 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 줄이거나 0으로 둡니다.", "exposure_rule": "Exposure is 1 when QQQ close is above its 200-day SMA; otherwise 0.", "rule_interpretation_note": "이 항목은 백테스트 재현을 위한 규칙 설명이며 투자 조언이나 실거래 지시가 아닙니다.", "same_close_execution_allowed": false, "signal_timing": "after_close", "source_rule_text": "Exposure is 1 when QQQ close is above its 200-day SMA; otherwise 0.", "traded_instrument": "TQQQ", "trading_basis_label": "종가 신호 → 다음 시가 체결"}, "run_order": 1, "signals": {"required_inputs": ["QQQ", "TQQQ"], "signal_count": 1, "signal_groups": ["추세"], "signal_items": [{"name": "QQQ 200일 추세", "role": "진입 조건"}], "signal_summary": "QQQ 200일 추세"}, "source_group": {"key": "qqq_signal", "label": "QQQ 신호"}, "strategy_id": "QSIG-001", "strategy_key": "QSIG-001", "strategy_name": "QQQ 200일선 추세 필터", "test_window": {"date_end": "2026-06-12", "date_range_label": "2010-02-16 ~ 2026-06-12", "date_range_note": "공통 정렬 기간", "date_start": "2010-02-16"}}, {"metrics": {"annualized_volatility": 0.4696171871, "cagr": 0.2740629562, "difference_vs_qqq_reference": 32.9519751858, "difference_vs_tqqq_reference": -328.7912210564, "estimated_cost_impact": 269.6021000711, "mar": 0.4602458723946766, "max_drawdown": -0.595470753, "total_return": 51.0549298003, "trade_count": 93}, "public_export_note": "이 페이지는 로컬 감사 경로를 빼고 성과 검토용 요약만 보여줍니다.", "research_boundary": {"candidate_watch_champion_mutation": false, "data_source_tier": "exploratory_unofficial", "data_source_tier_label": "탐색용 비공식 데이터", "final_review_allowed": false, "licensed_rerun_required": true, "no_ranking_or_recommendation": true, "not_trading_instruction": true}, "review": {"period_compare_anchor": "period-compare-2010-02-16-2026-06-12", "period_recalc_source": "전체 equity series 없음", "review_status": "최종 검토 전 재실행 필요", "risk_flags": ["노출 변경 많음 - 비용 영향 확인"]}, "rule_semantics": {"cost_assumption_summary": "수수료 0, 노출 변경당 슬리피지 0.05% 가정", "entry_rule": "진입/노출 ON: 장마감 후 계산한 신호 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 적용합니다.", "execution_timing": "next_session_open_to_next_session_open", "exit_rule": "청산/노출 OFF: 장마감 후 계산한 신호 조건이 거짓이거나 차단 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 줄이거나 0으로 둡니다.", "exposure_rule": "Daily proxy uses a fixed 210-trading-day average, not same-close monthly execution.", "rule_interpretation_note": "이 항목은 백테스트 재현을 위한 규칙 설명이며 투자 조언이나 실거래 지시가 아닙니다.", "same_close_execution_allowed": false, "signal_timing": "after_close", "source_rule_text": "Daily proxy uses a fixed 210-trading-day average, not same-close monthly execution.", "traded_instrument": "TQQQ", "trading_basis_label": "종가 신호 → 다음 시가 체결"}, "run_order": 2, "signals": {"required_inputs": ["QQQ", "TQQQ"], "signal_count": 1, "signal_groups": ["추세"], "signal_items": [{"name": "QQQ 추세", "role": "진입 조건"}], "signal_summary": "QQQ 추세"}, "source_group": {"key": "qqq_signal", "label": "QQQ 신호"}, "strategy_id": "QSIG-002", "strategy_key": "QSIG-002", "strategy_name": "QQQ 10-month MA daily proxy", "test_window": {"date_end": "2026-06-12", "date_range_label": "2010-02-16 ~ 2026-06-12", "date_range_note": "공통 정렬 기간", "date_start": "2010-02-16"}}, {"metrics": {"annualized_volatility": 0.5338577599, "cagr": 0.3161711882, "difference_vs_qqq_reference": 69.386307686, "difference_vs_tqqq_reference": -292.3568885562, "estimated_cost_impact": 238.2223677374, "mar": 0.4749148060422694, "max_drawdown": -0.6657429589, "total_return": 87.4892623005, "trade_count": 47}, "public_export_note": "이 페이지는 로컬 감사 경로를 빼고 성과 검토용 요약만 보여줍니다.", "research_boundary": {"candidate_watch_champion_mutation": false, "data_source_tier": "exploratory_unofficial", "data_source_tier_label": "탐색용 비공식 데이터", "final_review_allowed": false, "licensed_rerun_required": true, "no_ranking_or_recommendation": true, "not_trading_instruction": true}, "review": {"period_compare_anchor": "period-compare-2010-02-16-2026-06-12", "period_recalc_source": "전체 equity series 없음", "review_status": "최종 검토 전 재실행 필요", "risk_flags": ["노출 변경 낮음"]}, "rule_semantics": {"cost_assumption_summary": "수수료 0, 노출 변경당 슬리피지 0.05% 가정", "entry_rule": "진입/노출 ON: 장마감 후 계산한 신호 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 적용합니다.", "execution_timing": "next_session_open_to_next_session_open", "exit_rule": "청산/노출 OFF: 장마감 후 계산한 신호 조건이 거짓이거나 차단 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 줄이거나 0으로 둡니다.", "exposure_rule": "Exposure is 1 when QQQ 252-trading-day return is positive; otherwise 0.", "rule_interpretation_note": "이 항목은 백테스트 재현을 위한 규칙 설명이며 투자 조언이나 실거래 지시가 아닙니다.", "same_close_execution_allowed": false, "signal_timing": "after_close", "source_rule_text": "Exposure is 1 when QQQ 252-trading-day return is positive; otherwise 0.", "traded_instrument": "TQQQ", "trading_basis_label": "종가 신호 → 다음 시가 체결"}, "run_order": 3, "signals": {"required_inputs": ["QQQ", "TQQQ"], "signal_count": 1, "signal_groups": ["모멘텀"], "signal_items": [{"name": "QQQ 252일 모멘텀", "role": "진입 조건"}], "signal_summary": "QQQ 252일 모멘텀"}, "source_group": {"key": "qqq_signal", "label": "QQQ 신호"}, "strategy_id": "QSIG-003", "strategy_key": "QSIG-003", "strategy_name": "QQQ 12-month time-series momentum", "test_window": {"date_end": "2026-06-12", "date_range_label": "2010-02-16 ~ 2026-06-12", "date_range_note": "공통 정렬 기간", "date_start": "2010-02-16"}}, {"metrics": {"annualized_volatility": 0.4170354, "cagr": 0.1967217259, "difference_vs_qqq_reference": -0.3676519012, "difference_vs_tqqq_reference": -362.1108481434, "estimated_cost_impact": 293.0486089307, "mar": 0.36342938834112093, "max_drawdown": -0.5412928404, "total_return": 17.7353027133, "trade_count": 145}, "public_export_note": "이 페이지는 로컬 감사 경로를 빼고 성과 검토용 요약만 보여줍니다.", "research_boundary": {"candidate_watch_champion_mutation": false, "data_source_tier": "exploratory_unofficial", "data_source_tier_label": "탐색용 비공식 데이터", "final_review_allowed": false, "licensed_rerun_required": true, "no_ranking_or_recommendation": true, "not_trading_instruction": true}, "review": {"period_compare_anchor": "period-compare-2010-02-16-2026-06-12", "period_recalc_source": "전체 equity series 없음", "review_status": "최종 검토 전 재실행 필요", "risk_flags": ["노출 변경 과다 가능 - 비용 영향 확인"]}, "rule_semantics": {"cost_assumption_summary": "수수료 0, 노출 변경당 슬리피지 0.05% 가정", "entry_rule": "진입/노출 ON: 장마감 후 계산한 신호 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 적용합니다.", "execution_timing": "next_session_open_to_next_session_open", "exit_rule": "청산/노출 OFF: 장마감 후 계산한 신호 조건이 거짓이거나 차단 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 줄이거나 0으로 둡니다.", "exposure_rule": "Exposure requires QQQ above SMA200 and positive 63-day return.", "rule_interpretation_note": "이 항목은 백테스트 재현을 위한 규칙 설명이며 투자 조언이나 실거래 지시가 아닙니다.", "same_close_execution_allowed": false, "signal_timing": "after_close", "source_rule_text": "Exposure requires QQQ above SMA200 and positive 63-day return.", "traded_instrument": "TQQQ", "trading_basis_label": "종가 신호 → 다음 시가 체결"}, "run_order": 4, "signals": {"required_inputs": ["QQQ", "TQQQ"], "signal_count": 1, "signal_groups": ["추세", "모멘텀"], "signal_items": [{"name": "QQQ 200일 추세", "role": "진입 조건"}], "signal_summary": "QQQ 200일 추세"}, "source_group": {"key": "qqq_signal", "label": "QQQ 신호"}, "strategy_id": "QSIG-004", "strategy_key": "QSIG-004", "strategy_name": "QQQ SMA200 plus 63-day momentum confirmation", "test_window": {"date_end": "2026-06-12", "date_range_label": "2010-02-16 ~ 2026-06-12", "date_range_note": "공통 정렬 기간", "date_start": "2010-02-16"}}, {"metrics": {"annualized_volatility": 0.3636597949, "cagr": 0.2172610671, "difference_vs_qqq_reference": 5.6289057746, "difference_vs_tqqq_reference": -356.1142904676, "estimated_cost_impact": 824.9029063973, "mar": 0.44121056660024105, "max_drawdown": -0.4924203624, "total_return": 23.7318603891, "trade_count": 270}, "public_export_note": "이 페이지는 로컬 감사 경로를 빼고 성과 검토용 요약만 보여줍니다.", "research_boundary": {"candidate_watch_champion_mutation": false, "data_source_tier": "exploratory_unofficial", "data_source_tier_label": "탐색용 비공식 데이터", "final_review_allowed": false, "licensed_rerun_required": true, "no_ranking_or_recommendation": true, "not_trading_instruction": true}, "review": {"period_compare_anchor": "period-compare-2010-02-16-2026-06-12", "period_recalc_source": "전체 equity series 없음", "review_status": "최종 검토 전 재실행 필요", "risk_flags": ["노출 변경 과다 가능 - 비용 영향 확인"]}, "rule_semantics": {"cost_assumption_summary": "수수료 0, 노출 변경당 슬리피지 0.05% 가정", "entry_rule": "진입/노출 ON: 장마감 후 계산한 신호 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 적용합니다.", "execution_timing": "next_session_open_to_next_session_open", "exit_rule": "청산/노출 OFF: 장마감 후 계산한 신호 조건이 거짓이거나 차단 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 줄이거나 0으로 둡니다.", "exposure_rule": "Exposure requires QQQ above SMA200 and VXN below its trailing 252-day 75th percentile.", "rule_interpretation_note": "이 항목은 백테스트 재현을 위한 규칙 설명이며 투자 조언이나 실거래 지시가 아닙니다.", "same_close_execution_allowed": false, "signal_timing": "after_close", "source_rule_text": "Exposure requires QQQ above SMA200 and VXN below its trailing 252-day 75th percentile.", "traded_instrument": "TQQQ", "trading_basis_label": "종가 신호 → 다음 시가 체결"}, "run_order": 5, "signals": {"required_inputs": ["QQQ", "TQQQ", "^VXN"], "signal_count": 2, "signal_groups": ["추세", "변동성"], "signal_items": [{"name": "QQQ 200일 추세", "role": "진입 조건"}, {"name": "VXN 고변동성 상태", "role": "차단 조건"}], "signal_summary": "QQQ 200일 추세, VXN 고변동성 상태"}, "source_group": {"key": "qqq_signal", "label": "QQQ 신호"}, "strategy_id": "QSIG-005", "strategy_key": "QSIG-005", "strategy_name": "QQQ SMA200 with VXN high-volatility block", "test_window": {"date_end": "2026-06-12", "date_range_label": "2010-02-16 ~ 2026-06-12", "date_range_note": "공통 정렬 기간", "date_start": "2010-02-16"}}, {"metrics": {"annualized_volatility": 0.4569806496, "cagr": 0.2553391095, "difference_vs_qqq_reference": 21.7800251163, "difference_vs_tqqq_reference": -339.9631711259, "estimated_cost_impact": 419.6339939265, "mar": 0.43361648824815174, "max_drawdown": -0.5888593179, "total_return": 39.8829797308, "trade_count": 125}, "public_export_note": "이 페이지는 로컬 감사 경로를 빼고 성과 검토용 요약만 보여줍니다.", "research_boundary": {"candidate_watch_champion_mutation": false, "data_source_tier": "exploratory_unofficial", "data_source_tier_label": "탐색용 비공식 데이터", "final_review_allowed": false, "licensed_rerun_required": true, "no_ranking_or_recommendation": true, "not_trading_instruction": true}, "review": {"period_compare_anchor": "period-compare-2010-02-16-2026-06-12", "period_recalc_source": "전체 equity series 없음", "review_status": "최종 검토 전 재실행 필요", "risk_flags": ["노출 변경 과다 가능 - 비용 영향 확인"]}, "rule_semantics": {"cost_assumption_summary": "수수료 0, 노출 변경당 슬리피지 0.05% 가정", "entry_rule": "진입/노출 ON: 장마감 후 계산한 신호 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 적용합니다.", "execution_timing": "next_session_open_to_next_session_open", "exit_rule": "청산/노출 OFF: 장마감 후 계산한 신호 조건이 거짓이거나 차단 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 줄이거나 0으로 둡니다.", "exposure_rule": "Exposure requires QQQ above SMA200 and 20-day overnight volatility not exceeding 1.25x regular-hours volatility.", "rule_interpretation_note": "이 항목은 백테스트 재현을 위한 규칙 설명이며 투자 조언이나 실거래 지시가 아닙니다.", "same_close_execution_allowed": false, "signal_timing": "after_close", "source_rule_text": "Exposure requires QQQ above SMA200 and 20-day overnight volatility not exceeding 1.25x regular-hours volatility.", "traded_instrument": "TQQQ", "trading_basis_label": "종가 신호 → 다음 시가 체결"}, "run_order": 6, "signals": {"required_inputs": ["QQQ", "TQQQ"], "signal_count": 1, "signal_groups": ["추세"], "signal_items": [{"name": "QQQ 200일 추세", "role": "진입 조건"}], "signal_summary": "QQQ 200일 추세"}, "source_group": {"key": "qqq_signal", "label": "QQQ 신호"}, "strategy_id": "QSIG-006", "strategy_key": "QSIG-006", "strategy_name": "QQQ SMA200 with overnight stress block", "test_window": {"date_end": "2026-06-12", "date_range_label": "2010-02-16 ~ 2026-06-12", "date_range_note": "공통 정렬 기간", "date_start": "2010-02-16"}}, {"metrics": {"annualized_volatility": 0.5055658091, "cagr": 0.4238420919, "difference_vs_qqq_reference": 300.1443858178, "difference_vs_tqqq_reference": -61.5988104244, "estimated_cost_impact": 958.0606962369, "mar": 0.6176672949167296, "max_drawdown": -0.6861980477, "total_return": 318.2473404323, "trade_count": 1284}, "public_export_note": "이 페이지는 로컬 감사 경로를 빼고 성과 검토용 요약만 보여줍니다.", "research_boundary": {"candidate_watch_champion_mutation": false, "data_source_tier": "exploratory_unofficial", "data_source_tier_label": "탐색용 비공식 데이터", "final_review_allowed": false, "licensed_rerun_required": true, "no_ranking_or_recommendation": true, "not_trading_instruction": true}, "review": {"period_compare_anchor": "period-compare-2010-02-16-2026-06-12", "period_recalc_source": "전체 equity series 없음", "review_status": "최종 검토 전 재실행 필요", "risk_flags": ["노출 변경 과다 가능 - 비용 영향 확인"]}, "rule_semantics": {"cost_assumption_summary": "수수료 0, 노출 변경당 슬리피지 0.05% 가정", "entry_rule": "진입/노출 ON: 장마감 후 계산한 신호 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 적용합니다.", "execution_timing": "next_session_open_to_next_session_open", "exit_rule": "청산/노출 OFF: 장마감 후 계산한 신호 조건이 거짓이거나 차단 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 줄이거나 0으로 둡니다.", "exposure_rule": "Exposure is min(1, 20% target annualized volatility / QQQ 20-day realized volatility).", "rule_interpretation_note": "이 항목은 백테스트 재현을 위한 규칙 설명이며 투자 조언이나 실거래 지시가 아닙니다.", "same_close_execution_allowed": false, "signal_timing": "after_close", "source_rule_text": "Exposure is min(1, 20% target annualized volatility / QQQ 20-day realized volatility).", "traded_instrument": "TQQQ", "trading_basis_label": "종가 신호 → 다음 시가 체결"}, "run_order": 7, "signals": {"required_inputs": ["QQQ", "TQQQ"], "signal_count": 1, "signal_groups": ["변동성"], "signal_items": [{"name": "volatility_managed_exposure", "role": "참고 기준"}], "signal_summary": "volatility_managed_exposure"}, "source_group": {"key": "qqq_signal", "label": "QQQ 신호"}, "strategy_id": "QSIG-007", "strategy_key": "QSIG-007", "strategy_name": "QQQ 20-day realized-volatility exposure scaling", "test_window": {"date_end": "2026-06-12", "date_range_label": "2010-02-16 ~ 2026-06-12", "date_range_note": "공통 정렬 기간", "date_start": "2010-02-16"}}, {"metrics": {"annualized_volatility": 0.4303584906, "cagr": 0.2912449137, "difference_vs_qqq_reference": 45.6699371746, "difference_vs_tqqq_reference": -316.0732590676, "estimated_cost_impact": 345.1962696894, "mar": 0.48914909678823026, "max_drawdown": -0.5954113288, "total_return": 63.7728917891, "trade_count": 745}, "public_export_note": "이 페이지는 로컬 감사 경로를 빼고 성과 검토용 요약만 보여줍니다.", "research_boundary": {"candidate_watch_champion_mutation": false, "data_source_tier": "exploratory_unofficial", "data_source_tier_label": "탐색용 비공식 데이터", "final_review_allowed": false, "licensed_rerun_required": true, "no_ranking_or_recommendation": true, "not_trading_instruction": true}, "review": {"period_compare_anchor": "period-compare-2010-02-16-2026-06-12", "period_recalc_source": "전체 equity series 없음", "review_status": "최종 검토 전 재실행 필요", "risk_flags": ["노출 변경 과다 가능 - 비용 영향 확인"]}, "rule_semantics": {"cost_assumption_summary": "수수료 0, 노출 변경당 슬리피지 0.05% 가정", "entry_rule": "진입/노출 ON: 장마감 후 계산한 신호 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 적용합니다.", "execution_timing": "next_session_open_to_next_session_open", "exit_rule": "청산/노출 OFF: 장마감 후 계산한 신호 조건이 거짓이거나 차단 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 줄이거나 0으로 둡니다.", "exposure_rule": "Exposure is volatility-scaled only when QQQ is above SMA200; otherwise 0.", "rule_interpretation_note": "이 항목은 백테스트 재현을 위한 규칙 설명이며 투자 조언이나 실거래 지시가 아닙니다.", "same_close_execution_allowed": false, "signal_timing": "after_close", "source_rule_text": "Exposure is volatility-scaled only when QQQ is above SMA200; otherwise 0.", "traded_instrument": "TQQQ", "trading_basis_label": "종가 신호 → 다음 시가 체결"}, "run_order": 8, "signals": {"required_inputs": ["QQQ", "TQQQ"], "signal_count": 1, "signal_groups": ["추세", "변동성"], "signal_items": [{"name": "QQQ 200일 추세", "role": "진입 조건"}], "signal_summary": "QQQ 200일 추세"}, "source_group": {"key": "qqq_signal", "label": "QQQ 신호"}, "strategy_id": "QSIG-008", "strategy_key": "QSIG-008", "strategy_name": "QQQ SMA200 plus volatility-managed exposure", "test_window": {"date_end": "2026-06-12", "date_range_label": "2010-02-16 ~ 2026-06-12", "date_range_note": "공통 정렬 기간", "date_start": "2010-02-16"}}, {"metrics": {"annualized_volatility": 0.4442104109, "cagr": 0.2111267192, "difference_vs_qqq_reference": 0.341553929, "difference_vs_tqqq_reference": -5.5855104831, "estimated_cost_impact": 85.4506917124, "mar": 0.345806914076308, "max_drawdown": -0.6105335394, "total_return": 3.6075158424, "trade_count": 103}, "public_export_note": "이 페이지는 로컬 감사 경로를 빼고 성과 검토용 요약만 보여줍니다.", "research_boundary": {"candidate_watch_champion_mutation": false, "data_source_tier": "exploratory_unofficial", "data_source_tier_label": "탐색용 비공식 데이터", "final_review_allowed": false, "licensed_rerun_required": true, "no_ranking_or_recommendation": true, "not_trading_instruction": true}, "review": {"period_compare_anchor": "period-compare-2018-06-21-2026-06-12", "period_recalc_source": "전체 equity series 없음", "review_status": "최종 검토 전 재실행 필요", "risk_flags": ["노출 변경 과다 가능 - 비용 영향 확인"]}, "rule_semantics": {"cost_assumption_summary": "수수료 0, 노출 변경당 슬리피지 0.05% 가정", "entry_rule": "진입/노출 ON: 장마감 후 계산한 신호 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 적용합니다.", "execution_timing": "next_session_open_to_next_session_open", "exit_rule": "청산/노출 OFF: 장마감 후 계산한 신호 조건이 거짓이거나 차단 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 줄이거나 0으로 둡니다.", "exposure_rule": "Exposure requires QQQ above SMA200 and 63-day XLK/SPY ratio return above 0.", "rule_interpretation_note": "이 항목은 백테스트 재현을 위한 규칙 설명이며 투자 조언이나 실거래 지시가 아닙니다.", "same_close_execution_allowed": false, "signal_timing": "after_close", "source_rule_text": "Exposure requires QQQ above SMA200 and 63-day XLK/SPY ratio return above 0.", "traded_instrument": "TQQQ", "trading_basis_label": "종가 신호 → 다음 시가 체결"}, "run_order": 9, "signals": {"required_inputs": ["QQQ", "TQQQ", "XLK", "SPY"], "signal_count": 2, "signal_groups": ["추세", "섹터", "모멘텀"], "signal_items": [{"name": "QQQ 200일 추세", "role": "진입 조건"}, {"name": "XLK/SPY 상대강도", "role": "진입 조건"}], "signal_summary": "QQQ 200일 추세, XLK/SPY 상대강도"}, "source_group": {"key": "sector_tech", "label": "섹터/기술주"}, "strategy_id": "STL-001", "strategy_key": "STL-001", "strategy_name": "QQQ 추세 + XLK/SPY 상대강도", "test_window": {"date_end": "2026-06-12", "date_range_label": "2018-06-21 ~ 2026-06-12", "date_range_note": "상장일/신호 데이터 때문에 짧은 기간", "date_start": "2018-06-21"}}, {"metrics": {"annualized_volatility": 0.3927720728, "cagr": 0.3155577227, "difference_vs_qqq_reference": 4.6454048962, "difference_vs_tqqq_reference": -1.2816595159, "estimated_cost_impact": 133.8589118028, "mar": 0.6455120479520592, "max_drawdown": -0.4888486957, "total_return": 7.9113668096, "trade_count": 97}, "public_export_note": "이 페이지는 로컬 감사 경로를 빼고 성과 검토용 요약만 보여줍니다.", "research_boundary": {"candidate_watch_champion_mutation": false, "data_source_tier": "exploratory_unofficial", "data_source_tier_label": "탐색용 비공식 데이터", "final_review_allowed": false, "licensed_rerun_required": true, "no_ranking_or_recommendation": true, "not_trading_instruction": true}, "review": {"period_compare_anchor": "period-compare-2018-06-21-2026-06-12", "period_recalc_source": "전체 equity series 없음", "review_status": "최종 검토 전 재실행 필요", "risk_flags": ["노출 변경 많음 - 비용 영향 확인"]}, "rule_semantics": {"cost_assumption_summary": "수수료 0, 노출 변경당 슬리피지 0.05% 가정", "entry_rule": "진입/노출 ON: 장마감 후 계산한 신호 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 적용합니다.", "execution_timing": "next_session_open_to_next_session_open", "exit_rule": "청산/노출 OFF: 장마감 후 계산한 신호 조건이 거짓이거나 차단 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 줄이거나 0으로 둡니다.", "exposure_rule": "Exposure requires QQQ above SMA200 and 63-day SMH/QQQ ratio return above 0.", "rule_interpretation_note": "이 항목은 백테스트 재현을 위한 규칙 설명이며 투자 조언이나 실거래 지시가 아닙니다.", "same_close_execution_allowed": false, "signal_timing": "after_close", "source_rule_text": "Exposure requires QQQ above SMA200 and 63-day SMH/QQQ ratio return above 0.", "traded_instrument": "TQQQ", "trading_basis_label": "종가 신호 → 다음 시가 체결"}, "run_order": 10, "signals": {"required_inputs": ["QQQ", "TQQQ", "SMH"], "signal_count": 2, "signal_groups": ["추세", "섹터", "모멘텀"], "signal_items": [{"name": "QQQ 200일 추세", "role": "진입 조건"}, {"name": "SMH/SPY 상대강도", "role": "진입 조건"}], "signal_summary": "QQQ 200일 추세, SMH/SPY 상대강도"}, "source_group": {"key": "sector_tech", "label": "섹터/기술주"}, "strategy_id": "STL-002", "strategy_key": "STL-002", "strategy_name": "QQQ 추세 + SMH relative strength vs QQQ", "test_window": {"date_end": "2026-06-12", "date_range_label": "2018-06-21 ~ 2026-06-12", "date_range_note": "상장일/신호 데이터 때문에 짧은 기간", "date_start": "2018-06-21"}}, {"metrics": {"annualized_volatility": 0.3729908489, "cagr": 0.2896108884, "difference_vs_qqq_reference": 3.3363862591, "difference_vs_tqqq_reference": -2.590678153, "estimated_cost_impact": 135.5086731288, "mar": 0.592434614119806, "max_drawdown": -0.4888486957, "total_return": 6.6023481724, "trade_count": 85}, "public_export_note": "이 페이지는 로컬 감사 경로를 빼고 성과 검토용 요약만 보여줍니다.", "research_boundary": {"candidate_watch_champion_mutation": false, "data_source_tier": "exploratory_unofficial", "data_source_tier_label": "탐색용 비공식 데이터", "final_review_allowed": false, "licensed_rerun_required": true, "no_ranking_or_recommendation": true, "not_trading_instruction": true}, "review": {"period_compare_anchor": "period-compare-2018-06-21-2026-06-12", "period_recalc_source": "전체 equity series 없음", "review_status": "최종 검토 전 재실행 필요", "risk_flags": ["노출 변경 많음 - 비용 영향 확인"]}, "rule_semantics": {"cost_assumption_summary": "수수료 0, 노출 변경당 슬리피지 0.05% 가정", "entry_rule": "진입/노출 ON: 장마감 후 계산한 신호 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 적용합니다.", "execution_timing": "next_session_open_to_next_session_open", "exit_rule": "청산/노출 OFF: 장마감 후 계산한 신호 조건이 거짓이거나 차단 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 줄이거나 0으로 둡니다.", "exposure_rule": "Exposure requires QQQ above SMA200 and 63-day SOXX/QQQ ratio return above 0.", "rule_interpretation_note": "이 항목은 백테스트 재현을 위한 규칙 설명이며 투자 조언이나 실거래 지시가 아닙니다.", "same_close_execution_allowed": false, "signal_timing": "after_close", "source_rule_text": "Exposure requires QQQ above SMA200 and 63-day SOXX/QQQ ratio return above 0.", "traded_instrument": "TQQQ", "trading_basis_label": "종가 신호 → 다음 시가 체결"}, "run_order": 11, "signals": {"required_inputs": ["QQQ", "TQQQ", "SOXX"], "signal_count": 2, "signal_groups": ["추세", "섹터", "모멘텀"], "signal_items": [{"name": "QQQ 200일 추세", "role": "진입 조건"}, {"name": "SOXX/SPY 상대강도", "role": "진입 조건"}], "signal_summary": "QQQ 200일 추세, SOXX/SPY 상대강도"}, "source_group": {"key": "sector_tech", "label": "섹터/기술주"}, "strategy_id": "STL-003", "strategy_key": "STL-003", "strategy_name": "QQQ 추세 + SOXX relative strength vs QQQ", "test_window": {"date_end": "2026-06-12", "date_range_label": "2018-06-21 ~ 2026-06-12", "date_range_note": "상장일/신호 데이터 때문에 짧은 기간", "date_start": "2018-06-21"}}, {"metrics": {"annualized_volatility": 0.3250018486, "cagr": 0.2837732536, "difference_vs_qqq_reference": 3.0662222152, "difference_vs_tqqq_reference": -2.860842197, "estimated_cost_impact": 104.8725820001, "mar": 0.7477662987660714, "max_drawdown": -0.3794945748, "total_return": 6.3321841285, "trade_count": 76}, "public_export_note": "이 페이지는 로컬 감사 경로를 빼고 성과 검토용 요약만 보여줍니다.", "research_boundary": {"candidate_watch_champion_mutation": false, "data_source_tier": "exploratory_unofficial", "data_source_tier_label": "탐색용 비공식 데이터", "final_review_allowed": false, "licensed_rerun_required": true, "no_ranking_or_recommendation": true, "not_trading_instruction": true}, "review": {"period_compare_anchor": "period-compare-2018-06-21-2026-06-12", "period_recalc_source": "전체 equity series 없음", "review_status": "최종 검토 전 재실행 필요", "risk_flags": ["노출 변경 많음 - 비용 영향 확인"]}, "rule_semantics": {"cost_assumption_summary": "수수료 0, 노출 변경당 슬리피지 0.05% 가정", "entry_rule": "진입/노출 ON: 장마감 후 계산한 신호 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 적용합니다.", "execution_timing": "next_session_open_to_next_session_open", "exit_rule": "청산/노출 OFF: 장마감 후 계산한 신호 조건이 거짓이거나 차단 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 줄이거나 0으로 둡니다.", "exposure_rule": "Exposure requires QQQ above SMA200 and 63-day IGV/QQQ ratio return above 0.", "rule_interpretation_note": "이 항목은 백테스트 재현을 위한 규칙 설명이며 투자 조언이나 실거래 지시가 아닙니다.", "same_close_execution_allowed": false, "signal_timing": "after_close", "source_rule_text": "Exposure requires QQQ above SMA200 and 63-day IGV/QQQ ratio return above 0.", "traded_instrument": "TQQQ", "trading_basis_label": "종가 신호 → 다음 시가 체결"}, "run_order": 12, "signals": {"required_inputs": ["QQQ", "TQQQ", "IGV"], "signal_count": 2, "signal_groups": ["추세", "섹터", "모멘텀"], "signal_items": [{"name": "QQQ 200일 추세", "role": "진입 조건"}, {"name": "IGV/SPY 상대강도", "role": "진입 조건"}], "signal_summary": "QQQ 200일 추세, IGV/SPY 상대강도"}, "source_group": {"key": "sector_tech", "label": "섹터/기술주"}, "strategy_id": "STL-004", "strategy_key": "STL-004", "strategy_name": "QQQ 추세 + IGV relative strength vs QQQ", "test_window": {"date_end": "2026-06-12", "date_range_label": "2018-06-21 ~ 2026-06-12", "date_range_note": "상장일/신호 데이터 때문에 짧은 기간", "date_start": "2018-06-21"}}, {"metrics": {"annualized_volatility": 0.4085761065, "cagr": 0.3409059257, "difference_vs_qqq_reference": 6.1104523478, "difference_vs_tqqq_reference": 0.1833879357, "estimated_cost_impact": 204.9471471789, "mar": 0.6973649079943736, "max_drawdown": -0.4888486957, "total_return": 9.3764142611, "trade_count": 131}, "public_export_note": "이 페이지는 로컬 감사 경로를 빼고 성과 검토용 요약만 보여줍니다.", "research_boundary": {"candidate_watch_champion_mutation": false, "data_source_tier": "exploratory_unofficial", "data_source_tier_label": "탐색용 비공식 데이터", "final_review_allowed": false, "licensed_rerun_required": true, "no_ranking_or_recommendation": true, "not_trading_instruction": true}, "review": {"period_compare_anchor": "period-compare-2018-06-21-2026-06-12", "period_recalc_source": "전체 equity series 없음", "review_status": "최종 검토 전 재실행 필요", "risk_flags": ["노출 변경 과다 가능 - 비용 영향 확인"]}, "rule_semantics": {"cost_assumption_summary": "수수료 0, 노출 변경당 슬리피지 0.05% 가정", "entry_rule": "진입/노출 ON: 장마감 후 계산한 신호 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 적용합니다.", "execution_timing": "next_session_open_to_next_session_open", "exit_rule": "청산/노출 OFF: 장마감 후 계산한 신호 조건이 거짓이거나 차단 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 줄이거나 0으로 둡니다.", "exposure_rule": "Exposure requires QQQ above SMA200 and at least two of XLK, SMH, IGV leadership checks positive.", "rule_interpretation_note": "이 항목은 백테스트 재현을 위한 규칙 설명이며 투자 조언이나 실거래 지시가 아닙니다.", "same_close_execution_allowed": false, "signal_timing": "after_close", "source_rule_text": "Exposure requires QQQ above SMA200 and at least two of XLK, SMH, IGV leadership checks positive.", "traded_instrument": "TQQQ", "trading_basis_label": "종가 신호 → 다음 시가 체결"}, "run_order": 13, "signals": {"required_inputs": ["QQQ", "TQQQ", "XLK", "SMH", "IGV", "SPY"], "signal_count": 4, "signal_groups": ["추세", "섹터", "breadth"], "signal_items": [{"name": "QQQ 200일 추세", "role": "진입 조건"}, {"name": "XLK/SPY 상대강도", "role": "진입 조건"}, {"name": "SMH/SPY 상대강도", "role": "진입 조건"}, {"name": "IGV/SPY 상대강도", "role": "진입 조건"}], "signal_summary": "QQQ 200일 추세, XLK/SPY 상대강도 +2개"}, "source_group": {"key": "sector_tech", "label": "섹터/기술주"}, "strategy_id": "STL-005", "strategy_key": "STL-005", "strategy_name": "QQQ 추세 + XLK/SMH/IGV leadership breadth", "test_window": {"date_end": "2026-06-12", "date_range_label": "2018-06-21 ~ 2026-06-12", "date_range_note": "상장일/신호 데이터 때문에 짧은 기간", "date_start": "2018-06-21"}}, {"metrics": {"annualized_volatility": 0.4085761065, "cagr": 0.3409059257, "difference_vs_qqq_reference": 6.1104523478, "difference_vs_tqqq_reference": 0.1833879357, "estimated_cost_impact": 204.9471471789, "mar": 0.6973649079943736, "max_drawdown": -0.4888486957, "total_return": 9.3764142611, "trade_count": 131}, "public_export_note": "이 페이지는 로컬 감사 경로를 빼고 성과 검토용 요약만 보여줍니다.", "research_boundary": {"candidate_watch_champion_mutation": false, "data_source_tier": "exploratory_unofficial", "data_source_tier_label": "탐색용 비공식 데이터", "final_review_allowed": false, "licensed_rerun_required": true, "no_ranking_or_recommendation": true, "not_trading_instruction": true}, "review": {"period_compare_anchor": "period-compare-2018-06-21-2026-06-12", "period_recalc_source": "전체 equity series 없음", "review_status": "최종 검토 전 재실행 필요", "risk_flags": ["노출 변경 과다 가능 - 비용 영향 확인"]}, "rule_semantics": {"cost_assumption_summary": "수수료 0, 노출 변경당 슬리피지 0.05% 가정", "entry_rule": "진입/노출 ON: 장마감 후 계산한 신호 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 적용합니다.", "execution_timing": "next_session_open_to_next_session_open", "exit_rule": "청산/노출 OFF: 장마감 후 계산한 신호 조건이 거짓이거나 차단 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 줄이거나 0으로 둡니다.", "exposure_rule": "Exposure requires QQQ above SMA200 and fewer than two of XLK, SMH, IGV leadership checks negative.", "rule_interpretation_note": "이 항목은 백테스트 재현을 위한 규칙 설명이며 투자 조언이나 실거래 지시가 아닙니다.", "same_close_execution_allowed": false, "signal_timing": "after_close", "source_rule_text": "Exposure requires QQQ above SMA200 and fewer than two of XLK, SMH, IGV leadership checks negative.", "traded_instrument": "TQQQ", "trading_basis_label": "종가 신호 → 다음 시가 체결"}, "run_order": 14, "signals": {"required_inputs": ["QQQ", "TQQQ", "XLK", "SMH", "IGV", "SPY"], "signal_count": 4, "signal_groups": ["추세", "섹터"], "signal_items": [{"name": "QQQ 200일 추세", "role": "진입 조건"}, {"name": "XLK/SPY 상대강도", "role": "진입 조건"}, {"name": "SMH/SPY 상대강도", "role": "진입 조건"}, {"name": "IGV/SPY 상대강도", "role": "진입 조건"}], "signal_summary": "QQQ 200일 추세, XLK/SPY 상대강도 +2개"}, "source_group": {"key": "sector_tech", "label": "섹터/기술주"}, "strategy_id": "STL-006", "strategy_key": "STL-006", "strategy_name": "QQQ 추세 + tech leadership deterioration block", "test_window": {"date_end": "2026-06-12", "date_range_label": "2018-06-21 ~ 2026-06-12", "date_range_note": "상장일/신호 데이터 때문에 짧은 기간", "date_start": "2018-06-21"}}, {"metrics": {"annualized_volatility": 0.3645160107, "cagr": 0.2988312777, "difference_vs_qqq_reference": 3.7808508111, "difference_vs_tqqq_reference": -2.146213601, "estimated_cost_impact": 140.8435494856, "mar": 0.6112960519861729, "max_drawdown": -0.4888486957, "total_return": 7.0468127244, "trade_count": 89}, "public_export_note": "이 페이지는 로컬 감사 경로를 빼고 성과 검토용 요약만 보여줍니다.", "research_boundary": {"candidate_watch_champion_mutation": false, "data_source_tier": "exploratory_unofficial", "data_source_tier_label": "탐색용 비공식 데이터", "final_review_allowed": false, "licensed_rerun_required": true, "no_ranking_or_recommendation": true, "not_trading_instruction": true}, "review": {"period_compare_anchor": "period-compare-2018-06-21-2026-06-12", "period_recalc_source": "전체 equity series 없음", "review_status": "최종 검토 전 재실행 필요", "risk_flags": ["노출 변경 많음 - 비용 영향 확인"]}, "rule_semantics": {"cost_assumption_summary": "수수료 0, 노출 변경당 슬리피지 0.05% 가정", "entry_rule": "진입/노출 ON: 장마감 후 계산한 신호 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 적용합니다.", "execution_timing": "next_session_open_to_next_session_open", "exit_rule": "청산/노출 OFF: 장마감 후 계산한 신호 조건이 거짓이거나 차단 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 줄이거나 0으로 둡니다.", "exposure_rule": "Exposure requires QQQ above SMA200 and both SMH/QQQ and SOXX/QQQ leadership checks positive.", "rule_interpretation_note": "이 항목은 백테스트 재현을 위한 규칙 설명이며 투자 조언이나 실거래 지시가 아닙니다.", "same_close_execution_allowed": false, "signal_timing": "after_close", "source_rule_text": "Exposure requires QQQ above SMA200 and both SMH/QQQ and SOXX/QQQ leadership checks positive.", "traded_instrument": "TQQQ", "trading_basis_label": "종가 신호 → 다음 시가 체결"}, "run_order": 15, "signals": {"required_inputs": ["QQQ", "TQQQ", "SMH", "SOXX"], "signal_count": 3, "signal_groups": ["추세", "섹터"], "signal_items": [{"name": "QQQ 200일 추세", "role": "진입 조건"}, {"name": "SMH/SPY 상대강도", "role": "진입 조건"}, {"name": "SOXX/SPY 상대강도", "role": "진입 조건"}], "signal_summary": "QQQ 200일 추세, SMH/SPY 상대강도 +1개"}, "source_group": {"key": "sector_tech", "label": "섹터/기술주"}, "strategy_id": "STL-007", "strategy_key": "STL-007", "strategy_name": "QQQ 추세 + semiconductor leadership confirmation", "test_window": {"date_end": "2026-06-12", "date_range_label": "2018-06-21 ~ 2026-06-12", "date_range_note": "상장일/신호 데이터 때문에 짧은 기간", "date_start": "2018-06-21"}}, {"metrics": {"annualized_volatility": 0.4950989638, "cagr": 0.2632988019, "difference_vs_qqq_reference": 2.1838566449, "difference_vs_tqqq_reference": -3.7432077673, "estimated_cost_impact": 95.5867393811, "mar": 0.45407414112681793, "max_drawdown": -0.5798586135, "total_return": 5.4498185582, "trade_count": 79}, "public_export_note": "이 페이지는 로컬 감사 경로를 빼고 성과 검토용 요약만 보여줍니다.", "research_boundary": {"candidate_watch_champion_mutation": false, "data_source_tier": "exploratory_unofficial", "data_source_tier_label": "탐색용 비공식 데이터", "final_review_allowed": false, "licensed_rerun_required": true, "no_ranking_or_recommendation": true, "not_trading_instruction": true}, "review": {"period_compare_anchor": "period-compare-2018-06-21-2026-06-12", "period_recalc_source": "전체 equity series 없음", "review_status": "최종 검토 전 재실행 필요", "risk_flags": ["노출 변경 많음 - 비용 영향 확인"]}, "rule_semantics": {"cost_assumption_summary": "수수료 0, 노출 변경당 슬리피지 0.05% 가정", "entry_rule": "진입/노출 ON: 장마감 후 계산한 신호 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 적용합니다.", "execution_timing": "next_session_open_to_next_session_open", "exit_rule": "청산/노출 OFF: 장마감 후 계산한 신호 조건이 거짓이거나 차단 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 줄이거나 0으로 둡니다.", "exposure_rule": "Exposure requires QQQ above SMA200 and at least one of XLK/SPY or XLC/SPY leadership checks positive.", "rule_interpretation_note": "이 항목은 백테스트 재현을 위한 규칙 설명이며 투자 조언이나 실거래 지시가 아닙니다.", "same_close_execution_allowed": false, "signal_timing": "after_close", "source_rule_text": "Exposure requires QQQ above SMA200 and at least one of XLK/SPY or XLC/SPY leadership checks positive.", "traded_instrument": "TQQQ", "trading_basis_label": "종가 신호 → 다음 시가 체결"}, "run_order": 16, "signals": {"required_inputs": ["QQQ", "TQQQ", "XLK", "XLC", "SPY"], "signal_count": 3, "signal_groups": ["추세", "섹터"], "signal_items": [{"name": "QQQ 200일 추세", "role": "진입 조건"}, {"name": "XLK/SPY 상대강도", "role": "진입 조건"}, {"name": "XLC/SPY 상대강도", "role": "진입 조건"}], "signal_summary": "QQQ 200일 추세, XLK/SPY 상대강도 +1개"}, "source_group": {"key": "sector_tech", "label": "섹터/기술주"}, "strategy_id": "STL-008", "strategy_key": "STL-008", "strategy_name": "QQQ 추세 + sector leadership rotation risk-off", "test_window": {"date_end": "2026-06-12", "date_range_label": "2018-06-21 ~ 2026-06-12", "date_range_note": "상장일/신호 데이터 때문에 짧은 기간", "date_start": "2018-06-21"}}, {"metrics": {"annualized_volatility": 0.3779492442, "cagr": 0.2459024218, "difference_vs_qqq_reference": 17.0438007007, "difference_vs_tqqq_reference": -344.6993681124, "estimated_cost_impact": 1271.9342097952, "mar": 0.47543773102418546, "max_drawdown": -0.5172126774, "total_return": 35.1467553152, "trade_count": 264}, "public_export_note": "이 페이지는 로컬 감사 경로를 빼고 성과 검토용 요약만 보여줍니다.", "research_boundary": {"candidate_watch_champion_mutation": false, "data_source_tier": "exploratory_unofficial", "data_source_tier_label": "탐색용 비공식 데이터", "final_review_allowed": false, "licensed_rerun_required": true, "no_ranking_or_recommendation": true, "not_trading_instruction": true}, "review": {"period_compare_anchor": "period-compare-2010-02-16-2026-06-12", "period_recalc_source": "전체 equity series 없음", "review_status": "최종 검토 전 재실행 필요", "risk_flags": ["exploratory_unofficial_final_review_blocked", "high_turnover_review_needed", "high_cost_review_needed", "노출 변경 과다 가능 - 비용 영향 확인", "비용 영향 확인"]}, "rule_semantics": {"cost_assumption_summary": "수수료 0, 노출 변경당 슬리피지 0.05% 가정", "entry_rule": "진입/노출 ON: 장마감 후 계산한 신호 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 적용합니다.", "execution_timing": "next_session_open_to_next_session_open", "exit_rule": "청산/노출 OFF: 장마감 후 계산한 신호 조건이 거짓이거나 차단 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 줄이거나 0으로 둡니다.", "exposure_rule": "Exposure requires QQQ above SMA200 and VIX not above its rolling 75th percentile.", "rule_interpretation_note": "이 항목은 백테스트 재현을 위한 규칙 설명이며 투자 조언이나 실거래 지시가 아닙니다.", "same_close_execution_allowed": false, "signal_timing": "after_close", "source_rule_text": "Exposure requires QQQ above SMA200 and VIX not above its rolling 75th percentile.", "traded_instrument": "TQQQ", "trading_basis_label": "종가 신호 → 다음 시가 체결"}, "run_order": 17, "signals": {"required_inputs": ["QQQ", "TQQQ", "^VIX"], "signal_count": 2, "signal_groups": ["추세", "변동성", "매크로"], "signal_items": [{"name": "QQQ 200일 추세", "role": "진입 조건"}, {"name": "VIX 고변동성 상태", "role": "차단 조건"}], "signal_summary": "QQQ 200일 추세, VIX 고변동성 상태"}, "source_group": {"key": "macro_rates", "label": "매크로/금리"}, "strategy_id": "MRS-001", "strategy_key": "MRS-001", "strategy_name": "QQQ 추세 + VIX 고변동성 차단", "test_window": {"date_end": "2026-06-12", "date_range_label": "2010-02-16 ~ 2026-06-12", "date_range_note": "공통 정렬 기간", "date_start": "2010-02-16"}}, {"metrics": {"annualized_volatility": 0.3659474606, "cagr": 0.2366260931, "difference_vs_qqq_reference": 12.8939933223, "difference_vs_tqqq_reference": -348.8491754907, "estimated_cost_impact": 1067.07381638, "mar": 0.4805368935022824, "max_drawdown": -0.4924202414, "total_return": 30.9969479368, "trade_count": 270}, "public_export_note": "이 페이지는 로컬 감사 경로를 빼고 성과 검토용 요약만 보여줍니다.", "research_boundary": {"candidate_watch_champion_mutation": false, "data_source_tier": "exploratory_unofficial", "data_source_tier_label": "탐색용 비공식 데이터", "final_review_allowed": false, "licensed_rerun_required": true, "no_ranking_or_recommendation": true, "not_trading_instruction": true}, "review": {"period_compare_anchor": "period-compare-2010-02-16-2026-06-12", "period_recalc_source": "전체 equity series 없음", "review_status": "최종 검토 전 재실행 필요", "risk_flags": ["exploratory_unofficial_final_review_blocked", "high_turnover_review_needed", "high_cost_review_needed", "노출 변경 과다 가능 - 비용 영향 확인", "비용 영향 확인"]}, "rule_semantics": {"cost_assumption_summary": "수수료 0, 노출 변경당 슬리피지 0.05% 가정", "entry_rule": "진입/노출 ON: 장마감 후 계산한 신호 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 적용합니다.", "execution_timing": "next_session_open_to_next_session_open", "exit_rule": "청산/노출 OFF: 장마감 후 계산한 신호 조건이 거짓이거나 차단 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 줄이거나 0으로 둡니다.", "exposure_rule": "Exposure requires QQQ above SMA200 and VXN not above its rolling 75th percentile.", "rule_interpretation_note": "이 항목은 백테스트 재현을 위한 규칙 설명이며 투자 조언이나 실거래 지시가 아닙니다.", "same_close_execution_allowed": false, "signal_timing": "after_close", "source_rule_text": "Exposure requires QQQ above SMA200 and VXN not above its rolling 75th percentile.", "traded_instrument": "TQQQ", "trading_basis_label": "종가 신호 → 다음 시가 체결"}, "run_order": 18, "signals": {"required_inputs": ["QQQ", "TQQQ", "^VXN"], "signal_count": 2, "signal_groups": ["추세", "변동성"], "signal_items": [{"name": "QQQ 200일 추세", "role": "진입 조건"}, {"name": "VXN 고변동성 상태", "role": "차단 조건"}], "signal_summary": "QQQ 200일 추세, VXN 고변동성 상태"}, "source_group": {"key": "macro_rates", "label": "매크로/금리"}, "strategy_id": "MRS-002", "strategy_key": "MRS-002", "strategy_name": "QQQ 추세 + VXN 고변동성 차단", "test_window": {"date_end": "2026-06-12", "date_range_label": "2010-02-16 ~ 2026-06-12", "date_range_note": "공통 정렬 기간", "date_start": "2010-02-16"}}, {"metrics": {"annualized_volatility": 0.3935281407, "cagr": 0.2661279606, "difference_vs_qqq_reference": 27.9067504076, "difference_vs_tqqq_reference": -333.8364184054, "estimated_cost_impact": 901.2344766089, "mar": 0.47527670762404534, "max_drawdown": -0.5599432001, "total_return": 46.0097050221, "trade_count": 205}, "public_export_note": "이 페이지는 로컬 감사 경로를 빼고 성과 검토용 요약만 보여줍니다.", "research_boundary": {"candidate_watch_champion_mutation": false, "data_source_tier": "exploratory_unofficial", "data_source_tier_label": "탐색용 비공식 데이터", "final_review_allowed": false, "licensed_rerun_required": true, "no_ranking_or_recommendation": true, "not_trading_instruction": true}, "review": {"period_compare_anchor": "period-compare-2010-02-16-2026-06-12", "period_recalc_source": "전체 equity series 없음", "review_status": "최종 검토 전 재실행 필요", "risk_flags": ["exploratory_unofficial_final_review_blocked", "high_turnover_review_needed", "high_cost_review_needed", "노출 변경 과다 가능 - 비용 영향 확인", "비용 영향 확인"]}, "rule_semantics": {"cost_assumption_summary": "수수료 0, 노출 변경당 슬리피지 0.05% 가정", "entry_rule": "진입/노출 ON: 장마감 후 계산한 신호 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 적용합니다.", "execution_timing": "next_session_open_to_next_session_open", "exit_rule": "청산/노출 OFF: 장마감 후 계산한 신호 조건이 거짓이거나 차단 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 줄이거나 0으로 둡니다.", "exposure_rule": "Exposure requires QQQ above SMA200 and no 63-day TLT/IEF risk-off confirmation.", "rule_interpretation_note": "이 항목은 백테스트 재현을 위한 규칙 설명이며 투자 조언이나 실거래 지시가 아닙니다.", "same_close_execution_allowed": false, "signal_timing": "after_close", "source_rule_text": "Exposure requires QQQ above SMA200 and no 63-day TLT/IEF risk-off confirmation.", "traded_instrument": "TQQQ", "trading_basis_label": "종가 신호 → 다음 시가 체결"}, "run_order": 19, "signals": {"required_inputs": ["QQQ", "TQQQ", "TLT", "IEF"], "signal_count": 2, "signal_groups": ["추세", "금리"], "signal_items": [{"name": "QQQ 200일 추세", "role": "진입 조건"}, {"name": "TLT/IEF 위험회피 확인", "role": "차단 조건"}], "signal_summary": "QQQ 200일 추세, TLT/IEF 위험회피 확인"}, "source_group": {"key": "macro_rates", "label": "매크로/금리"}, "strategy_id": "MRS-003", "strategy_key": "MRS-003", "strategy_name": "QQQ 추세 + TLT/IEF 위험회피 차단", "test_window": {"date_end": "2026-06-12", "date_range_label": "2010-02-16 ~ 2026-06-12", "date_range_note": "공통 정렬 기간", "date_start": "2010-02-16"}}, {"metrics": {"annualized_volatility": 0.3822836692, "cagr": 0.2495334614, "difference_vs_qqq_reference": 18.8016944087, "difference_vs_tqqq_reference": -342.9414744044, "estimated_cost_impact": 788.4077333692, "mar": 0.4550919435937276, "max_drawdown": -0.5483143899, "total_return": 36.9046490231, "trade_count": 171}, "public_export_note": "이 페이지는 로컬 감사 경로를 빼고 성과 검토용 요약만 보여줍니다.", "research_boundary": {"candidate_watch_champion_mutation": false, "data_source_tier": "exploratory_unofficial", "data_source_tier_label": "탐색용 비공식 데이터", "final_review_allowed": false, "licensed_rerun_required": true, "no_ranking_or_recommendation": true, "not_trading_instruction": true}, "review": {"period_compare_anchor": "period-compare-2010-02-16-2026-06-12", "period_recalc_source": "전체 equity series 없음", "review_status": "최종 검토 전 재실행 필요", "risk_flags": ["exploratory_unofficial_final_review_blocked", "high_turnover_review_needed", "high_cost_review_needed", "노출 변경 과다 가능 - 비용 영향 확인", "비용 영향 확인"]}, "rule_semantics": {"cost_assumption_summary": "수수료 0, 노출 변경당 슬리피지 0.05% 가정", "entry_rule": "진입/노출 ON: 장마감 후 계산한 신호 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 적용합니다.", "execution_timing": "next_session_open_to_next_session_open", "exit_rule": "청산/노출 OFF: 장마감 후 계산한 신호 조건이 거짓이거나 차단 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 줄이거나 0으로 둡니다.", "exposure_rule": "Exposure requires QQQ above SMA200 and 63-day QQQ/TLT relative return above zero.", "rule_interpretation_note": "이 항목은 백테스트 재현을 위한 규칙 설명이며 투자 조언이나 실거래 지시가 아닙니다.", "same_close_execution_allowed": false, "signal_timing": "after_close", "source_rule_text": "Exposure requires QQQ above SMA200 and 63-day QQQ/TLT relative return above zero.", "traded_instrument": "TQQQ", "trading_basis_label": "종가 신호 → 다음 시가 체결"}, "run_order": 20, "signals": {"required_inputs": ["QQQ", "TQQQ", "TLT"], "signal_count": 2, "signal_groups": ["추세", "금리", "모멘텀"], "signal_items": [{"name": "QQQ 200일 추세", "role": "진입 조건"}, {"name": "TLT 금리 민감도", "role": "차단 조건"}], "signal_summary": "QQQ 200일 추세, TLT 금리 민감도"}, "source_group": {"key": "macro_rates", "label": "매크로/금리"}, "strategy_id": "MRS-004", "strategy_key": "MRS-004", "strategy_name": "QQQ 추세 + TLT 상대 약세 차단", "test_window": {"date_end": "2026-06-12", "date_range_label": "2010-02-16 ~ 2026-06-12", "date_range_note": "공통 정렬 기간", "date_start": "2010-02-16"}}, {"metrics": {"annualized_volatility": 0.4258807231, "cagr": 0.1785954117, "difference_vs_qqq_reference": -4.4979830592, "difference_vs_tqqq_reference": -366.2411518723, "estimated_cost_impact": 355.9949859087, "mar": 0.3139760557406737, "max_drawdown": -0.5688185721, "total_return": 13.6049715553, "trade_count": 223}, "public_export_note": "이 페이지는 로컬 감사 경로를 빼고 성과 검토용 요약만 보여줍니다.", "research_boundary": {"candidate_watch_champion_mutation": false, "data_source_tier": "exploratory_unofficial", "data_source_tier_label": "탐색용 비공식 데이터", "final_review_allowed": false, "licensed_rerun_required": true, "no_ranking_or_recommendation": true, "not_trading_instruction": true}, "review": {"period_compare_anchor": "period-compare-2010-02-16-2026-06-12", "period_recalc_source": "전체 equity series 없음", "review_status": "최종 검토 전 재실행 필요", "risk_flags": ["exploratory_unofficial_final_review_blocked", "high_turnover_review_needed", "high_cost_review_needed", "노출 변경 과다 가능 - 비용 영향 확인", "비용 영향 확인"]}, "rule_semantics": {"cost_assumption_summary": "수수료 0, 노출 변경당 슬리피지 0.05% 가정", "entry_rule": "진입/노출 ON: 장마감 후 계산한 신호 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 적용합니다.", "execution_timing": "next_session_open_to_next_session_open", "exit_rule": "청산/노출 OFF: 장마감 후 계산한 신호 조건이 거짓이거나 차단 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 줄이거나 0으로 둡니다.", "exposure_rule": "Exposure requires QQQ above SMA200 and UUP 63-day strength not above fixed 3 percent threshold.", "rule_interpretation_note": "이 항목은 백테스트 재현을 위한 규칙 설명이며 투자 조언이나 실거래 지시가 아닙니다.", "same_close_execution_allowed": false, "signal_timing": "after_close", "source_rule_text": "Exposure requires QQQ above SMA200 and UUP 63-day strength not above fixed 3 percent threshold.", "traded_instrument": "TQQQ", "trading_basis_label": "종가 신호 → 다음 시가 체결"}, "run_order": 21, "signals": {"required_inputs": ["QQQ", "TQQQ", "UUP"], "signal_count": 2, "signal_groups": ["추세", "매크로"], "signal_items": [{"name": "QQQ 200일 추세", "role": "진입 조건"}, {"name": "달러 강세 상태", "role": "차단 조건"}], "signal_summary": "QQQ 200일 추세, 달러 강세 상태"}, "source_group": {"key": "macro_rates", "label": "매크로/금리"}, "strategy_id": "MRS-005", "strategy_key": "MRS-005", "strategy_name": "QQQ 추세 + 달러 강세 차단", "test_window": {"date_end": "2026-06-12", "date_range_label": "2010-02-16 ~ 2026-06-12", "date_range_note": "공통 정렬 기간", "date_start": "2010-02-16"}}, {"metrics": {"annualized_volatility": 0.2970175118, "cagr": 0.1999747596, "difference_vs_qqq_reference": 0.4808967392, "difference_vs_tqqq_reference": -361.2622720739, "estimated_cost_impact": 842.7935714678, "mar": 0.5646743494954686, "max_drawdown": -0.3541417452, "total_return": 18.5838513537, "trade_count": 420}, "public_export_note": "이 페이지는 로컬 감사 경로를 빼고 성과 검토용 요약만 보여줍니다.", "research_boundary": {"candidate_watch_champion_mutation": false, "data_source_tier": "exploratory_unofficial", "data_source_tier_label": "탐색용 비공식 데이터", "final_review_allowed": false, "licensed_rerun_required": true, "no_ranking_or_recommendation": true, "not_trading_instruction": true}, "review": {"period_compare_anchor": "period-compare-2010-02-16-2026-06-12", "period_recalc_source": "전체 equity series 없음", "review_status": "최종 검토 전 재실행 필요", "risk_flags": ["exploratory_unofficial_final_review_blocked", "high_turnover_review_needed", "high_cost_review_needed", "노출 변경 과다 가능 - 비용 영향 확인", "비용 영향 확인"]}, "rule_semantics": {"cost_assumption_summary": "수수료 0, 노출 변경당 슬리피지 0.05% 가정", "entry_rule": "진입/노출 ON: 장마감 후 계산한 신호 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 적용합니다.", "execution_timing": "next_session_open_to_next_session_open", "exit_rule": "청산/노출 OFF: 장마감 후 계산한 신호 조건이 거짓이거나 차단 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 줄이거나 0으로 둡니다.", "exposure_rule": "Exposure requires QQQ above SMA200 and both VIX and VXN at or below rolling 63-day averages.", "rule_interpretation_note": "이 항목은 백테스트 재현을 위한 규칙 설명이며 투자 조언이나 실거래 지시가 아닙니다.", "same_close_execution_allowed": false, "signal_timing": "after_close", "source_rule_text": "Exposure requires QQQ above SMA200 and both VIX and VXN at or below rolling 63-day averages.", "traded_instrument": "TQQQ", "trading_basis_label": "종가 신호 → 다음 시가 체결"}, "run_order": 22, "signals": {"required_inputs": ["QQQ", "TQQQ", "^VIX", "^VXN"], "signal_count": 3, "signal_groups": ["추세", "변동성"], "signal_items": [{"name": "QQQ 200일 추세", "role": "진입 조건"}, {"name": "VIX 고변동성 상태", "role": "차단 조건"}, {"name": "VXN 고변동성 상태", "role": "차단 조건"}], "signal_summary": "QQQ 200일 추세, VIX 고변동성 상태 +1개"}, "source_group": {"key": "macro_rates", "label": "매크로/금리"}, "strategy_id": "MRS-006", "strategy_key": "MRS-006", "strategy_name": "QQQ 추세 + VIX/VXN 변동성 상태", "test_window": {"date_end": "2026-06-12", "date_range_label": "2010-02-16 ~ 2026-06-12", "date_range_note": "공통 정렬 기간", "date_start": "2010-02-16"}}, {"metrics": {"annualized_volatility": 0.3643019699, "cagr": 0.2311659755, "difference_vs_qqq_reference": 10.665027105, "difference_vs_tqqq_reference": -351.078141708, "estimated_cost_impact": 1198.7330415202, "mar": 0.4699616477010891, "max_drawdown": -0.491882639, "total_return": 28.7679817195, "trade_count": 312}, "public_export_note": "이 페이지는 로컬 감사 경로를 빼고 성과 검토용 요약만 보여줍니다.", "research_boundary": {"candidate_watch_champion_mutation": false, "data_source_tier": "exploratory_unofficial", "data_source_tier_label": "탐색용 비공식 데이터", "final_review_allowed": false, "licensed_rerun_required": true, "no_ranking_or_recommendation": true, "not_trading_instruction": true}, "review": {"period_compare_anchor": "period-compare-2010-02-16-2026-06-12", "period_recalc_source": "전체 equity series 없음", "review_status": "최종 검토 전 재실행 필요", "risk_flags": ["exploratory_unofficial_final_review_blocked", "high_turnover_review_needed", "high_cost_review_needed", "노출 변경 과다 가능 - 비용 영향 확인", "비용 영향 확인"]}, "rule_semantics": {"cost_assumption_summary": "수수료 0, 노출 변경당 슬리피지 0.05% 가정", "entry_rule": "진입/노출 ON: 장마감 후 계산한 신호 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 적용합니다.", "execution_timing": "next_session_open_to_next_session_open", "exit_rule": "청산/노출 OFF: 장마감 후 계산한 신호 조건이 거짓이거나 차단 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 줄이거나 0으로 둡니다.", "exposure_rule": "Exposure requires QQQ above SMA200 and fewer than two fixed stress flags active.", "rule_interpretation_note": "이 항목은 백테스트 재현을 위한 규칙 설명이며 투자 조언이나 실거래 지시가 아닙니다.", "same_close_execution_allowed": false, "signal_timing": "after_close", "source_rule_text": "Exposure requires QQQ above SMA200 and fewer than two fixed stress flags active.", "traded_instrument": "TQQQ", "trading_basis_label": "종가 신호 → 다음 시가 체결"}, "run_order": 23, "signals": {"required_inputs": ["QQQ", "TQQQ", "^VIX", "^VXN", "TLT", "IEF", "UUP"], "signal_count": 6, "signal_groups": ["추세", "변동성", "금리", "매크로"], "signal_items": [{"name": "QQQ 200일 추세", "role": "진입 조건"}, {"name": "VIX 고변동성 상태", "role": "차단 조건"}, {"name": "VXN 고변동성 상태", "role": "차단 조건"}, {"name": "TLT/IEF 위험회피 확인", "role": "차단 조건"}, {"name": "달러 강세 상태", "role": "차단 조건"}, {"name": "매크로/금리 스트레스", "role": "차단 조건"}], "signal_summary": "QQQ 200일 추세, VIX 고변동성 상태 +4개"}, "source_group": {"key": "macro_rates", "label": "매크로/금리"}, "strategy_id": "MRS-007", "strategy_key": "MRS-007", "strategy_name": "QQQ 추세 + 매크로/금리 스트레스", "test_window": {"date_end": "2026-06-12", "date_range_label": "2010-02-16 ~ 2026-06-12", "date_range_note": "공통 정렬 기간", "date_start": "2010-02-16"}}, {"metrics": {"annualized_volatility": 0.3522551295, "cagr": 0.2907982127, "difference_vs_qqq_reference": 45.3052610473, "difference_vs_tqqq_reference": -316.4379077657, "estimated_cost_impact": 3044.9924535586, "mar": 0.5170209218454745, "max_drawdown": -0.5624496039, "total_return": 63.4082156618, "trade_count": 583}, "public_export_note": "이 페이지는 로컬 감사 경로를 빼고 성과 검토용 요약만 보여줍니다.", "research_boundary": {"candidate_watch_champion_mutation": false, "data_source_tier": "exploratory_unofficial", "data_source_tier_label": "탐색용 비공식 데이터", "final_review_allowed": false, "licensed_rerun_required": true, "no_ranking_or_recommendation": true, "not_trading_instruction": true}, "review": {"period_compare_anchor": "period-compare-2010-02-16-2026-06-12", "period_recalc_source": "전체 equity series 없음", "review_status": "최종 검토 전 재실행 필요", "risk_flags": ["exploratory_unofficial_final_review_blocked", "high_turnover_review_needed", "high_cost_review_needed", "fractional_exposure_scaling_review_needed", "노출 변경 과다 가능 - 비용 영향 확인", "비용 영향 확인"]}, "rule_semantics": {"cost_assumption_summary": "수수료 0, 노출 변경당 슬리피지 0.05% 가정", "entry_rule": "진입/노출 ON: 장마감 후 계산한 신호 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 적용합니다.", "execution_timing": "next_session_open_to_next_session_open", "exit_rule": "청산/노출 OFF: 장마감 후 계산한 신호 조건이 거짓이거나 차단 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 줄이거나 0으로 둡니다.", "exposure_rule": "Exposure is 1.0 with no stress flags, 0.5 with one stress flag, and 0.0 with two or more stress flags.", "rule_interpretation_note": "이 항목은 백테스트 재현을 위한 규칙 설명이며 투자 조언이나 실거래 지시가 아닙니다.", "same_close_execution_allowed": false, "signal_timing": "after_close", "source_rule_text": "Exposure is 1.0 with no stress flags, 0.5 with one stress flag, and 0.0 with two or more stress flags.", "traded_instrument": "TQQQ", "trading_basis_label": "종가 신호 → 다음 시가 체결"}, "run_order": 24, "signals": {"required_inputs": ["TQQQ", "^VIX", "^VXN", "TLT", "IEF", "UUP"], "signal_count": 5, "signal_groups": ["변동성", "금리", "매크로"], "signal_items": [{"name": "VIX 고변동성 상태", "role": "차단 조건"}, {"name": "VXN 고변동성 상태", "role": "차단 조건"}, {"name": "TLT/IEF 위험회피 확인", "role": "차단 조건"}, {"name": "달러 강세 상태", "role": "차단 조건"}, {"name": "매크로/금리 스트레스", "role": "노출 조절 조건"}], "signal_summary": "VIX 고변동성 상태, VXN 고변동성 상태 +3개"}, "source_group": {"key": "macro_rates", "label": "매크로/금리"}, "strategy_id": "MRS-008", "strategy_key": "MRS-008", "strategy_name": "매크로 스트레스 노출 축소", "test_window": {"date_end": "2026-06-12", "date_range_label": "2010-02-16 ~ 2026-06-12", "date_range_note": "공통 정렬 기간", "date_start": "2010-02-16"}}, {"metrics": {"annualized_volatility": 0.3327615458, "cagr": 0.2255726218, "difference_vs_qqq_reference": 8.5333818055, "difference_vs_tqqq_reference": -353.2097870076, "estimated_cost_impact": 989.6471511081, "mar": 0.4651192056656834, "max_drawdown": -0.4849780853, "total_return": 26.6363364199, "trade_count": 617}, "public_export_note": "이 페이지는 로컬 감사 경로를 빼고 성과 검토용 요약만 보여줍니다.", "research_boundary": {"candidate_watch_champion_mutation": false, "data_source_tier": "exploratory_unofficial", "data_source_tier_label": "탐색용 비공식 데이터", "final_review_allowed": false, "licensed_rerun_required": true, "no_ranking_or_recommendation": true, "not_trading_instruction": true}, "review": {"period_compare_anchor": "period-compare-2010-02-16-2026-06-12", "period_recalc_source": "전체 equity series 없음", "review_status": "최종 검토 전 재실행 필요", "risk_flags": ["exploratory_unofficial_final_review_blocked", "high_turnover_review_needed", "high_cost_review_needed", "fractional_exposure_scaling_review_needed", "노출 변경 과다 가능 - 비용 영향 확인", "비용 영향 확인"]}, "rule_semantics": {"cost_assumption_summary": "수수료 0, 노출 변경당 슬리피지 0.05% 가정", "entry_rule": "진입/노출 ON: 장마감 후 계산한 신호 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 적용합니다.", "execution_timing": "next_session_open_to_next_session_open", "exit_rule": "청산/노출 OFF: 장마감 후 계산한 신호 조건이 거짓이거나 차단 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 줄이거나 0으로 둡니다.", "exposure_rule": "QQQ trend gates exposure, then fixed macro stress count scales exposure down without parameter search.", "rule_interpretation_note": "이 항목은 백테스트 재현을 위한 규칙 설명이며 투자 조언이나 실거래 지시가 아닙니다.", "same_close_execution_allowed": false, "signal_timing": "after_close", "source_rule_text": "QQQ trend gates exposure, then fixed macro stress count scales exposure down without parameter search.", "traded_instrument": "TQQQ", "trading_basis_label": "종가 신호 → 다음 시가 체결"}, "run_order": 25, "signals": {"required_inputs": ["QQQ", "TQQQ", "^VIX", "^VXN", "TLT", "IEF", "UUP"], "signal_count": 6, "signal_groups": ["추세", "변동성", "금리", "매크로"], "signal_items": [{"name": "QQQ 추세", "role": "진입 조건"}, {"name": "VIX 고변동성 상태", "role": "차단 조건"}, {"name": "VXN 고변동성 상태", "role": "차단 조건"}, {"name": "TLT/IEF 위험회피 확인", "role": "차단 조건"}, {"name": "달러 강세 상태", "role": "차단 조건"}, {"name": "매크로/금리 스트레스", "role": "노출 조절 조건"}], "signal_summary": "QQQ 추세, VIX 고변동성 상태 +4개"}, "source_group": {"key": "macro_rates", "label": "매크로/금리"}, "strategy_id": "MRS-009", "strategy_key": "MRS-009", "strategy_name": "추세 + 매크로 스트레스 노출 조절", "test_window": {"date_end": "2026-06-12", "date_range_label": "2010-02-16 ~ 2026-06-12", "date_range_note": "공통 정렬 기간", "date_start": "2010-02-16"}}, {"metrics": {"annualized_volatility": 0.3636598499, "cagr": 0.217261478, "difference_vs_qqq_reference": 5.6290343395, "difference_vs_tqqq_reference": -356.1140993701, "estimated_cost_impact": 824.9064797862, "mar": 0.4412120802, "max_drawdown": -0.4924196044, "total_return": 23.7319966283, "trade_count": 270}, "public_export_note": "이 페이지는 로컬 감사 경로를 빼고 성과 검토용 요약만 보여줍니다.", "research_boundary": {"candidate_watch_champion_mutation": false, "data_source_tier": "exploratory_unofficial", "data_source_tier_label": "탐색용 비공식 데이터", "final_review_allowed": false, "licensed_rerun_required": true, "no_ranking_or_recommendation": true, "not_trading_instruction": true}, "review": {"period_compare_anchor": "period-compare-2010-02-16-2026-06-12", "period_recalc_source": "단일 초안 trace", "review_status": "최종 검토 전 재실행 필요", "risk_flags": ["노출 변경 과다 가능 - 비용 영향 확인"]}, "rule_semantics": {"cost_assumption_summary": "수수료 0, 노출 변경당 슬리피지 0.05% 가정", "entry_rule": "진입/노출 ON: 장마감 후 계산한 신호 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 적용합니다.", "execution_timing": "next_session_open_to_next_session_open", "exit_rule": "청산/노출 OFF: 장마감 후 계산한 신호 조건이 거짓이거나 차단 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 줄이거나 0으로 둡니다.", "exposure_rule": "QQQ close above its 200-day moving average and VXN at or below its rolling 252-day 75th percentile.", "rule_interpretation_note": "이 항목은 백테스트 재현을 위한 규칙 설명이며 투자 조언이나 실거래 지시가 아닙니다.", "same_close_execution_allowed": false, "signal_timing": "after_close", "source_rule_text": "QQQ close above its 200-day moving average and VXN at or below its rolling 252-day 75th percentile.", "traded_instrument": "TQQQ", "trading_basis_label": "종가 신호 → 다음 시가 체결"}, "run_order": 26, "signals": {"required_inputs": ["TQQQ", "QQQ", "^NDX", "^VXN"], "signal_count": 2, "signal_groups": ["추세", "변동성", "매크로"], "signal_items": [{"name": "QQQ 200일 추세", "role": "진입 조건"}, {"name": "VXN 고변동성 상태", "role": "차단 조건"}], "signal_summary": "QQQ 200일 추세, VXN 고변동성 상태"}, "source_group": {"key": "rule_draft_batch", "label": "규칙 초안"}, "strategy_id": "DRSIG-002", "strategy_key": "DRSIG-002", "strategy_name": "나스닥 변동성/거시 상태 신호 초안 (DRSIG-002)", "test_window": {"date_end": "2026-06-12", "date_range_label": "2010-02-16 ~ 2026-06-12", "date_range_note": "공통 정렬 기간", "date_start": "2010-02-16"}}, {"metrics": {"annualized_volatility": 0.5338578098, "cagr": 0.3161711374, "difference_vs_qqq_reference": 69.3862519352, "difference_vs_tqqq_reference": -292.3568894487, "estimated_cost_impact": 238.2223248079, "mar": 0.4749148215, "max_drawdown": -0.6657428302, "total_return": 87.4892065497, "trade_count": 47}, "public_export_note": "이 페이지는 로컬 감사 경로를 빼고 성과 검토용 요약만 보여줍니다.", "research_boundary": {"candidate_watch_champion_mutation": false, "data_source_tier": "exploratory_unofficial", "data_source_tier_label": "탐색용 비공식 데이터", "final_review_allowed": false, "licensed_rerun_required": true, "no_ranking_or_recommendation": true, "not_trading_instruction": true}, "review": {"period_compare_anchor": "period-compare-2010-02-16-2026-06-12", "period_recalc_source": "전체 equity series 없음", "review_status": "최종 검토 전 재실행 필요", "risk_flags": ["노출 변경 낮음"]}, "rule_semantics": {"cost_assumption_summary": "수수료 0, 노출 변경당 슬리피지 0.05% 가정", "entry_rule": "진입/노출 ON: 장마감 후 계산한 신호 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 적용합니다.", "execution_timing": "next_session_open_to_next_session_open", "exit_rule": "청산/노출 OFF: 장마감 후 계산한 신호 조건이 거짓이거나 차단 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출을 줄이거나 0으로 둡니다.", "exposure_rule": "Exposure is 1.0 when QQQ 252-trading-day return is positive; otherwise 0.0. Signal after close, next-session open execution.", "rule_interpretation_note": "이 항목은 백테스트 재현을 위한 규칙 설명이며 투자 조언이나 실거래 지시가 아닙니다.", "same_close_execution_allowed": false, "signal_timing": "after_close", "source_rule_text": "Exposure is 1.0 when QQQ 252-trading-day return is positive; otherwise 0.0. Signal after close, next-session open execution.", "traded_instrument": "TQQQ", "trading_basis_label": "종가 신호 → 다음 시가 체결"}, "run_order": 27, "signals": {"required_inputs": ["QQQ", "TQQQ"], "signal_count": 4, "signal_groups": ["추세", "변동성", "모멘텀"], "signal_items": [{"name": "QQQ 200일 추세", "role": "진입 조건"}, {"name": "QQQ 252일 모멘텀", "role": "진입 조건"}, {"name": "VIX 고변동성 상태", "role": "차단 조건"}, {"name": "VXN 고변동성 상태", "role": "차단 조건"}], "signal_summary": "QQQ 200일 추세, QQQ 252일 모멘텀 +2개"}, "source_group": {"key": "rule_draft_batch", "label": "규칙 초안"}, "strategy_id": "DRSIG-003", "strategy_key": "DRSIG-003", "strategy_name": "QQQ 12-month momentum daily draft (DRSIG-003)", "test_window": {"date_end": "2026-06-12", "date_range_label": "2010-02-16 ~ 2026-06-12", "date_range_note": "공통 정렬 기간", "date_start": "2010-02-16"}}], "strategy_count": 27}</script>
-  <div class="table-wrap">
-    <table>
-      <thead><tr><th>전략명</th><th>신호 요약</th><th>신호 수</th><th>신호 묶음</th><th>공통 테스트 기간</th><th>매매 기준</th><th>토탈 리턴</th><th>CAGR</th><th>MDD</th><th>MAR</th><th>매매횟수</th><th>TQQQ 대비</th><th>QQQ 대비</th><th>검토 상태</th><th>기간 비교</th></tr></thead>
-      <tbody><tr id="strategy-row-001-qsig-001">
-<td><label class="strategy-select-control"><input type="checkbox" class="strategy-export-checkbox" data-strategy-key="QSIG-001"><span>선택</span></label><strong>QQQ 200일선 추세 필터</strong><div class="muted">QSIG-001</div></td>
-<td><div class="signal-compact">QQQ 200일 추세</div></td>
-<td class="num">1</td>
-<td>추세</td>
-<td>2010-02-16 ~ 2026-06-12</td>
-<td>종가 신호 → 다음 시가 체결</td>
-<td class="num strong">5,802.9%</td>
-<td class="num">28.4%</td>
-<td class="num">-60.3%</td>
-<td class="num">0.47</td>
-<td class="num">87</td>
-<td class="num">-32,181.7%</td>
-<td class="num">3,992.6%</td>
-<td>최종 검토 전 재실행 필요</td>
-<td><a href="#period-compare-2010-02-16-2026-06-12">이 기간으로 비교</a></td>
-</tr><tr id="strategy-row-002-qsig-002">
-<td><label class="strategy-select-control"><input type="checkbox" class="strategy-export-checkbox" data-strategy-key="QSIG-002"><span>선택</span></label><strong>QQQ 10-month MA daily proxy</strong><div class="muted">QSIG-002</div></td>
-<td><div class="signal-compact">QQQ 추세</div></td>
-<td class="num">1</td>
-<td>추세</td>
-<td>2010-02-16 ~ 2026-06-12</td>
-<td>종가 신호 → 다음 시가 체결</td>
-<td class="num strong">5,105.5%</td>
-<td class="num">27.4%</td>
-<td class="num">-59.5%</td>
-<td class="num">0.46</td>
-<td class="num">93</td>
-<td class="num">-32,879.1%</td>
-<td class="num">3,295.2%</td>
-<td>최종 검토 전 재실행 필요</td>
-<td><a href="#period-compare-2010-02-16-2026-06-12">이 기간으로 비교</a></td>
-</tr><tr id="strategy-row-003-qsig-003">
-<td><label class="strategy-select-control"><input type="checkbox" class="strategy-export-checkbox" data-strategy-key="QSIG-003"><span>선택</span></label><strong>QQQ 12-month time-series momentum</strong><div class="muted">QSIG-003</div></td>
-<td><div class="signal-compact">QQQ 252일 모멘텀</div></td>
-<td class="num">1</td>
-<td>모멘텀</td>
-<td>2010-02-16 ~ 2026-06-12</td>
-<td>종가 신호 → 다음 시가 체결</td>
-<td class="num strong">8,748.9%</td>
-<td class="num">31.6%</td>
-<td class="num">-66.6%</td>
-<td class="num">0.47</td>
-<td class="num">47</td>
-<td class="num">-29,235.7%</td>
-<td class="num">6,938.6%</td>
-<td>최종 검토 전 재실행 필요</td>
-<td><a href="#period-compare-2010-02-16-2026-06-12">이 기간으로 비교</a></td>
-</tr><tr id="strategy-row-004-qsig-004">
-<td><label class="strategy-select-control"><input type="checkbox" class="strategy-export-checkbox" data-strategy-key="QSIG-004"><span>선택</span></label><strong>QQQ SMA200 plus 63-day momentum confirmation</strong><div class="muted">QSIG-004</div></td>
-<td><div class="signal-compact">QQQ 200일 추세</div></td>
-<td class="num">1</td>
-<td>추세, 모멘텀</td>
-<td>2010-02-16 ~ 2026-06-12</td>
-<td>종가 신호 → 다음 시가 체결</td>
-<td class="num strong">1,773.5%</td>
-<td class="num">19.7%</td>
-<td class="num">-54.1%</td>
-<td class="num">0.36</td>
-<td class="num">145</td>
-<td class="num">-36,211.1%</td>
-<td class="num">-36.8%</td>
-<td>최종 검토 전 재실행 필요</td>
-<td><a href="#period-compare-2010-02-16-2026-06-12">이 기간으로 비교</a></td>
-</tr><tr id="strategy-row-005-qsig-005">
-<td><label class="strategy-select-control"><input type="checkbox" class="strategy-export-checkbox" data-strategy-key="QSIG-005"><span>선택</span></label><strong>QQQ SMA200 with VXN high-volatility block</strong><div class="muted">QSIG-005</div></td>
-<td><div class="signal-compact">QQQ 200일 추세 / VXN 고변동성 상태</div></td>
-<td class="num">2</td>
-<td>추세, 변동성</td>
-<td>2010-02-16 ~ 2026-06-12</td>
-<td>종가 신호 → 다음 시가 체결</td>
-<td class="num strong">2,373.2%</td>
-<td class="num">21.7%</td>
-<td class="num">-49.2%</td>
-<td class="num">0.44</td>
-<td class="num">270</td>
-<td class="num">-35,611.4%</td>
-<td class="num">562.9%</td>
-<td>최종 검토 전 재실행 필요</td>
-<td><a href="#period-compare-2010-02-16-2026-06-12">이 기간으로 비교</a></td>
-</tr><tr id="strategy-row-006-qsig-006">
-<td><label class="strategy-select-control"><input type="checkbox" class="strategy-export-checkbox" data-strategy-key="QSIG-006"><span>선택</span></label><strong>QQQ SMA200 with overnight stress block</strong><div class="muted">QSIG-006</div></td>
-<td><div class="signal-compact">QQQ 200일 추세</div></td>
-<td class="num">1</td>
-<td>추세</td>
-<td>2010-02-16 ~ 2026-06-12</td>
-<td>종가 신호 → 다음 시가 체결</td>
-<td class="num strong">3,988.3%</td>
-<td class="num">25.5%</td>
-<td class="num">-58.9%</td>
-<td class="num">0.43</td>
-<td class="num">125</td>
-<td class="num">-33,996.3%</td>
-<td class="num">2,178.0%</td>
-<td>최종 검토 전 재실행 필요</td>
-<td><a href="#period-compare-2010-02-16-2026-06-12">이 기간으로 비교</a></td>
-</tr><tr id="strategy-row-007-qsig-007">
-<td><label class="strategy-select-control"><input type="checkbox" class="strategy-export-checkbox" data-strategy-key="QSIG-007"><span>선택</span></label><strong>QQQ 20-day realized-volatility exposure scaling</strong><div class="muted">QSIG-007</div></td>
-<td><div class="signal-compact">volatility_managed_exposure</div></td>
-<td class="num">1</td>
-<td>변동성</td>
-<td>2010-02-16 ~ 2026-06-12</td>
-<td>종가 신호 → 다음 시가 체결</td>
-<td class="num strong">31,824.7%</td>
-<td class="num">42.4%</td>
-<td class="num">-68.6%</td>
-<td class="num">0.62</td>
-<td class="num">1,284</td>
-<td class="num">-6,159.9%</td>
-<td class="num">30,014.4%</td>
-<td>최종 검토 전 재실행 필요</td>
-<td><a href="#period-compare-2010-02-16-2026-06-12">이 기간으로 비교</a></td>
-</tr><tr id="strategy-row-008-qsig-008">
-<td><label class="strategy-select-control"><input type="checkbox" class="strategy-export-checkbox" data-strategy-key="QSIG-008"><span>선택</span></label><strong>QQQ SMA200 plus volatility-managed exposure</strong><div class="muted">QSIG-008</div></td>
-<td><div class="signal-compact">QQQ 200일 추세</div></td>
-<td class="num">1</td>
-<td>추세, 변동성</td>
-<td>2010-02-16 ~ 2026-06-12</td>
-<td>종가 신호 → 다음 시가 체결</td>
-<td class="num strong">6,377.3%</td>
-<td class="num">29.1%</td>
-<td class="num">-59.5%</td>
-<td class="num">0.49</td>
-<td class="num">745</td>
-<td class="num">-31,607.3%</td>
-<td class="num">4,567.0%</td>
-<td>최종 검토 전 재실행 필요</td>
-<td><a href="#period-compare-2010-02-16-2026-06-12">이 기간으로 비교</a></td>
-</tr><tr id="strategy-row-009-stl-001">
-<td><label class="strategy-select-control"><input type="checkbox" class="strategy-export-checkbox" data-strategy-key="STL-001"><span>선택</span></label><strong>QQQ 추세 + XLK/SPY 상대강도</strong><div class="muted">STL-001</div></td>
-<td><div class="signal-compact">QQQ 200일 추세 / XLK/SPY 상대강도</div></td>
-<td class="num">2</td>
-<td>추세, 섹터, 모멘텀</td>
-<td>2018-06-21 ~ 2026-06-12</td>
-<td>종가 신호 → 다음 시가 체결</td>
-<td class="num strong">360.8%</td>
-<td class="num">21.1%</td>
-<td class="num">-61.1%</td>
-<td class="num">0.35</td>
-<td class="num">103</td>
-<td class="num">-558.6%</td>
-<td class="num">34.2%</td>
-<td>최종 검토 전 재실행 필요</td>
-<td><a href="#period-compare-2018-06-21-2026-06-12">이 기간으로 비교</a></td>
-</tr><tr id="strategy-row-010-stl-002">
-<td><label class="strategy-select-control"><input type="checkbox" class="strategy-export-checkbox" data-strategy-key="STL-002"><span>선택</span></label><strong>QQQ 추세 + SMH relative strength vs QQQ</strong><div class="muted">STL-002</div></td>
-<td><div class="signal-compact">QQQ 200일 추세 / SMH/SPY 상대강도</div></td>
-<td class="num">2</td>
-<td>추세, 섹터, 모멘텀</td>
-<td>2018-06-21 ~ 2026-06-12</td>
-<td>종가 신호 → 다음 시가 체결</td>
-<td class="num strong">791.1%</td>
-<td class="num">31.6%</td>
-<td class="num">-48.9%</td>
-<td class="num">0.65</td>
-<td class="num">97</td>
-<td class="num">-128.2%</td>
-<td class="num">464.5%</td>
-<td>최종 검토 전 재실행 필요</td>
-<td><a href="#period-compare-2018-06-21-2026-06-12">이 기간으로 비교</a></td>
-</tr><tr id="strategy-row-011-stl-003">
-<td><label class="strategy-select-control"><input type="checkbox" class="strategy-export-checkbox" data-strategy-key="STL-003"><span>선택</span></label><strong>QQQ 추세 + SOXX relative strength vs QQQ</strong><div class="muted">STL-003</div></td>
-<td><div class="signal-compact">QQQ 200일 추세 / SOXX/SPY 상대강도</div></td>
-<td class="num">2</td>
-<td>추세, 섹터, 모멘텀</td>
-<td>2018-06-21 ~ 2026-06-12</td>
-<td>종가 신호 → 다음 시가 체결</td>
-<td class="num strong">660.2%</td>
-<td class="num">29.0%</td>
-<td class="num">-48.9%</td>
-<td class="num">0.59</td>
-<td class="num">85</td>
-<td class="num">-259.1%</td>
-<td class="num">333.6%</td>
-<td>최종 검토 전 재실행 필요</td>
-<td><a href="#period-compare-2018-06-21-2026-06-12">이 기간으로 비교</a></td>
-</tr><tr id="strategy-row-012-stl-004">
-<td><label class="strategy-select-control"><input type="checkbox" class="strategy-export-checkbox" data-strategy-key="STL-004"><span>선택</span></label><strong>QQQ 추세 + IGV relative strength vs QQQ</strong><div class="muted">STL-004</div></td>
-<td><div class="signal-compact">QQQ 200일 추세 / IGV/SPY 상대강도</div></td>
-<td class="num">2</td>
-<td>추세, 섹터, 모멘텀</td>
-<td>2018-06-21 ~ 2026-06-12</td>
-<td>종가 신호 → 다음 시가 체결</td>
-<td class="num strong">633.2%</td>
-<td class="num">28.4%</td>
-<td class="num">-37.9%</td>
-<td class="num">0.75</td>
-<td class="num">76</td>
-<td class="num">-286.1%</td>
-<td class="num">306.6%</td>
-<td>최종 검토 전 재실행 필요</td>
-<td><a href="#period-compare-2018-06-21-2026-06-12">이 기간으로 비교</a></td>
-</tr><tr id="strategy-row-013-stl-005">
-<td><label class="strategy-select-control"><input type="checkbox" class="strategy-export-checkbox" data-strategy-key="STL-005"><span>선택</span></label><strong>QQQ 추세 + XLK/SMH/IGV leadership breadth</strong><div class="muted">STL-005</div></td>
-<td><div class="signal-compact">QQQ 200일 추세 / XLK/SPY 상대강도 / SMH/SPY 상대강도 외 1개</div><details><summary>전체 신호 보기</summary><ul><li>QQQ 200일 추세 <span class="muted">(역할: 진입 조건)</span></li><li>XLK/SPY 상대강도 <span class="muted">(역할: 진입 조건)</span></li><li>SMH/SPY 상대강도 <span class="muted">(역할: 진입 조건)</span></li><li>IGV/SPY 상대강도 <span class="muted">(역할: 진입 조건)</span></li></ul></details></td>
-<td class="num">4</td>
-<td>추세, 섹터, breadth</td>
-<td>2018-06-21 ~ 2026-06-12</td>
-<td>종가 신호 → 다음 시가 체결</td>
-<td class="num strong">937.6%</td>
-<td class="num">34.1%</td>
-<td class="num">-48.9%</td>
-<td class="num">0.70</td>
-<td class="num">131</td>
-<td class="num">18.3%</td>
-<td class="num">611.0%</td>
-<td>최종 검토 전 재실행 필요</td>
-<td><a href="#period-compare-2018-06-21-2026-06-12">이 기간으로 비교</a></td>
-</tr><tr id="strategy-row-014-stl-006">
-<td><label class="strategy-select-control"><input type="checkbox" class="strategy-export-checkbox" data-strategy-key="STL-006"><span>선택</span></label><strong>QQQ 추세 + tech leadership deterioration block</strong><div class="muted">STL-006</div></td>
-<td><div class="signal-compact">QQQ 200일 추세 / XLK/SPY 상대강도 / SMH/SPY 상대강도 외 1개</div><details><summary>전체 신호 보기</summary><ul><li>QQQ 200일 추세 <span class="muted">(역할: 진입 조건)</span></li><li>XLK/SPY 상대강도 <span class="muted">(역할: 진입 조건)</span></li><li>SMH/SPY 상대강도 <span class="muted">(역할: 진입 조건)</span></li><li>IGV/SPY 상대강도 <span class="muted">(역할: 진입 조건)</span></li></ul></details></td>
-<td class="num">4</td>
-<td>추세, 섹터</td>
-<td>2018-06-21 ~ 2026-06-12</td>
-<td>종가 신호 → 다음 시가 체결</td>
-<td class="num strong">937.6%</td>
-<td class="num">34.1%</td>
-<td class="num">-48.9%</td>
-<td class="num">0.70</td>
-<td class="num">131</td>
-<td class="num">18.3%</td>
-<td class="num">611.0%</td>
-<td>최종 검토 전 재실행 필요</td>
-<td><a href="#period-compare-2018-06-21-2026-06-12">이 기간으로 비교</a></td>
-</tr><tr id="strategy-row-015-stl-007">
-<td><label class="strategy-select-control"><input type="checkbox" class="strategy-export-checkbox" data-strategy-key="STL-007"><span>선택</span></label><strong>QQQ 추세 + semiconductor leadership confirmation</strong><div class="muted">STL-007</div></td>
-<td><div class="signal-compact">QQQ 200일 추세 / SMH/SPY 상대강도 / SOXX/SPY 상대강도</div></td>
-<td class="num">3</td>
-<td>추세, 섹터</td>
-<td>2018-06-21 ~ 2026-06-12</td>
-<td>종가 신호 → 다음 시가 체결</td>
-<td class="num strong">704.7%</td>
-<td class="num">29.9%</td>
-<td class="num">-48.9%</td>
-<td class="num">0.61</td>
-<td class="num">89</td>
-<td class="num">-214.6%</td>
-<td class="num">378.1%</td>
-<td>최종 검토 전 재실행 필요</td>
-<td><a href="#period-compare-2018-06-21-2026-06-12">이 기간으로 비교</a></td>
-</tr><tr id="strategy-row-016-stl-008">
-<td><label class="strategy-select-control"><input type="checkbox" class="strategy-export-checkbox" data-strategy-key="STL-008"><span>선택</span></label><strong>QQQ 추세 + sector leadership rotation risk-off</strong><div class="muted">STL-008</div></td>
-<td><div class="signal-compact">QQQ 200일 추세 / XLK/SPY 상대강도 / XLC/SPY 상대강도</div></td>
-<td class="num">3</td>
-<td>추세, 섹터</td>
-<td>2018-06-21 ~ 2026-06-12</td>
-<td>종가 신호 → 다음 시가 체결</td>
-<td class="num strong">545.0%</td>
-<td class="num">26.3%</td>
-<td class="num">-58.0%</td>
-<td class="num">0.45</td>
-<td class="num">79</td>
-<td class="num">-374.3%</td>
-<td class="num">218.4%</td>
-<td>최종 검토 전 재실행 필요</td>
-<td><a href="#period-compare-2018-06-21-2026-06-12">이 기간으로 비교</a></td>
-</tr><tr id="strategy-row-017-mrs-001">
-<td><label class="strategy-select-control"><input type="checkbox" class="strategy-export-checkbox" data-strategy-key="MRS-001"><span>선택</span></label><strong>QQQ 추세 + VIX 고변동성 차단</strong><div class="muted">MRS-001</div></td>
-<td><div class="signal-compact">QQQ 200일 추세 / VIX 고변동성 상태</div></td>
-<td class="num">2</td>
-<td>추세, 변동성, 매크로</td>
-<td>2010-02-16 ~ 2026-06-12</td>
-<td>종가 신호 → 다음 시가 체결</td>
-<td class="num strong">3,514.7%</td>
-<td class="num">24.6%</td>
-<td class="num">-51.7%</td>
-<td class="num">0.48</td>
-<td class="num">264</td>
-<td class="num">-34,469.9%</td>
-<td class="num">1,704.4%</td>
-<td>최종 검토 전 재실행 필요</td>
-<td><a href="#period-compare-2010-02-16-2026-06-12">이 기간으로 비교</a></td>
-</tr><tr id="strategy-row-018-mrs-002">
-<td><label class="strategy-select-control"><input type="checkbox" class="strategy-export-checkbox" data-strategy-key="MRS-002"><span>선택</span></label><strong>QQQ 추세 + VXN 고변동성 차단</strong><div class="muted">MRS-002</div></td>
-<td><div class="signal-compact">QQQ 200일 추세 / VXN 고변동성 상태</div></td>
-<td class="num">2</td>
-<td>추세, 변동성</td>
-<td>2010-02-16 ~ 2026-06-12</td>
-<td>종가 신호 → 다음 시가 체결</td>
-<td class="num strong">3,099.7%</td>
-<td class="num">23.7%</td>
-<td class="num">-49.2%</td>
-<td class="num">0.48</td>
-<td class="num">270</td>
-<td class="num">-34,884.9%</td>
-<td class="num">1,289.4%</td>
-<td>최종 검토 전 재실행 필요</td>
-<td><a href="#period-compare-2010-02-16-2026-06-12">이 기간으로 비교</a></td>
-</tr><tr id="strategy-row-019-mrs-003">
-<td><label class="strategy-select-control"><input type="checkbox" class="strategy-export-checkbox" data-strategy-key="MRS-003"><span>선택</span></label><strong>QQQ 추세 + TLT/IEF 위험회피 차단</strong><div class="muted">MRS-003</div></td>
-<td><div class="signal-compact">QQQ 200일 추세 / TLT/IEF 위험회피 확인</div></td>
-<td class="num">2</td>
-<td>추세, 금리</td>
-<td>2010-02-16 ~ 2026-06-12</td>
-<td>종가 신호 → 다음 시가 체결</td>
-<td class="num strong">4,601.0%</td>
-<td class="num">26.6%</td>
-<td class="num">-56.0%</td>
-<td class="num">0.48</td>
-<td class="num">205</td>
-<td class="num">-33,383.6%</td>
-<td class="num">2,790.7%</td>
-<td>최종 검토 전 재실행 필요</td>
-<td><a href="#period-compare-2010-02-16-2026-06-12">이 기간으로 비교</a></td>
-</tr><tr id="strategy-row-020-mrs-004">
-<td><label class="strategy-select-control"><input type="checkbox" class="strategy-export-checkbox" data-strategy-key="MRS-004"><span>선택</span></label><strong>QQQ 추세 + TLT 상대 약세 차단</strong><div class="muted">MRS-004</div></td>
-<td><div class="signal-compact">QQQ 200일 추세 / TLT 금리 민감도</div></td>
-<td class="num">2</td>
-<td>추세, 금리, 모멘텀</td>
-<td>2010-02-16 ~ 2026-06-12</td>
-<td>종가 신호 → 다음 시가 체결</td>
-<td class="num strong">3,690.5%</td>
-<td class="num">25.0%</td>
-<td class="num">-54.8%</td>
-<td class="num">0.46</td>
-<td class="num">171</td>
-<td class="num">-34,294.1%</td>
-<td class="num">1,880.2%</td>
-<td>최종 검토 전 재실행 필요</td>
-<td><a href="#period-compare-2010-02-16-2026-06-12">이 기간으로 비교</a></td>
-</tr><tr id="strategy-row-021-mrs-005">
-<td><label class="strategy-select-control"><input type="checkbox" class="strategy-export-checkbox" data-strategy-key="MRS-005"><span>선택</span></label><strong>QQQ 추세 + 달러 강세 차단</strong><div class="muted">MRS-005</div></td>
-<td><div class="signal-compact">QQQ 200일 추세 / 달러 강세 상태</div></td>
-<td class="num">2</td>
-<td>추세, 매크로</td>
-<td>2010-02-16 ~ 2026-06-12</td>
-<td>종가 신호 → 다음 시가 체결</td>
-<td class="num strong">1,360.5%</td>
-<td class="num">17.9%</td>
-<td class="num">-56.9%</td>
-<td class="num">0.31</td>
-<td class="num">223</td>
-<td class="num">-36,624.1%</td>
-<td class="num">-449.8%</td>
-<td>최종 검토 전 재실행 필요</td>
-<td><a href="#period-compare-2010-02-16-2026-06-12">이 기간으로 비교</a></td>
-</tr><tr id="strategy-row-022-mrs-006">
-<td><label class="strategy-select-control"><input type="checkbox" class="strategy-export-checkbox" data-strategy-key="MRS-006"><span>선택</span></label><strong>QQQ 추세 + VIX/VXN 변동성 상태</strong><div class="muted">MRS-006</div></td>
-<td><div class="signal-compact">QQQ 200일 추세 / VIX 고변동성 상태 / VXN 고변동성 상태</div></td>
-<td class="num">3</td>
-<td>추세, 변동성</td>
-<td>2010-02-16 ~ 2026-06-12</td>
-<td>종가 신호 → 다음 시가 체결</td>
-<td class="num strong">1,858.4%</td>
-<td class="num">20.0%</td>
-<td class="num">-35.4%</td>
-<td class="num">0.56</td>
-<td class="num">420</td>
-<td class="num">-36,126.2%</td>
-<td class="num">48.1%</td>
-<td>최종 검토 전 재실행 필요</td>
-<td><a href="#period-compare-2010-02-16-2026-06-12">이 기간으로 비교</a></td>
-</tr><tr id="strategy-row-023-mrs-007">
-<td><label class="strategy-select-control"><input type="checkbox" class="strategy-export-checkbox" data-strategy-key="MRS-007"><span>선택</span></label><strong>QQQ 추세 + 매크로/금리 스트레스</strong><div class="muted">MRS-007</div></td>
-<td><div class="signal-compact">QQQ 200일 추세 / VIX 고변동성 상태 / VXN 고변동성 상태 외 3개</div><details><summary>전체 신호 보기</summary><ul><li>QQQ 200일 추세 <span class="muted">(역할: 진입 조건)</span></li><li>VIX 고변동성 상태 <span class="muted">(역할: 차단 조건)</span></li><li>VXN 고변동성 상태 <span class="muted">(역할: 차단 조건)</span></li><li>TLT/IEF 위험회피 확인 <span class="muted">(역할: 차단 조건)</span></li><li>달러 강세 상태 <span class="muted">(역할: 차단 조건)</span></li><li>매크로/금리 스트레스 <span class="muted">(역할: 차단 조건)</span></li></ul></details></td>
-<td class="num">6</td>
-<td>추세, 변동성, 금리, 매크로</td>
-<td>2010-02-16 ~ 2026-06-12</td>
-<td>종가 신호 → 다음 시가 체결</td>
-<td class="num strong">2,876.8%</td>
-<td class="num">23.1%</td>
-<td class="num">-49.2%</td>
-<td class="num">0.47</td>
-<td class="num">312</td>
-<td class="num">-35,107.8%</td>
-<td class="num">1,066.5%</td>
-<td>최종 검토 전 재실행 필요</td>
-<td><a href="#period-compare-2010-02-16-2026-06-12">이 기간으로 비교</a></td>
-</tr><tr id="strategy-row-024-mrs-008">
-<td><label class="strategy-select-control"><input type="checkbox" class="strategy-export-checkbox" data-strategy-key="MRS-008"><span>선택</span></label><strong>매크로 스트레스 노출 축소</strong><div class="muted">MRS-008</div></td>
-<td><div class="signal-compact">VIX 고변동성 상태 / VXN 고변동성 상태 / TLT/IEF 위험회피 확인 외 2개</div><details><summary>전체 신호 보기</summary><ul><li>VIX 고변동성 상태 <span class="muted">(역할: 차단 조건)</span></li><li>VXN 고변동성 상태 <span class="muted">(역할: 차단 조건)</span></li><li>TLT/IEF 위험회피 확인 <span class="muted">(역할: 차단 조건)</span></li><li>달러 강세 상태 <span class="muted">(역할: 차단 조건)</span></li><li>매크로/금리 스트레스 <span class="muted">(역할: 노출 조절 조건)</span></li></ul></details></td>
-<td class="num">5</td>
-<td>변동성, 금리, 매크로</td>
-<td>2010-02-16 ~ 2026-06-12</td>
-<td>종가 신호 → 다음 시가 체결</td>
-<td class="num strong">6,340.8%</td>
-<td class="num">29.1%</td>
-<td class="num">-56.2%</td>
-<td class="num">0.52</td>
-<td class="num">583</td>
-<td class="num">-31,643.8%</td>
-<td class="num">4,530.5%</td>
-<td>최종 검토 전 재실행 필요</td>
-<td><a href="#period-compare-2010-02-16-2026-06-12">이 기간으로 비교</a></td>
-</tr><tr id="strategy-row-025-mrs-009">
-<td><label class="strategy-select-control"><input type="checkbox" class="strategy-export-checkbox" data-strategy-key="MRS-009"><span>선택</span></label><strong>추세 + 매크로 스트레스 노출 조절</strong><div class="muted">MRS-009</div></td>
-<td><div class="signal-compact">QQQ 추세 / VIX 고변동성 상태 / VXN 고변동성 상태 외 3개</div><details><summary>전체 신호 보기</summary><ul><li>QQQ 추세 <span class="muted">(역할: 진입 조건)</span></li><li>VIX 고변동성 상태 <span class="muted">(역할: 차단 조건)</span></li><li>VXN 고변동성 상태 <span class="muted">(역할: 차단 조건)</span></li><li>TLT/IEF 위험회피 확인 <span class="muted">(역할: 차단 조건)</span></li><li>달러 강세 상태 <span class="muted">(역할: 차단 조건)</span></li><li>매크로/금리 스트레스 <span class="muted">(역할: 노출 조절 조건)</span></li></ul></details></td>
-<td class="num">6</td>
-<td>추세, 변동성, 금리, 매크로</td>
-<td>2010-02-16 ~ 2026-06-12</td>
-<td>종가 신호 → 다음 시가 체결</td>
-<td class="num strong">2,663.6%</td>
-<td class="num">22.6%</td>
-<td class="num">-48.5%</td>
-<td class="num">0.47</td>
-<td class="num">617</td>
-<td class="num">-35,321.0%</td>
-<td class="num">853.3%</td>
-<td>최종 검토 전 재실행 필요</td>
-<td><a href="#period-compare-2010-02-16-2026-06-12">이 기간으로 비교</a></td>
-</tr><tr id="strategy-row-026-drsig-002">
-<td><label class="strategy-select-control"><input type="checkbox" class="strategy-export-checkbox" data-strategy-key="DRSIG-002"><span>선택</span></label><strong>나스닥 변동성/거시 상태 신호 초안 (DRSIG-002)</strong><div class="muted">DRSIG-002</div></td>
-<td><div class="signal-compact">QQQ 200일 추세 / VXN 고변동성 상태</div></td>
-<td class="num">2</td>
-<td>추세, 변동성, 매크로</td>
-<td>2010-02-16 ~ 2026-06-12</td>
-<td>종가 신호 → 다음 시가 체결</td>
-<td class="num strong">2,373.2%</td>
-<td class="num">21.7%</td>
-<td class="num">-49.2%</td>
-<td class="num">0.44</td>
-<td class="num">270</td>
-<td class="num">-35,611.4%</td>
-<td class="num">562.9%</td>
-<td>최종 검토 전 재실행 필요</td>
-<td><a href="#period-compare-2010-02-16-2026-06-12">이 기간으로 비교</a></td>
-</tr><tr id="strategy-row-027-drsig-003">
-<td><label class="strategy-select-control"><input type="checkbox" class="strategy-export-checkbox" data-strategy-key="DRSIG-003"><span>선택</span></label><strong>QQQ 12-month momentum daily draft (DRSIG-003)</strong><div class="muted">DRSIG-003</div></td>
-<td><div class="signal-compact">QQQ 200일 추세 / QQQ 252일 모멘텀 / VIX 고변동성 상태 외 1개</div><details><summary>전체 신호 보기</summary><ul><li>QQQ 200일 추세 <span class="muted">(역할: 진입 조건)</span></li><li>QQQ 252일 모멘텀 <span class="muted">(역할: 진입 조건)</span></li><li>VIX 고변동성 상태 <span class="muted">(역할: 차단 조건)</span></li><li>VXN 고변동성 상태 <span class="muted">(역할: 차단 조건)</span></li></ul></details></td>
-<td class="num">4</td>
-<td>추세, 변동성, 모멘텀</td>
-<td>2010-02-16 ~ 2026-06-12</td>
-<td>종가 신호 → 다음 시가 체결</td>
-<td class="num strong">8,748.9%</td>
-<td class="num">31.6%</td>
-<td class="num">-66.6%</td>
-<td class="num">0.47</td>
-<td class="num">47</td>
-<td class="num">-29,235.7%</td>
-<td class="num">6,938.6%</td>
-<td>최종 검토 전 재실행 필요</td>
-<td><a href="#period-compare-2010-02-16-2026-06-12">이 기간으로 비교</a></td>
-</tr></tbody>
-    </table>
+  <div class="messages">
+    <p id="import-status" class="muted">아직 파일을 선택하지 않았습니다.</p>
+    <div id="validation-list" class="validation-list"></div>
   </div>
 </section>
 
-<section id="metric-notes">
-  <h2>지표 설명</h2>
-  <div class="policy-grid">
-    <div class="policy-card"><strong>정책</strong><p>기존 trace/equity artifact가 있는 경우만 같은 기간 기준으로 재계산합니다. 전체 series가 없는 행은 준비 부족으로 표시합니다.</p></div>
-    <div class="policy-card"><strong>지표 설명</strong><p>토탈 리턴은 전체 누적 수익, CAGR은 연평균 성장률, MDD는 가장 큰 낙폭, MAR은 CAGR을 MDD로 나눈 값입니다. 매매횟수는 포지션이 바뀌 횟수입니다.</p></div>
-  </div>
+<section class="band">
+  <h2>전략 상세</h2>
+  <div id="detail-list" class="validation-list"><p class="muted">결과가 있으면 전략별 상세가 여기에 표시됩니다.</p></div>
 </section>
 
-<section id="period-comparisons">
-  <h2>같은 기간 비교표</h2>
-  
-<section id="period-compare-2010-02-16-2026-06-12" class="period-section">
-  <h2>기간 비교: 2010-02-16 ~ 2026-06-12</h2>
-  <p class="muted">계산 가능: 19 / 27</p>
-  <div class="table-wrap compact-table">
-    <table>
-      <thead><tr><th>전략명</th><th>신호 묶음</th><th>상태</th><th>토탈 리턴</th><th>CAGR</th><th>MDD</th><th>MAR</th></tr></thead>
-      <tbody><tr>
-<td><strong>QQQ 200일선 추세 필터</strong><div class="muted">QSIG-001</div></td>
-<td>QQQ 신호</td>
-<td>같은 기간 원본 지표</td>
-<td class="num">5,802.9%</td>
-<td class="num">28.4%</td>
-<td class="num">-60.3%</td>
-<td class="num">0.47</td>
-</tr><tr>
-<td><strong>QQQ 10-month MA daily proxy</strong><div class="muted">QSIG-002</div></td>
-<td>QQQ 신호</td>
-<td>같은 기간 원본 지표</td>
-<td class="num">5,105.5%</td>
-<td class="num">27.4%</td>
-<td class="num">-59.5%</td>
-<td class="num">0.46</td>
-</tr><tr>
-<td><strong>QQQ 12-month time-series momentum</strong><div class="muted">QSIG-003</div></td>
-<td>QQQ 신호</td>
-<td>같은 기간 원본 지표</td>
-<td class="num">8,748.9%</td>
-<td class="num">31.6%</td>
-<td class="num">-66.6%</td>
-<td class="num">0.47</td>
-</tr><tr>
-<td><strong>QQQ SMA200 plus 63-day momentum confirmation</strong><div class="muted">QSIG-004</div></td>
-<td>QQQ 신호</td>
-<td>같은 기간 원본 지표</td>
-<td class="num">1,773.5%</td>
-<td class="num">19.7%</td>
-<td class="num">-54.1%</td>
-<td class="num">0.36</td>
-</tr><tr>
-<td><strong>QQQ SMA200 with VXN high-volatility block</strong><div class="muted">QSIG-005</div></td>
-<td>QQQ 신호</td>
-<td>같은 기간 원본 지표</td>
-<td class="num">2,373.2%</td>
-<td class="num">21.7%</td>
-<td class="num">-49.2%</td>
-<td class="num">0.44</td>
-</tr><tr>
-<td><strong>QQQ SMA200 with overnight stress block</strong><div class="muted">QSIG-006</div></td>
-<td>QQQ 신호</td>
-<td>같은 기간 원본 지표</td>
-<td class="num">3,988.3%</td>
-<td class="num">25.5%</td>
-<td class="num">-58.9%</td>
-<td class="num">0.43</td>
-</tr><tr>
-<td><strong>QQQ 20-day realized-volatility exposure scaling</strong><div class="muted">QSIG-007</div></td>
-<td>QQQ 신호</td>
-<td>같은 기간 원본 지표</td>
-<td class="num">31,824.7%</td>
-<td class="num">42.4%</td>
-<td class="num">-68.6%</td>
-<td class="num">0.62</td>
-</tr><tr>
-<td><strong>QQQ SMA200 plus volatility-managed exposure</strong><div class="muted">QSIG-008</div></td>
-<td>QQQ 신호</td>
-<td>같은 기간 원본 지표</td>
-<td class="num">6,377.3%</td>
-<td class="num">29.1%</td>
-<td class="num">-59.5%</td>
-<td class="num">0.49</td>
-</tr><tr>
-<td><strong>QQQ 추세 + XLK/SPY 상대강도</strong><div class="muted">STL-001</div></td>
-<td>섹터/기술주</td>
-<td>기간 데이터 부족</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-</tr><tr>
-<td><strong>QQQ 추세 + SMH relative strength vs QQQ</strong><div class="muted">STL-002</div></td>
-<td>섹터/기술주</td>
-<td>기간 데이터 부족</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-</tr><tr>
-<td><strong>QQQ 추세 + SOXX relative strength vs QQQ</strong><div class="muted">STL-003</div></td>
-<td>섹터/기술주</td>
-<td>기간 데이터 부족</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-</tr><tr>
-<td><strong>QQQ 추세 + IGV relative strength vs QQQ</strong><div class="muted">STL-004</div></td>
-<td>섹터/기술주</td>
-<td>기간 데이터 부족</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-</tr><tr>
-<td><strong>QQQ 추세 + XLK/SMH/IGV leadership breadth</strong><div class="muted">STL-005</div></td>
-<td>섹터/기술주</td>
-<td>기간 데이터 부족</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-</tr><tr>
-<td><strong>QQQ 추세 + tech leadership deterioration block</strong><div class="muted">STL-006</div></td>
-<td>섹터/기술주</td>
-<td>기간 데이터 부족</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-</tr><tr>
-<td><strong>QQQ 추세 + semiconductor leadership confirmation</strong><div class="muted">STL-007</div></td>
-<td>섹터/기술주</td>
-<td>기간 데이터 부족</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-</tr><tr>
-<td><strong>QQQ 추세 + sector leadership rotation risk-off</strong><div class="muted">STL-008</div></td>
-<td>섹터/기술주</td>
-<td>기간 데이터 부족</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-</tr><tr>
-<td><strong>QQQ 추세 + VIX 고변동성 차단</strong><div class="muted">MRS-001</div></td>
-<td>매크로/금리</td>
-<td>같은 기간 원본 지표</td>
-<td class="num">3,514.7%</td>
-<td class="num">24.6%</td>
-<td class="num">-51.7%</td>
-<td class="num">0.48</td>
-</tr><tr>
-<td><strong>QQQ 추세 + VXN 고변동성 차단</strong><div class="muted">MRS-002</div></td>
-<td>매크로/금리</td>
-<td>같은 기간 원본 지표</td>
-<td class="num">3,099.7%</td>
-<td class="num">23.7%</td>
-<td class="num">-49.2%</td>
-<td class="num">0.48</td>
-</tr><tr>
-<td><strong>QQQ 추세 + TLT/IEF 위험회피 차단</strong><div class="muted">MRS-003</div></td>
-<td>매크로/금리</td>
-<td>같은 기간 원본 지표</td>
-<td class="num">4,601.0%</td>
-<td class="num">26.6%</td>
-<td class="num">-56.0%</td>
-<td class="num">0.48</td>
-</tr><tr>
-<td><strong>QQQ 추세 + TLT 상대 약세 차단</strong><div class="muted">MRS-004</div></td>
-<td>매크로/금리</td>
-<td>같은 기간 원본 지표</td>
-<td class="num">3,690.5%</td>
-<td class="num">25.0%</td>
-<td class="num">-54.8%</td>
-<td class="num">0.46</td>
-</tr><tr>
-<td><strong>QQQ 추세 + 달러 강세 차단</strong><div class="muted">MRS-005</div></td>
-<td>매크로/금리</td>
-<td>같은 기간 원본 지표</td>
-<td class="num">1,360.5%</td>
-<td class="num">17.9%</td>
-<td class="num">-56.9%</td>
-<td class="num">0.31</td>
-</tr><tr>
-<td><strong>QQQ 추세 + VIX/VXN 변동성 상태</strong><div class="muted">MRS-006</div></td>
-<td>매크로/금리</td>
-<td>같은 기간 원본 지표</td>
-<td class="num">1,858.4%</td>
-<td class="num">20.0%</td>
-<td class="num">-35.4%</td>
-<td class="num">0.56</td>
-</tr><tr>
-<td><strong>QQQ 추세 + 매크로/금리 스트레스</strong><div class="muted">MRS-007</div></td>
-<td>매크로/금리</td>
-<td>같은 기간 원본 지표</td>
-<td class="num">2,876.8%</td>
-<td class="num">23.1%</td>
-<td class="num">-49.2%</td>
-<td class="num">0.47</td>
-</tr><tr>
-<td><strong>매크로 스트레스 노출 축소</strong><div class="muted">MRS-008</div></td>
-<td>매크로/금리</td>
-<td>같은 기간 원본 지표</td>
-<td class="num">6,340.8%</td>
-<td class="num">29.1%</td>
-<td class="num">-56.2%</td>
-<td class="num">0.52</td>
-</tr><tr>
-<td><strong>추세 + 매크로 스트레스 노출 조절</strong><div class="muted">MRS-009</div></td>
-<td>매크로/금리</td>
-<td>같은 기간 원본 지표</td>
-<td class="num">2,663.6%</td>
-<td class="num">22.6%</td>
-<td class="num">-48.5%</td>
-<td class="num">0.47</td>
-</tr><tr>
-<td><strong>나스닥 변동성/거시 상태 신호 초안 (DRSIG-002)</strong><div class="muted">DRSIG-002</div></td>
-<td>규칙 초안</td>
-<td>같은 기간 원본 지표</td>
-<td class="num">2,373.2%</td>
-<td class="num">21.7%</td>
-<td class="num">-49.2%</td>
-<td class="num">0.44</td>
-</tr><tr>
-<td><strong>QQQ 12-month momentum daily draft (DRSIG-003)</strong><div class="muted">DRSIG-003</div></td>
-<td>규칙 초안</td>
-<td>같은 기간 원본 지표</td>
-<td class="num">8,748.9%</td>
-<td class="num">31.6%</td>
-<td class="num">-66.6%</td>
-<td class="num">0.47</td>
-</tr></tbody>
-    </table>
-  </div>
-</section>
-<section id="period-compare-2018-06-21-2026-06-12" class="period-section">
-  <h2>기간 비교: 2018-06-21 ~ 2026-06-12</h2>
-  <p class="muted">계산 가능: 9 / 27</p>
-  <div class="table-wrap compact-table">
-    <table>
-      <thead><tr><th>전략명</th><th>신호 묶음</th><th>상태</th><th>토탈 리턴</th><th>CAGR</th><th>MDD</th><th>MAR</th></tr></thead>
-      <tbody><tr>
-<td><strong>QQQ 200일선 추세 필터</strong><div class="muted">QSIG-001</div></td>
-<td>QQQ 신호</td>
-<td>기간 맞춤 비교 준비 부족</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-</tr><tr>
-<td><strong>QQQ 10-month MA daily proxy</strong><div class="muted">QSIG-002</div></td>
-<td>QQQ 신호</td>
-<td>기간 맞춤 비교 준비 부족</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-</tr><tr>
-<td><strong>QQQ 12-month time-series momentum</strong><div class="muted">QSIG-003</div></td>
-<td>QQQ 신호</td>
-<td>기간 맞춤 비교 준비 부족</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-</tr><tr>
-<td><strong>QQQ SMA200 plus 63-day momentum confirmation</strong><div class="muted">QSIG-004</div></td>
-<td>QQQ 신호</td>
-<td>기간 맞춤 비교 준비 부족</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-</tr><tr>
-<td><strong>QQQ SMA200 with VXN high-volatility block</strong><div class="muted">QSIG-005</div></td>
-<td>QQQ 신호</td>
-<td>기간 맞춤 비교 준비 부족</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-</tr><tr>
-<td><strong>QQQ SMA200 with overnight stress block</strong><div class="muted">QSIG-006</div></td>
-<td>QQQ 신호</td>
-<td>기간 맞춤 비교 준비 부족</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-</tr><tr>
-<td><strong>QQQ 20-day realized-volatility exposure scaling</strong><div class="muted">QSIG-007</div></td>
-<td>QQQ 신호</td>
-<td>기간 맞춤 비교 준비 부족</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-</tr><tr>
-<td><strong>QQQ SMA200 plus volatility-managed exposure</strong><div class="muted">QSIG-008</div></td>
-<td>QQQ 신호</td>
-<td>기간 맞춤 비교 준비 부족</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-</tr><tr>
-<td><strong>QQQ 추세 + XLK/SPY 상대강도</strong><div class="muted">STL-001</div></td>
-<td>섹터/기술주</td>
-<td>같은 기간 원본 지표</td>
-<td class="num">360.8%</td>
-<td class="num">21.1%</td>
-<td class="num">-61.1%</td>
-<td class="num">0.35</td>
-</tr><tr>
-<td><strong>QQQ 추세 + SMH relative strength vs QQQ</strong><div class="muted">STL-002</div></td>
-<td>섹터/기술주</td>
-<td>같은 기간 원본 지표</td>
-<td class="num">791.1%</td>
-<td class="num">31.6%</td>
-<td class="num">-48.9%</td>
-<td class="num">0.65</td>
-</tr><tr>
-<td><strong>QQQ 추세 + SOXX relative strength vs QQQ</strong><div class="muted">STL-003</div></td>
-<td>섹터/기술주</td>
-<td>같은 기간 원본 지표</td>
-<td class="num">660.2%</td>
-<td class="num">29.0%</td>
-<td class="num">-48.9%</td>
-<td class="num">0.59</td>
-</tr><tr>
-<td><strong>QQQ 추세 + IGV relative strength vs QQQ</strong><div class="muted">STL-004</div></td>
-<td>섹터/기술주</td>
-<td>같은 기간 원본 지표</td>
-<td class="num">633.2%</td>
-<td class="num">28.4%</td>
-<td class="num">-37.9%</td>
-<td class="num">0.75</td>
-</tr><tr>
-<td><strong>QQQ 추세 + XLK/SMH/IGV leadership breadth</strong><div class="muted">STL-005</div></td>
-<td>섹터/기술주</td>
-<td>같은 기간 원본 지표</td>
-<td class="num">937.6%</td>
-<td class="num">34.1%</td>
-<td class="num">-48.9%</td>
-<td class="num">0.70</td>
-</tr><tr>
-<td><strong>QQQ 추세 + tech leadership deterioration block</strong><div class="muted">STL-006</div></td>
-<td>섹터/기술주</td>
-<td>같은 기간 원본 지표</td>
-<td class="num">937.6%</td>
-<td class="num">34.1%</td>
-<td class="num">-48.9%</td>
-<td class="num">0.70</td>
-</tr><tr>
-<td><strong>QQQ 추세 + semiconductor leadership confirmation</strong><div class="muted">STL-007</div></td>
-<td>섹터/기술주</td>
-<td>같은 기간 원본 지표</td>
-<td class="num">704.7%</td>
-<td class="num">29.9%</td>
-<td class="num">-48.9%</td>
-<td class="num">0.61</td>
-</tr><tr>
-<td><strong>QQQ 추세 + sector leadership rotation risk-off</strong><div class="muted">STL-008</div></td>
-<td>섹터/기술주</td>
-<td>같은 기간 원본 지표</td>
-<td class="num">545.0%</td>
-<td class="num">26.3%</td>
-<td class="num">-58.0%</td>
-<td class="num">0.45</td>
-</tr><tr>
-<td><strong>QQQ 추세 + VIX 고변동성 차단</strong><div class="muted">MRS-001</div></td>
-<td>매크로/금리</td>
-<td>기간 맞춤 비교 준비 부족</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-</tr><tr>
-<td><strong>QQQ 추세 + VXN 고변동성 차단</strong><div class="muted">MRS-002</div></td>
-<td>매크로/금리</td>
-<td>기간 맞춤 비교 준비 부족</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-</tr><tr>
-<td><strong>QQQ 추세 + TLT/IEF 위험회피 차단</strong><div class="muted">MRS-003</div></td>
-<td>매크로/금리</td>
-<td>기간 맞춤 비교 준비 부족</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-</tr><tr>
-<td><strong>QQQ 추세 + TLT 상대 약세 차단</strong><div class="muted">MRS-004</div></td>
-<td>매크로/금리</td>
-<td>기간 맞춤 비교 준비 부족</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-</tr><tr>
-<td><strong>QQQ 추세 + 달러 강세 차단</strong><div class="muted">MRS-005</div></td>
-<td>매크로/금리</td>
-<td>기간 맞춤 비교 준비 부족</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-</tr><tr>
-<td><strong>QQQ 추세 + VIX/VXN 변동성 상태</strong><div class="muted">MRS-006</div></td>
-<td>매크로/금리</td>
-<td>기간 맞춤 비교 준비 부족</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-</tr><tr>
-<td><strong>QQQ 추세 + 매크로/금리 스트레스</strong><div class="muted">MRS-007</div></td>
-<td>매크로/금리</td>
-<td>기간 맞춤 비교 준비 부족</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-</tr><tr>
-<td><strong>매크로 스트레스 노출 축소</strong><div class="muted">MRS-008</div></td>
-<td>매크로/금리</td>
-<td>기간 맞춤 비교 준비 부족</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-</tr><tr>
-<td><strong>추세 + 매크로 스트레스 노출 조절</strong><div class="muted">MRS-009</div></td>
-<td>매크로/금리</td>
-<td>기간 맞춤 비교 준비 부족</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-</tr><tr>
-<td><strong>나스닥 변동성/거시 상태 신호 초안 (DRSIG-002)</strong><div class="muted">DRSIG-002</div></td>
-<td>규칙 초안</td>
-<td>trace 재계산</td>
-<td class="num">665.8%</td>
-<td class="num">29.1%</td>
-<td class="num">-45.2%</td>
-<td class="num">0.64</td>
-</tr><tr>
-<td><strong>QQQ 12-month momentum daily draft (DRSIG-003)</strong><div class="muted">DRSIG-003</div></td>
-<td>규칙 초안</td>
-<td>기간 맞춤 비교 준비 부족</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-<td class="num">미표시</td>
-</tr></tbody>
-    </table>
-  </div>
-</section>
-</section>
-<footer>Alpha Research Ops Lab &middot; static research snapshot</footer>
+<footer>탐색용 연구 화면입니다. 최종 검토, 후보/watch/Champion 증거, 추천, 순위, 자동 선택에 사용할 수 없습니다.</footer>
 </main>
+
 <script>
-(() => {
-  const dataNode = document.getElementById("strategy-selection-export-data");
-  if (!dataNode) return;
-  const exportData = JSON.parse(dataNode.textContent);
-  const boxes = Array.from(document.querySelectorAll(".strategy-export-checkbox"));
-  const status = document.getElementById("strategy-export-status");
-  const selectedPrefix = "\uc120\ud0dd\ub41c \uc804\ub7b5";
-  const recommendedExt = "\uad8c\uc7a5 \ud655\uc7a5\uc790";
-  const chooseFirst = "\ub0b4\ubcf4\ub0bc \uc804\ub7b5\uc744 \uba3c\uc800 \uc120\ud0dd\ud558\uc138\uc694.";
-  const exportedPrefix = "\ub0b4\ubcf4\ub0b8 \uc804\ub7b5";
-  const unit = "\uac1c";
-  const byKey = new Map((exportData.strategies || []).map((row) => [row.strategy_key, row]));
-  const selectedRows = () => boxes.filter((box) => box.checked).map((box) => byKey.get(box.dataset.strategyKey)).filter(Boolean);
-  const updateStatus = () => {
-    if (!status) return;
-    status.textContent = selectedPrefix + " " + selectedRows().length + unit + " - " + recommendedExt + " .strategy-review.json";
-  };
-  const setAll = (checked) => { boxes.forEach((box) => { box.checked = checked; }); updateStatus(); };
-  const makePayload = () => {
-    const strategies = selectedRows();
-    return {...exportData, exported_at_browser_time: new Date().toISOString(), selected_strategy_count: strategies.length, strategies};
-  };
-  const exportJson = () => {
-    const payload = makePayload();
-    if (!payload.selected_strategy_count) { if (status) status.textContent = chooseFirst; return; }
-    const blob = new Blob([JSON.stringify(payload, null, 2)], {type: "application/json;charset=utf-8"});
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = exportData.default_filename || "alpha-research-selected-strategies.strategy-review.json";
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-    URL.revokeObjectURL(url);
-    if (status) status.textContent = exportedPrefix + " " + payload.selected_strategy_count + unit + " - " + link.download;
-  };
-  boxes.forEach((box) => box.addEventListener("change", updateStatus));
-  const selectAllButton = document.getElementById("strategy-select-all");
-  const clearButton = document.getElementById("strategy-clear-selection");
-  const exportButton = document.getElementById("strategy-export-json");
-  if (selectAllButton) selectAllButton.addEventListener("click", () => setAll(true));
-  if (clearButton) clearButton.addEventListener("click", () => setAll(false));
-  if (exportButton) exportButton.addEventListener("click", exportJson);
-  updateStatus();
-})();
-</script>
-<script>
-(() => {
-  const configNode = document.getElementById("strategy-import-config-data");
-  if (!configNode) return;
-  const importConfig = JSON.parse(configNode.textContent);
-  const fileInput = document.getElementById("strategy-import-file");
-  const status = document.getElementById("strategy-import-status");
-  const errorsNode = document.getElementById("strategy-import-errors");
-  let latestIdea = null;
-  let latestValidation = { valid: false, errors: [] };
-  const text = {
-    noFile: "\ud30c\uc77c\uc744 \uba3c\uc800 \uc120\ud0dd\ud558\uc138\uc694.",
-    parseFail: "JSON\uc744 \uc77d\uc744 \uc218 \uc5c6\uc2b5\ub2c8\ub2e4.",
-    valid: "\uac80\uc99d \ud1b5\uacfc: \ud14c\uc2a4\ud2b8 \uc694\uccad \ud30c\uc77c\uc744 \uc0dd\uc131\ud560 \uc218 \uc788\uc2b5\ub2c8\ub2e4.",
-    invalid: "\uac80\uc99d \uc2e4\ud328: \uc544\ub798 \ud56d\ubaa9\uc744 \uba3c\uc800 \uc218\uc815\ud558\uc138\uc694.",
-    requestBlocked: "\uac80\uc99d\uc744 \ud1b5\uacfc\ud55c \ud30c\uc77c\ub9cc \uc694\uccad \ud30c\uc77c\ub85c \ub0b4\ubcf4\ub0bc \uc218 \uc788\uc2b5\ub2c8\ub2e4.",
-    downloaded: "\ud14c\uc2a4\ud2b8 \uc694\uccad \ud30c\uc77c\uc744 \ub0b4\ubcf4\ub0c8\uc2b5\ub2c8\ub2e4."
-  };
-  const setStatus = (message) => { if (status) status.textContent = message; };
-  const showErrors = (errors) => {
-    if (!errorsNode) return;
-    errorsNode.innerHTML = "";
-    errors.forEach((error) => {
-      const li = document.createElement("li");
-      li.textContent = error;
-      errorsNode.appendChild(li);
-    });
-  };
-  const hasText = (value) => typeof value === "string" && value.trim().length > 0;
-  const validateIdea = (idea) => {
-    const errors = [];
-    if (!hasText(idea.strategy_name)) errors.push("strategy_name\uc774 \ud544\uc694\ud569\ub2c8\ub2e4.");
-    if (!hasText(idea.traded_instrument)) errors.push("traded_instrument\uac00 \ud544\uc694\ud569\ub2c8\ub2e4.");
-    if (!Array.isArray(idea.required_symbols) || !idea.required_symbols.length) errors.push("required_symbols\ub294 1\uac1c \uc774\uc0c1 \ud544\uc694\ud569\ub2c8\ub2e4.");
-    if (!Array.isArray(idea.signals) || !idea.signals.length) {
-      errors.push("signals\ub294 1\uac1c \uc774\uc0c1 \ud544\uc694\ud569\ub2c8\ub2e4.");
-    } else {
-      idea.signals.forEach((signal, index) => {
-        const prefix = `signals[${index}]`;
-        if (!hasText(signal.name)) errors.push(prefix + ".name\uc774 \ud544\uc694\ud569\ub2c8\ub2e4.");
-        if (!hasText(signal.symbol)) errors.push(prefix + ".symbol\uc774 \ud544\uc694\ud569\ub2c8\ub2e4.");
-        if (!hasText(signal.rule)) errors.push(prefix + ".rule\uc774 \ud544\uc694\ud569\ub2c8\ub2e4.");
-        if (!hasText(signal.role)) errors.push(prefix + ".role\uc774 \ud544\uc694\ud569\ub2c8\ub2e4.");
-      });
-    }
-    if (!hasText(idea.entry_rule)) errors.push("entry_rule\uc774 \ud544\uc694\ud569\ub2c8\ub2e4.");
-    if (!hasText(idea.exit_rule)) errors.push("exit_rule\uc774 \ud544\uc694\ud569\ub2c8\ub2e4.");
-    if (idea.signal_timing !== "after_close") errors.push("signal_timing\uc740 after_close\ub85c \uc9c0\uc815\ud558\uc138\uc694.");
-    if (idea.execution_timing !== "next_session_open") errors.push("execution_timing\uc740 next_session_open\uc73c\ub85c \uc9c0\uc815\ud558\uc138\uc694.");
-    if (idea.same_close_execution_allowed !== false) errors.push("same_close_execution_allowed\ub294 false\uc5ec\uc57c \ud569\ub2c8\ub2e4.");
-    if (!idea.benchmark) errors.push("benchmark\uac00 \ud544\uc694\ud569\ub2c8\ub2e4.");
-    if (!idea.costs || typeof idea.costs.commission !== "number") errors.push("costs.commission\uc774 \uc22b\uc790\ub85c \ud544\uc694\ud569\ub2c8\ub2e4.");
-    if (!idea.costs || typeof idea.costs.slippage_per_trade !== "number") errors.push("costs.slippage_per_trade\uac00 \uc22b\uc790\ub85c \ud544\uc694\ud569\ub2c8\ub2e4.");
-    return { valid: errors.length === 0, errors };
-  };
-  const downloadJson = (payload, filename) => {
-    const blob = new Blob([JSON.stringify(payload, null, 2)], {type: "application/json;charset=utf-8"});
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = filename;
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-    URL.revokeObjectURL(url);
-  };
-  const validateSelectedFile = () => {
-    if (!fileInput || !fileInput.files || !fileInput.files.length) {
-      latestIdea = null;
-      latestValidation = { valid: false, errors: [text.noFile] };
-      setStatus(text.noFile);
-      showErrors(latestValidation.errors);
-      return;
-    }
-    const reader = new FileReader();
-    reader.onload = () => {
-      try {
-        latestIdea = JSON.parse(String(reader.result || ""));
-        latestValidation = validateIdea(latestIdea);
-      } catch (error) {
-        latestIdea = null;
-        latestValidation = { valid: false, errors: [text.parseFail] };
-      }
-      const validationStatus = (latestValidation.valid && text.valid) || text.invalid;
-      setStatus(validationStatus);
-      showErrors(latestValidation.errors);
-    };
-    reader.readAsText(fileInput.files[0], "utf-8");
-  };
-  const createRequest = () => {
-    if (!latestIdea || !latestValidation.valid) {
-      setStatus(text.requestBlocked);
-      const currentErrors = (latestValidation.errors && latestValidation.errors.length && latestValidation.errors) || [text.requestBlocked];
-      showErrors(currentErrors);
-      return;
-    }
-    const payload = {
-      schema_name: "alpha_research_strategy_test_request",
-      schema_version: "1.0",
-      requested_action: "exploratory_backtest_request",
-      data_source_tier_requested: "exploratory_unofficial",
-      final_review_allowed: false,
-      licensed_rerun_required: true,
-      same_close_execution_allowed: false,
-      research_only: true,
-      no_ranking_or_recommendation: true,
-      no_automatic_selection: true,
-      no_status_mutation: true,
-      generated_at_browser_time: new Date().toISOString(),
-      validation_result: latestValidation,
-      strategy_idea: latestIdea
-    };
-    const safeName = String(latestIdea.strategy_name || "strategy").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "") || "strategy";
-    downloadJson(payload, safeName + ".strategy-test-request.json");
-    setStatus(text.downloaded);
-  };
-  const sampleButton = document.getElementById("strategy-sample-download");
-  const validateButton = document.getElementById("strategy-import-validate");
-  const requestButton = document.getElementById("strategy-test-request-download");
-  if (sampleButton) sampleButton.addEventListener("click", () => downloadJson(importConfig.sample || {}, importConfig.sample_filename || "sample.strategy-idea.json"));
-  if (validateButton) validateButton.addEventListener("click", validateSelectedFile);
-  if (requestButton) requestButton.addEventListener("click", createRequest);
-})();
+const DISPATCH_ENDPOINT = window.ALPHA_STRATEGY_DISPATCH_ENDPOINT || "https://alpha-strategy-dispatch.kdhyu32.workers.dev";
+const REQUIRED = ["strategy_name","traded_instrument","required_symbols","signals","entry_rule","exit_rule","signal_timing","execution_timing","same_close_execution_allowed","benchmark","costs"];
+let latestBatch = null;
+let latestValidation = [];
+const qs = (id) => document.getElementById(id);
+const statusNode = qs("import-status");
+const validationNode = qs("validation-list");
+const resultBody = qs("result-body");
+const detailList = qs("detail-list");
+function setStatus(text, kind){statusNode.textContent=text;statusNode.className=kind==="bad"?"status-bad":kind==="ok"?"status-ok":"muted"}
+function pct(v){return typeof v==="number"&&Number.isFinite(v)?(v*100).toFixed(1)+"%":"-"}
+function num(v){return typeof v==="number"&&Number.isFinite(v)?String(v):"-"}
+function asArray(payload){if(payload&&Array.isArray(payload.strategies))return payload.strategies;if(payload&&payload.strategy_idea)return [payload.strategy_idea];return payload?[payload]:[]}
+function normalize(payload){return {schema_name:"external_strategy_ideas",schema_version:"1.0",strategies:asArray(payload)}}
+function hasText(v){return typeof v==="string"&&v.trim().length>0}
+function validateStrategy(strategy,index){
+  const errors=[];
+  REQUIRED.forEach((key)=>{if(strategy[key]===undefined||strategy[key]===null||strategy[key]==="")errors.push(`${key} 항목이 필요합니다.`)});
+  if(!Array.isArray(strategy.required_symbols)||!strategy.required_symbols.length)errors.push("required_symbols는 1개 이상이어야 합니다.");
+  if(!Array.isArray(strategy.signals)||!strategy.signals.length)errors.push("signals는 1개 이상이어야 합니다.");
+  (strategy.signals||[]).forEach((signal,i)=>{["name","symbol","rule","role"].forEach((key)=>{if(!hasText(signal[key]))errors.push(`signals[${i}].${key} 항목이 필요합니다.`)})});
+  if(strategy.signal_timing!=="after_close")errors.push("signal_timing은 after_close여야 합니다.");
+  if(strategy.execution_timing!=="next_session_open")errors.push("execution_timing은 next_session_open이어야 합니다.");
+  if(strategy.same_close_execution_allowed!==false)errors.push("same_close_execution_allowed는 false여야 합니다.");
+  if(!strategy.costs||typeof strategy.costs.commission!=="number")errors.push("costs.commission은 숫자여야 합니다.");
+  if(!strategy.costs||typeof strategy.costs.slippage_per_trade!=="number")errors.push("costs.slippage_per_trade는 숫자여야 합니다.");
+  return {index,strategy_name:strategy.strategy_name||`전략 ${index+1}`,valid:errors.length===0,errors};
+}
+function renderValidation(items){
+  validationNode.innerHTML="";
+  items.forEach((item)=>{
+    const div=document.createElement("div");div.className="validation-item";
+    const title=document.createElement("strong");title.textContent=`${item.index+1}. ${item.strategy_name}: ${item.valid?"실행 가능":"수정 필요"}`;title.className=item.valid?"status-ok":"status-bad";div.appendChild(title);
+    if(item.errors.length){const ul=document.createElement("ul");item.errors.forEach((e)=>{const li=document.createElement("li");li.textContent=e;ul.appendChild(li)});div.appendChild(ul)}
+    validationNode.appendChild(div);
+  });
+}
+async function readFileBatch(){
+  const input=qs("strategy-file");
+  if(!input.files.length)throw new Error("전략 파일을 먼저 선택하세요.");
+  const text=await input.files[0].text();
+  return normalize(JSON.parse(text));
+}
+async function validateFile(){
+  try{latestBatch=await readFileBatch();latestValidation=latestBatch.strategies.map(validateStrategy);renderValidation(latestValidation);setStatus(`검증 완료: ${latestValidation.filter(x=>x.valid).length}/${latestValidation.length}개 실행 가능`,latestValidation.every(x=>x.valid)?"ok":"bad")}
+  catch(e){latestBatch=null;latestValidation=[];renderValidation([{index:0,strategy_name:"파일 읽기",valid:false,errors:[e.message||String(e)]}]);setStatus("검증 실패","bad")}
+}
+async function dispatch(mode){
+  if(!latestBatch)await validateFile();
+  const runnable=latestBatch.strategies.filter((_,i)=>latestValidation[i]&&latestValidation[i].valid);
+  if(!runnable.length){setStatus("검증을 통과한 전략만 실행할 수 있습니다.","bad");return}
+  const token=qs("execution-token").value.trim();
+  if(!token){setStatus("실행 토큰을 입력하세요.","bad");return}
+  setStatus(mode==="validate"?"backend 검증 요청 중입니다.":"백테스트 실행 요청 중입니다.");
+  const response=await fetch(DISPATCH_ENDPOINT,{method:"POST",headers:{"content-type":"application/json","x-alpha-execution-token":token},body:JSON.stringify({mode,strategy_batch:{...latestBatch,strategies:runnable}})});
+  const payload=await response.json().catch(()=>({ok:false,error:"응답 JSON을 읽지 못했습니다."}));
+  if(!response.ok||!payload.ok){setStatus(payload.error||"실행 요청이 거부되었습니다.","bad");return}
+  setStatus(`요청 접수: ${payload.github_event_type}. GitHub Actions 완료 후 latest.json에 반영됩니다.`,"ok");
+}
+function renderResults(payload){
+  const runs=(payload&&Array.isArray(payload.results))?payload.results:[];
+  resultBody.innerHTML="";
+  if(!runs.length){resultBody.innerHTML='<tr><td colspan="13" class="muted">아직 표시할 백테스트 결과가 없습니다.</td></tr>';return}
+  runs.forEach((row)=>{
+    const m=row.metrics||{};const tr=document.createElement("tr");
+    tr.innerHTML=`<td><strong></strong></td><td></td><td class="num"></td><td></td><td></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td><td class="num"></td><td></td>`;
+    const cells=tr.children;cells[0].querySelector("strong").textContent=row.strategy_name||"-";cells[1].textContent=row.signal_summary||"-";cells[2].textContent=num(row.signal_count);cells[3].textContent=row.period||"-";cells[4].textContent=row.trading_basis||"-";cells[5].textContent=pct(m.total_return);cells[6].textContent=pct(m.cagr);cells[7].textContent=pct(m.max_drawdown);cells[8].textContent=typeof m.mar==="number"?m.mar.toFixed(2):"-";cells[9].textContent=num(m.trade_count);cells[10].textContent=pct(m.difference_vs_tqqq);cells[11].textContent=pct(m.difference_vs_qqq);cells[12].textContent=row.status||"-";resultBody.appendChild(tr);
+  });
+  renderDetails(runs);
+}
+function renderDetails(runs){
+  detailList.innerHTML="";
+  runs.forEach((row,index)=>{
+    const d=document.createElement("details");d.open=index===0;const s=document.createElement("summary");s.textContent=`${index+1}. ${row.strategy_name}`;d.appendChild(s);
+    const grid=document.createElement("div");grid.className="detail-grid";
+    const fields=[["모든 신호",(row.signals||[]).map(x=>`${x.name} / ${x.symbol} / ${x.role}: ${x.rule}`).join("\n")],["진입 규칙",row.entry_rule],["청산 규칙",row.exit_rule],["노출 규칙",row.exposure_rule],["필요 symbol",(row.required_symbols||[]).join(", ")],["비용 가정",row.cost_assumption],["데이터 tier",row.data_source_tier],["실패 이유/제한사항",(row.errors||row.limitations||[]).join("\n")||"-"]];
+    fields.forEach(([k,v])=>{const div=document.createElement("div");const strong=document.createElement("strong");strong.textContent=k;const p=document.createElement("p");p.textContent=v||"-";div.append(strong,p);grid.appendChild(div)});
+    d.appendChild(grid);detailList.appendChild(d);
+  });
+}
+async function loadLatest(){
+  try{const response=await fetch("external_strategy_results/latest.json",{cache:"no-store"});if(!response.ok)throw new Error("latest 없음");renderResults(await response.json())}
+  catch(e){renderResults({results:[]})}
+}
+qs("validate-button").addEventListener("click",()=>validateFile().then(()=>dispatch("validate")).catch((e)=>setStatus(e.message,"bad")));
+qs("backtest-button").addEventListener("click",()=>dispatch("backtest").catch((e)=>setStatus(e.message,"bad")));
+qs("strategy-file").addEventListener("change",()=>validateFile());
+loadLatest();
 </script>
 </body>
 </html>
