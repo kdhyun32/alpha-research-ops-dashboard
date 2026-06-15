@@ -28,7 +28,16 @@ YFINANCE_ALIASES = {
     "VIX6M": "^VIX6M",
     "VVIX": "^VVIX",
 }
-NEEDS_DATA_SOURCE_MAPPING = {"DGS10", "T10Y2Y", "DTB3", "NFCI", "HY_SPREAD", "FRED"}
+NEEDS_DATA_SOURCE_MAPPING = {
+    "DGS10",
+    "T10Y2Y",
+    "DTB3",
+    "NFCI",
+    "HY_SPREAD",
+    "FRED",
+    "P066_AUTHORITY",
+    "ABL_AUTHORITY",
+}
 BOUNDARY_FLAGS = {
     "data_source_tier": "exploratory_unofficial",
     "final_decision_allowed": False,
@@ -96,6 +105,8 @@ def split_symbol_field(value: Any) -> list[str]:
 def normalize_symbol(symbol: Any) -> tuple[str, str | None]:
     raw = clean_text(symbol).upper()
     if not raw:
+        return "", None
+    if raw == "RV":
         return "", None
     if raw in NEEDS_DATA_SOURCE_MAPPING:
         return raw, "needs_data_source_mapping"
@@ -187,7 +198,84 @@ def parse_rule_text(rule: Any, default_symbol: Any = "") -> dict[str, Any] | Non
     text = strip_wrapping(clean_text(rule))
     if not text:
         return None
+    text = re.sub(r"\s+", " ", text)
+    text = re.sub(r"(?<=\w)(<=|>=|<|>)(?=\w|\d)", r" \1 ", text)
+    text = re.sub(r"\b(\^?[A-Za-z][A-Za-z0-9.\-_]*)\s*>\s*SMA(\d+)\b", r"\1 close > \1 \2-day simple moving average", text, flags=re.I)
+    text = re.sub(r"\b(\^?[A-Za-z][A-Za-z0-9.\-_]*)\s*<\s*SMA(\d+)\b", r"\1 close < \1 \2-day simple moving average", text, flags=re.I)
+    text = re.sub(r"\bROC(\d+)\s*>\s*0\b", lambda m: f"{clean_text(default_symbol) or 'QQQ'} {m.group(1)}-day rate of change > 0", text, flags=re.I)
+    text = re.sub(r"\b(\^?[A-Za-z][A-Za-z0-9.\-_]*)\s+ROC(\d+)\b", r"\1 \2-day rate of change", text, flags=re.I)
+    text = re.sub(r"\b(\^?[A-Za-z][A-Za-z0-9.\-_]*)\s+RV(\d+)\s*<\s*(\d+(?:\.\d+)?%?)", r"\1 \2-day annualized realized volatility < \3", text, flags=re.I)
+    text = re.sub(r"\bRV(\d+)\s*<\s*(\d+(?:\.\d+)?%?)", lambda m: f"{clean_text(default_symbol) or 'QQQ'} {m.group(1)}-day annualized realized volatility < {m.group(2)}", text, flags=re.I)
     lowered = text.lower()
+    if any(token in lowered for token in ("p066_authority", "abl_authority", "authority engine", "health_score", "stress_score", "canonical grace")):
+        return make_node("external_authority_state", symbol="P066_AUTHORITY")
+    if any(token in lowered for token in ("state machine", "hysteresis", "maintain prior state", "when armed")):
+        return make_node("state_machine")
+    if "target annualized volatility" in lowered or "target-vol" in lowered or "target volatility" in lowered:
+        return make_node("target_volatility_sizing")
+    if "formula" in lowered or "compute " in lowered or "drag_score" in lowered:
+        return make_node("formula_engine")
+    if lowered.startswith("hold tqqq if ") and "otherwise select" in lowered:
+        condition_text = re.split(r"\botherwise select\b", text[13:], flags=re.I, maxsplit=1)[0]
+        return parse_rule_text(condition_text, default_symbol)
+    if lowered.startswith("tqqq in trend"):
+        return parse_rule_text("QQQ close > QQQ 200-day simple moving average", default_symbol)
+    if lowered.startswith("use qqq 200-day sma trend gate"):
+        return parse_rule_text("QQQ close > QQQ 200-day simple moving average", default_symbol)
+    if lowered.startswith("enter tqqq when "):
+        return parse_rule_text(text[len("enter tqqq when "):].split(";")[0], default_symbol)
+    if lowered.startswith("when ") and ", enter" in lowered:
+        when_text = re.split(r",\s*enter", text[5:], flags=re.I, maxsplit=1)[0]
+        enter_match = re.search(r"\bif\s+(.+?)(?:;|$)", text, re.I)
+        children = [parse_rule_text(when_text, default_symbol)]
+        if enter_match:
+            children.append(parse_rule_text(enter_match.group(1), default_symbol))
+        children = [child for child in children if child]
+        return make_node("logical_and", children=children) if children else None
+    if "full tqqq above sma200" in lowered:
+        return parse_rule_text("QQQ close > QQQ 200-day simple moving average", default_symbol)
+    if "qqq trend" in lowered and "vxn" in lowered:
+        match = re.search(r"VXN\s*<\s*(\d+(?:\.\d+)?)", text, re.I)
+        vxn_node = make_node("price_level_compare", symbol="^VXN", operator="<", threshold=float(match.group(1))) if match else None
+        children = [parse_rule_text("QQQ close > QQQ 200-day simple moving average", default_symbol), vxn_node]
+        return make_node("logical_and", children=[child for child in children if child])
+    if "qqq trend" in lowered and "vvix percentile" in lowered:
+        match = re.search(r"VVIX percentile\s*<\s*(\d+(?:\.\d+)?)", text, re.I)
+        vvix_node = make_node("percentile", symbol="VVIX", operator="<", window=252, threshold=float(match.group(1)) / 100.0) if match else None
+        return make_node("logical_and", children=[parse_rule_text("QQQ close > QQQ 200-day simple moving average", default_symbol), vvix_node])
+    if "qqq momentum beats lqd/shy" in lowered:
+        return make_node("logical_and", children=[
+            parse_rule_text("QQQ close > QQQ 200-day simple moving average", default_symbol),
+            parse_rule_text("QQQ 63-day rate of change > LQD 63-day rate of change", default_symbol),
+            parse_rule_text("QQQ 63-day rate of change > SHY 63-day rate of change", default_symbol),
+        ])
+    if "xlk or soxx" in lowered and "sma100" in lowered:
+        return make_node("logical_and", children=[
+            parse_rule_text("QQQ close > QQQ 200-day simple moving average", default_symbol),
+            make_node("logical_or", children=[
+                parse_rule_text("XLK close > XLK 100-day simple moving average", "XLK"),
+                parse_rule_text("SOXX close > SOXX 100-day simple moving average", "SOXX"),
+            ]),
+        ])
+    if "at the first daily signal check in each calendar month" in lowered:
+        match = re.search(r"from\s+(.+?)\s+and hold", text, re.I)
+        child = parse_rule_text(match.group(1), default_symbol) if match else None
+        return make_node("monthly_revalidation", child=child) if child else None
+    if lowered.startswith("if ") and "otherwise require" in lowered:
+        require_text = re.split(r"\botherwise require\b", text, flags=re.I, maxsplit=1)[1]
+        return parse_rule_text(require_text, default_symbol)
+    if lowered.startswith("if ") and "otherwise allow" in lowered:
+        return make_node("always_true", symbol=clean_text(default_symbol) or "QQQ")
+    if "hy oas" in lowered or "hy_spread" in lowered:
+        trend = parse_rule_text("QQQ close > QQQ 200-day simple moving average" if "sma200" in lowered else "QQQ close > QQQ 100-day simple moving average", default_symbol)
+        return make_node("logical_and", children=[trend, make_node("price_level_compare", symbol="HY_SPREAD", operator="<", threshold=6.0)])
+    if lowered.startswith("risk-on if at least"):
+        match = re.search(r"at least\s+(?P<threshold>\d+)\s+of\s+(?P<total>\d+).*?true:\s*(?P<body>.+)", text, re.I)
+        if match:
+            children = [parse_rule_text(part, default_symbol) for part in re.split(r";", match.group("body")) if part.strip()]
+            return make_node("count_condition", children=[child for child in children if child], operator=">=", threshold=int(match.group("threshold")))
+    if lowered.startswith("set tqqq exposure to the fraction"):
+        return make_node("always_true", symbol=clean_text(default_symbol) or "QQQ")
     parts = split_logical(text, "or")
     if len(parts) > 1:
         children = [parse_rule_text(part, default_symbol) for part in parts]
@@ -210,6 +298,11 @@ def parse_rule_text(rule: Any, default_symbol: Any = "") -> dict[str, Any] | Non
     if match:
         left, _ = normalize_symbol(match.group("symbol"))
         return make_node("price_vs_sma", symbol=left, operator=normalize_operator(match.group("op")), window=int(match.group("window")))
+
+    match = re.search(rf"{symbol}\s+close\s+percentile\s+over\s+the\s+trailing\s+(?P<window>\d+)(?:\s+trading)?\s+days\s+{op}\s+(?P<threshold>\d+(?:\.\d+)?)", text, re.I)
+    if match:
+        left, _ = normalize_symbol(match.group("symbol"))
+        return make_node("percentile", symbol=left, operator=normalize_operator(match.group("op")), window=int(match.group("window")), threshold=as_number(match.group("threshold")))
 
     match = re.search(rf"(?:{symbol}\s+)?close\s+{op}\s+(?:sma|ma)\((?P<window>\d+)\)", text, re.I)
     if match:
@@ -253,6 +346,14 @@ def parse_rule_text(rule: Any, default_symbol: Any = "") -> dict[str, Any] | Non
 
     match = re.search(rf"{symbol}\s+close\s+{op}\s+(?P<threshold>-?\d+(?:\.\d+)?)$", text, re.I)
     if match:
+        left, _ = normalize_symbol(match.group("symbol"))
+        return make_node("price_level_compare", symbol=left, operator=normalize_operator(match.group("op")), threshold=float(match.group("threshold")))
+
+    match = re.search(rf"{symbol}\s+{op}\s+(?P<threshold>-?\d+(?:\.\d+)?)$", text, re.I)
+    if match:
+        if re.match(r"RSI\d+$", match.group("symbol"), re.I):
+            window = int(re.search(r"\d+", match.group("symbol")).group(0))
+            return make_node("rsi", symbol=clean_text(default_symbol) or "QQQ", operator=normalize_operator(match.group("op")), window=window, threshold=float(match.group("threshold")))
         left, _ = normalize_symbol(match.group("symbol"))
         return make_node("price_level_compare", symbol=left, operator=normalize_operator(match.group("op")), threshold=float(match.group("threshold")))
 
@@ -306,10 +407,54 @@ def parse_rule_text(rule: Any, default_symbol: Any = "") -> dict[str, Any] | Non
         right, _ = normalize_symbol(match.group("right"))
         return make_node("ratio_return_threshold", left_symbol=left, right_symbol=right, operator=normalize_operator(match.group("op")), window=int(match.group("window")), threshold=as_number(match.group("threshold")))
 
+    match = re.search(rf"(?P<left>\^?[A-Za-z][A-Za-z0-9.\-_]*)/(?P<right>\^?[A-Za-z][A-Za-z0-9.\-_]*)\s+(?:ratio\s+)?{op}\s*(?P<threshold>-?\d+(?:\.\d+)?)", text, re.I)
+    if match:
+        left, _ = normalize_symbol(match.group("left"))
+        right, _ = normalize_symbol(match.group("right"))
+        return make_node("ratio_price_threshold", left_symbol=left, right_symbol=right, operator=normalize_operator(match.group("op")), threshold=float(match.group("threshold")))
+
+    match = re.search(rf"(?P<left>\^?[A-Za-z][A-Za-z0-9.\-_]*)/(?P<right>\^?[A-Za-z][A-Za-z0-9.\-_]*)\s+(?:ratio\s+)?(?:>|above)\s*(?:SMA|(?P=left)\s+(?P=right)\s+)?(?P<window>\d+)?", text, re.I)
+    if match:
+        left, _ = normalize_symbol(match.group("left"))
+        right, _ = normalize_symbol(match.group("right"))
+        window = int(match.group("window") or 100)
+        return make_node("ratio_price_vs_sma", left_symbol=left, right_symbol=right, operator=">", window=window)
+
+    match = re.search(rf"(?:fewer than|less than)\s+(?P<threshold>\d+)\s+of\s+the\s+last\s+(?P<window>\d+)\s+(?P<symbol>\^?[A-Za-z][A-Za-z0-9.\-_]*)\s+daily returns are negative", text, re.I)
+    if match:
+        left, _ = normalize_symbol(match.group("symbol"))
+        return make_node("count_condition", condition=make_node("down_day", symbol=left), window=int(match.group("window")), operator="<", threshold=int(match.group("threshold")))
+
     match = re.search(rf"(?:last|recent)\s+(?P<window>\d+)\s+days?.*?(?:down|negative).*?(?:count\s*)?{op}\s*(?P<threshold>\d+)", text, re.I)
     if match:
         return make_node("count_condition", condition=make_node("down_day", symbol=default), window=int(match.group("window")), operator=normalize_operator(match.group("op")), threshold=int(match.group("threshold")))
 
+    match = re.search(rf"(?P<symbol>\^?[A-Za-z][A-Za-z0-9.\-_]*)\s+RSI(?P<window>\d+)\s*{op}\s*(?P<threshold>\d+(?:\.\d+)?)", text, re.I)
+    if match:
+        left, _ = normalize_symbol(match.group("symbol"))
+        return make_node("rsi", symbol=left, operator=normalize_operator(match.group("op")), window=int(match.group("window")), threshold=float(match.group("threshold")))
+
+    match = re.search(rf"RSI(?P<window>\d+)\s*{op}\s*(?P<threshold>\d+(?:\.\d+)?)", text, re.I)
+    if match:
+        return make_node("rsi", symbol=clean_text(default_symbol) or "QQQ", operator=normalize_operator(match.group("op")), window=int(match.group("window")), threshold=float(match.group("threshold")))
+
+    match = re.search(rf"(?P<symbol>\^?[A-Za-z][A-Za-z0-9.\-_]*)/SMA(?P<window>\d+)\s*{op}\s*(?P<threshold>\d+(?:\.\d+)?)", text, re.I)
+    if match:
+        left, _ = normalize_symbol(match.group("symbol"))
+        return make_node("distance_from_sma", symbol=left, operator=normalize_operator(match.group("op")), window=int(match.group("window")), threshold=float(match.group("threshold")) - 1.0)
+
+    match = re.search(rf"(?P<symbol>\^?[A-Za-z][A-Za-z0-9.\-_]*)\s+(?P<window>\d+)-day\s+z-score\s*{op}\s*(?P<threshold>\d+(?:\.\d+)?)", text, re.I)
+    if match:
+        left, _ = normalize_symbol(match.group("symbol"))
+        return make_node("z_score", symbol=left, operator=normalize_operator(match.group("op")), window=int(match.group("window")), threshold=float(match.group("threshold")))
+
+    match = re.search(rf"(?P<symbol>\^?[A-Za-z][A-Za-z0-9.\-_]*)\s+z(?P<window>\d+)\s*{op}\s*(?P<threshold>\d+(?:\.\d+)?)", text, re.I)
+    if match:
+        left, _ = normalize_symbol(match.group("symbol"))
+        return make_node("z_score", symbol=left, operator=normalize_operator(match.group("op")), window=int(match.group("window")), threshold=float(match.group("threshold")))
+
+    if "strongest positive 63-day momentum defensive asset" in lowered:
+        return make_node("defensive_selector", assets=["SHY", "GLD", "LQD"], window=63)
     return None
 
 
@@ -319,6 +464,8 @@ def normalize_node(raw: Any, default_symbol: Any = "") -> tuple[dict[str, Any] |
         node = parse_rule_text(raw, default_symbol)
         if not node:
             return None, ["unsupported_rule"]
+        if isinstance(node, dict):
+            return normalize_node(node, default_symbol)
         return node, errors
     if not isinstance(raw, dict):
         return None, ["unsupported_rule"]
@@ -353,13 +500,30 @@ def normalize_node(raw: Any, default_symbol: Any = "") -> tuple[dict[str, Any] |
             errors.append("unsupported_rule")
         node["child"] = parsed
     if node_type == "count_condition":
-        parsed, child_errors = normalize_node(raw.get("condition"), default_symbol)
-        errors.extend(child_errors)
-        if not parsed:
-            errors.append("unsupported_rule")
-        node["condition"] = parsed
-    if node_type in {"vote", "votes", "hysteresis", "state_machine"}:
+        if raw.get("children"):
+            children = []
+            for child in raw.get("children") or []:
+                parsed, child_errors = normalize_node(child, default_symbol)
+                errors.extend(child_errors)
+                if parsed:
+                    children.append(parsed)
+            if not children:
+                errors.append("unsupported_rule")
+            node["children"] = children
+        else:
+            parsed, child_errors = normalize_node(raw.get("condition"), default_symbol)
+            errors.extend(child_errors)
+            if not parsed:
+                errors.append("unsupported_rule")
+            node["condition"] = parsed
+    if node_type == "source_rule_text":
+        return normalize_node(raw.get("text"), default_symbol)
+    if node_type in {"vote", "votes", "hysteresis", "state_machine", "needs_state_machine_support"}:
         errors.append("needs_state_machine_support")
+    if node_type in {"target_volatility_sizing", "formula_engine"}:
+        errors.append("needs_formula_engine")
+    if node_type == "external_authority_state":
+        errors.append("needs_data_source_mapping")
     return node, errors
 
 
@@ -386,6 +550,8 @@ def node_leaf_count(node: Any) -> int:
     if node_type == "logical_not":
         return node_leaf_count(node.get("child"))
     if node_type == "count_condition":
+        if node.get("children"):
+            return sum(node_leaf_count(child) for child in node.get("children") or [])
         return node_leaf_count(node.get("condition"))
     return 1
 
@@ -397,6 +563,7 @@ def skip_reason_for(status: str) -> str:
         "unsupported_signal_shape": "multi-symbol signal shape could not be split safely",
         "needs_data_source_mapping": "requires a non-yfinance or separately mapped data source",
         "needs_state_machine_support": "stateful votes/hysteresis rule needs a state-machine implementation",
+        "needs_formula_engine": "formula-like sizing or target-volatility expression needs a bounded formula engine",
         "unsupported_rule": "rule family is not supported by this runner",
         "data_unavailable": "yfinance/Yahoo-family data was unavailable for at least one required symbol",
         "validation_only_not_executed": "validation mode only; no backtest was run",
@@ -455,7 +622,7 @@ def normalize_exposure(strategy: dict[str, Any], root_node: dict[str, Any] | Non
         exposure = dict(raw)
     else:
         exposure = {"type": "binary", "true_exposure": 1.0, "false_exposure": 0.0}
-        text = clean_text(strategy.get("exposure_rule"))
+        text = " ".join([clean_text(strategy.get("exposure_rule"))] + [clean_text(signal.get("rule")) for signal in strategy.get("signals") or [] if isinstance(signal, dict)])
         tier_matches = re.findall(r"(?:(\d+(?:\.\d+)?)%?\s+exposure).*?(?:when|if)\s+([^;]+)", text, flags=re.I)
         if tier_matches:
             tiers = []
@@ -467,6 +634,21 @@ def normalize_exposure(strategy: dict[str, Any], root_node: dict[str, Any] | Non
                     tiers.append({"when": node, "exposure": value / 100.0 if value > 1 else value})
             if tiers:
                 exposure = {"type": "tiered", "tiers": tiers, "default_exposure": 0.0}
+        if "set tqqq exposure to 100% if vix close < 18" in text.lower():
+            exposure = {
+                "type": "tiered",
+                "default_exposure": 0.0,
+                "tiers": [
+                    {"when": {"type": "price_level_compare", "symbol": "VIX", "operator": "<", "threshold": 18}, "exposure": 1.0},
+                    {"when": {"type": "price_level_compare", "symbol": "VIX", "operator": "<", "threshold": 25}, "exposure": 0.5},
+                ],
+            }
+        if "fraction of these true conditions" in text.lower():
+            body = text.split(":", 1)[1] if ":" in text else text
+            conditions = [normalize_node(part.strip(), "")[0] for part in re.split(r",", body) if part.strip()]
+            conditions = [condition for condition in conditions if condition]
+            if conditions:
+                exposure = {"type": "condition_fraction", "conditions": conditions, "default_exposure": 0.0}
     if exposure.get("type") == "tiered":
         tiers = []
         for tier in exposure.get("tiers") or []:
@@ -476,6 +658,15 @@ def normalize_exposure(strategy: dict[str, Any], root_node: dict[str, Any] | Non
                 tiers.append({"when": node, "exposure": as_number(tier.get("exposure"))})
         exposure["tiers"] = tiers
         exposure["default_exposure"] = as_number(exposure.get("default_exposure"), 0.0)
+    elif exposure.get("type") == "condition_fraction":
+        conditions = []
+        for condition in exposure.get("conditions") or []:
+            node, node_errors = normalize_node(condition, "")
+            errors.extend(node_errors)
+            if node:
+                conditions.append(node)
+        exposure["conditions"] = conditions
+        exposure["default_exposure"] = as_number(exposure.get("default_exposure"), 0.0)
     elif root_node:
         exposure["condition"] = root_node
         exposure["true_exposure"] = as_number(exposure.get("true_exposure"), 1.0)
@@ -483,9 +674,55 @@ def normalize_exposure(strategy: dict[str, Any], root_node: dict[str, Any] | Non
     return exposure, errors
 
 
+def normalize_allocation_rule(strategy: dict[str, Any], root_node: dict[str, Any] | None) -> tuple[dict[str, Any] | None, list[str]]:
+    raw = strategy.get("allocation_rule") or strategy.get("target_weights")
+    errors: list[str] = []
+    if isinstance(raw, dict):
+        rule = dict(raw)
+        for key in ("risk_on", "risk_off", "default"):
+            weights = rule.get(key)
+            if isinstance(weights, dict):
+                rule[key] = {normalize_symbol(symbol)[0] or symbol: as_number(weight) for symbol, weight in weights.items()}
+        return rule, errors
+    if not root_node:
+        return None, errors
+    text = " ".join([clean_text(strategy.get("strategy_name")), clean_text(strategy.get("exposure_rule"))])
+    for signal in strategy.get("signals") or []:
+        if isinstance(signal, dict):
+            text += " " + clean_text(signal.get("rule"))
+    lowered = text.lower()
+    defensive_asset = ""
+    for asset in ("GLD", "SHY", "LQD", "BIL"):
+        if re.search(rf"\belse\s+{asset.lower()}\b|/{asset.lower()}\b|->{asset.lower()}\b", lowered):
+            defensive_asset = "SHY" if asset == "BIL" else asset
+            break
+    if "strongest positive 63-day momentum defensive asset" in lowered or "dynamic defensive selector" in lowered:
+        return {
+            "type": "defensive_momentum_selector",
+            "condition": root_node,
+            "risk_on": {"TQQQ": 1.0},
+            "assets": ["SHY", "GLD", "LQD"],
+            "window": 63,
+            "cash_weight": 0.0,
+        }, errors
+    if defensive_asset:
+        return {"type": "binary_target_weights", "condition": root_node, "risk_on": {"TQQQ": 1.0}, "risk_off": {defensive_asset: 1.0}}, errors
+    if "else cash" in lowered or "otherwise 0%" in lowered or "otherwise 0" in lowered:
+        return {"type": "binary_target_weights", "condition": root_node, "risk_on": {"TQQQ": 1.0}, "risk_off": {}}, errors
+    return None, errors
+
+
 def normalize_cooldown(strategy: dict[str, Any]) -> tuple[dict[str, Any] | None, list[str]]:
     raw = strategy.get("cooldown") or strategy.get("lockout")
     if raw in (None, "", False):
+        text = " ".join([clean_text(strategy.get("exposure_rule"))] + [clean_text(signal.get("rule")) for signal in strategy.get("signals") or [] if isinstance(signal, dict)])
+        lowered = text.lower()
+        match = re.search(r"if\s+(.+?),?\s+set tqqq exposure to zero for\s+(\d+)\s+trading days", text, re.I)
+        if not match:
+            match = re.search(r"if\s+(.+?)\s+then hold zero tqqq for a\s+(\d+)-session cooldown", text, re.I)
+        if match:
+            node, errors = normalize_node(match.group(1), "")
+            return {"trigger": node, "lockout_days": int(match.group(2)), "exposure_during_lockout": 0.0}, errors
         return None, []
     if not isinstance(raw, dict):
         return None, ["unsupported_rule"]
@@ -497,6 +734,19 @@ def normalize_cooldown(strategy: dict[str, Any]) -> tuple[dict[str, Any] | None,
         "lockout_days": int(as_number(raw.get("lockout_days") or raw.get("days"), 0)),
         "exposure_during_lockout": as_number(raw.get("exposure_during_lockout"), 0.0),
     }, errors
+
+
+def normalize_max_hold(strategy: dict[str, Any]) -> dict[str, Any] | None:
+    text = " ".join([clean_text(strategy.get("exposure_rule"))] + [clean_text(signal.get("rule")) for signal in strategy.get("signals") or [] if isinstance(signal, dict)])
+    match = re.search(r"position age (?:reaches|exceeds)\s+(\d+)\s+sessions", text, re.I)
+    if not match:
+        return None
+    cooldown_match = re.search(r"then hold zero TQQQ for a\s+(\d+)-session cooldown", text, re.I)
+    return {
+        "type": "max_hold",
+        "max_sessions": int(match.group(1)),
+        "cooldown_sessions": int(cooldown_match.group(1)) if cooldown_match else 0,
+    }
 
 
 def normalize_strategy(strategy: dict[str, Any], index: int, total_ready_hint: int = 0) -> dict[str, Any]:
@@ -560,8 +810,11 @@ def normalize_strategy(strategy: dict[str, Any], index: int, total_ready_hint: i
 
     exposure, exposure_errors = normalize_exposure(strategy, root_node)
     parse_errors.extend(exposure_errors)
+    allocation_rule, allocation_errors = normalize_allocation_rule(strategy, root_node)
+    parse_errors.extend(allocation_errors)
     cooldown, cooldown_errors = normalize_cooldown(strategy)
     parse_errors.extend(cooldown_errors)
+    max_hold = normalize_max_hold(strategy)
 
     normalized_symbols = unique_strings([
         *required_symbols,
@@ -569,17 +822,21 @@ def normalize_strategy(strategy: dict[str, Any], index: int, total_ready_hint: i
         *benchmarks,
         *node_symbols(root_node),
         *node_symbols(exposure),
+        *node_symbols(allocation_rule),
         *node_symbols(cooldown),
         "QQQ",
         "TQQQ",
     ])
     source_symbols = unique_strings([*source_symbols, *strategy.get("required_symbols", []), strategy.get("traded_instrument"), *benchmarks])
+    mapping_symbols = {symbol.upper() for symbol in normalized_symbols if symbol.upper() in NEEDS_DATA_SOURCE_MAPPING}
     data_mapping_needed = (
         traded_status == "needs_data_source_mapping"
         or benchmark_needs_mapping
         or required_needs_mapping
         or "needs_data_source_mapping" in parse_errors
+        or bool(mapping_symbols)
     )
+    combined_rule_text = " ".join([clean_text(strategy.get("strategy_name")), clean_text(strategy.get("exposure_rule"))] + [clean_text(signal.get("rule")) for signal in strategy.get("signals") or [] if isinstance(signal, dict)]).lower()
 
     if errors:
         status = "invalid_required_field"
@@ -587,6 +844,12 @@ def normalize_strategy(strategy: dict[str, Any], index: int, total_ready_hint: i
         status = "needs_data_source_mapping"
     elif "needs_state_machine_support" in parse_errors:
         status = "needs_state_machine_support"
+    elif "needs_formula_engine" in parse_errors:
+        status = "needs_formula_engine"
+    elif any(token in combined_rule_text for token in ("state machine", "stateful", "hysteresis", "maintain prior state", "when armed")):
+        status = "needs_state_machine_support"
+    elif any(token in combined_rule_text for token in ("score", "fraction of these true conditions", "compute ", "dynamic", "ladder")) and (parse_errors or not root_node):
+        status = "needs_formula_engine"
     elif parse_errors or not root_node:
         status = "unsupported_rule"
     else:
@@ -607,7 +870,10 @@ def normalize_strategy(strategy: dict[str, Any], index: int, total_ready_hint: i
         "rule_spec": root_node,
         "signal_graph": root_node,
         "exposure": exposure,
+        "allocation_rule": allocation_rule,
+        "target_weights": allocation_rule,
         "cooldown": cooldown,
+        "max_hold": max_hold,
         "signal_timing": "after_close",
         "execution_timing": "next_session_open",
         "same_close_execution_allowed": False,
@@ -627,6 +893,9 @@ def normalize_strategy(strategy: dict[str, Any], index: int, total_ready_hint: i
         "structured_rule_spec": root_node,
         "exposure_rule": exposure,
         "cooldown": cooldown,
+        "max_hold": max_hold,
+        "allocation_rule": allocation_rule,
+        "target_weights": allocation_rule,
         "normalized_strategy": normalized,
         "valid": status == SUPPORTED_STATUS,
         "errors": errors,
@@ -733,14 +1002,76 @@ def eval_node(node: dict[str, Any], frames: dict[str, pd.DataFrame]) -> pd.Serie
         ratio = close_series(frames, node["left_symbol"]) / close_series(frames, node["right_symbol"])
         ratio_return = ratio.pct_change(int(node["window"]))
         return operator_apply(ratio_return, node.get("operator", ">"), float(node["threshold"]))
+    if node_type == "ratio_price_threshold":
+        ratio = close_series(frames, node["left_symbol"]) / close_series(frames, node["right_symbol"])
+        return operator_apply(ratio, node.get("operator", ">"), float(node["threshold"]))
+    if node_type == "ratio_price_vs_sma":
+        ratio = close_series(frames, node["left_symbol"]) / close_series(frames, node["right_symbol"])
+        return operator_apply(ratio, node.get("operator", ">"), ratio.rolling(int(node["window"])).mean())
+    if node_type == "rsi":
+        close = close_series(frames, node["symbol"])
+        delta = close.diff()
+        gain = delta.clip(lower=0).rolling(int(node["window"])).mean()
+        loss = (-delta.clip(upper=0)).rolling(int(node["window"])).mean()
+        rsi = 100 - (100 / (1 + gain / loss.replace(0, math.nan)))
+        rsi = rsi.fillna(100)
+        return operator_apply(rsi, node.get("operator", "<="), float(node["threshold"]))
+    if node_type == "distance_from_sma":
+        close = close_series(frames, node["symbol"])
+        distance = close / close.rolling(int(node["window"])).mean() - 1.0
+        return operator_apply(distance, node.get("operator", ">"), float(node["threshold"]))
+    if node_type == "z_score":
+        close = close_series(frames, node["symbol"])
+        mean = close.rolling(int(node["window"])).mean()
+        std = close.rolling(int(node["window"])).std()
+        z = (close - mean) / std
+        return operator_apply(z, node.get("operator", ">"), float(node["threshold"]))
     if node_type == "down_day":
         close = close_series(frames, node["symbol"])
         return close.pct_change() < 0
     if node_type == "count_condition":
+        if node.get("children"):
+            values = [eval_node(child, frames).astype(int) for child in node.get("children") or []]
+            count = pd.concat(values, axis=1).sum(axis=1)
+            return operator_apply(count, node.get("operator", ">="), float(node["threshold"]))
         condition = eval_node(node["condition"], frames).astype(float)
-        count = condition.rolling(int(node["window"])).sum()
+        count = condition.rolling(int(node.get("window", 1))).sum()
         return operator_apply(count, node.get("operator", ">="), float(node["threshold"]))
+    if node_type == "monthly_revalidation":
+        child = eval_node(node["child"], frames).astype(bool)
+        month_key = pd.Series(child.index.to_period("M"), index=child.index)
+        first_signal = child.groupby(month_key).transform("first")
+        return first_signal.astype(bool)
+    if node_type == "always_true":
+        return pd.Series(True, index=close_series(frames, node.get("symbol") or "QQQ").index)
     raise RuntimeError(f"Unsupported rule node: {node_type}")
+
+
+def apply_max_hold(exposure: pd.Series, max_hold: dict[str, Any] | None) -> pd.Series:
+    if not max_hold:
+        return exposure
+    max_sessions = int(max_hold.get("max_sessions") or 0)
+    cooldown_sessions = int(max_hold.get("cooldown_sessions") or 0)
+    if max_sessions <= 0:
+        return exposure
+    output = exposure.copy()
+    active_age = 0
+    cooldown_left = 0
+    for idx, value in enumerate(exposure.tolist()):
+        if cooldown_left > 0:
+            output.iloc[idx] = 0.0
+            cooldown_left -= 1
+            active_age = 0
+            continue
+        if value > 0:
+            active_age += 1
+            if active_age > max_sessions:
+                output.iloc[idx] = 0.0
+                active_age = 0
+                cooldown_left = cooldown_sessions
+        else:
+            active_age = 0
+    return output
 
 
 def exposure_series(strategy: dict[str, Any], frames: dict[str, pd.DataFrame]) -> pd.Series:
@@ -752,6 +1083,12 @@ def exposure_series(strategy: dict[str, Any], frames: dict[str, pd.DataFrame]) -
         for tier in exposure.get("tiers") or []:
             mask = eval_node(tier["when"], frames).reindex(series.index).fillna(False).astype(bool)
             series.loc[mask] = float(tier.get("exposure", 0.0))
+    elif exposure.get("type") == "condition_fraction":
+        parts = [eval_node(condition, frames).astype(float) for condition in exposure.get("conditions") or []]
+        if parts:
+            series = pd.concat(parts, axis=1).mean(axis=1)
+        else:
+            series = eval_node(root, frames).astype(float)
     else:
         condition = eval_node(exposure.get("condition") or root, frames).astype(bool)
         series = condition.astype(float) * float(exposure.get("true_exposure", 1.0))
@@ -765,7 +1102,47 @@ def exposure_series(strategy: dict[str, Any], frames: dict[str, pd.DataFrame]) -
             if active:
                 lockout.iloc[idx : idx + days] = True
         series.loc[lockout] = float(cooldown.get("exposure_during_lockout", 0.0))
+    series = apply_max_hold(series, strategy.get("max_hold"))
     return series.clip(lower=0.0, upper=1.0)
+
+
+def target_weight_frame(strategy: dict[str, Any], frames: dict[str, pd.DataFrame]) -> tuple[pd.DataFrame, list[str], int]:
+    allocation = strategy.get("allocation_rule")
+    if not allocation:
+        exposure = exposure_series(strategy, frames)
+        return pd.DataFrame({strategy["traded_instrument"]: exposure}, index=exposure.index), [strategy["traded_instrument"]], 0
+    condition = eval_node(allocation.get("condition") or strategy["rule_spec"], frames).astype(bool)
+    condition = condition.reindex(condition.index).fillna(False)
+    assets = unique_strings([
+        *list((allocation.get("risk_on") or {}).keys()),
+        *list((allocation.get("risk_off") or {}).keys()),
+        *(allocation.get("assets") or []),
+    ])
+    weights = pd.DataFrame(0.0, index=condition.index, columns=assets)
+    if allocation.get("type") == "defensive_momentum_selector":
+        risk_on = allocation.get("risk_on") or {"TQQQ": 1.0}
+        for symbol, weight in risk_on.items():
+            weights.loc[condition, symbol] = float(weight)
+        defensive_assets = allocation.get("assets") or ["SHY", "GLD", "LQD"]
+        window = int(allocation.get("window") or 63)
+        momentum = pd.DataFrame({symbol: close_series(frames, symbol).pct_change(window).reindex(condition.index) for symbol in defensive_assets})
+        for date, row in momentum.loc[~condition].iterrows():
+            positive = row[row > 0].dropna()
+            if not positive.empty:
+                weights.loc[date, positive.idxmax()] = 1.0
+    else:
+        for symbol, weight in (allocation.get("risk_on") or {"TQQQ": 1.0}).items():
+            weights.loc[condition, symbol] = float(weight)
+        for symbol, weight in (allocation.get("risk_off") or {}).items():
+            weights.loc[~condition, symbol] = float(weight)
+    if strategy.get("cooldown"):
+        base = exposure_series({**strategy, "allocation_rule": None}, frames)
+        weights = weights.mul(base.reindex(weights.index).fillna(0.0), axis=0)
+    if strategy.get("max_hold"):
+        gate = apply_max_hold(pd.Series(1.0, index=weights.index).where(weights.sum(axis=1) > 0, 0.0), strategy.get("max_hold"))
+        weights = weights.mul(gate, axis=0)
+    changes = int(weights.diff().abs().fillna(weights.abs()).sum(axis=1).gt(0).sum())
+    return weights, assets, changes
 
 
 def max_drawdown(equity: pd.Series) -> float:
@@ -817,24 +1194,45 @@ def skipped_result(normalized: dict[str, Any], *, reason: str | None = None) -> 
 
 def backtest(normalized: dict[str, Any]) -> dict[str, Any]:
     strategy = normalized["normalized_strategy"]
-    symbols = unique_strings([*strategy.get("required_symbols", []), strategy["traded_instrument"], *strategy["benchmarks"], "QQQ", "TQQQ"])
+    allocation = strategy.get("allocation_rule") or {}
+    symbols = unique_strings([
+        *strategy.get("required_symbols", []),
+        strategy["traded_instrument"],
+        *strategy["benchmarks"],
+        *list((allocation.get("risk_on") or {}).keys()),
+        *list((allocation.get("risk_off") or {}).keys()),
+        *(allocation.get("assets") or []),
+        "QQQ",
+        "TQQQ",
+    ])
     frames, source_audit = download_symbols(symbols)
-    exposure_raw = exposure_series(strategy, frames)
-    traded = frames[strategy["traded_instrument"]]
-    df = pd.DataFrame({"raw_exposure": exposure_raw, "open": traded["Open"]}).dropna()
-    df["exposure"] = df["raw_exposure"].shift(1, fill_value=0.0)
-    df["asset_return"] = df["open"].shift(-1) / df["open"] - 1.0
+    raw_weights, held_instruments, allocation_change_count = target_weight_frame(strategy, frames)
+    shifted_weights = raw_weights.shift(1, fill_value=0.0)
+    returns = pd.DataFrame(index=shifted_weights.index)
+    for symbol in shifted_weights.columns:
+        aligned = frames[symbol]["Open"].reindex(shifted_weights.index)
+        returns[symbol] = aligned.shift(-1) / aligned - 1.0
+    df = pd.DataFrame(index=shifted_weights.index)
+    for symbol in shifted_weights.columns:
+        df[f"weight_{symbol}"] = shifted_weights[symbol]
+        df[f"return_{symbol}"] = returns[symbol]
     benchmark_returns: dict[str, pd.Series] = {}
     for benchmark in strategy["benchmarks"]:
         if benchmark in frames:
             aligned = frames[benchmark]["Open"].reindex(df.index)
             benchmark_returns[benchmark] = aligned.shift(-1) / aligned - 1.0
             df[f"benchmark_{benchmark}"] = benchmark_returns[benchmark]
-    df = df.dropna(subset=["asset_return"])
+    return_columns = [f"return_{symbol}" for symbol in shifted_weights.columns]
+    df = df.dropna(subset=return_columns, how="all")
     slippage = as_number((strategy.get("costs") or {}).get("slippage_per_trade"))
     commission = as_number((strategy.get("costs") or {}).get("commission"))
-    trades = df["exposure"].diff().abs().fillna(df["exposure"].abs())
-    df["strategy_return"] = df["asset_return"] * df["exposure"] - trades * (slippage + commission)
+    weight_columns = [f"weight_{symbol}" for symbol in shifted_weights.columns]
+    weight_frame = df[weight_columns].copy()
+    weight_frame.columns = shifted_weights.columns
+    return_frame = df[return_columns].copy()
+    return_frame.columns = shifted_weights.columns
+    trades = weight_frame.diff().abs().fillna(weight_frame.abs()).sum(axis=1)
+    df["strategy_return"] = (return_frame.fillna(0.0) * weight_frame).sum(axis=1) - trades * (slippage + commission)
     equity = (1 + df["strategy_return"]).cumprod()
     total_return = float(equity.iloc[-1] - 1)
     cagr_value = cagr(equity)
@@ -853,7 +1251,8 @@ def backtest(normalized: dict[str, Any]) -> dict[str, Any]:
     primary_return = benchmark_metrics.get(primary, {}).get("total_return")
     qqq_return = benchmark_metrics.get("QQQ", {}).get("total_return")
     tqqq_return = benchmark_metrics.get("TQQQ", {}).get("total_return")
-    tiers = sorted({float(value) for value in df["exposure"].dropna().unique().tolist()})
+    exposure_totals = weight_frame.sum(axis=1)
+    tiers = sorted({float(value) for value in exposure_totals.dropna().unique().tolist()})
     return {
         "input_order": normalized["input_order"],
         "strategy_id": strategy["strategy_id"],
@@ -878,7 +1277,12 @@ def backtest(normalized: dict[str, Any]) -> dict[str, Any]:
         "exit_rule": strategy.get("exit_rule", ""),
         "exposure_rule": strategy.get("exposure"),
         "exposure_tiers_used": tiers,
+        "allocation_rule": strategy.get("allocation_rule"),
+        "target_weights": strategy.get("target_weights"),
+        "held_instruments": held_instruments,
+        "allocation_change_count": allocation_change_count,
         "cooldown": strategy.get("cooldown"),
+        "max_hold": strategy.get("max_hold"),
         "metrics": {
             "total_return": total_return,
             "cagr": cagr_value,
@@ -886,6 +1290,7 @@ def backtest(normalized: dict[str, Any]) -> dict[str, Any]:
             "mdd": mdd,
             "mar": cagr_value / abs(mdd) if mdd else None,
             "trade_count": int(trades.sum()),
+            "allocation_change_count": allocation_change_count,
             "benchmark_returns": benchmark_metrics,
             "primary_benchmark_total_return": primary_return,
             "difference_vs_primary_benchmark": total_return - primary_return if primary_return is not None else None,

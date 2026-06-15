@@ -2973,6 +2973,37 @@ dl,.path-list li{grid-template-columns:1fr}
     if (payload && payload.strategy_idea) return [payload.strategy_idea];
     return payload ? [payload] : [];
   };
+  const strategyKey = (row) => String(row?.strategy_id || row?.strategy_name || "").trim();
+  const latestRunnerValidation = async (batch) => {
+    try {
+      const response = await fetch(publicConfig.result_json_path || "external_strategy_results/latest.json", {cache: "no-store"});
+      if (!response.ok) return null;
+      const payload = await response.json();
+      const validations = Array.isArray(payload?.validations) ? payload.validations : [];
+      if (payload?.schema_name !== "alpha_research_strategy_batch_result") return null;
+      if (validations.length !== batch.strategies.length) return null;
+      const sameRows = validations.every((item, index) => {
+        const source = batch.strategies[index] || {};
+        const sourceKey = strategyKey(source);
+        const resultKey = strategyKey(item);
+        return !sourceKey || !resultKey || sourceKey === resultKey;
+      });
+      if (!sameRows) return null;
+      return validations.map((item, index) => ({
+        ...item,
+        index,
+        valid: item.validation_status === "ready_to_backtest",
+        errors: item.errors || [],
+        warnings: item.parse_errors || [],
+        normalized_strategy: item.normalized_strategy || {},
+        source_symbols: item.source_symbols || [],
+        normalized_symbols: item.normalized_symbols || [],
+        skip_reason: item.skip_reason || skipReason(item.validation_status),
+      }));
+    } catch (_error) {
+      return null;
+    }
+  };
   const readFiles = async () => {
     const files = Array.from(fileInput?.files || []);
     if (!files.length) throw new Error("전략 파일을 먼저 선택하세요.");
@@ -3061,7 +3092,8 @@ dl,.path-list li{grid-template-columns:1fr}
   const validateFiles = async () => {
     try {
       latestBatch = await readFiles();
-      latestValidation = latestBatch.strategies.map(validateIdea);
+      latestValidation = await latestRunnerValidation(latestBatch);
+      if (!latestValidation) latestValidation = latestBatch.strategies.map(validateIdea);
       renderValidation(latestValidation);
       const passed = latestValidation.filter((item) => item.valid).length;
       const held = latestValidation.length - passed;
