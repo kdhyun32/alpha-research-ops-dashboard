@@ -3,16 +3,20 @@
   "schema_version": "1.0",
   "runs": [
     {
-      "run_id": "alpha-ext-20260615-052714Z",
-      "path": "external_strategy_results/runs/alpha-ext-20260615-052714Z.json",
-      "generated_at": "2026-06-15T05:27:18Z",
+      "run_id": "alpha-ext-20260615-054209Z",
+      "path": "external_strategy_results/runs/alpha-ext-20260615-054209Z.json",
+      "generated_at": "2026-06-15T05:42:23Z",
       "mode": "backtest",
       "validation_summary": {
-        "total_rows": 6,
-        "ready_to_backtest": 6,
-        "skipped_or_held": 0,
+        "total_rows": 9,
+        "ready_to_backtest": 8,
+        "skipped_or_held": 1,
         "status_counts": {
-          "ready_to_backtest": 6
+          "ready_to_backtest": 8,
+          "needs_data_source_mapping": 1
+        },
+        "hold_reason_counts": {
+          "needs_data_source_mapping": 1
         },
         "batch_size_limit": 10,
         "batch_split_required": false,
@@ -20,39 +24,7 @@
         "batch_plan": [
           {
             "batch_index": 1,
-            "row_range": "1-6",
-            "input_orders": [
-              1,
-              2,
-              3,
-              4,
-              5,
-              6
-            ],
-            "strategy_count": 6
-          }
-        ]
-      }
-    },
-    {
-      "run_id": "alpha-ext-20260615-051545Z",
-      "path": "external_strategy_results/runs/alpha-ext-20260615-051545Z.json",
-      "generated_at": "2026-06-15T05:15:45Z",
-      "mode": "validate",
-      "validation_summary": {
-        "total_rows": 10,
-        "ready_to_backtest": 10,
-        "skipped_or_held": 0,
-        "status_counts": {
-          "ready_to_backtest": 10
-        },
-        "batch_size_limit": 10,
-        "batch_split_required": false,
-        "batch_count": 1,
-        "batch_plan": [
-          {
-            "batch_index": 1,
-            "row_range": "1-10",
+            "row_range": "1-8",
             "input_orders": [
               1,
               2,
@@ -61,11 +33,123 @@
               5,
               6,
               7,
-              8,
-              9,
-              10
+              8
             ],
-            "strategy_count": 10
+            "strategy_count": 8
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "alpha-ext-20260615-054143Z",
+      "path": "external_strategy_results/runs/alpha-ext-20260615-054143Z.json",
+      "generated_at": "2026-06-15T05:41:57Z",
+      "mode": "backtest",
+      "validation_summary": {
+        "total_rows": 9,
+        "ready_to_backtest": 8,
+        "skipped_or_held": 1,
+        "status_counts": {
+          "ready_to_backtest": 8,
+          "needs_data_source_mapping": 1
+        },
+        "hold_reason_counts": {
+          "needs_data_source_mapping": 1
+        },
+        "batch_size_limit": 10,
+        "batch_split_required": false,
+        "batch_count": 1,
+        "batch_plan": [
+          {
+            "batch_index": 1,
+            "row_range": "1-8",
+            "input_orders": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8
+            ],
+            "strategy_count": 8
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "alpha-ext-20260615-053229Z",
+      "path": "external_strategy_results/runs/alpha-ext-20260615-053229Z.json",
+      "generated_at": "2026-06-15T05:32:43Z",
+      "mode": "backtest",
+      "validation_summary": {
+        "total_rows": 9,
+        "ready_to_backtest": 8,
+        "skipped_or_held": 1,
+        "status_counts": {
+          "ready_to_backtest": 8,
+          "needs_data_source_mapping": 1
+        },
+        "hold_reason_counts": {
+          "needs_data_source_mapping": 1
+        },
+        "batch_size_limit": 10,
+        "batch_split_required": false,
+        "batch_count": 1,
+        "batch_plan": [
+          {
+            "batch_index": 1,
+            "row_range": "1-8",
+            "input_orders": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8
+            ],
+            "strategy_count": 8
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "alpha-ext-20260615-053224Z",
+      "path": "external_strategy_results/runs/alpha-ext-20260615-053224Z.json",
+      "generated_at": "2026-06-15T05:32:24Z",
+      "mode": "validate",
+      "validation_summary": {
+        "total_rows": 9,
+        "ready_to_backtest": 8,
+        "skipped_or_held": 1,
+        "status_counts": {
+          "ready_to_backtest": 8,
+          "needs_data_source_mapping": 1
+        },
+        "hold_reason_counts": {
+          "needs_data_source_mapping": 1
+        },
+        "batch_size_limit": 10,
+        "batch_split_required": false,
+        "batch_count": 1,
+        "batch_plan": [
+          {
+            "batch_index": 1,
+            "row_range": "1-8",
+            "input_orders": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8
+            ],
+            "strategy_count": 8
           }
         ]
       }

@@ -1,38 +1,151 @@
 {
-  "schema_name": "external_strategy_ideas",
-  "schema_version": "1.0",
+  "schema_name": "alpha_research_strategy_batch",
+  "schema_version": "2.0",
+  "description": "Machine-readable exploratory daily strategy batch. No performance metrics are included in the input.",
   "strategies": [
     {
-      "strategy_name": "Sample QQQ SMA20 TQQQ exposure",
+      "strategy_id": "SAMPLE-SMA-001",
+      "strategy_name": "Simple QQQ SMA20 TQQQ exposure",
       "traded_instrument": "TQQQ",
-      "benchmark": "QQQ",
       "required_symbols": ["QQQ", "TQQQ"],
+      "benchmarks": ["QQQ", "TQQQ"],
+      "primary_benchmark": "QQQ",
       "signal_timing": "after_close",
       "execution_timing": "next_session_open",
       "same_close_execution_allowed": false,
-      "entry_rule": "If the signal is true after close, enter at the next session open.",
-      "exit_rule": "If the signal is false after close, exit at the next session open.",
-      "exposure_rule": "Exposure is 1 when QQQ close is above its 20-day simple moving average; otherwise 0.",
       "costs": {"commission": 0, "slippage_per_trade": 0.0005},
-      "signals": [
-        {"name": "QQQ SMA20", "symbol": "QQQ", "role": "entry_filter", "rule": "QQQ close > QQQ 20-day simple moving average"}
-      ]
+      "rule_spec": {"type": "price_vs_sma", "symbol": "QQQ", "operator": ">", "window": 20},
+      "exposure": {"type": "binary", "true_exposure": 1.0, "false_exposure": 0.0}
     },
     {
-      "strategy_name": "Sample QQQ 60-day momentum TQQQ exposure",
+      "strategy_id": "SAMPLE-AND-002",
+      "strategy_name": "Dual SMA AND filter",
       "traded_instrument": "TQQQ",
-      "benchmark": "QQQ",
       "required_symbols": ["QQQ", "TQQQ"],
+      "benchmarks": ["QQQ", "TQQQ"],
+      "primary_benchmark": "QQQ",
       "signal_timing": "after_close",
       "execution_timing": "next_session_open",
       "same_close_execution_allowed": false,
-      "entry_rule": "If momentum is positive after close, enter at the next session open.",
-      "exit_rule": "If momentum is not positive after close, exit at the next session open.",
-      "exposure_rule": "Exposure is 1 when QQQ 60-day return is positive; otherwise 0.",
       "costs": {"commission": 0, "slippage_per_trade": 0.0005},
-      "signals": [
-        {"name": "QQQ 60-day momentum", "symbol": "QQQ", "role": "entry_filter", "rule": "QQQ 60-day return is positive"}
-      ]
+      "rule_spec": {
+        "type": "logical_and",
+        "children": [
+          {"type": "price_vs_sma", "symbol": "QQQ", "operator": ">", "window": 50},
+          {"type": "sma_slope", "symbol": "QQQ", "operator": ">", "window": 200}
+        ]
+      },
+      "exposure": {"type": "binary", "true_exposure": 1.0, "false_exposure": 0.0}
+    },
+    {
+      "strategy_id": "SAMPLE-REL-003",
+      "strategy_name": "QQQ versus GLD relative momentum",
+      "traded_instrument": "TQQQ",
+      "required_symbols": ["QQQ", "GLD", "TQQQ"],
+      "benchmarks": ["QQQ", "GLD", "TQQQ"],
+      "primary_benchmark": "QQQ",
+      "signal_timing": "after_close",
+      "execution_timing": "next_session_open",
+      "same_close_execution_allowed": false,
+      "costs": {"commission": 0, "slippage_per_trade": 0.0005},
+      "rule_spec": {"type": "roc_compare_symbol", "left_symbol": "QQQ", "right_symbol": "GLD", "operator": ">", "window": 63},
+      "exposure": {"type": "binary", "true_exposure": 1.0, "false_exposure": 0.0}
+    },
+    {
+      "strategy_id": "SAMPLE-VIX-004",
+      "strategy_name": "VIX level less than or equal 25",
+      "traded_instrument": "TQQQ",
+      "required_symbols": ["VIX", "TQQQ", "QQQ"],
+      "benchmarks": ["QQQ", "TQQQ"],
+      "primary_benchmark": "QQQ",
+      "signal_timing": "after_close",
+      "execution_timing": "next_session_open",
+      "same_close_execution_allowed": false,
+      "costs": {"commission": 0, "slippage_per_trade": 0.0005},
+      "rule_spec": {"type": "price_level_compare", "symbol": "VIX", "operator": "<=", "threshold": 25},
+      "exposure": {"type": "binary", "true_exposure": 1.0, "false_exposure": 0.0}
+    },
+    {
+      "strategy_id": "SAMPLE-VIXSMA-005",
+      "strategy_name": "VIX below own SMA50",
+      "traded_instrument": "TQQQ",
+      "required_symbols": ["VIX", "TQQQ", "QQQ"],
+      "benchmarks": ["QQQ", "TQQQ"],
+      "primary_benchmark": "QQQ",
+      "signal_timing": "after_close",
+      "execution_timing": "next_session_open",
+      "same_close_execution_allowed": false,
+      "costs": {"commission": 0, "slippage_per_trade": 0.0005},
+      "rule_spec": {"type": "price_vs_sma_other_symbol", "symbol": "VIX", "sma_symbol": "VIX", "operator": "<", "window": 50},
+      "exposure": {"type": "binary", "true_exposure": 1.0, "false_exposure": 0.0}
+    },
+    {
+      "strategy_id": "SAMPLE-RVOL-006",
+      "strategy_name": "QQQ realized volatility threshold",
+      "traded_instrument": "TQQQ",
+      "required_symbols": ["QQQ", "TQQQ"],
+      "benchmarks": ["QQQ", "TQQQ"],
+      "primary_benchmark": "QQQ",
+      "signal_timing": "after_close",
+      "execution_timing": "next_session_open",
+      "same_close_execution_allowed": false,
+      "costs": {"commission": 0, "slippage_per_trade": 0.0005},
+      "rule_spec": {"type": "realized_volatility", "symbol": "QQQ", "operator": "<=", "window": 20, "threshold": 0.35},
+      "exposure": {"type": "binary", "true_exposure": 1.0, "false_exposure": 0.0}
+    },
+    {
+      "strategy_id": "SAMPLE-COOLDOWN-007",
+      "strategy_name": "Return shock cooldown rule",
+      "traded_instrument": "TQQQ",
+      "required_symbols": ["TQQQ", "QQQ"],
+      "benchmarks": ["QQQ", "TQQQ"],
+      "primary_benchmark": "QQQ",
+      "signal_timing": "after_close",
+      "execution_timing": "next_session_open",
+      "same_close_execution_allowed": false,
+      "costs": {"commission": 0, "slippage_per_trade": 0.0005},
+      "rule_spec": {"type": "price_vs_sma", "symbol": "QQQ", "operator": ">", "window": 100},
+      "cooldown": {
+        "trigger": {"type": "return_threshold", "symbol": "TQQQ", "operator": "<", "window": 5, "threshold": -0.15},
+        "lockout_days": 5,
+        "exposure_during_lockout": 0
+      },
+      "exposure": {"type": "binary", "true_exposure": 1.0, "false_exposure": 0.0}
+    },
+    {
+      "strategy_id": "SAMPLE-TIER-008",
+      "strategy_name": "Tiered exposure by volatility",
+      "traded_instrument": "TQQQ",
+      "required_symbols": ["QQQ", "TQQQ"],
+      "benchmarks": ["QQQ", "TQQQ"],
+      "primary_benchmark": "QQQ",
+      "signal_timing": "after_close",
+      "execution_timing": "next_session_open",
+      "same_close_execution_allowed": false,
+      "costs": {"commission": 0, "slippage_per_trade": 0.0005},
+      "rule_spec": {"type": "price_vs_sma", "symbol": "QQQ", "operator": ">", "window": 200},
+      "exposure": {
+        "type": "tiered",
+        "default_exposure": 0,
+        "tiers": [
+          {"when": {"type": "realized_volatility", "symbol": "QQQ", "operator": "<=", "window": 20, "threshold": 0.20}, "exposure": 1.0},
+          {"when": {"type": "realized_volatility", "symbol": "QQQ", "operator": "<=", "window": 20, "threshold": 0.30}, "exposure": 0.5},
+          {"when": {"type": "price_vs_sma", "symbol": "QQQ", "operator": ">", "window": 200}, "exposure": 0.25}
+        ]
+      }
+    },
+    {
+      "strategy_id": "SAMPLE-FRED-009",
+      "strategy_name": "FRED yield curve hold",
+      "traded_instrument": "TQQQ",
+      "required_symbols": ["T10Y2Y", "QQQ", "TQQQ"],
+      "benchmarks": ["QQQ", "TQQQ"],
+      "primary_benchmark": "QQQ",
+      "signal_timing": "after_close",
+      "execution_timing": "next_session_open",
+      "same_close_execution_allowed": false,
+      "costs": {"commission": 0, "slippage_per_trade": 0.0005},
+      "rule_spec": {"type": "price_level_compare", "symbol": "T10Y2Y", "operator": ">", "threshold": 0}
     }
   ]
 }

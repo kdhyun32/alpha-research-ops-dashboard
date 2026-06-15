@@ -3,9 +3,9 @@
   "schema_version": "2.0",
   "input_schema_name": "alpha_research_strategy_batch",
   "input_schema_version": "2.0",
-  "run_id": "alpha-ext-20260615-054209Z",
-  "generated_at": "2026-06-15T05:42:23Z",
-  "mode": "backtest",
+  "run_id": "alpha-ext-20260615-053224Z",
+  "generated_at": "2026-06-15T05:32:24Z",
+  "mode": "validate",
   "data_source_tier": "exploratory_unofficial",
   "final_decision_allowed": false,
   "final_review_allowed": false,
@@ -1154,8 +1154,8 @@
       "input_order": 1,
       "strategy_id": "SAMPLE-SMA-001",
       "strategy_name": "Simple QQQ SMA20 TQQQ exposure",
-      "status": "executed",
-      "skip_reason": "",
+      "status": "skipped",
+      "skip_reason": "validation mode only; no backtest was run",
       "traded_instrument": "TQQQ",
       "required_symbols": [
         "QQQ",
@@ -1170,22 +1170,18 @@
       "signal_timing": "after_close",
       "execution_timing": "next_session_open",
       "same_close_execution_allowed": false,
-      "period": "2010-02-11 ~ 2026-06-11",
+      "period": "",
       "test_date_range": {
-        "start": "2010-02-11",
-        "end": "2026-06-11"
+        "start": "",
+        "end": ""
       },
       "signal_count": 1,
-      "signal_summary": "Simple QQQ SMA20 TQQQ exposure",
       "structured_rule_spec": {
         "type": "price_vs_sma",
         "symbol": "QQQ",
         "operator": ">",
         "window": 20
       },
-      "signals": [],
-      "entry_rule": "",
-      "exit_rule": "",
       "exposure_rule": {
         "type": "binary",
         "true_exposure": 1.0,
@@ -1197,37 +1193,8 @@
           "window": 20
         }
       },
-      "exposure_tiers_used": [
-        0.0,
-        1.0
-      ],
-      "cooldown": null,
-      "metrics": {
-        "total_return": 28.06819724224841,
-        "cagr": 0.22920216537383653,
-        "max_drawdown": -0.5382982960252914,
-        "mdd": -0.5382982960252914,
-        "mar": 0.42579024876398214,
-        "trade_count": 448,
-        "benchmark_returns": {
-          "QQQ": {
-            "total_return": 15.676969688802988,
-            "cagr": 0.18807936670352876,
-            "max_drawdown": -0.37086076619534114
-          },
-          "TQQQ": {
-            "total_return": 374.24944579718766,
-            "cagr": 0.4376649329533462,
-            "max_drawdown": -0.81571754056124
-          }
-        },
-        "primary_benchmark_total_return": 15.676969688802988,
-        "difference_vs_primary_benchmark": 12.391227553445422,
-        "difference_vs_tqqq": -346.18124855493926,
-        "difference_vs_qqq": 12.391227553445422,
-        "difference_vs_tqqq_reference": -346.18124855493926,
-        "difference_vs_qqq_reference": 12.391227553445422
-      },
+      "exposure_tiers_used": [],
+      "metrics": {},
       "data_source_tier": "exploratory_unofficial",
       "final_review_allowed": false,
       "licensed_rerun_required": true,
@@ -1297,65 +1264,14 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "source_audit": [
-        {
-          "symbol": "QQQ",
-          "source_provider": "yfinance/Yahoo-family",
-          "source_url_or_endpoint": "yfinance.download(QQQ)",
-          "access_timestamp": "2026-06-15T05:42:09Z",
-          "retrieval_method": "yfinance.download",
-          "local_file_path": null,
-          "sha256": null,
-          "row_count": 4136,
-          "date_range": {
-            "start": "2010-01-04",
-            "end": "2026-06-12"
-          },
-          "adjusted_unadjusted_basis": "adjusted",
-          "license_terms_or_redistribution_status": "Yahoo/yfinance exploratory access; terms not audited for redistribution",
-          "yfinance_package": {
-            "version": "0.2.66"
-          },
-          "data_source_tier": "exploratory_unofficial"
-        },
-        {
-          "symbol": "TQQQ",
-          "source_provider": "yfinance/Yahoo-family",
-          "source_url_or_endpoint": "yfinance.download(TQQQ)",
-          "access_timestamp": "2026-06-15T05:42:09Z",
-          "retrieval_method": "yfinance.download",
-          "local_file_path": null,
-          "sha256": null,
-          "row_count": 4109,
-          "date_range": {
-            "start": "2010-02-11",
-            "end": "2026-06-12"
-          },
-          "adjusted_unadjusted_basis": "adjusted",
-          "license_terms_or_redistribution_status": "Yahoo/yfinance exploratory access; terms not audited for redistribution",
-          "yfinance_package": {
-            "version": "0.2.66"
-          },
-          "data_source_tier": "exploratory_unofficial"
-        }
-      ],
-      "limitations": [
-        "Exploratory yfinance/Yahoo-family result.",
-        "Not final review evidence and not candidate/watch/Champion evidence."
-      ],
-      "final_decision_allowed": false,
-      "candidate_watch_champion_evidence": false,
-      "ranking_applied": false,
-      "recommendation_applied": false,
-      "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "validation_status": "ready_to_backtest"
     },
     {
       "input_order": 2,
       "strategy_id": "SAMPLE-AND-002",
       "strategy_name": "Dual SMA AND filter",
-      "status": "executed",
-      "skip_reason": "",
+      "status": "skipped",
+      "skip_reason": "validation mode only; no backtest was run",
       "traded_instrument": "TQQQ",
       "required_symbols": [
         "QQQ",
@@ -1370,13 +1286,12 @@
       "signal_timing": "after_close",
       "execution_timing": "next_session_open",
       "same_close_execution_allowed": false,
-      "period": "2010-02-11 ~ 2026-06-11",
+      "period": "",
       "test_date_range": {
-        "start": "2010-02-11",
-        "end": "2026-06-11"
+        "start": "",
+        "end": ""
       },
       "signal_count": 2,
-      "signal_summary": "Dual SMA AND filter",
       "structured_rule_spec": {
         "type": "logical_and",
         "children": [
@@ -1394,9 +1309,6 @@
           }
         ]
       },
-      "signals": [],
-      "entry_rule": "",
-      "exit_rule": "",
       "exposure_rule": {
         "type": "binary",
         "true_exposure": 1.0,
@@ -1419,37 +1331,8 @@
           ]
         }
       },
-      "exposure_tiers_used": [
-        0.0,
-        1.0
-      ],
-      "cooldown": null,
-      "metrics": {
-        "total_return": 20.99675306201538,
-        "cagr": 0.20839615446512094,
-        "max_drawdown": -0.5187877863043007,
-        "mdd": -0.5187877863043007,
-        "mar": 0.4016982665487886,
-        "trade_count": 257,
-        "benchmark_returns": {
-          "QQQ": {
-            "total_return": 15.676969688802988,
-            "cagr": 0.18807936670352876,
-            "max_drawdown": -0.37086076619534114
-          },
-          "TQQQ": {
-            "total_return": 374.24944579718766,
-            "cagr": 0.4376649329533462,
-            "max_drawdown": -0.81571754056124
-          }
-        },
-        "primary_benchmark_total_return": 15.676969688802988,
-        "difference_vs_primary_benchmark": 5.319783373212392,
-        "difference_vs_tqqq": -353.2526927351723,
-        "difference_vs_qqq": 5.319783373212392,
-        "difference_vs_tqqq_reference": -353.2526927351723,
-        "difference_vs_qqq_reference": 5.319783373212392
-      },
+      "exposure_tiers_used": [],
+      "metrics": {},
       "data_source_tier": "exploratory_unofficial",
       "final_review_allowed": false,
       "licensed_rerun_required": true,
@@ -1552,65 +1435,14 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "source_audit": [
-        {
-          "symbol": "QQQ",
-          "source_provider": "yfinance/Yahoo-family",
-          "source_url_or_endpoint": "yfinance.download(QQQ)",
-          "access_timestamp": "2026-06-15T05:42:12Z",
-          "retrieval_method": "yfinance.download",
-          "local_file_path": null,
-          "sha256": null,
-          "row_count": 4136,
-          "date_range": {
-            "start": "2010-01-04",
-            "end": "2026-06-12"
-          },
-          "adjusted_unadjusted_basis": "adjusted",
-          "license_terms_or_redistribution_status": "Yahoo/yfinance exploratory access; terms not audited for redistribution",
-          "yfinance_package": {
-            "version": "0.2.66"
-          },
-          "data_source_tier": "exploratory_unofficial"
-        },
-        {
-          "symbol": "TQQQ",
-          "source_provider": "yfinance/Yahoo-family",
-          "source_url_or_endpoint": "yfinance.download(TQQQ)",
-          "access_timestamp": "2026-06-15T05:42:12Z",
-          "retrieval_method": "yfinance.download",
-          "local_file_path": null,
-          "sha256": null,
-          "row_count": 4109,
-          "date_range": {
-            "start": "2010-02-11",
-            "end": "2026-06-12"
-          },
-          "adjusted_unadjusted_basis": "adjusted",
-          "license_terms_or_redistribution_status": "Yahoo/yfinance exploratory access; terms not audited for redistribution",
-          "yfinance_package": {
-            "version": "0.2.66"
-          },
-          "data_source_tier": "exploratory_unofficial"
-        }
-      ],
-      "limitations": [
-        "Exploratory yfinance/Yahoo-family result.",
-        "Not final review evidence and not candidate/watch/Champion evidence."
-      ],
-      "final_decision_allowed": false,
-      "candidate_watch_champion_evidence": false,
-      "ranking_applied": false,
-      "recommendation_applied": false,
-      "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "validation_status": "ready_to_backtest"
     },
     {
       "input_order": 3,
       "strategy_id": "SAMPLE-REL-003",
       "strategy_name": "QQQ versus GLD relative momentum",
-      "status": "executed",
-      "skip_reason": "",
+      "status": "skipped",
+      "skip_reason": "validation mode only; no backtest was run",
       "traded_instrument": "TQQQ",
       "required_symbols": [
         "QQQ",
@@ -1627,13 +1459,12 @@
       "signal_timing": "after_close",
       "execution_timing": "next_session_open",
       "same_close_execution_allowed": false,
-      "period": "2010-02-11 ~ 2026-06-11",
+      "period": "",
       "test_date_range": {
-        "start": "2010-02-11",
-        "end": "2026-06-11"
+        "start": "",
+        "end": ""
       },
       "signal_count": 1,
-      "signal_summary": "QQQ versus GLD relative momentum",
       "structured_rule_spec": {
         "type": "roc_compare_symbol",
         "left_symbol": "QQQ",
@@ -1641,9 +1472,6 @@
         "operator": ">",
         "window": 63
       },
-      "signals": [],
-      "entry_rule": "",
-      "exit_rule": "",
       "exposure_rule": {
         "type": "binary",
         "true_exposure": 1.0,
@@ -1656,42 +1484,8 @@
           "window": 63
         }
       },
-      "exposure_tiers_used": [
-        0.0,
-        1.0
-      ],
-      "cooldown": null,
-      "metrics": {
-        "total_return": 17.965780414588544,
-        "cagr": 0.19747392063242653,
-        "max_drawdown": -0.6769312542171629,
-        "mdd": -0.6769312542171629,
-        "mar": 0.29171931330131184,
-        "trade_count": 203,
-        "benchmark_returns": {
-          "QQQ": {
-            "total_return": 15.676969688802988,
-            "cagr": 0.18807936670352876,
-            "max_drawdown": -0.37086076619534114
-          },
-          "GLD": {
-            "total_return": 2.65343819186098,
-            "cagr": 0.08258308557972338,
-            "max_drawdown": -0.45324522067500783
-          },
-          "TQQQ": {
-            "total_return": 374.24944579718766,
-            "cagr": 0.4376649329533462,
-            "max_drawdown": -0.81571754056124
-          }
-        },
-        "primary_benchmark_total_return": 15.676969688802988,
-        "difference_vs_primary_benchmark": 2.288810725785556,
-        "difference_vs_tqqq": -356.2836653825991,
-        "difference_vs_qqq": 2.288810725785556,
-        "difference_vs_tqqq_reference": -356.2836653825991,
-        "difference_vs_qqq_reference": 2.288810725785556
-      },
+      "exposure_tiers_used": [],
+      "metrics": {},
       "data_source_tier": "exploratory_unofficial",
       "final_review_allowed": false,
       "licensed_rerun_required": true,
@@ -1766,85 +1560,14 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "source_audit": [
-        {
-          "symbol": "QQQ",
-          "source_provider": "yfinance/Yahoo-family",
-          "source_url_or_endpoint": "yfinance.download(QQQ)",
-          "access_timestamp": "2026-06-15T05:42:13Z",
-          "retrieval_method": "yfinance.download",
-          "local_file_path": null,
-          "sha256": null,
-          "row_count": 4136,
-          "date_range": {
-            "start": "2010-01-04",
-            "end": "2026-06-12"
-          },
-          "adjusted_unadjusted_basis": "adjusted",
-          "license_terms_or_redistribution_status": "Yahoo/yfinance exploratory access; terms not audited for redistribution",
-          "yfinance_package": {
-            "version": "0.2.66"
-          },
-          "data_source_tier": "exploratory_unofficial"
-        },
-        {
-          "symbol": "GLD",
-          "source_provider": "yfinance/Yahoo-family",
-          "source_url_or_endpoint": "yfinance.download(GLD)",
-          "access_timestamp": "2026-06-15T05:42:13Z",
-          "retrieval_method": "yfinance.download",
-          "local_file_path": null,
-          "sha256": null,
-          "row_count": 4136,
-          "date_range": {
-            "start": "2010-01-04",
-            "end": "2026-06-12"
-          },
-          "adjusted_unadjusted_basis": "adjusted",
-          "license_terms_or_redistribution_status": "Yahoo/yfinance exploratory access; terms not audited for redistribution",
-          "yfinance_package": {
-            "version": "0.2.66"
-          },
-          "data_source_tier": "exploratory_unofficial"
-        },
-        {
-          "symbol": "TQQQ",
-          "source_provider": "yfinance/Yahoo-family",
-          "source_url_or_endpoint": "yfinance.download(TQQQ)",
-          "access_timestamp": "2026-06-15T05:42:13Z",
-          "retrieval_method": "yfinance.download",
-          "local_file_path": null,
-          "sha256": null,
-          "row_count": 4109,
-          "date_range": {
-            "start": "2010-02-11",
-            "end": "2026-06-12"
-          },
-          "adjusted_unadjusted_basis": "adjusted",
-          "license_terms_or_redistribution_status": "Yahoo/yfinance exploratory access; terms not audited for redistribution",
-          "yfinance_package": {
-            "version": "0.2.66"
-          },
-          "data_source_tier": "exploratory_unofficial"
-        }
-      ],
-      "limitations": [
-        "Exploratory yfinance/Yahoo-family result.",
-        "Not final review evidence and not candidate/watch/Champion evidence."
-      ],
-      "final_decision_allowed": false,
-      "candidate_watch_champion_evidence": false,
-      "ranking_applied": false,
-      "recommendation_applied": false,
-      "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "validation_status": "ready_to_backtest"
     },
     {
       "input_order": 4,
       "strategy_id": "SAMPLE-VIX-004",
       "strategy_name": "VIX level less than or equal 25",
-      "status": "executed",
-      "skip_reason": "",
+      "status": "skipped",
+      "skip_reason": "validation mode only; no backtest was run",
       "traded_instrument": "TQQQ",
       "required_symbols": [
         "^VIX",
@@ -1860,22 +1583,18 @@
       "signal_timing": "after_close",
       "execution_timing": "next_session_open",
       "same_close_execution_allowed": false,
-      "period": "2010-02-11 ~ 2026-06-11",
+      "period": "",
       "test_date_range": {
-        "start": "2010-02-11",
-        "end": "2026-06-11"
+        "start": "",
+        "end": ""
       },
       "signal_count": 1,
-      "signal_summary": "VIX level less than or equal 25",
       "structured_rule_spec": {
         "type": "price_level_compare",
         "symbol": "^VIX",
         "operator": "<=",
         "threshold": 25
       },
-      "signals": [],
-      "entry_rule": "",
-      "exit_rule": "",
       "exposure_rule": {
         "type": "binary",
         "true_exposure": 1.0,
@@ -1887,37 +1606,8 @@
           "threshold": 25
         }
       },
-      "exposure_tiers_used": [
-        0.0,
-        1.0
-      ],
-      "cooldown": null,
-      "metrics": {
-        "total_return": 100.00802903225468,
-        "cagr": 0.3266356853663841,
-        "max_drawdown": -0.7528923089050408,
-        "mdd": -0.7528923089050408,
-        "mar": 0.4338411768894578,
-        "trade_count": 141,
-        "benchmark_returns": {
-          "QQQ": {
-            "total_return": 15.676969688802988,
-            "cagr": 0.18807936670352876,
-            "max_drawdown": -0.37086076619534114
-          },
-          "TQQQ": {
-            "total_return": 374.24944579718766,
-            "cagr": 0.4376649329533462,
-            "max_drawdown": -0.81571754056124
-          }
-        },
-        "primary_benchmark_total_return": 15.676969688802988,
-        "difference_vs_primary_benchmark": 84.3310593434517,
-        "difference_vs_tqqq": -274.241416764933,
-        "difference_vs_qqq": 84.3310593434517,
-        "difference_vs_tqqq_reference": -274.241416764933,
-        "difference_vs_qqq_reference": 84.3310593434517
-      },
+      "exposure_tiers_used": [],
+      "metrics": {},
       "data_source_tier": "exploratory_unofficial",
       "final_review_allowed": false,
       "licensed_rerun_required": true,
@@ -1988,85 +1678,14 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "source_audit": [
-        {
-          "symbol": "^VIX",
-          "source_provider": "yfinance/Yahoo-family",
-          "source_url_or_endpoint": "yfinance.download(^VIX)",
-          "access_timestamp": "2026-06-15T05:42:15Z",
-          "retrieval_method": "yfinance.download",
-          "local_file_path": null,
-          "sha256": null,
-          "row_count": 4137,
-          "date_range": {
-            "start": "2010-01-04",
-            "end": "2026-06-12"
-          },
-          "adjusted_unadjusted_basis": "adjusted",
-          "license_terms_or_redistribution_status": "Yahoo/yfinance exploratory access; terms not audited for redistribution",
-          "yfinance_package": {
-            "version": "0.2.66"
-          },
-          "data_source_tier": "exploratory_unofficial"
-        },
-        {
-          "symbol": "TQQQ",
-          "source_provider": "yfinance/Yahoo-family",
-          "source_url_or_endpoint": "yfinance.download(TQQQ)",
-          "access_timestamp": "2026-06-15T05:42:15Z",
-          "retrieval_method": "yfinance.download",
-          "local_file_path": null,
-          "sha256": null,
-          "row_count": 4109,
-          "date_range": {
-            "start": "2010-02-11",
-            "end": "2026-06-12"
-          },
-          "adjusted_unadjusted_basis": "adjusted",
-          "license_terms_or_redistribution_status": "Yahoo/yfinance exploratory access; terms not audited for redistribution",
-          "yfinance_package": {
-            "version": "0.2.66"
-          },
-          "data_source_tier": "exploratory_unofficial"
-        },
-        {
-          "symbol": "QQQ",
-          "source_provider": "yfinance/Yahoo-family",
-          "source_url_or_endpoint": "yfinance.download(QQQ)",
-          "access_timestamp": "2026-06-15T05:42:15Z",
-          "retrieval_method": "yfinance.download",
-          "local_file_path": null,
-          "sha256": null,
-          "row_count": 4136,
-          "date_range": {
-            "start": "2010-01-04",
-            "end": "2026-06-12"
-          },
-          "adjusted_unadjusted_basis": "adjusted",
-          "license_terms_or_redistribution_status": "Yahoo/yfinance exploratory access; terms not audited for redistribution",
-          "yfinance_package": {
-            "version": "0.2.66"
-          },
-          "data_source_tier": "exploratory_unofficial"
-        }
-      ],
-      "limitations": [
-        "Exploratory yfinance/Yahoo-family result.",
-        "Not final review evidence and not candidate/watch/Champion evidence."
-      ],
-      "final_decision_allowed": false,
-      "candidate_watch_champion_evidence": false,
-      "ranking_applied": false,
-      "recommendation_applied": false,
-      "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "validation_status": "ready_to_backtest"
     },
     {
       "input_order": 5,
       "strategy_id": "SAMPLE-VIXSMA-005",
       "strategy_name": "VIX below own SMA50",
-      "status": "executed",
-      "skip_reason": "",
+      "status": "skipped",
+      "skip_reason": "validation mode only; no backtest was run",
       "traded_instrument": "TQQQ",
       "required_symbols": [
         "^VIX",
@@ -2082,13 +1701,12 @@
       "signal_timing": "after_close",
       "execution_timing": "next_session_open",
       "same_close_execution_allowed": false,
-      "period": "2010-02-11 ~ 2026-06-11",
+      "period": "",
       "test_date_range": {
-        "start": "2010-02-11",
-        "end": "2026-06-11"
+        "start": "",
+        "end": ""
       },
       "signal_count": 1,
-      "signal_summary": "VIX below own SMA50",
       "structured_rule_spec": {
         "type": "price_vs_sma_other_symbol",
         "symbol": "^VIX",
@@ -2096,9 +1714,6 @@
         "operator": "<",
         "window": 50
       },
-      "signals": [],
-      "entry_rule": "",
-      "exit_rule": "",
       "exposure_rule": {
         "type": "binary",
         "true_exposure": 1.0,
@@ -2111,37 +1726,8 @@
           "window": 50
         }
       },
-      "exposure_tiers_used": [
-        0.0,
-        1.0
-      ],
-      "cooldown": null,
-      "metrics": {
-        "total_return": 40.71891100518593,
-        "cagr": 0.2567044940859955,
-        "max_drawdown": -0.766022117083548,
-        "mdd": -0.766022117083548,
-        "mar": 0.33511368452824636,
-        "trade_count": 460,
-        "benchmark_returns": {
-          "QQQ": {
-            "total_return": 15.676969688802988,
-            "cagr": 0.18807936670352876,
-            "max_drawdown": -0.37086076619534114
-          },
-          "TQQQ": {
-            "total_return": 374.24944579718766,
-            "cagr": 0.4376649329533462,
-            "max_drawdown": -0.81571754056124
-          }
-        },
-        "primary_benchmark_total_return": 15.676969688802988,
-        "difference_vs_primary_benchmark": 25.041941316382943,
-        "difference_vs_tqqq": -333.53053479200173,
-        "difference_vs_qqq": 25.041941316382943,
-        "difference_vs_tqqq_reference": -333.53053479200173,
-        "difference_vs_qqq_reference": 25.041941316382943
-      },
+      "exposure_tiers_used": [],
+      "metrics": {},
       "data_source_tier": "exploratory_unofficial",
       "final_review_allowed": false,
       "licensed_rerun_required": true,
@@ -2215,85 +1801,14 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "source_audit": [
-        {
-          "symbol": "^VIX",
-          "source_provider": "yfinance/Yahoo-family",
-          "source_url_or_endpoint": "yfinance.download(^VIX)",
-          "access_timestamp": "2026-06-15T05:42:17Z",
-          "retrieval_method": "yfinance.download",
-          "local_file_path": null,
-          "sha256": null,
-          "row_count": 4137,
-          "date_range": {
-            "start": "2010-01-04",
-            "end": "2026-06-12"
-          },
-          "adjusted_unadjusted_basis": "adjusted",
-          "license_terms_or_redistribution_status": "Yahoo/yfinance exploratory access; terms not audited for redistribution",
-          "yfinance_package": {
-            "version": "0.2.66"
-          },
-          "data_source_tier": "exploratory_unofficial"
-        },
-        {
-          "symbol": "TQQQ",
-          "source_provider": "yfinance/Yahoo-family",
-          "source_url_or_endpoint": "yfinance.download(TQQQ)",
-          "access_timestamp": "2026-06-15T05:42:17Z",
-          "retrieval_method": "yfinance.download",
-          "local_file_path": null,
-          "sha256": null,
-          "row_count": 4109,
-          "date_range": {
-            "start": "2010-02-11",
-            "end": "2026-06-12"
-          },
-          "adjusted_unadjusted_basis": "adjusted",
-          "license_terms_or_redistribution_status": "Yahoo/yfinance exploratory access; terms not audited for redistribution",
-          "yfinance_package": {
-            "version": "0.2.66"
-          },
-          "data_source_tier": "exploratory_unofficial"
-        },
-        {
-          "symbol": "QQQ",
-          "source_provider": "yfinance/Yahoo-family",
-          "source_url_or_endpoint": "yfinance.download(QQQ)",
-          "access_timestamp": "2026-06-15T05:42:17Z",
-          "retrieval_method": "yfinance.download",
-          "local_file_path": null,
-          "sha256": null,
-          "row_count": 4136,
-          "date_range": {
-            "start": "2010-01-04",
-            "end": "2026-06-12"
-          },
-          "adjusted_unadjusted_basis": "adjusted",
-          "license_terms_or_redistribution_status": "Yahoo/yfinance exploratory access; terms not audited for redistribution",
-          "yfinance_package": {
-            "version": "0.2.66"
-          },
-          "data_source_tier": "exploratory_unofficial"
-        }
-      ],
-      "limitations": [
-        "Exploratory yfinance/Yahoo-family result.",
-        "Not final review evidence and not candidate/watch/Champion evidence."
-      ],
-      "final_decision_allowed": false,
-      "candidate_watch_champion_evidence": false,
-      "ranking_applied": false,
-      "recommendation_applied": false,
-      "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "validation_status": "ready_to_backtest"
     },
     {
       "input_order": 6,
       "strategy_id": "SAMPLE-RVOL-006",
       "strategy_name": "QQQ realized volatility threshold",
-      "status": "executed",
-      "skip_reason": "",
+      "status": "skipped",
+      "skip_reason": "validation mode only; no backtest was run",
       "traded_instrument": "TQQQ",
       "required_symbols": [
         "QQQ",
@@ -2308,13 +1823,12 @@
       "signal_timing": "after_close",
       "execution_timing": "next_session_open",
       "same_close_execution_allowed": false,
-      "period": "2010-02-11 ~ 2026-06-11",
+      "period": "",
       "test_date_range": {
-        "start": "2010-02-11",
-        "end": "2026-06-11"
+        "start": "",
+        "end": ""
       },
       "signal_count": 1,
-      "signal_summary": "QQQ realized volatility threshold",
       "structured_rule_spec": {
         "type": "realized_volatility",
         "symbol": "QQQ",
@@ -2322,9 +1836,6 @@
         "window": 20,
         "threshold": 0.35
       },
-      "signals": [],
-      "entry_rule": "",
-      "exit_rule": "",
       "exposure_rule": {
         "type": "binary",
         "true_exposure": 1.0,
@@ -2337,37 +1848,8 @@
           "threshold": 0.35
         }
       },
-      "exposure_tiers_used": [
-        0.0,
-        1.0
-      ],
-      "cooldown": null,
-      "metrics": {
-        "total_return": 311.9931372874938,
-        "cagr": 0.4217809074175056,
-        "max_drawdown": -0.7394863212586502,
-        "mdd": -0.7394863212586502,
-        "mar": 0.5703701276037252,
-        "trade_count": 33,
-        "benchmark_returns": {
-          "QQQ": {
-            "total_return": 15.676969688802988,
-            "cagr": 0.18807936670352876,
-            "max_drawdown": -0.37086076619534114
-          },
-          "TQQQ": {
-            "total_return": 374.24944579718766,
-            "cagr": 0.4376649329533462,
-            "max_drawdown": -0.81571754056124
-          }
-        },
-        "primary_benchmark_total_return": 15.676969688802988,
-        "difference_vs_primary_benchmark": 296.3161675986908,
-        "difference_vs_tqqq": -62.25630850969384,
-        "difference_vs_qqq": 296.3161675986908,
-        "difference_vs_tqqq_reference": -62.25630850969384,
-        "difference_vs_qqq_reference": 296.3161675986908
-      },
+      "exposure_tiers_used": [],
+      "metrics": {},
       "data_source_tier": "exploratory_unofficial",
       "final_review_allowed": false,
       "licensed_rerun_required": true,
@@ -2440,65 +1922,14 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "source_audit": [
-        {
-          "symbol": "QQQ",
-          "source_provider": "yfinance/Yahoo-family",
-          "source_url_or_endpoint": "yfinance.download(QQQ)",
-          "access_timestamp": "2026-06-15T05:42:19Z",
-          "retrieval_method": "yfinance.download",
-          "local_file_path": null,
-          "sha256": null,
-          "row_count": 4136,
-          "date_range": {
-            "start": "2010-01-04",
-            "end": "2026-06-12"
-          },
-          "adjusted_unadjusted_basis": "adjusted",
-          "license_terms_or_redistribution_status": "Yahoo/yfinance exploratory access; terms not audited for redistribution",
-          "yfinance_package": {
-            "version": "0.2.66"
-          },
-          "data_source_tier": "exploratory_unofficial"
-        },
-        {
-          "symbol": "TQQQ",
-          "source_provider": "yfinance/Yahoo-family",
-          "source_url_or_endpoint": "yfinance.download(TQQQ)",
-          "access_timestamp": "2026-06-15T05:42:19Z",
-          "retrieval_method": "yfinance.download",
-          "local_file_path": null,
-          "sha256": null,
-          "row_count": 4109,
-          "date_range": {
-            "start": "2010-02-11",
-            "end": "2026-06-12"
-          },
-          "adjusted_unadjusted_basis": "adjusted",
-          "license_terms_or_redistribution_status": "Yahoo/yfinance exploratory access; terms not audited for redistribution",
-          "yfinance_package": {
-            "version": "0.2.66"
-          },
-          "data_source_tier": "exploratory_unofficial"
-        }
-      ],
-      "limitations": [
-        "Exploratory yfinance/Yahoo-family result.",
-        "Not final review evidence and not candidate/watch/Champion evidence."
-      ],
-      "final_decision_allowed": false,
-      "candidate_watch_champion_evidence": false,
-      "ranking_applied": false,
-      "recommendation_applied": false,
-      "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "validation_status": "ready_to_backtest"
     },
     {
       "input_order": 7,
       "strategy_id": "SAMPLE-COOLDOWN-007",
       "strategy_name": "Return shock cooldown rule",
-      "status": "executed",
-      "skip_reason": "",
+      "status": "skipped",
+      "skip_reason": "validation mode only; no backtest was run",
       "traded_instrument": "TQQQ",
       "required_symbols": [
         "TQQQ",
@@ -2513,22 +1944,18 @@
       "signal_timing": "after_close",
       "execution_timing": "next_session_open",
       "same_close_execution_allowed": false,
-      "period": "2010-02-11 ~ 2026-06-11",
+      "period": "",
       "test_date_range": {
-        "start": "2010-02-11",
-        "end": "2026-06-11"
+        "start": "",
+        "end": ""
       },
       "signal_count": 1,
-      "signal_summary": "Return shock cooldown rule",
       "structured_rule_spec": {
         "type": "price_vs_sma",
         "symbol": "QQQ",
         "operator": ">",
         "window": 100
       },
-      "signals": [],
-      "entry_rule": "",
-      "exit_rule": "",
       "exposure_rule": {
         "type": "binary",
         "true_exposure": 1.0,
@@ -2540,47 +1967,8 @@
           "window": 100
         }
       },
-      "exposure_tiers_used": [
-        0.0,
-        1.0
-      ],
-      "cooldown": {
-        "trigger": {
-          "type": "return_threshold",
-          "symbol": "TQQQ",
-          "operator": "<",
-          "window": 5,
-          "threshold": -0.15
-        },
-        "lockout_days": 5,
-        "exposure_during_lockout": 0.0
-      },
-      "metrics": {
-        "total_return": 30.59150440112446,
-        "cagr": 0.23548468613685336,
-        "max_drawdown": -0.49101621838962983,
-        "mdd": -0.49101621838962983,
-        "mar": 0.4795863707092302,
-        "trade_count": 180,
-        "benchmark_returns": {
-          "QQQ": {
-            "total_return": 15.676969688802988,
-            "cagr": 0.18807936670352876,
-            "max_drawdown": -0.37086076619534114
-          },
-          "TQQQ": {
-            "total_return": 374.24944579718766,
-            "cagr": 0.4376649329533462,
-            "max_drawdown": -0.81571754056124
-          }
-        },
-        "primary_benchmark_total_return": 15.676969688802988,
-        "difference_vs_primary_benchmark": 14.914534712321473,
-        "difference_vs_tqqq": -343.6579413960632,
-        "difference_vs_qqq": 14.914534712321473,
-        "difference_vs_tqqq_reference": -343.6579413960632,
-        "difference_vs_qqq_reference": 14.914534712321473
-      },
+      "exposure_tiers_used": [],
+      "metrics": {},
       "data_source_tier": "exploratory_unofficial",
       "final_review_allowed": false,
       "licensed_rerun_required": true,
@@ -2660,65 +2048,14 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "source_audit": [
-        {
-          "symbol": "TQQQ",
-          "source_provider": "yfinance/Yahoo-family",
-          "source_url_or_endpoint": "yfinance.download(TQQQ)",
-          "access_timestamp": "2026-06-15T05:42:20Z",
-          "retrieval_method": "yfinance.download",
-          "local_file_path": null,
-          "sha256": null,
-          "row_count": 4109,
-          "date_range": {
-            "start": "2010-02-11",
-            "end": "2026-06-12"
-          },
-          "adjusted_unadjusted_basis": "adjusted",
-          "license_terms_or_redistribution_status": "Yahoo/yfinance exploratory access; terms not audited for redistribution",
-          "yfinance_package": {
-            "version": "0.2.66"
-          },
-          "data_source_tier": "exploratory_unofficial"
-        },
-        {
-          "symbol": "QQQ",
-          "source_provider": "yfinance/Yahoo-family",
-          "source_url_or_endpoint": "yfinance.download(QQQ)",
-          "access_timestamp": "2026-06-15T05:42:20Z",
-          "retrieval_method": "yfinance.download",
-          "local_file_path": null,
-          "sha256": null,
-          "row_count": 4136,
-          "date_range": {
-            "start": "2010-01-04",
-            "end": "2026-06-12"
-          },
-          "adjusted_unadjusted_basis": "adjusted",
-          "license_terms_or_redistribution_status": "Yahoo/yfinance exploratory access; terms not audited for redistribution",
-          "yfinance_package": {
-            "version": "0.2.66"
-          },
-          "data_source_tier": "exploratory_unofficial"
-        }
-      ],
-      "limitations": [
-        "Exploratory yfinance/Yahoo-family result.",
-        "Not final review evidence and not candidate/watch/Champion evidence."
-      ],
-      "final_decision_allowed": false,
-      "candidate_watch_champion_evidence": false,
-      "ranking_applied": false,
-      "recommendation_applied": false,
-      "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "validation_status": "ready_to_backtest"
     },
     {
       "input_order": 8,
       "strategy_id": "SAMPLE-TIER-008",
       "strategy_name": "Tiered exposure by volatility",
-      "status": "executed",
-      "skip_reason": "",
+      "status": "skipped",
+      "skip_reason": "validation mode only; no backtest was run",
       "traded_instrument": "TQQQ",
       "required_symbols": [
         "QQQ",
@@ -2733,22 +2070,18 @@
       "signal_timing": "after_close",
       "execution_timing": "next_session_open",
       "same_close_execution_allowed": false,
-      "period": "2010-02-11 ~ 2026-06-11",
+      "period": "",
       "test_date_range": {
-        "start": "2010-02-11",
-        "end": "2026-06-11"
+        "start": "",
+        "end": ""
       },
       "signal_count": 1,
-      "signal_summary": "Tiered exposure by volatility",
       "structured_rule_spec": {
         "type": "price_vs_sma",
         "symbol": "QQQ",
         "operator": ">",
         "window": 200
       },
-      "signals": [],
-      "entry_rule": "",
-      "exit_rule": "",
       "exposure_rule": {
         "type": "tiered",
         "default_exposure": 0.0,
@@ -2784,38 +2117,8 @@
           }
         ]
       },
-      "exposure_tiers_used": [
-        0.0,
-        0.25,
-        0.5
-      ],
-      "cooldown": null,
-      "metrics": {
-        "total_return": 8.83525179917109,
-        "cagr": 0.15027218992652203,
-        "max_drawdown": -0.28512120673818186,
-        "mdd": -0.28512120673818186,
-        "mar": 0.5270466958443831,
-        "trade_count": 37,
-        "benchmark_returns": {
-          "QQQ": {
-            "total_return": 15.676969688802988,
-            "cagr": 0.18807936670352876,
-            "max_drawdown": -0.37086076619534114
-          },
-          "TQQQ": {
-            "total_return": 374.24944579718766,
-            "cagr": 0.4376649329533462,
-            "max_drawdown": -0.81571754056124
-          }
-        },
-        "primary_benchmark_total_return": 15.676969688802988,
-        "difference_vs_primary_benchmark": -6.841717889631898,
-        "difference_vs_tqqq": -365.4141939980166,
-        "difference_vs_qqq": -6.841717889631898,
-        "difference_vs_tqqq_reference": -365.4141939980166,
-        "difference_vs_qqq_reference": -6.841717889631898
-      },
+      "exposure_tiers_used": [],
+      "metrics": {},
       "data_source_tier": "exploratory_unofficial",
       "final_review_allowed": false,
       "licensed_rerun_required": true,
@@ -2909,58 +2212,7 @@
         "recommendation": false,
         "automatic_selection": false
       },
-      "source_audit": [
-        {
-          "symbol": "QQQ",
-          "source_provider": "yfinance/Yahoo-family",
-          "source_url_or_endpoint": "yfinance.download(QQQ)",
-          "access_timestamp": "2026-06-15T05:42:22Z",
-          "retrieval_method": "yfinance.download",
-          "local_file_path": null,
-          "sha256": null,
-          "row_count": 4136,
-          "date_range": {
-            "start": "2010-01-04",
-            "end": "2026-06-12"
-          },
-          "adjusted_unadjusted_basis": "adjusted",
-          "license_terms_or_redistribution_status": "Yahoo/yfinance exploratory access; terms not audited for redistribution",
-          "yfinance_package": {
-            "version": "0.2.66"
-          },
-          "data_source_tier": "exploratory_unofficial"
-        },
-        {
-          "symbol": "TQQQ",
-          "source_provider": "yfinance/Yahoo-family",
-          "source_url_or_endpoint": "yfinance.download(TQQQ)",
-          "access_timestamp": "2026-06-15T05:42:22Z",
-          "retrieval_method": "yfinance.download",
-          "local_file_path": null,
-          "sha256": null,
-          "row_count": 4109,
-          "date_range": {
-            "start": "2010-02-11",
-            "end": "2026-06-12"
-          },
-          "adjusted_unadjusted_basis": "adjusted",
-          "license_terms_or_redistribution_status": "Yahoo/yfinance exploratory access; terms not audited for redistribution",
-          "yfinance_package": {
-            "version": "0.2.66"
-          },
-          "data_source_tier": "exploratory_unofficial"
-        }
-      ],
-      "limitations": [
-        "Exploratory yfinance/Yahoo-family result.",
-        "Not final review evidence and not candidate/watch/Champion evidence."
-      ],
-      "final_decision_allowed": false,
-      "candidate_watch_champion_evidence": false,
-      "ranking_applied": false,
-      "recommendation_applied": false,
-      "automatic_selection_applied": false,
-      "broker_live_order_alert_paper_automation": false
+      "validation_status": "ready_to_backtest"
     },
     {
       "input_order": 9,
