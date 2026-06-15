@@ -229,6 +229,81 @@ def test_ambiguous_general_formula_and_hysteresis_remain_held() -> None:
     assert hysteresis["validation_status"] == "needs_state_machine_support"
 
 
+def test_closed_remaining_formula_state_patterns_are_ready_and_execute(monkeypatch) -> None:
+    cases = [
+        strategy(
+            "Stress if VIX9D/VIX3M > 1.05 OR VIX/VIX3M > 1.02 OR VVIX > 115 OR QQQ 252-day drawdown < -0.18; recovery if VIX9D/VIX3M < 0.95 AND VIX is lower than 10 sessions ago AND QQQ 20-day momentum > 0; use TQQQ when recovery or QQQ close > QQQ 100-day SMA, otherwise 40% TQQQ when not stressed",
+            symbol="QQQ, VIX, VIX9D, VIX3M, VVIX, GLD",
+            required_symbols=["TQQQ", "QQQ", "VIX", "VIX9D", "VIX3M", "VVIX", "GLD"],
+        )
+        | {"strategy_name": "P2_001 Vol term-structure state machine"},
+        strategy(
+            "Panic if QQQ 252-day drawdown < -0.20 OR TQQQ 252-day drawdown < -0.55 OR VIX > 35; repaired if QQQ 20-day momentum > 0 AND QQQ close > QQQ 50-day SMA AND VIX is lower than 10 sessions ago; strong if QQQ close > QQQ 100-day SMA AND QQQ 252-day drawdown > -0.10 AND VIX < 28; map panic-not-repaired to 0%, repaired-not-strong to 50%, strong to 100%, otherwise 25% TQQQ",
+            symbol="QQQ, VIX",
+            required_symbols=["TQQQ", "QQQ", "VIX"],
+        )
+        | {"strategy_name": "P2_002 Damage recovery state machine"},
+        strategy(
+            "Count QQQ, XLK, SOXX, SPY assets with positive 63-day momentum and positive 20-day momentum; stress if VIX > 30 OR QQQ 252-day drawdown < -0.20; if stress and recovery count < 3 use defense, if 63-day count >= 3 and 20-day count >= 3 use 100% TQQQ, if recovery count >= 3 use 50% TQQQ, otherwise 0%",
+            symbol="QQQ, SPY, SOXX, XLK, VIX, GLD",
+            required_symbols=["TQQQ", "QQQ", "SPY", "SOXX", "XLK", "VIX", "GLD"],
+        )
+        | {"strategy_name": "P2_005 Breadth recovery ladder"},
+        strategy(
+            "Compute drag_score = QQQ 63-day momentum - 0.5 * (QQQ 21-day annualized realized volatility squared); subtract 0.15 if VIX9D > 1.05 * VIX3M; use 100% TQQQ if drag_score > 0.10, 50% if > 0.02, otherwise defense",
+            symbol="QQQ, VIX, VIX9D, VIX3M, GLD",
+            required_symbols=["TQQQ", "QQQ", "VIX", "VIX9D", "VIX3M", "GLD"],
+        )
+        | {"strategy_name": "P2_006 Variance drag allocator"},
+        strategy(
+            "Risk count adds one each for VIX > 28, VVIX > 110, QQQ 252-day drawdown < -0.12, and QQQ 63-day momentum <= 0; use 100% TQQQ if risk count <= 1, 35% TQQQ if risk count == 2, otherwise defense",
+            symbol="QQQ, VIX, VVIX, GLD",
+            required_symbols=["TQQQ", "QQQ", "VIX", "VVIX", "GLD"],
+        )
+        | {"strategy_name": "P2_008 Adaptive defensive rotation"},
+        strategy(
+            "0% TQQQ when QQQ close < QQQ 200-day SMA AND QQQ 200-day SMA slope < 0; 50% TQQQ when QQQ realized volatility 20-day > realized volatility 60-day while long trend remains positive; return to 100% only when QQQ close > QQQ 200-day SMA AND QQQ 200-day SMA slope > 0 AND QQQ realized volatility 20-day <= realized volatility 60-day",
+            symbol="QQQ",
+            required_symbols=["TQQQ", "QQQ"],
+        )
+        | {"strategy_name": "C04 Three-feature minimal regime"},
+    ]
+
+    monkeypatch.setattr(batch, "download_symbols", lambda symbols: (synthetic_frames(symbols), []))
+
+    normalized = [batch.normalize_strategy(case, index) for index, case in enumerate(cases)]
+    results = [batch.backtest(row) for row in normalized]
+
+    assert [row["validation_status"] for row in normalized] == ["ready_to_backtest"] * len(cases)
+    assert [result["status"] for result in results] == ["executed"] * len(cases)
+
+
+def test_remaining_ambiguous_formula_state_patterns_stay_held() -> None:
+    cases = [
+        strategy("Full if RV21<25%, 0.67 if <35%, QQQ if trend only", symbol="QQQ, RV", required_symbols=["TQQQ", "QQQ", "RV"])
+        | {"strategy_name": "TQQQ_QQQ200_RV21_LADDER QQQ trend + RV21 exposure ladder"},
+        strategy("QQQ>SMA200; TQQQ weight=min(1,25%/RV21)", symbol="QQQ, RV", required_symbols=["TQQQ", "QQQ", "RV"])
+        | {"strategy_name": "TQQQ_QQQ200_TARGETVOL_RV21 QQQ trend + target-vol/RV sizing"},
+        strategy("Full if trend+RV/VXN normal; 0.67 if elevated; QQQ if trend only", symbol="QQQ, VXN, RV", required_symbols=["TQQQ", "QQQ", "VXN", "RV"])
+        | {"strategy_name": "TQQQ_QQQ200_RV21_VXN_LADDER QQQ trend + RV21/VXN ladder"},
+        strategy(
+            "Maintain prior state unless votes change: add one vote each for QQQ close > QQQ 100-day SMA, XLK 63-day momentum > 0, VIX9D/VIX3M < 1.0, VVIX 252-day percentile < 0.75, QQQ 252-day drawdown > -0.15; switch to 100% TQQQ when votes >= 4 and switch to defense when votes <= 2",
+            symbol="QQQ, XLK, VIX9D, VIX3M, VVIX",
+            required_symbols=["TQQQ", "QQQ", "XLK", "VIX9D", "VIX3M", "VVIX"],
+        )
+        | {"strategy_name": "P2_007 Hysteresis risk committee"},
+    ]
+
+    statuses = [batch.normalize_strategy(case, index)["validation_status"] for index, case in enumerate(cases)]
+
+    assert statuses == [
+        "needs_formula_engine",
+        "needs_formula_engine",
+        "needs_formula_engine",
+        "needs_state_machine_support",
+    ]
+
+
 def test_derived_placeholder_symbol_in_structured_node_is_not_ready() -> None:
     normalized = batch.normalize_strategy(
         strategy_with(

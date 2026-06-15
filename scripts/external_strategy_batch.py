@@ -242,6 +242,22 @@ def make_node(node_type: str, **kwargs: Any) -> dict[str, Any]:
     return {"type": node_type, **{k: v for k, v in kwargs.items() if v is not None and v != ""}}
 
 
+def qqq_trend(window: int = 200) -> dict[str, Any]:
+    return make_node("price_vs_sma", symbol="QQQ", operator=">", window=window)
+
+
+def qqq_momentum(window: int) -> dict[str, Any]:
+    return make_node("roc_compare_zero", symbol="QQQ", operator=">", window=window)
+
+
+def qqq_drawdown(operator: str, threshold: float) -> dict[str, Any]:
+    return make_node("trailing_drawdown", symbol="QQQ", operator=operator, window=252, threshold=threshold)
+
+
+def vix_level(operator: str, threshold: float, symbol: str = "^VIX") -> dict[str, Any]:
+    return make_node("price_level_compare", symbol=symbol, operator=operator, threshold=threshold)
+
+
 def strip_wrapping(text: str) -> str:
     text = text.strip()
     if text.startswith("(") and text.endswith(")"):
@@ -723,6 +739,11 @@ def normalize_node(raw: Any, default_symbol: Any = "") -> tuple[dict[str, Any] |
         node["threshold"] = int(as_number(raw.get("threshold"), 0))
         if not node["symbols"] or node["sma_window"] <= 0 or node["lookback"] <= 0 or node["threshold"] <= 0:
             errors.append("unsupported_rule")
+    if node_type == "realized_volatility_compare":
+        node["left_window"] = int(as_number(raw.get("left_window"), 0))
+        node["right_window"] = int(as_number(raw.get("right_window"), 0))
+        if node["left_window"] <= 0 or node["right_window"] <= 0:
+            errors.append("unsupported_rule")
     if node_type == "source_rule_text":
         return normalize_node(raw.get("text"), default_symbol)
     if node_type in {"vote", "votes", "hysteresis", "state_machine", "needs_state_machine_support"}:
@@ -799,12 +820,14 @@ def is_bounded_daily_node(node: Any) -> bool:
         "ratio_price_vs_sma",
         "ratio_return_threshold",
         "realized_volatility",
+        "realized_volatility_compare",
         "return_threshold",
         "roc_compare_symbol",
         "roc_compare_zero",
         "rsi",
         "sma_slope",
         "trailing_drawdown",
+        "variance_drag_score",
         "z_score",
     }
     symbols = {symbol.upper() for symbol in node_symbols(node)}
@@ -907,7 +930,10 @@ def normalize_exposure(strategy: dict[str, Any], root_node: dict[str, Any] | Non
         exposure = dict(raw)
     else:
         exposure = {"type": "binary", "true_exposure": 1.0, "false_exposure": 0.0}
-        text = " ".join([clean_text(strategy.get("exposure_rule"))] + [clean_text(signal.get("rule")) for signal in strategy.get("signals") or [] if isinstance(signal, dict)])
+        text = " ".join(
+            [clean_text(strategy.get("strategy_name")), clean_text(strategy.get("exposure_rule"))]
+            + [clean_text(signal.get("rule")) for signal in strategy.get("signals") or [] if isinstance(signal, dict)]
+        )
         tier_matches = re.findall(r"(?:(\d+(?:\.\d+)?)%?\s+exposure).*?(?:when|if)\s+([^;]+)", text, flags=re.I)
         if tier_matches:
             tiers = []
@@ -926,6 +952,121 @@ def normalize_exposure(strategy: dict[str, Any], root_node: dict[str, Any] | Non
                 "tiers": [
                     {"when": {"type": "price_level_compare", "symbol": "VIX", "operator": "<", "threshold": 18}, "exposure": 1.0},
                     {"when": {"type": "price_level_compare", "symbol": "VIX", "operator": "<", "threshold": 25}, "exposure": 0.5},
+                ],
+            }
+        lowered_text = text.lower()
+        if "vol term-structure state machine" in lowered_text and "use tqqq when recovery" in lowered_text:
+            stress = make_node(
+                "logical_or",
+                children=[
+                    make_node("ratio_price_threshold", left_symbol="^VIX9D", right_symbol="^VIX3M", operator=">", threshold=1.05),
+                    make_node("ratio_price_threshold", left_symbol="^VIX", right_symbol="^VIX3M", operator=">", threshold=1.02),
+                    vix_level(">", 115.0, "^VVIX"),
+                    qqq_drawdown("<", -0.18),
+                ],
+            )
+            recovery = make_node(
+                "logical_and",
+                children=[
+                    make_node("ratio_price_threshold", left_symbol="^VIX9D", right_symbol="^VIX3M", operator="<", threshold=0.95),
+                    make_node("price_change_threshold", symbol="^VIX", operator="<", window=10, threshold=0.0),
+                    qqq_momentum(20),
+                ],
+            )
+            exposure = {
+                "type": "tiered",
+                "default_exposure": 0.0,
+                "tiers": [
+                    {"when": make_node("logical_not", child=stress), "exposure": 0.4},
+                    {"when": make_node("logical_or", children=[recovery, qqq_trend(100)]), "exposure": 1.0},
+                ],
+            }
+        if "damage recovery state machine" in lowered_text and "map panic-not-repaired" in lowered_text:
+            panic = make_node(
+                "logical_or",
+                children=[
+                    qqq_drawdown("<", -0.20),
+                    make_node("trailing_drawdown", symbol="TQQQ", operator="<", window=252, threshold=-0.55),
+                    vix_level(">", 35.0),
+                ],
+            )
+            repaired = make_node(
+                "logical_and",
+                children=[
+                    qqq_momentum(20),
+                    qqq_trend(50),
+                    make_node("price_change_threshold", symbol="^VIX", operator="<", window=10, threshold=0.0),
+                ],
+            )
+            strong = make_node(
+                "logical_and",
+                children=[qqq_trend(100), qqq_drawdown(">", -0.10), vix_level("<", 28.0)],
+            )
+            exposure = {
+                "type": "tiered",
+                "default_exposure": 0.25,
+                "tiers": [
+                    {"when": make_node("logical_and", children=[panic, make_node("logical_not", child=repaired)]), "exposure": 0.0},
+                    {"when": make_node("logical_and", children=[repaired, make_node("logical_not", child=strong)]), "exposure": 0.5},
+                    {"when": strong, "exposure": 1.0},
+                ],
+            }
+        if "breadth recovery ladder" in lowered_text and "positive 63-day momentum" in lowered_text:
+            symbols = ["QQQ", "XLK", "SOXX", "SPY"]
+            count63 = make_node(
+                "count_condition",
+                children=[make_node("roc_compare_zero", symbol=symbol, operator=">", window=63) for symbol in symbols],
+                operator=">=",
+                threshold=3,
+            )
+            count20 = make_node(
+                "count_condition",
+                children=[make_node("roc_compare_zero", symbol=symbol, operator=">", window=20) for symbol in symbols],
+                operator=">=",
+                threshold=3,
+            )
+            exposure = {
+                "type": "tiered",
+                "default_exposure": 0.0,
+                "tiers": [
+                    {"when": count63, "exposure": 0.5},
+                    {"when": make_node("logical_and", children=[count63, count20]), "exposure": 1.0},
+                ],
+            }
+        if "variance drag allocator" in lowered_text and "compute drag_score" in lowered_text:
+            exposure = {
+                "type": "tiered",
+                "default_exposure": 0.0,
+                "tiers": [
+                    {"when": make_node("variance_drag_score", operator=">", threshold=0.02), "exposure": 0.5},
+                    {"when": make_node("variance_drag_score", operator=">", threshold=0.10), "exposure": 1.0},
+                ],
+            }
+        if "adaptive defensive rotation" in lowered_text and "risk count adds one each" in lowered_text:
+            risk_count = [
+                vix_level(">", 28.0),
+                vix_level(">", 110.0, "^VVIX"),
+                qqq_drawdown("<", -0.12),
+                make_node("roc_compare_zero", symbol="QQQ", operator="<=", window=63),
+            ]
+            exposure = {
+                "type": "tiered",
+                "default_exposure": 0.0,
+                "tiers": [
+                    {"when": make_node("count_condition", children=risk_count, operator="<=", threshold=1), "exposure": 1.0},
+                    {"when": make_node("count_condition", children=risk_count, operator="==", threshold=2), "exposure": 0.35},
+                ],
+            }
+        if "three-feature minimal regime" in lowered_text and "realized volatility 20-day" in lowered_text:
+            trend_positive = make_node("logical_and", children=[qqq_trend(200), make_node("sma_slope", symbol="QQQ", operator=">", window=200)])
+            rv20_le_rv60 = make_node("realized_volatility_compare", symbol="QQQ", left_window=20, right_window=60, operator="<=")
+            rv20_gt_rv60 = make_node("realized_volatility_compare", symbol="QQQ", left_window=20, right_window=60, operator=">")
+            exposure = {
+                "type": "tiered",
+                "default_exposure": 0.0,
+                "tiers": [
+                    {"when": make_node("logical_and", children=[trend_positive, rv20_gt_rv60]), "exposure": 0.5},
+                    {"when": make_node("logical_and", children=[trend_positive, rv20_le_rv60]), "exposure": 1.0},
                 ],
             }
         if "half exposure when qqq/sma50" in text.lower():
@@ -1189,6 +1330,14 @@ def normalize_strategy(strategy: dict[str, Any], index: int, total_ready_hint: i
     }
     bounded_formula_ready = is_bounded_formula_pattern(formula_context, combined_rule_text)
     bounded_state_ready = is_bounded_state_pattern(formula_context)
+    if bounded_formula_ready:
+        effective_parse_errors = [
+            error for error in effective_parse_errors if error != "needs_formula_engine"
+        ]
+    if bounded_state_ready:
+        effective_parse_errors = [
+            error for error in effective_parse_errors if error != "needs_state_machine_support"
+        ]
 
     if errors:
         status = "invalid_required_field"
@@ -1204,6 +1353,8 @@ def normalize_strategy(strategy: dict[str, Any], index: int, total_ready_hint: i
         status = "unsupported_rule"
     else:
         status = SUPPORTED_STATUS
+    if status == "unsupported_rule" and formula_engine_needed:
+        status = "needs_formula_engine"
 
     normalized = {
         **strategy,
@@ -1337,6 +1488,20 @@ def eval_node(node: dict[str, Any], frames: dict[str, pd.DataFrame]) -> pd.Serie
         close = close_series(frames, node["symbol"])
         vol = close.pct_change().rolling(int(node["window"])).std() * math.sqrt(float(node.get("annualization", 252)))
         return operator_apply(vol, node.get("operator", "<="), float(node["threshold"]))
+    if node_type == "realized_volatility_compare":
+        close = close_series(frames, node["symbol"])
+        left = close.pct_change().rolling(int(node["left_window"])).std() * math.sqrt(float(node.get("annualization", 252)))
+        right = close.pct_change().rolling(int(node["right_window"])).std() * math.sqrt(float(node.get("annualization", 252)))
+        return operator_apply(left, node.get("operator", "<="), right)
+    if node_type == "variance_drag_score":
+        qqq = close_series(frames, "QQQ")
+        vix9d = close_series(frames, "^VIX9D")
+        vix3m = close_series(frames, "^VIX3M")
+        momentum = qqq.pct_change(63)
+        rv21 = qqq.pct_change().rolling(21).std() * math.sqrt(252)
+        stress_penalty = (vix9d / vix3m > 1.05).astype(float) * 0.15
+        score = momentum - 0.5 * (rv21 ** 2) - stress_penalty
+        return operator_apply(score, node.get("operator", ">"), float(node["threshold"]))
     if node_type == "trailing_drawdown":
         close = close_series(frames, node["symbol"])
         drawdown = close / close.rolling(int(node["window"])).max() - 1.0
@@ -1461,7 +1626,7 @@ def exposure_series(strategy: dict[str, Any], frames: dict[str, pd.DataFrame]) -
             else:
                 series.loc[date] = float(exposure.get("outside_true_exposure", 0.25)) if bool(outside.iloc[idx]) else float(exposure.get("outside_false_exposure", 0.0))
     elif exposure.get("type") == "tiered":
-        if root:
+        if root and is_bounded_daily_node(root):
             base_index = eval_node(root, frames).index
         else:
             base_symbol = exposure.get("base_symbol") or strategy.get("traded_instrument") or "QQQ"
