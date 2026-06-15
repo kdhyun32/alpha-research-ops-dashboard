@@ -39,6 +39,16 @@ NEEDS_DATA_SOURCE_MAPPING = {
     "P066_AUTHORITY",
     "ABL_AUTHORITY",
 }
+DERIVED_PLACEHOLDER_SYMBOLS = {
+    "RETURN",
+    "VOLATILITY",
+    "SLOPE",
+    "MOMENTUM",
+    "RATIO",
+    "SMA50",
+    "Z-SCORE",
+    "ZSCORE",
+}
 BOUNDARY_FLAGS = {
     "data_source_tier": "exploratory_unofficial",
     "final_decision_allowed": False,
@@ -55,6 +65,12 @@ BOUNDARY_FLAGS = {
     "automatic_selection": False,
 }
 
+PUBLIC_TEXT_REPLACEMENTS = {
+    "P066_AUTHORITY": "EXTERNAL_AUTHORITY",
+    "P066": "external authority",
+    "Snowball": "external prior system",
+}
+
 
 def utc_now() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -67,6 +83,19 @@ def run_id() -> str:
 def stable_json_hash(value: Any) -> str:
     encoded = json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
     return hashlib.sha256(encoded).hexdigest()
+
+
+def sanitize_public_text(value: Any) -> Any:
+    if isinstance(value, str):
+        output = value
+        for old, new in PUBLIC_TEXT_REPLACEMENTS.items():
+            output = output.replace(old, new)
+        return output
+    if isinstance(value, list):
+        return [sanitize_public_text(item) for item in value]
+    if isinstance(value, dict):
+        return {key: sanitize_public_text(item) for key, item in value.items()}
+    return value
 
 
 def strategy_sequence_hash(strategies: list[dict[str, Any]]) -> str:
@@ -126,6 +155,10 @@ def normalize_symbol(symbol: Any) -> tuple[str, str | None]:
         return "", None
     if raw == "RV":
         return "", None
+    if "," in raw:
+        return raw, "unsupported_signal_shape"
+    if raw in DERIVED_PLACEHOLDER_SYMBOLS:
+        return raw, "unsupported_rule"
     if raw in NEEDS_DATA_SOURCE_MAPPING:
         return raw, "needs_data_source_mapping"
     return YFINANCE_ALIASES.get(raw, raw), None
@@ -556,6 +589,7 @@ def node_symbols(node: Any) -> list[str]:
         symbols.extend(node_symbols(child))
     symbols.extend(node_symbols(node.get("child")))
     symbols.extend(node_symbols(node.get("condition")))
+    symbols.extend(node_symbols(node.get("trigger")))
     return unique_strings(symbols)
 
 
@@ -847,6 +881,11 @@ def normalize_strategy(strategy: dict[str, Any], index: int, total_ready_hint: i
     ])
     source_symbols = unique_strings([*source_symbols, *strategy.get("required_symbols", []), strategy.get("traded_instrument"), *benchmarks])
     mapping_symbols = {symbol.upper() for symbol in normalized_symbols if symbol.upper() in NEEDS_DATA_SOURCE_MAPPING}
+    unsupported_placeholder_symbols = {
+        symbol.upper()
+        for symbol in normalized_symbols
+        if symbol.upper() in DERIVED_PLACEHOLDER_SYMBOLS or "," in symbol
+    }
     data_mapping_needed = (
         traded_status == "needs_data_source_mapping"
         or benchmark_needs_mapping
@@ -855,6 +894,10 @@ def normalize_strategy(strategy: dict[str, Any], index: int, total_ready_hint: i
         or bool(mapping_symbols)
     )
     combined_rule_text = " ".join([clean_text(strategy.get("strategy_name")), clean_text(strategy.get("exposure_rule"))] + [clean_text(signal.get("rule")) for signal in strategy.get("signals") or [] if isinstance(signal, dict)]).lower()
+    unsupported_runtime_derived = bool(unsupported_placeholder_symbols) or (
+        "cooldown" in combined_rule_text
+        and ("one-day return" in combined_rule_text or "z-score" in combined_rule_text)
+    )
 
     if errors:
         status = "invalid_required_field"
@@ -868,6 +911,8 @@ def normalize_strategy(strategy: dict[str, Any], index: int, total_ready_hint: i
         status = "needs_state_machine_support"
     elif any(token in combined_rule_text for token in ("score", "fraction of these true conditions", "compute ", "dynamic", "ladder")) and (parse_errors or not root_node):
         status = "needs_formula_engine"
+    elif unsupported_runtime_derived:
+        status = "unsupported_rule"
     elif parse_errors or not root_node:
         status = "unsupported_rule"
     else:
@@ -1377,6 +1422,10 @@ def write_outputs(payload: dict[str, Any], output_dir: Path, mode: str) -> dict[
             reason_counts["data_unavailable"] = reason_counts.get("data_unavailable", 0) + 1
 
     batch_plan = chunk_ranges(ready_rows)
+    executed_count = sum(1 for row in results if row.get("status") == "executed")
+    held_count = len(results) - executed_count
+    public_validations = sanitize_public_text(validations)
+    public_results = sanitize_public_text(results)
     result_payload = {
         "schema_name": RESULT_SCHEMA_NAME,
         "schema_version": RESULT_SCHEMA_VERSION,
@@ -1406,8 +1455,19 @@ def write_outputs(payload: dict[str, Any], output_dir: Path, mode: str) -> dict[
             "batch_count": len(batch_plan),
             "batch_plan": batch_plan,
         },
-        "validations": validations,
-        "results": results,
+        "backtest_summary": {
+            "total_rows": len(results),
+            "executed_rows": executed_count if mode == "backtest" else 0,
+            "held_or_skipped_rows": held_count if mode == "backtest" else len(results),
+            "status_counts": {
+                "executed": executed_count,
+                "skipped": held_count,
+            },
+            "hold_reason_counts": reason_counts,
+            "metrics_available": mode == "backtest" and executed_count > 0,
+        },
+        "validations": public_validations,
+        "results": public_results,
     }
     output_dir.mkdir(parents=True, exist_ok=True)
     runs_dir = output_dir / "runs"

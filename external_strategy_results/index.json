@@ -3,6 +3,461 @@
   "schema_version": "1.0",
   "runs": [
     {
+      "run_id": "alpha-ext-20260615-073353Z",
+      "request_id": "alpha-public-1781507131079-c1d9aaaee21378",
+      "path": "external_strategy_results/runs/alpha-ext-20260615-073353Z.json",
+      "generated_at": "2026-06-15T07:34:59Z",
+      "mode": "backtest",
+      "input_batch_hash": "6ebb72b1a4d1aa81d7ebbdd8412fa376c8a24bd1f9272f53456221b107f48fbc",
+      "input_strategy_sequence_hash": "6293db7fd50757eb4645ff305cebfe6cee0f93ccce4cd83af8d0fca906b0775e",
+      "strategy_count": 145,
+      "validation_summary": {
+        "total_rows": 145,
+        "ready_to_backtest": 44,
+        "skipped_or_held": 101,
+        "status_counts": {
+          "ready_to_backtest": 44,
+          "unsupported_rule": 49,
+          "needs_data_source_mapping": 38,
+          "needs_formula_engine": 10,
+          "needs_state_machine_support": 4
+        },
+        "hold_reason_counts": {
+          "unsupported_rule": 49,
+          "needs_data_source_mapping": 38,
+          "needs_formula_engine": 10,
+          "needs_state_machine_support": 4
+        },
+        "batch_size_limit": 10,
+        "batch_split_required": true,
+        "batch_count": 5,
+        "batch_plan": [
+          {
+            "batch_index": 1,
+            "row_range": "1-20",
+            "input_orders": [
+              1,
+              2,
+              3,
+              4,
+              10,
+              11,
+              12,
+              15,
+              19,
+              20
+            ],
+            "strategy_count": 10
+          },
+          {
+            "batch_index": 2,
+            "row_range": "23-78",
+            "input_orders": [
+              23,
+              25,
+              26,
+              27,
+              28,
+              35,
+              75,
+              76,
+              77,
+              78
+            ],
+            "strategy_count": 10
+          },
+          {
+            "batch_index": 3,
+            "row_range": "79-96",
+            "input_orders": [
+              79,
+              83,
+              84,
+              85,
+              86,
+              87,
+              88,
+              89,
+              90,
+              96
+            ],
+            "strategy_count": 10
+          },
+          {
+            "batch_index": 4,
+            "row_range": "97-133",
+            "input_orders": [
+              97,
+              99,
+              100,
+              101,
+              102,
+              103,
+              104,
+              129,
+              130,
+              133
+            ],
+            "strategy_count": 10
+          },
+          {
+            "batch_index": 5,
+            "row_range": "134-137",
+            "input_orders": [
+              134,
+              135,
+              136,
+              137
+            ],
+            "strategy_count": 4
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "alpha-ext-20260615-073054Z",
+      "request_id": "alpha-public-1781507131079-c1d9aaaee21378",
+      "path": "external_strategy_results/runs/alpha-ext-20260615-073054Z.json",
+      "generated_at": "2026-06-15T07:32:13Z",
+      "mode": "backtest",
+      "input_batch_hash": "6ebb72b1a4d1aa81d7ebbdd8412fa376c8a24bd1f9272f53456221b107f48fbc",
+      "input_strategy_sequence_hash": "6293db7fd50757eb4645ff305cebfe6cee0f93ccce4cd83af8d0fca906b0775e",
+      "strategy_count": 145,
+      "validation_summary": {
+        "total_rows": 145,
+        "ready_to_backtest": 44,
+        "skipped_or_held": 101,
+        "status_counts": {
+          "ready_to_backtest": 44,
+          "unsupported_rule": 49,
+          "needs_data_source_mapping": 38,
+          "needs_formula_engine": 10,
+          "needs_state_machine_support": 4
+        },
+        "hold_reason_counts": {
+          "unsupported_rule": 49,
+          "needs_data_source_mapping": 38,
+          "needs_formula_engine": 10,
+          "needs_state_machine_support": 4
+        },
+        "batch_size_limit": 10,
+        "batch_split_required": true,
+        "batch_count": 5,
+        "batch_plan": [
+          {
+            "batch_index": 1,
+            "row_range": "1-20",
+            "input_orders": [
+              1,
+              2,
+              3,
+              4,
+              10,
+              11,
+              12,
+              15,
+              19,
+              20
+            ],
+            "strategy_count": 10
+          },
+          {
+            "batch_index": 2,
+            "row_range": "23-78",
+            "input_orders": [
+              23,
+              25,
+              26,
+              27,
+              28,
+              35,
+              75,
+              76,
+              77,
+              78
+            ],
+            "strategy_count": 10
+          },
+          {
+            "batch_index": 3,
+            "row_range": "79-96",
+            "input_orders": [
+              79,
+              83,
+              84,
+              85,
+              86,
+              87,
+              88,
+              89,
+              90,
+              96
+            ],
+            "strategy_count": 10
+          },
+          {
+            "batch_index": 4,
+            "row_range": "97-133",
+            "input_orders": [
+              97,
+              99,
+              100,
+              101,
+              102,
+              103,
+              104,
+              129,
+              130,
+              133
+            ],
+            "strategy_count": 10
+          },
+          {
+            "batch_index": 5,
+            "row_range": "134-137",
+            "input_orders": [
+              134,
+              135,
+              136,
+              137
+            ],
+            "strategy_count": 4
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "alpha-ext-20260615-072914Z",
+      "request_id": "alpha-public-1781507131079-c1d9aaaee21378",
+      "path": "external_strategy_results/runs/alpha-ext-20260615-072914Z.json",
+      "generated_at": "2026-06-15T07:30:22Z",
+      "mode": "backtest",
+      "input_batch_hash": "6ebb72b1a4d1aa81d7ebbdd8412fa376c8a24bd1f9272f53456221b107f48fbc",
+      "input_strategy_sequence_hash": "6293db7fd50757eb4645ff305cebfe6cee0f93ccce4cd83af8d0fca906b0775e",
+      "strategy_count": 145,
+      "validation_summary": {
+        "total_rows": 145,
+        "ready_to_backtest": 45,
+        "skipped_or_held": 100,
+        "status_counts": {
+          "ready_to_backtest": 45,
+          "unsupported_rule": 48,
+          "needs_data_source_mapping": 38,
+          "needs_formula_engine": 10,
+          "needs_state_machine_support": 4
+        },
+        "hold_reason_counts": {
+          "unsupported_rule": 48,
+          "needs_data_source_mapping": 38,
+          "needs_formula_engine": 10,
+          "needs_state_machine_support": 4
+        },
+        "batch_size_limit": 10,
+        "batch_split_required": true,
+        "batch_count": 5,
+        "batch_plan": [
+          {
+            "batch_index": 1,
+            "row_range": "1-20",
+            "input_orders": [
+              1,
+              2,
+              3,
+              4,
+              10,
+              11,
+              12,
+              15,
+              19,
+              20
+            ],
+            "strategy_count": 10
+          },
+          {
+            "batch_index": 2,
+            "row_range": "22-77",
+            "input_orders": [
+              22,
+              23,
+              25,
+              26,
+              27,
+              28,
+              35,
+              75,
+              76,
+              77
+            ],
+            "strategy_count": 10
+          },
+          {
+            "batch_index": 3,
+            "row_range": "78-90",
+            "input_orders": [
+              78,
+              79,
+              83,
+              84,
+              85,
+              86,
+              87,
+              88,
+              89,
+              90
+            ],
+            "strategy_count": 10
+          },
+          {
+            "batch_index": 4,
+            "row_range": "96-130",
+            "input_orders": [
+              96,
+              97,
+              99,
+              100,
+              101,
+              102,
+              103,
+              104,
+              129,
+              130
+            ],
+            "strategy_count": 10
+          },
+          {
+            "batch_index": 5,
+            "row_range": "133-137",
+            "input_orders": [
+              133,
+              134,
+              135,
+              136,
+              137
+            ],
+            "strategy_count": 5
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "alpha-ext-20260615-072709Z",
+      "request_id": "alpha-public-1781507131079-c1d9aaaee21378",
+      "path": "external_strategy_results/runs/alpha-ext-20260615-072709Z.json",
+      "generated_at": "2026-06-15T07:28:28Z",
+      "mode": "backtest",
+      "input_batch_hash": "6ebb72b1a4d1aa81d7ebbdd8412fa376c8a24bd1f9272f53456221b107f48fbc",
+      "input_strategy_sequence_hash": "6293db7fd50757eb4645ff305cebfe6cee0f93ccce4cd83af8d0fca906b0775e",
+      "strategy_count": 145,
+      "validation_summary": {
+        "total_rows": 145,
+        "ready_to_backtest": 49,
+        "skipped_or_held": 96,
+        "status_counts": {
+          "ready_to_backtest": 49,
+          "unsupported_rule": 44,
+          "needs_data_source_mapping": 38,
+          "needs_formula_engine": 10,
+          "needs_state_machine_support": 4
+        },
+        "hold_reason_counts": {
+          "unsupported_rule": 44,
+          "needs_data_source_mapping": 38,
+          "needs_formula_engine": 10,
+          "needs_state_machine_support": 4,
+          "data_unavailable": 3
+        },
+        "batch_size_limit": 10,
+        "batch_split_required": true,
+        "batch_count": 5,
+        "batch_plan": [
+          {
+            "batch_index": 1,
+            "row_range": "1-19",
+            "input_orders": [
+              1,
+              2,
+              3,
+              4,
+              10,
+              11,
+              12,
+              15,
+              18,
+              19
+            ],
+            "strategy_count": 10
+          },
+          {
+            "batch_index": 2,
+            "row_range": "20-75",
+            "input_orders": [
+              20,
+              22,
+              23,
+              25,
+              26,
+              27,
+              28,
+              35,
+              47,
+              75
+            ],
+            "strategy_count": 10
+          },
+          {
+            "batch_index": 3,
+            "row_range": "76-88",
+            "input_orders": [
+              76,
+              77,
+              78,
+              79,
+              83,
+              84,
+              85,
+              86,
+              87,
+              88
+            ],
+            "strategy_count": 10
+          },
+          {
+            "batch_index": 4,
+            "row_range": "89-104",
+            "input_orders": [
+              89,
+              90,
+              96,
+              97,
+              99,
+              100,
+              101,
+              102,
+              103,
+              104
+            ],
+            "strategy_count": 10
+          },
+          {
+            "batch_index": 5,
+            "row_range": "129-137",
+            "input_orders": [
+              129,
+              130,
+              131,
+              132,
+              133,
+              134,
+              135,
+              136,
+              137
+            ],
+            "strategy_count": 9
+          }
+        ]
+      }
+    },
+    {
       "run_id": "alpha-ext-20260615-070553Z",
       "request_id": "alpha-public-1781507131079-c1d9aaaee21378",
       "path": "external_strategy_results/runs/alpha-ext-20260615-070553Z.json",
