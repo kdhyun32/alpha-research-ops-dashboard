@@ -3,6 +3,36 @@
   "schema_version": "1.0",
   "runs": [
     {
+      "run_id": "alpha-ext-20260615-050112Z",
+      "path": "external_strategy_results/runs/alpha-ext-20260615-050112Z.json",
+      "generated_at": "2026-06-15T05:01:16Z",
+      "mode": "backtest",
+      "validation_summary": {
+        "total_rows": 4,
+        "ready_to_backtest": 2,
+        "skipped_or_held": 2,
+        "status_counts": {
+          "ready_to_backtest": 2,
+          "needs_data_source_mapping": 1,
+          "unsupported_rule": 1
+        },
+        "batch_size_limit": 10,
+        "batch_split_required": false,
+        "batch_count": 1,
+        "batch_plan": [
+          {
+            "batch_index": 1,
+            "row_range": "1-2",
+            "input_orders": [
+              1,
+              2
+            ],
+            "strategy_count": 2
+          }
+        ]
+      }
+    },
+    {
       "run_id": "alpha-ext-20260615-043912Z",
       "path": "external_strategy_results/runs/alpha-ext-20260615-043912Z.json",
       "generated_at": "2026-06-15T04:39:12Z",
