@@ -45,13 +45,14 @@ export default {
     } catch {
       return json({ ok: false, error: "JSON 요청만 허용됩니다." }, 400, origin);
     }
-    if (!env.EXECUTION_TOKEN || tokenFrom(request, body) !== env.EXECUTION_TOKEN) {
+    const executionToken = env.EXECUTION_TOKEN || env.DASHBOARD_SHARED_ACCESS_TOKEN;
+    if (!executionToken || tokenFrom(request, body) !== executionToken) {
       return json({ ok: false, error: "실행 토큰이 올바르지 않습니다." }, 401, origin);
     }
     const mode = body.mode === "backtest" ? "backtest" : "validate";
     const payloadError = validatePayload(body);
     if (payloadError) return json({ ok: false, error: payloadError }, 400, origin);
-    const githubToken = env.GITHUB_TOKEN;
+    const githubToken = env.GITHUB_TOKEN || env.GITHUB_DISPATCH_TOKEN;
     if (!githubToken) return json({ ok: false, error: "GitHub dispatch token이 설정되지 않았습니다." }, 500, origin);
     const eventType = mode === "backtest" ? "external_strategy_backtest" : "external_strategy_validate";
     const response = await fetch("https://api.github.com/repos/kdhyun32/alpha-research-ops-dashboard/dispatches", {
