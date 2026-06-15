@@ -2619,7 +2619,7 @@ dl,.path-list li{grid-template-columns:1fr}
 <p class="plain-note" id="strategy-import-file-name">선택된 파일 없음 · 여러 파일과 여러 전략 row 지원</p>
 <div class="import-status pending" id="strategy-import-status" aria-live="polite">아직 검증하지 않았습니다.</div>
 <ul class="validation-list" id="strategy-import-errors"></ul>
-<script type="application/json" id="strategy-import-config">{"browser_only": false, "input_extension": ".strategy-ideas.json", "legacy_input_extensions": [".strategy-idea.json", ".strategy-ideas.json", ".strategy-review.json"], "no_backtest_execution_in_browser": true, "no_external_url": false, "no_python_execution_in_browser": true, "normalization_contract": {"benchmark_accepts": ["QQQ", "TQQQ", ["TQQQ", "QQQ"], ["TQQQ", "QQQ", "GLD"]], "blocked_rows_stay_visible": true, "canonical_schema_name": "alpha_research_strategy_batch", "canonical_schema_version": "2.0", "max_worker_batch_size": 10, "normalized_benchmark_fields": ["benchmarks", "primary_benchmark"], "primary_benchmark_rule": "QQQ if present, else first benchmark", "ready_rows_only_dispatched": true}, "public_execution_config": {"bundle_name": "Unified Alpha Dashboard v1", "canonical_source_repo": "Alpha Research Ops Lab", "execution_token_required": false, "github_dispatch_event_backtest": "external_strategy_backtest", "github_dispatch_event_validate": "external_strategy_validate", "github_dispatch_repo": "kdhyun32/alpha-research-ops-dashboard", "public_repo_role": "generated_dashboard_bundle_deployment_target_only", "result_index_json_path": "external_strategy_results/index.json", "result_json_path": "external_strategy_results/latest.json", "worker_endpoint": "https://alpha-strategy-dispatch.kdhyun32.workers.dev"}, "recommended_values": {"execution_timing": "next_session_open", "same_close_execution_allowed": false, "signal_timing": "after_close", "traded_instrument": "TQQQ"}, "required_fields": ["strategy_name", "traded_instrument", "required_symbols", "signals[].name", "signals[].symbol", "signals[].rule", "signals[].role", "entry_rule", "exit_rule", "signal_timing", "execution_timing", "same_close_execution_allowed", "benchmark", "costs.commission", "costs.slippage_per_trade"], "sample": {"schema_name": "alpha_research_strategy_batch", "schema_version": "2.0", "strategies": [{"benchmark": ["TQQQ", "QQQ"], "costs": {"commission": 0, "slippage_per_trade": 0.0005}, "entry_rule": "신호를 장마감 후 확인하고 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출 테스트를 요청합니다.", "execution_timing": "next_session_open", "exit_rule": "신호를 장마감 후 확인하고 조건이 거짓이면 다음 거래일 시가 기준으로 TQQQ 노출 해제 테스트를 요청합니다.", "notes": "탐색용 출처 등급은 별도 실행 단계에서 결정합니다. 이 파일은 브라우저 구조 검증과 테스트 요청 준비에만 씁니다.", "required_symbols": ["QQQ", "TQQQ"], "same_close_execution_allowed": false, "signal_timing": "after_close", "signals": [{"name": "QQQ 200일 추세", "role": "entry_filter", "rule": "QQQ close > QQQ 200-day simple moving average", "symbol": "QQQ"}], "strategy_name": "QQQ 200일선 확인 후 TQQQ 테스트 아이디어", "traded_instrument": "TQQQ"}]}, "sample_filename": "sample-alpha-research.strategy-ideas.json", "schema_name": "alpha_research_strategy_batch", "schema_version": "2.0", "selection_review_extension": ".strategy-review.json", "source_tier_note": "exploratory source tier는 별도 실행 단계에서 결정합니다.", "supported_rule_families": ["price_vs_sma", "sma_slope", "roc_compare_zero", "roc_compare_symbol", "price_level_compare", "price_vs_sma_other_symbol", "realized_volatility", "trailing_drawdown", "return_threshold", "count_condition", "percentile", "logical_and", "logical_or", "logical_not", "tiered_exposure", "cooldown_lockout"], "test_request_extension": "", "validation_scope": "browser_structure_check_then_worker_dispatch"}</script>
+<script type="application/json" id="strategy-import-config">{"browser_only": false, "input_extension": ".strategy-ideas.json", "legacy_input_extensions": [".strategy-idea.json", ".strategy-ideas.json", ".strategy-review.json"], "no_backtest_execution_in_browser": true, "no_external_url": false, "no_python_execution_in_browser": true, "normalization_contract": {"benchmark_accepts": ["QQQ", "TQQQ", ["TQQQ", "QQQ"], ["TQQQ", "QQQ", "GLD"]], "blocked_rows_stay_visible": true, "canonical_schema_name": "alpha_research_strategy_batch", "canonical_schema_version": "2.0", "max_worker_batch_size": 200, "normalized_benchmark_fields": ["benchmarks", "primary_benchmark"], "primary_benchmark_rule": "QQQ if present, else first benchmark", "ready_rows_only_dispatched": false}, "public_execution_config": {"bundle_name": "Unified Alpha Dashboard v1", "canonical_source_repo": "Alpha Research Ops Lab", "execution_token_required": false, "github_dispatch_event_backtest": "external_strategy_backtest", "github_dispatch_event_validate": "external_strategy_validate", "github_dispatch_repo": "kdhyun32/alpha-research-ops-dashboard", "public_repo_role": "generated_dashboard_bundle_deployment_target_only", "result_index_json_path": "external_strategy_results/index.json", "result_json_path": "external_strategy_results/latest.json", "worker_endpoint": "https://alpha-strategy-dispatch.kdhyun32.workers.dev"}, "recommended_values": {"execution_timing": "next_session_open", "same_close_execution_allowed": false, "signal_timing": "after_close", "traded_instrument": "TQQQ"}, "required_fields": ["strategy_name", "traded_instrument", "required_symbols", "signals[].name", "signals[].symbol", "signals[].rule", "signals[].role", "entry_rule", "exit_rule", "signal_timing", "execution_timing", "same_close_execution_allowed", "benchmark", "costs.commission", "costs.slippage_per_trade"], "sample": {"schema_name": "alpha_research_strategy_batch", "schema_version": "2.0", "strategies": [{"benchmark": ["TQQQ", "QQQ"], "costs": {"commission": 0, "slippage_per_trade": 0.0005}, "entry_rule": "신호를 장마감 후 확인하고 조건이 참이면 다음 거래일 시가 기준으로 TQQQ 노출 테스트를 요청합니다.", "execution_timing": "next_session_open", "exit_rule": "신호를 장마감 후 확인하고 조건이 거짓이면 다음 거래일 시가 기준으로 TQQQ 노출 해제 테스트를 요청합니다.", "notes": "탐색용 출처 등급은 별도 실행 단계에서 결정합니다. 이 파일은 브라우저 구조 검증과 테스트 요청 준비에만 씁니다.", "required_symbols": ["QQQ", "TQQQ"], "same_close_execution_allowed": false, "signal_timing": "after_close", "signals": [{"name": "QQQ 200일 추세", "role": "entry_filter", "rule": "QQQ close > QQQ 200-day simple moving average", "symbol": "QQQ"}], "strategy_name": "QQQ 200일선 확인 후 TQQQ 테스트 아이디어", "traded_instrument": "TQQQ"}]}, "sample_filename": "sample-alpha-research.strategy-ideas.json", "schema_name": "alpha_research_strategy_batch", "schema_version": "2.0", "selection_review_extension": ".strategy-review.json", "source_tier_note": "exploratory source tier는 별도 실행 단계에서 결정합니다.", "supported_rule_families": ["price_vs_sma", "sma_slope", "roc_compare_zero", "roc_compare_symbol", "price_level_compare", "price_vs_sma_other_symbol", "realized_volatility", "trailing_drawdown", "return_threshold", "count_condition", "percentile", "logical_and", "logical_or", "logical_not", "tiered_exposure", "cooldown_lockout"], "test_request_extension": "", "validation_scope": "browser_structure_check_then_worker_dispatch"}</script>
 <details class="raw-details" id="strategy-import-format-details">
 <summary>임포트 양식 보기</summary>
 <div class="details-body">
@@ -2754,6 +2754,7 @@ dl,.path-list li{grid-template-columns:1fr}
   const externalDetails = document.getElementById("external-result-details");
   let latestBatch = null;
   let latestValidation = [];
+  let latestRunnerResult = null;
 
   const setStatus = (text, state) => {
     if (!status) return;
@@ -2773,6 +2774,24 @@ dl,.path-list li{grid-template-columns:1fr}
   const hasOwn = (object, key) => Object.prototype.hasOwnProperty.call(object || {}, key);
   const referenceField = "bench" + "mark";
   const MAX_BATCH_SIZE = 10;
+  const stableStringify = (value) => {
+    if (Array.isArray(value)) return `[${value.map((item) => stableStringify(item)).join(",")}]`;
+    if (value && typeof value === "object") {
+      return `{${Object.keys(value).sort().map((key) => `${JSON.stringify(key)}:${stableStringify(value[key])}`).join(",")}}`;
+    }
+    return JSON.stringify(value);
+  };
+  const sha256Hex = async (value) => {
+    const bytes = new TextEncoder().encode(value);
+    const digest = await crypto.subtle.digest("SHA-256", bytes);
+    return Array.from(new Uint8Array(digest)).map((byte) => byte.toString(16).padStart(2, "0")).join("");
+  };
+  const batchHash = async (strategies) => sha256Hex(stableStringify(strategies));
+  const sequenceHash = async (strategies) => sha256Hex(stableStringify(strategies.map((strategy, index) => ({
+    input_order: strategy?.input_order ?? index + 1,
+    strategy_id: String(strategy?.strategy_id || strategy?.strategy_key || "").trim(),
+    strategy_name: String(strategy?.strategy_name || "").trim(),
+  }))));
   const symbolAliases = {VIX: "^VIX", VXN: "^VXN", VIX9D: "^VIX9D", VIX3M: "^VIX3M", VVIX: "^VVIX"};
   const dataSourceMappingNeeded = new Set(["DGS10", "T10Y2Y", "DTB3", "NFCI", "HY_SPREAD"]);
   const statusLabels = {
@@ -2981,6 +3000,8 @@ dl,.path-list li{grid-template-columns:1fr}
       const payload = await response.json();
       const validations = Array.isArray(payload?.validations) ? payload.validations : [];
       if (payload?.schema_name !== "alpha_research_strategy_batch_result") return null;
+      if (!payload.input_batch_hash || payload.input_batch_hash !== batch.input_batch_hash) return null;
+      if (payload.strategy_count !== batch.strategies.length) return null;
       if (validations.length !== batch.strategies.length) return null;
       const sameRows = validations.every((item, index) => {
         const source = batch.strategies[index] || {};
@@ -2989,7 +3010,9 @@ dl,.path-list li{grid-template-columns:1fr}
         return !sourceKey || !resultKey || sourceKey === resultKey;
       });
       if (!sameRows) return null;
-      return validations.map((item, index) => ({
+      return {
+        ...payload,
+        validations: validations.map((item, index) => ({
         ...item,
         index,
         valid: item.validation_status === "ready_to_backtest",
@@ -2999,7 +3022,8 @@ dl,.path-list li{grid-template-columns:1fr}
         source_symbols: item.source_symbols || [],
         normalized_symbols: item.normalized_symbols || [],
         skip_reason: item.skip_reason || skipReason(item.validation_status),
-      }));
+        })),
+      };
     } catch (_error) {
       return null;
     }
@@ -3012,7 +3036,16 @@ dl,.path-list li{grid-template-columns:1fr}
       const payload = JSON.parse(await file.text());
       normalizePayload(payload).forEach((row) => rows.push(row));
     }
-    return {schema_name: "external_strategy_ideas", schema_version: "1.0", strategies: rows};
+    const inputBatchHash = await batchHash(rows);
+    const inputStrategySequenceHash = await sequenceHash(rows);
+    return {
+      schema_name: "external_strategy_ideas",
+      schema_version: "1.0",
+      input_batch_hash: inputBatchHash,
+      input_strategy_sequence_hash: inputStrategySequenceHash,
+      strategy_count: rows.length,
+      strategies: rows
+    };
   };
   const validateIdea = (idea, index) => {
     return normalizeIdea(idea, index);
@@ -3060,62 +3093,76 @@ dl,.path-list li{grid-template-columns:1fr}
     if (idea.traded_instrument && idea.traded_instrument !== "TQQQ") warnings.push("권장 traded_instrument는 TQQQ입니다.");
     return {index, strategy_name: idea.strategy_name || `전략 ${index + 1}`, valid: errors.length === 0, errors, warnings};
   };
-  const renderValidation = (items) => {
+  const renderValidation = (resultPayload) => {
+    const items = Array.isArray(resultPayload?.validations) ? resultPayload.validations : [];
+    const summary = resultPayload?.validation_summary || {};
     const messages = [];
-    const counts = items.reduce((acc, item) => {
-      acc[item.validation_status] = (acc[item.validation_status] || 0) + 1;
-      return acc;
-    }, {});
-    const readyItems = items.filter((item) => item.valid);
-    const ready = readyItems.length;
-    const held = items.length - ready;
-    const batchCount = ready ? Math.ceil(ready / MAX_BATCH_SIZE) : 0;
-    messages.push(`총 전략 수: ${items.length}`);
-    messages.push(`실행 가능: ${ready}개`);
-    messages.push(`보류: ${held}개`);
-    messages.push(`데이터 소스 필요: ${counts.needs_data_source_mapping || 0}개`);
-    messages.push(`규칙 정규화 필요: ${(counts.needs_rule_normalization || 0) + (counts.unsupported_signal_shape || 0)}개`);
-    messages.push(`지원하지 않는 규칙: ${counts.unsupported_rule || 0}개`);
-    messages.push(`10개씩 ${batchCount}개 묶음으로 실행 예정`);
-    for (let start = 0; start < readyItems.length; start += MAX_BATCH_SIZE) {
-      const chunk = readyItems.slice(start, start + MAX_BATCH_SIZE);
-      if (chunk.length) messages.push(`묶음 ${Math.floor(start / MAX_BATCH_SIZE) + 1}: row ${chunk[0].index + 1}-${chunk[chunk.length - 1].index + 1}`);
-    }
+    const reasonCounts = summary.hold_reason_counts || {};
+    const batchPlan = Array.isArray(summary.batch_plan) ? summary.batch_plan : [];
+    messages.push(`runner run_id: ${resultPayload.run_id || "-"}`);
+    messages.push(`input_batch_hash: ${resultPayload.input_batch_hash || "-"}`);
+    messages.push(`total_rows: ${summary.total_rows ?? items.length}`);
+    messages.push(`ready_to_backtest: ${summary.ready_to_backtest ?? 0}`);
+    messages.push(`skipped_or_held: ${summary.skipped_or_held ?? 0}`);
+    Object.keys(reasonCounts).sort().forEach((reason) => {
+      messages.push(`hold_reason_counts.${reason}: ${reasonCounts[reason]}`);
+    });
+    messages.push(`batch_plan: ${batchPlan.length} runner batches`);
+    batchPlan.forEach((batch) => {
+      messages.push(`batch ${batch.batch_index}: row ${batch.row_range} (${batch.strategy_count} rows)`);
+    });
     items.forEach((item) => {
-      if (!item.valid) messages.push(`${item.index + 1}. ${item.strategy_name}: ${statusLabels[item.validation_status] || item.validation_status} - ${item.skip_reason}`);
-      if (item.valid && !item.warnings.length) messages.push(`${item.index + 1}. ${item.strategy_name}: 검증 통과`);
-      item.errors.forEach((error) => messages.push(`${item.index + 1}. ${item.strategy_name}: ${error}`));
-      item.warnings.forEach((warning) => messages.push(`${item.index + 1}. ${item.strategy_name}: 확인 필요 - ${warning}`));
+      const rowNumber = item.input_order || item.index + 1;
+      const status = item.validation_status || "unknown";
+      const reason = item.skip_reason || "";
+      messages.push(`${rowNumber}. ${item.strategy_name || `strategy ${rowNumber}`}: ${status}${reason ? ` - ${reason}` : ""}`);
+      (item.parse_errors || item.errors || []).forEach((error) => messages.push(`${rowNumber}. ${item.strategy_name || `strategy ${rowNumber}`}: ${error}`));
     });
     showMessages(messages);
+  };
+  const renderPendingRunnerResult = (batch) => {
+    showMessages([
+      `현재 파일 row 수: ${batch.strategy_count}`,
+      `input_batch_hash: ${batch.input_batch_hash}`,
+      "현재 파일과 일치하는 Python runner 검증 결과가 아직 없습니다. 검증 실행을 먼저 누르고, 결과 반영 후 새로고침하거나 결과를 확인하세요.",
+      "브라우저는 ready_to_backtest를 계산하지 않습니다."
+    ]);
   };
   const validateFiles = async () => {
     try {
       latestBatch = await readFiles();
-      latestValidation = await latestRunnerValidation(latestBatch);
-      if (!latestValidation) latestValidation = latestBatch.strategies.map(validateIdea);
-      renderValidation(latestValidation);
-      const passed = latestValidation.filter((item) => item.valid).length;
-      const held = latestValidation.length - passed;
-      const batchCount = passed ? Math.ceil(passed / MAX_BATCH_SIZE) : 0;
-      setStatus(`검증 완료: 실행 가능 ${passed}개 · 보류 ${held}개 · ${batchCount}개 묶음`, passed > 0 ? "passed" : "failed");
-      return passed > 0;
+      latestRunnerResult = await latestRunnerValidation(latestBatch);
+      latestValidation = latestRunnerResult ? latestRunnerResult.validations : [];
+      if (!latestBatch.strategies.length) {
+        showMessages(["strategies array is empty."]);
+        setStatus("파일 구조 오류: strategies row가 없습니다.", "failed");
+        return false;
+      }
+      if (!latestRunnerResult) {
+        renderPendingRunnerResult(latestBatch);
+        setStatus("현재 파일의 runner 검증 결과가 아직 없습니다. 검증 실행을 먼저 누르세요.", "pending");
+        return true;
+      }
+      renderValidation(latestRunnerResult);
+      const summary = latestRunnerResult.validation_summary || {};
+      setStatus(`runner 검증 결과: ${summary.total_rows ?? latestBatch.strategy_count} total / ${summary.ready_to_backtest ?? 0} ready / ${summary.skipped_or_held ?? 0} held`, "passed");
+      return true;
     } catch (error) {
       latestBatch = null;
       latestValidation = [];
+      latestRunnerResult = null;
       showMessages([error.message || String(error)]);
-      setStatus("검증 실패", "failed");
+      setStatus("파일 구조/JSON 파싱 실패", "failed");
       return false;
     }
   };
-  const dispatchOriginal = async (mode) => {
-    if (!latestBatch || !latestValidation.length) {
+  const dispatch = async (mode) => {
+    if (!latestBatch) {
       const ok = await validateFiles();
       if (!ok) return;
     }
-    const strategies = latestValidation.filter((item) => item.valid).map((item) => item.normalized_strategy);
-    if (!strategies.length) {
-      setStatus("검증을 통과한 전략 row가 없습니다.", "failed");
+    if (!latestBatch || !latestBatch.strategies.length) {
+      setStatus("전송할 strategy row가 없습니다.", "failed");
       return;
     }
     const endpoint = publicConfig.worker_endpoint;
@@ -3123,67 +3170,25 @@ dl,.path-list li{grid-template-columns:1fr}
       setStatus("Worker endpoint config가 없습니다.", "failed");
       return;
     }
-    setStatus(mode === "backtest" ? "백테스트 실행 요청 중입니다." : "검증 실행 요청 중입니다.", "pending");
+    const requestId = `alpha-public-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+    setStatus(mode === "backtest" ? `백테스트 요청 접수 중입니다: 전체 ${latestBatch.strategy_count} row` : `검증 요청 접수 중입니다: 전체 ${latestBatch.strategy_count} row`, "pending");
     const response = await fetch(endpoint, {
       method: "POST",
       headers: {"content-type": "application/json"},
-      body: JSON.stringify({mode, strategy_batch: {...latestBatch, strategies}}),
+      body: JSON.stringify({
+        mode,
+        request_id: requestId,
+        input_batch_hash: latestBatch.input_batch_hash,
+        input_strategy_sequence_hash: latestBatch.input_strategy_sequence_hash,
+        strategy_batch: latestBatch,
+      }),
     });
-    const payload = await response.json().catch(() => ({ok: false, error: "응답 JSON을 읽지 못했습니다."}));
+    const payload = await response.json().catch(() => ({ok: false, error: "Response JSON could not be parsed."}));
     if (!response.ok || !payload.ok) {
       setStatus(payload.error || "실행 요청이 거절되었습니다.", "failed");
       return;
     }
-    setStatus(`요청 접수: ${payload.github_event_type}. 결과 JSON 반영 후 새로고침하면 표시됩니다.`, "passed");
-  };
-  const dispatch = async (mode) => {
-    if (!latestBatch || !latestValidation.length) {
-      const ok = await validateFiles();
-      if (!ok) return;
-    }
-    const strategies = latestValidation.filter((item) => item.valid).map((item) => item.normalized_strategy);
-    if (!strategies.length) {
-      setStatus("검증을 통과한 실행 가능 row가 없습니다.", "failed");
-      return;
-    }
-    const endpoint = publicConfig.worker_endpoint;
-    if (!endpoint) {
-      setStatus("Worker endpoint config가 없습니다.", "failed");
-      return;
-    }
-    const chunks = [];
-    for (let start = 0; start < strategies.length; start += MAX_BATCH_SIZE) {
-      chunks.push(strategies.slice(start, start + MAX_BATCH_SIZE));
-    }
-    setStatus(mode === "backtest" ? `백테스트 실행 요청 중입니다: ${chunks.length}개 묶음` : `검증 실행 요청 중입니다: ${chunks.length}개 묶음`, "pending");
-    const accepted = [];
-    for (let index = 0; index < chunks.length; index += 1) {
-      const response = await fetch(endpoint, {
-        method: "POST",
-        headers: {"content-type": "application/json"},
-        body: JSON.stringify({
-          mode,
-          strategy_batch: {
-            ...latestBatch,
-            batch_metadata: {
-              batch_index: index + 1,
-              batch_count: chunks.length,
-              batch_size_limit: MAX_BATCH_SIZE,
-              ready_row_count: strategies.length,
-              held_row_count: latestValidation.length - strategies.length,
-            },
-            strategies: chunks[index],
-          },
-        }),
-      });
-      const payload = await response.json().catch(() => ({ok: false, error: "Response JSON could not be parsed."}));
-      if (!response.ok || !payload.ok) {
-        setStatus(payload.error || `묶음 ${index + 1} 실행 요청이 거절되었습니다.`, "failed");
-        return;
-      }
-      accepted.push(payload.github_event_type || mode);
-    }
-    setStatus(`요청 접수: ${accepted.length}개 묶음. 결과 JSON 반영 후 새로고침하면 표시됩니다.`, "passed");
+    setStatus(`${mode === "backtest" ? "백테스트" : "검증"} 요청 접수됨: ${payload.request_id || requestId}. 결과 반영 후 새로고침/결과 확인을 하세요.`, "passed");
   };
   const renderExternalResults = (payload) => {
     const rows = Array.isArray(payload?.results) ? payload.results : [];
@@ -3257,6 +3262,7 @@ dl,.path-list li{grid-template-columns:1fr}
     if (fileName) fileName.textContent = files.length ? `${files.length}개 파일 선택됨: ${files.map((file) => file.name).join(", ")}` : "선택된 파일 없음";
     latestBatch = null;
     latestValidation = [];
+    latestRunnerResult = null;
     showMessages([]);
     setStatus("파일을 읽었습니다. 검증 실행을 누르세요.", "pending");
   });

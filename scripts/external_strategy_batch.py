@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import importlib.metadata
 import json
 import math
@@ -61,6 +62,23 @@ def utc_now() -> str:
 
 def run_id() -> str:
     return datetime.now(timezone.utc).strftime("alpha-ext-%Y%m%d-%H%M%SZ")
+
+
+def stable_json_hash(value: Any) -> str:
+    encoded = json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
+
+
+def strategy_sequence_hash(strategies: list[dict[str, Any]]) -> str:
+    sequence = [
+        {
+            "input_order": strategy.get("input_order", index + 1) if isinstance(strategy, dict) else index + 1,
+            "strategy_id": clean_text(strategy.get("strategy_id") or strategy.get("strategy_key")) if isinstance(strategy, dict) else "",
+            "strategy_name": clean_text(strategy.get("strategy_name")) if isinstance(strategy, dict) else "",
+        }
+        for index, strategy in enumerate(strategies)
+    ]
+    return stable_json_hash(sequence)
 
 
 def yfinance_version() -> dict[str, str]:
@@ -1327,6 +1345,8 @@ def chunk_ranges(ready_rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
 def write_outputs(payload: dict[str, Any], output_dir: Path, mode: str) -> dict[str, Any]:
     current_run_id = run_id()
     raw_strategies = normalize_payload_strategies(payload)
+    input_batch_hash = stable_json_hash(raw_strategies)
+    input_strategy_sequence_hash = strategy_sequence_hash(raw_strategies)
     first_pass = [normalize_strategy(strategy, index) for index, strategy in enumerate(raw_strategies)]
     ready_count = sum(1 for row in first_pass if row["valid"])
     validations = [normalize_strategy(strategy, index, ready_count) for index, strategy in enumerate(raw_strategies)]
@@ -1363,8 +1383,14 @@ def write_outputs(payload: dict[str, Any], output_dir: Path, mode: str) -> dict[
         "input_schema_name": CANONICAL_SCHEMA_NAME,
         "input_schema_version": CANONICAL_SCHEMA_VERSION,
         "run_id": current_run_id,
+        "request_id": clean_text(payload.get("request_id")) or current_run_id,
         "generated_at": utc_now(),
         "mode": mode,
+        "input_batch_hash": input_batch_hash,
+        "input_strategy_sequence_hash": input_strategy_sequence_hash,
+        "strategy_count": len(raw_strategies),
+        "request_batch_hash": clean_text(payload.get("input_batch_hash")),
+        "request_strategy_sequence_hash": clean_text(payload.get("input_strategy_sequence_hash")),
         **BOUNDARY_FLAGS,
         "signal_timing": "after_close",
         "execution_timing": "next_session_open",
@@ -1396,9 +1422,13 @@ def write_outputs(payload: dict[str, Any], output_dir: Path, mode: str) -> dict[
         index_payload = {"schema_name": "external_strategy_results_index", "schema_version": "1.0", "runs": []}
     index_payload["runs"] = [{
         "run_id": current_run_id,
+        "request_id": result_payload["request_id"],
         "path": f"external_strategy_results/runs/{current_run_id}.json",
         "generated_at": result_payload["generated_at"],
         "mode": mode,
+        "input_batch_hash": input_batch_hash,
+        "input_strategy_sequence_hash": input_strategy_sequence_hash,
+        "strategy_count": len(raw_strategies),
         "validation_summary": result_payload["validation_summary"],
     }] + index_payload.get("runs", [])[:24]
     index_path.write_text(json.dumps(index_payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

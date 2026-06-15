@@ -4,8 +4,8 @@ const ALLOWED_ORIGINS = new Set([
   "https://alpha-research-ops-dashboard.pages.dev"
 ]);
 
-const MAX_STRATEGIES = 10;
-const MAX_PAYLOAD_BYTES = 120000;
+const MAX_STRATEGIES = 200;
+const MAX_PAYLOAD_BYTES = 1500000;
 
 function cors(origin) {
   const allowed = ALLOWED_ORIGINS.has(origin) ? origin : "https://kdhyun32.github.io";
@@ -72,6 +72,13 @@ export default {
 
     const mode = body.mode;
     const eventType = mode === "backtest" ? "external_strategy_backtest" : "external_strategy_validate";
+    const requestId = body.request_id || `alpha-public-${Date.now()}-${crypto.randomUUID()}`;
+    const strategyBatch = {
+      ...body.strategy_batch,
+      request_id: requestId,
+      input_batch_hash: body.input_batch_hash || body.strategy_batch.input_batch_hash || "",
+      input_strategy_sequence_hash: body.input_strategy_sequence_hash || body.strategy_batch.input_strategy_sequence_hash || ""
+    };
     const response = await fetch("https://api.github.com/repos/kdhyun32/alpha-research-ops-dashboard/dispatches", {
       method: "POST",
       headers: {
@@ -84,7 +91,7 @@ export default {
       body: JSON.stringify({
         event_type: eventType,
         client_payload: {
-          strategy_batch: body.strategy_batch,
+          strategy_batch: strategyBatch,
           requested_at: new Date().toISOString(),
           request_guard: { max_strategies: MAX_STRATEGIES, max_payload_bytes: MAX_PAYLOAD_BYTES }
         }
@@ -101,6 +108,12 @@ export default {
       }, 502, origin);
     }
 
-    return json({ ok: true, github_event_type: eventType, result_path: "external_strategy_results/latest.json" }, 202, origin);
+    return json({
+      ok: true,
+      github_event_type: eventType,
+      request_id: requestId,
+      result_path: "external_strategy_results/latest.json",
+      result_index_path: "external_strategy_results/index.json"
+    }, 202, origin);
   }
 };

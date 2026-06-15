@@ -3,21 +3,35 @@
   "schema_version": "1.0",
   "runs": [
     {
-      "run_id": "alpha-ext-20260615-062337Z",
-      "path": "external_strategy_results/runs/alpha-ext-20260615-062337Z.json",
-      "generated_at": "2026-06-15T06:23:37Z",
-      "mode": "validate",
+      "run_id": "alpha-ext-20260615-063516Z",
+      "request_id": "alpha-ext-20260615-063516Z",
+      "path": "external_strategy_results/runs/alpha-ext-20260615-063516Z.json",
+      "generated_at": "2026-06-15T06:38:29Z",
+      "mode": "backtest",
+      "input_batch_hash": "5d98bcb4fbb16ec1433caaddfae9f2557725fb1cd5a4b79fb9897b611754dade",
+      "input_strategy_sequence_hash": "4b5ef322fac5b3a0617a66ebfae11a0174552466dae9c2db72696a90b70228b9",
+      "strategy_count": 145,
       "validation_summary": {
-        "total_rows": 10,
-        "ready_to_backtest": 10,
-        "skipped_or_held": 0,
+        "total_rows": 145,
+        "ready_to_backtest": 94,
+        "skipped_or_held": 51,
         "status_counts": {
-          "ready_to_backtest": 10
+          "ready_to_backtest": 94,
+          "needs_data_source_mapping": 38,
+          "unsupported_rule": 5,
+          "needs_state_machine_support": 4,
+          "needs_formula_engine": 4
         },
-        "hold_reason_counts": {},
+        "hold_reason_counts": {
+          "needs_data_source_mapping": 38,
+          "unsupported_rule": 5,
+          "needs_state_machine_support": 4,
+          "needs_formula_engine": 4,
+          "data_unavailable": 9
+        },
         "batch_size_limit": 10,
-        "batch_split_required": false,
-        "batch_count": 1,
+        "batch_split_required": true,
+        "batch_count": 10,
         "batch_plan": [
           {
             "batch_index": 1,
@@ -35,6 +49,350 @@
               10
             ],
             "strategy_count": 10
+          },
+          {
+            "batch_index": 2,
+            "row_range": "11-21",
+            "input_orders": [
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              18,
+              19,
+              20,
+              21
+            ],
+            "strategy_count": 10
+          },
+          {
+            "batch_index": 3,
+            "row_range": "22-37",
+            "input_orders": [
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              34,
+              35,
+              37
+            ],
+            "strategy_count": 10
+          },
+          {
+            "batch_index": 4,
+            "row_range": "42-82",
+            "input_orders": [
+              42,
+              47,
+              75,
+              76,
+              77,
+              78,
+              79,
+              80,
+              81,
+              82
+            ],
+            "strategy_count": 10
+          },
+          {
+            "batch_index": 5,
+            "row_range": "83-92",
+            "input_orders": [
+              83,
+              84,
+              85,
+              86,
+              87,
+              88,
+              89,
+              90,
+              91,
+              92
+            ],
+            "strategy_count": 10
+          },
+          {
+            "batch_index": 6,
+            "row_range": "93-102",
+            "input_orders": [
+              93,
+              94,
+              95,
+              96,
+              97,
+              98,
+              99,
+              100,
+              101,
+              102
+            ],
+            "strategy_count": 10
+          },
+          {
+            "batch_index": 7,
+            "row_range": "103-112",
+            "input_orders": [
+              103,
+              104,
+              105,
+              106,
+              107,
+              108,
+              109,
+              110,
+              111,
+              112
+            ],
+            "strategy_count": 10
+          },
+          {
+            "batch_index": 8,
+            "row_range": "114-130",
+            "input_orders": [
+              114,
+              115,
+              116,
+              117,
+              118,
+              124,
+              125,
+              127,
+              129,
+              130
+            ],
+            "strategy_count": 10
+          },
+          {
+            "batch_index": 9,
+            "row_range": "131-140",
+            "input_orders": [
+              131,
+              132,
+              133,
+              134,
+              135,
+              136,
+              137,
+              138,
+              139,
+              140
+            ],
+            "strategy_count": 10
+          },
+          {
+            "batch_index": 10,
+            "row_range": "141-145",
+            "input_orders": [
+              141,
+              142,
+              144,
+              145
+            ],
+            "strategy_count": 4
+          }
+        ]
+      }
+    },
+    {
+      "run_id": "alpha-ext-20260615-063447Z",
+      "request_id": "alpha-ext-20260615-063447Z",
+      "path": "external_strategy_results/runs/alpha-ext-20260615-063447Z.json",
+      "generated_at": "2026-06-15T06:34:47Z",
+      "mode": "validate",
+      "input_batch_hash": "5d98bcb4fbb16ec1433caaddfae9f2557725fb1cd5a4b79fb9897b611754dade",
+      "input_strategy_sequence_hash": "4b5ef322fac5b3a0617a66ebfae11a0174552466dae9c2db72696a90b70228b9",
+      "strategy_count": 145,
+      "validation_summary": {
+        "total_rows": 145,
+        "ready_to_backtest": 94,
+        "skipped_or_held": 51,
+        "status_counts": {
+          "ready_to_backtest": 94,
+          "needs_data_source_mapping": 38,
+          "unsupported_rule": 5,
+          "needs_state_machine_support": 4,
+          "needs_formula_engine": 4
+        },
+        "hold_reason_counts": {
+          "needs_data_source_mapping": 38,
+          "unsupported_rule": 5,
+          "needs_state_machine_support": 4,
+          "needs_formula_engine": 4
+        },
+        "batch_size_limit": 10,
+        "batch_split_required": true,
+        "batch_count": 10,
+        "batch_plan": [
+          {
+            "batch_index": 1,
+            "row_range": "1-10",
+            "input_orders": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10
+            ],
+            "strategy_count": 10
+          },
+          {
+            "batch_index": 2,
+            "row_range": "11-21",
+            "input_orders": [
+              11,
+              12,
+              13,
+              14,
+              15,
+              16,
+              18,
+              19,
+              20,
+              21
+            ],
+            "strategy_count": 10
+          },
+          {
+            "batch_index": 3,
+            "row_range": "22-37",
+            "input_orders": [
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              34,
+              35,
+              37
+            ],
+            "strategy_count": 10
+          },
+          {
+            "batch_index": 4,
+            "row_range": "42-82",
+            "input_orders": [
+              42,
+              47,
+              75,
+              76,
+              77,
+              78,
+              79,
+              80,
+              81,
+              82
+            ],
+            "strategy_count": 10
+          },
+          {
+            "batch_index": 5,
+            "row_range": "83-92",
+            "input_orders": [
+              83,
+              84,
+              85,
+              86,
+              87,
+              88,
+              89,
+              90,
+              91,
+              92
+            ],
+            "strategy_count": 10
+          },
+          {
+            "batch_index": 6,
+            "row_range": "93-102",
+            "input_orders": [
+              93,
+              94,
+              95,
+              96,
+              97,
+              98,
+              99,
+              100,
+              101,
+              102
+            ],
+            "strategy_count": 10
+          },
+          {
+            "batch_index": 7,
+            "row_range": "103-112",
+            "input_orders": [
+              103,
+              104,
+              105,
+              106,
+              107,
+              108,
+              109,
+              110,
+              111,
+              112
+            ],
+            "strategy_count": 10
+          },
+          {
+            "batch_index": 8,
+            "row_range": "114-130",
+            "input_orders": [
+              114,
+              115,
+              116,
+              117,
+              118,
+              124,
+              125,
+              127,
+              129,
+              130
+            ],
+            "strategy_count": 10
+          },
+          {
+            "batch_index": 9,
+            "row_range": "131-140",
+            "input_orders": [
+              131,
+              132,
+              133,
+              134,
+              135,
+              136,
+              137,
+              138,
+              139,
+              140
+            ],
+            "strategy_count": 10
+          },
+          {
+            "batch_index": 10,
+            "row_range": "141-145",
+            "input_orders": [
+              141,
+              142,
+              144,
+              145
+            ],
+            "strategy_count": 4
           }
         ]
       }
