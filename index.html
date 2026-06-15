@@ -9488,33 +9488,150 @@ dl,.path-list li{grid-template-columns:1fr}
   const dataNode = document.getElementById("strategy-table-data");
   const body = document.getElementById("strategy-performance-body");
   if (!dataNode || !body) return;
+
   const tableData = JSON.parse(dataNode.textContent);
   const mainRows = Array.isArray(tableData.default_rows) ? tableData.default_rows : [];
   const holdRows = Array.isArray(tableData.hold_rows) ? tableData.hold_rows : [];
   const holdBody = document.getElementById("hold-strategy-body");
   const originStatus = document.getElementById("strategy-origin-status");
+  const sortStatus = document.getElementById("strategy-sort-status");
   let activeOriginFilter = tableData.default_view_filter || "all";
+  let activeSortKey = "";
+  let activeSortDirection = "asc";
+
+  const L = {
+    strategy: "\uc804\ub7b5\uba85",
+    registered: "\ub4f1\ub85d\uc77c",
+    signals: "\uc2e0\ud638 \uc218",
+    period: "\uae30\uac04",
+    trades: "\ub9e4\ub9e4\ud69f\uc218",
+    periodCompare: "\uae30\uac04 \ube44\uad50",
+    samePeriod: "\uac19\uc740 \uae30\uac04 \ubcf4\uae30",
+    actualPeriod: "actual \uae30\uac04",
+    strategyDesc: "\uc804\ub7b5 \uc124\uba85",
+    usedSignals: "\uc0ac\uc6a9 \uc2e0\ud638",
+    entry: "\ub9e4\uc218/\ub178\ucd9c \uc870\uac74",
+    exit: "\ub9e4\ub3c4/\ucd95\uc18c \uc870\uac74",
+    interpretation: "\uc870\uac74 \ud574\uc11d",
+    executionBasis: "\uccb4\uacb0 \uae30\uc900",
+    cost: "\ube44\uc6a9/\uc2ac\ub9ac\ud53c\uc9c0",
+    benchmark: "\ubca4\uce58\ub9c8\ud06c",
+    requiredData: "\ud544\uc694 \ub370\uc774\ud130",
+    noSignals: "\uc2e0\ud638 \uc0c1\uc138 \uc5c6\uc74c",
+    closeSignalNextOpen: "\uc885\uac00\ub85c \uc2e0\ud638\ub97c \uacc4\uc0b0\ud558\uace0, \ub2e4\uc74c \uac70\ub798\uc77c \uc2dc\uac00\uc5d0 \uccb4\uacb0",
+    close: "\uc885\uac00",
+    sma: "\uc77c \uc774\ub3d9\ud3c9\uade0",
+    aboveBelow: "\ubcf4\ub2e4",
+    trueThen: "\uc774\uba74 \ucc38",
+    and: " \uadf8\ub9ac\uace0 ",
+    or: " \ub610\ub294 ",
+    conditionFalse: "\uc704 \uc870\uac74\uc774 \uac70\uc9d3\uc774\uba74",
+    nextOpen: "\ub2e4\uc74c \uac70\ub798\uc77c \uc2dc\uac00",
+    exposure: "TQQQ \ub178\ucd9c",
+    defaultOrder: "\uae30\ubcf8 \ub4f1\ub85d/\uc785\ub825 \uc21c\uc11c",
+    currentSort: "\ud604\uc7ac \uc815\ub82c",
+    ascending: "\uc624\ub984\ucc28\uc21c",
+    descending: "\ub0b4\ub9bc\ucc28\uc21c",
+    closeDialog: "\ub2eb\uae30",
+    rawMeta: "\uc815\ud655\ud55c \uae30\uac04/\uc6d0\ubcf8 \uba54\ud0c0\ub370\uc774\ud130",
+    noHeld: "\ubcf4\ub958 \uc804\ub7b5 \uc5c6\uc74c",
+    holdReason: "\uae30\uc220 \uc0ac\uc720",
+    all: "\uc804\uccb4",
+    imported: "\uc774\ubc88 import",
+    existing: "\uae30\uc874 \uc5f0\uad6c",
+    currentFilter: "\ud604\uc7ac \ud544\ud130"
+  };
+
   const escapeHtml = (value) => String(value ?? "-").replace(/[&<>"']/g, (char) => ({
     "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;"
   }[char]));
   const text = (value) => value === null || value === undefined || value === "" ? "-" : String(value);
   const pct = (value) => typeof value === "number" && Number.isFinite(value) ? `${(value * 100).toFixed(1)}%` : "-";
   const num = (value) => typeof value === "number" && Number.isFinite(value) ? value.toFixed(2) : text(value);
-  const detailsHtml = (row) => {
+  const op = (operator) => ({">":"\ucd08\uacfc", ">=":"\uc774\uc0c1", "<":"\ubbf8\ub9cc", "<=":"\uc774\ud558", "==":"\uac19\uc74c"}[operator] || operator || "\uc870\uac74 \ucda9\uc871");
+  const percent = (value) => Number.isFinite(Number(value)) ? `${(Number(value) * 100).toFixed(1)}%` : text(value);
+  const sortValue = (row, key) => {
+    const value = row[key];
+    if (typeof value === "number" && Number.isFinite(value)) return value;
+    if (key === "registered_at" || key === "date_start") return Date.parse(value || "") || 0;
+    const parsed = Number(value);
+    if (Number.isFinite(parsed) && value !== null && value !== "") return parsed;
+    return String(value ?? "").toLowerCase();
+  };
+  const compareRows = (a, b) => {
+    const av = sortValue(a, activeSortKey);
+    const bv = sortValue(b, activeSortKey);
+    if (av < bv) return activeSortDirection === "asc" ? -1 : 1;
+    if (av > bv) return activeSortDirection === "asc" ? 1 : -1;
+    return Number(a.run_order || 0) - Number(b.run_order || 0);
+  };
+
+  const describeNode = (node) => {
+    if (!node || typeof node !== "object") return "";
+    if (node.type === "binary" && node.condition) return describeNode(node.condition);
+    const type = node.type || "";
+    if (type === "price_vs_sma") return `${node.symbol || "\uac00\uaca9"} ${L.close}\uac00 ${node.window}${L.sma}${L.aboveBelow} ${op(node.operator)}${L.trueThen}`;
+    if (type === "price_vs_sma_other_symbol") return `${node.symbol || "\uac00\uaca9"} ${L.close}\uac00 ${node.other_symbol || "\ube44\uad50\uc790\uc0b0"} ${node.window}${L.sma}${L.aboveBelow} ${op(node.operator)}${L.trueThen}`;
+    if (type === "sma_slope") return `${node.symbol || "\uac00\uaca9"} ${node.window}${L.sma} \uae30\uc6b8\uae30\uac00 0 ${op(node.operator)}${L.trueThen}`;
+    if (type === "roc_compare_zero") return `${node.symbol || "\uac00\uaca9"} ${node.window}\uc77c \uc218\uc775\ub960\uc774 ${percent(node.threshold || 0)} ${op(node.operator)}${L.trueThen}`;
+    if (type === "roc_compare_symbol") return `${node.left_symbol || "\uc67c\ucabd \uc790\uc0b0"} ${node.window}\uc77c \uc218\uc775\ub960\uc774 ${node.right_symbol || "\uc624\ub978\ucabd \uc790\uc0b0"} ${node.window}\uc77c \uc218\uc775\ub960\ubcf4\ub2e4 ${op(node.operator)}${L.trueThen}`;
+    if (type === "price_level_compare") return `${node.symbol || "\uc9c0\ud45c"} \uac12\uc774 ${node.threshold} ${op(node.operator)}${L.trueThen}`;
+    if (type === "realized_volatility") return `${node.symbol || "\uac00\uaca9"} ${node.window}\uc77c \uc2e4\ud604\ubcc0\ub3d9\uc131\uc774 ${percent(node.threshold || 0)} ${op(node.operator)}${L.trueThen}`;
+    if (type === "trailing_drawdown") return `${node.symbol || "\uac00\uaca9"} ${node.window}\uc77c \uace0\uc810 \ub300\ube44 \ub099\ud3ed\uc774 ${percent(node.threshold || 0)} ${op(node.operator)}${L.trueThen}`;
+    if (type === "return_threshold") return `${node.symbol || "\uac00\uaca9"} ${node.window}\uc77c \uc218\uc775\ub960\uc774 ${percent(node.threshold || 0)} ${op(node.operator)}${L.trueThen}`;
+    if (type === "percentile") return `${node.symbol || "\uc9c0\ud45c"} ${node.window}\uc77c \ubc31\ubd84\uc704\uac00 ${percent(node.threshold || 0)} ${op(node.operator)}${L.trueThen}`;
+    if (type === "rsi") return `${node.symbol || "\uac00\uaca9"} RSI(${node.window})\uac00 ${node.threshold} ${op(node.operator)}${L.trueThen}`;
+    if (type === "ratio_price_vs_sma") return `${node.numerator || "\ubd84\uc790"}/${node.denominator || "\ubd84\ubaa8"} \ube44\uc728\uc774 ${node.window}${L.sma}${L.aboveBelow} ${op(node.operator)}${L.trueThen}`;
+    if (type === "ratio_price_threshold" || type === "ratio_roc_compare_zero") return `${node.left_symbol || node.numerator || "\ubd84\uc790"}/${node.right_symbol || node.denominator || "\ubd84\ubaa8"} \ube44\uc728\uc774 ${node.threshold ?? 0} ${op(node.operator)}${L.trueThen}`;
+    if (type === "count_condition") return `\uc870\uac74 \ucda9\uc871 \uac1c\uc218\uac00 ${node.threshold} ${op(node.operator)}${L.trueThen}`;
+    if (type === "logical_and") return (node.children || []).map(describeNode).filter(Boolean).join(L.and);
+    if (type === "logical_or") return (node.children || []).map(describeNode).filter(Boolean).join(L.or);
+    if (type === "logical_not") return `${describeNode(node.child)} \uc870\uac74\uc774 \uc544\ub2c8\uba74 ${L.trueThen}`;
+    if (type === "monthly_revalidation") return `\ub9e4\uc6d4 \uccab \uc2e0\ud638 \ud655\uc778\uc77c\uc5d0 ${describeNode(node.child)} \uc5ec\ubd80\ub85c \ub2e4\uc74c \ub2ec\uae4c\uc9c0 \ub178\ucd9c\uc744 \uc815\ud568`;
+    if (type === "cooldown_lockout") return `${describeNode(node.trigger)} \ubc1c\uc0dd \ud6c4 ${node.cooldown_sessions || node.sessions || "\uc815\ud574\uc9c4"}\uac70\ub798\uc77c \ub3d9\uc548 \ub178\ucd9c 0`;
+    if (type === "condition_fraction") return `${(node.conditions || node.children || []).map(describeNode).filter(Boolean).join(" / ")} \uc911 \ucda9\uc871 \ube44\uc728\ub85c \ub178\ucd9c \uacb0\uc815`;
+    if (type === "tiered_exposure") return "\uc815\ud574\uc9c4 \uc810\uc218/\uc870\uac74 \uad6c\uac04\uc5d0 \ub530\ub77c \ub178\ucd9c\uc744 \ub2e8\uacc4\uc801\uc73c\ub85c \uc870\uc815";
+    if (type === "state_machine") return "\uc815\ud574\uc9c4 \uc0c1\ud0dc \uc804\ud658 \uaddc\uce59\uc5d0 \ub530\ub77c \ub178\ucd9c\uc744 \uc870\uc815";
+    return node.text || node.rule || type || "";
+  };
+  const describeExposure = (row) => {
+    const semantics = row.rule_semantics || {};
+    const exposure = row.exposure_rule || row.exposure || row.rule_spec || row.signal_graph;
+    const condition = describeNode(exposure);
+    if (exposure && typeof exposure === "object" && exposure.type === "binary") {
+      const truePct = Number.isFinite(Number(exposure.true_exposure)) ? `${(Number(exposure.true_exposure) * 100).toFixed(0)}%` : "ON";
+      const falsePct = Number.isFinite(Number(exposure.false_exposure)) ? `${(Number(exposure.false_exposure) * 100).toFixed(0)}%` : "OFF";
+      return {
+        entry: condition ? `${condition} -> ${L.nextOpen} ${L.exposure} ${truePct}` : text(semantics.entry_rule),
+        exit: condition ? `${L.conditionFalse} -> ${L.nextOpen} ${L.exposure} ${falsePct}` : text(semantics.exit_rule),
+        condition: condition || text(semantics.exposure_rule),
+      };
+    }
+    return {
+      entry: condition || text(semantics.entry_rule),
+      exit: text(semantics.exit_rule),
+      condition: condition || text(semantics.exposure_rule),
+    };
+  };
+  const detailHtml = (row) => {
     const semantics = row.rule_semantics || {};
     const signals = Array.isArray(row.signal_items) ? row.signal_items : [];
-    const signalItems = signals.length ? signals.map((item) => `<li>${escapeHtml(item.name)} / ${escapeHtml(item.role)}${item.rule ? ` / ${escapeHtml(item.rule)}` : ""}</li>`).join("") : "<li>신호 상세 없음</li>";
+    const signalItems = signals.length
+      ? signals.map((item) => `<li>${escapeHtml(item.name)} / ${escapeHtml(item.role)}${item.rule ? ` / ${escapeHtml(item.rule)}` : ""}</li>`).join("")
+      : `<li>${L.noSignals}</li>`;
     const publicRequired = Array.isArray(row.public_required_inputs) && row.public_required_inputs.length ? row.public_required_inputs : row.required_inputs;
     const required = Array.isArray(publicRequired) && publicRequired.length ? publicRequired.join(", ") : "-";
+    const interpreted = describeExposure(row);
     return `<div class="details-body"><dl class="mini-dl">
-      <dt>전략 설명</dt><dd>${escapeHtml(row.strategy_name)}</dd>
-      <dt>신호 목록</dt><dd><ul class="check-list">${signalItems}</ul></dd>
-      <dt>진입 조건</dt><dd>${escapeHtml(semantics.entry_rule)}</dd>
-      <dt>청산 조건</dt><dd>${escapeHtml(semantics.exit_rule)}</dd>
-      <dt>타이밍</dt><dd>장마감 후 신호 계산, 다음 거래일 시가 체결</dd>
-      <dt>비용/슬리피지</dt><dd>${escapeHtml(semantics.cost_assumption_summary)}</dd>
-      <dt>벤치마크</dt><dd>QQQ, TQQQ</dd>
-      <dt>필요 데이터</dt><dd>${escapeHtml(required)}</dd>
+      <dt>${L.strategyDesc}</dt><dd>${escapeHtml(row.strategy_name)}</dd>
+      <dt>${L.usedSignals}</dt><dd><ul class="check-list">${signalItems}</ul></dd>
+      <dt>${L.entry}</dt><dd>${escapeHtml(interpreted.entry)}</dd>
+      <dt>${L.exit}</dt><dd>${escapeHtml(interpreted.exit)}</dd>
+      <dt>${L.interpretation}</dt><dd>${escapeHtml(interpreted.condition)}</dd>
+      <dt>${L.executionBasis}</dt><dd>${L.closeSignalNextOpen}</dd>
+      <dt>${L.cost}</dt><dd>${escapeHtml(semantics.cost_assumption_summary || "\uc218\uc218\ub8cc 0, \ub178\ucd9c \ubcc0\uacbd\ub2f9 \uc2ac\ub9ac\ud53c\uc9c0 0.05% \uac00\uc815")}</dd>
+      <dt>${L.benchmark}</dt><dd>${escapeHtml(Array.isArray(row.benchmarks) ? row.benchmarks.join(", ") : "QQQ, TQQQ")}</dd>
+      <dt>${L.requiredData}</dt><dd>${escapeHtml(required)}</dd>
     </dl></div>`;
   };
   const openDetail = (row) => {
@@ -9523,7 +9640,7 @@ dl,.path-list li{grid-template-columns:1fr}
       dialog = document.createElement("dialog");
       dialog.id = "strategy-detail-dialog";
       dialog.className = "strategy-detail-dialog";
-      dialog.innerHTML = '<button type="button" class="export-button secondary" id="strategy-detail-dialog-close">닫기</button><div id="strategy-detail-dialog-body"></div>';
+      dialog.innerHTML = `<button type="button" class="export-button secondary" id="strategy-detail-dialog-close">${L.closeDialog}</button><div id="strategy-detail-dialog-body"></div>`;
       document.body.appendChild(dialog);
       document.getElementById("strategy-detail-dialog-close")?.addEventListener("click", () => dialog.close());
     }
@@ -9534,33 +9651,58 @@ dl,.path-list li{grid-template-columns:1fr}
       run_id: row.external_result_run_id,
       request_id: row.external_result_request_id,
       input_batch_hash: row.external_result_input_batch_hash,
-      sequence_hash: row.external_result_sequence_hash
+      sequence_hash: row.external_result_sequence_hash,
     };
     if (row.raw_strategy_name && row.raw_strategy_name !== row.strategy_name) meta.raw_strategy_name = row.raw_strategy_name;
     const container = document.getElementById("strategy-detail-dialog-body");
-    if (container) container.innerHTML = `<h2>${escapeHtml(row.strategy_name)}</h2>${detailsHtml(row)}<details class="raw-details"><summary>정확한 기간/원본 메타데이터</summary><pre>${escapeHtml(JSON.stringify(meta, null, 2))}</pre></details>`;
+    if (container) container.innerHTML = `<h2>${escapeHtml(row.strategy_name)}</h2>${detailHtml(row)}<details class="raw-details"><summary>${L.rawMeta}</summary><pre>${escapeHtml(JSON.stringify(meta, null, 2))}</pre></details>`;
     if (typeof dialog.showModal === "function") dialog.showModal();
   };
-  const renderMain = () => {
+  const headerCells = [
+    ["", "", false],
+    ["strategy_name", L.strategy, true],
+    ["registered_at", L.registered, true],
+    ["signal_count", L.signals, true],
+    ["date_start", L.period, true],
+    ["total_return", "Total Return", true],
+    ["cagr", "CAGR", true],
+    ["max_drawdown", "MDD", true],
+    ["mar", "MAR", true],
+    ["trade_count_display", L.trades, true],
+    ["difference_vs_tqqq_reference", "TQQQ \ub300\ube44", true],
+    ["difference_vs_qqq_reference", "QQQ \ub300\ube44", true],
+    ["period_action", L.periodCompare, false],
+  ];
+  const renderHeader = () => {
     const headRow = document.querySelector(".strategy-performance-table thead tr");
-    const headers = ["", "전략명", "등록일", "신호 수", "기간", "Total Return", "CAGR", "MDD", "MAR", "매매횟수", "TQQQ 대비", "QQQ 대비", "기간 비교"];
-    if (headRow) headRow.innerHTML = headers.map((label, index) => `<th${index === 0 ? ' class="select-cell"' : ""}>${label}</th>`).join("");
+    if (!headRow) return;
+    headRow.innerHTML = headerCells.map(([key, label, sortable], index) => {
+      if (index === 0) return '<th class="select-cell"></th>';
+      if (!sortable) return `<th>${label}</th>`;
+      const marker = activeSortKey === key ? (activeSortDirection === "asc" ? " \u25b2" : " \u25bc") : "";
+      return `<th><button type="button" class="table-sort-button" data-sort-key="${key}">${label}${marker}</button></th>`;
+    }).join("");
+  };
+  const filteredRows = () => mainRows.filter((row) => {
+    if (activeOriginFilter === "import") return row.row_origin === "import_latest_result";
+    if (activeOriginFilter === "existing") return row.row_origin !== "import_latest_result";
+    return true;
+  });
+  const renderMain = () => {
+    renderHeader();
     body.innerHTML = "";
-    const visibleRows = mainRows.filter((row) => {
-      if (activeOriginFilter === "import") return row.row_origin === "import_latest_result";
-      if (activeOriginFilter === "existing") return row.row_origin !== "import_latest_result";
-      return true;
-    });
+    const visibleRows = filteredRows();
+    if (activeSortKey) visibleRows.sort(compareRows);
     visibleRows.forEach((row) => {
-      const periodLabel = row.date_range_label === "2010-02-11 ~ 2026-06-11" ? "actual 기간" : text(row.date_range_label);
+      const periodLabel = row.date_range_label === "2010-02-11 ~ 2026-06-11" ? L.actualPeriod : text(row.date_range_label);
       const tr = document.createElement("tr");
-      tr.innerHTML = `<td class="select-cell"><label class="strategy-select-control"><input type="checkbox" class="strategy-export-checkbox" data-strategy-key="${escapeHtml(row.unique_key)}"><span class="sr-only">선택</span></label></td>
+      tr.innerHTML = `<td class="select-cell"><label class="strategy-select-control"><input type="checkbox" class="strategy-export-checkbox" data-strategy-key="${escapeHtml(row.unique_key)}"><span class="sr-only">\uc120\ud0dd</span></label></td>
         <td><a id="${escapeHtml(row.row_anchor)}"></a><button type="button" class="link-button strategy-detail-button" data-strategy-key="${escapeHtml(row.unique_key)}">${escapeHtml(row.strategy_name)}</button><div class="muted small-text">${escapeHtml(row.strategy_id)}</div></td>
         <td>${escapeHtml(row.registered_date_display)}</td>
         <td>${escapeHtml(row.signal_count)}</td>
         <td>${escapeHtml(periodLabel)}<div class="muted small-text">${escapeHtml(row.date_range_note)}</div></td>
         <td>${pct(row.total_return)}</td><td>${pct(row.cagr)}</td><td>${pct(row.max_drawdown)}</td><td>${num(row.mar)}</td><td>${escapeHtml(row.trade_count_display)}</td>
-        <td>${pct(row.difference_vs_tqqq_reference)}</td><td>${pct(row.difference_vs_qqq_reference)}</td><td><button type="button" class="link-button period-view-button" data-period="${escapeHtml(row.period_compare_anchor)}">같은 기간 보기</button></td>`;
+        <td>${pct(row.difference_vs_tqqq_reference)}</td><td>${pct(row.difference_vs_qqq_reference)}</td><td><button type="button" class="link-button period-view-button" data-period="${escapeHtml(row.period_compare_anchor)}">${L.samePeriod}</button></td>`;
       body.appendChild(tr);
     });
   };
@@ -9568,20 +9710,40 @@ dl,.path-list li{grid-template-columns:1fr}
     if (!holdBody) return;
     holdBody.innerHTML = "";
     if (!holdRows.length) {
-      holdBody.innerHTML = '<tr><td colspan="6">보류 전략 없음</td></tr>';
+      holdBody.innerHTML = `<tr><td colspan="6">${L.noHeld}</td></tr>`;
       return;
     }
     holdRows.forEach((row) => {
       const tr = document.createElement("tr");
-      tr.innerHTML = `<td><button type="button" class="link-button strategy-hold-detail-button" data-strategy-key="${escapeHtml(row.unique_key)}">${escapeHtml(row.strategy_name)}</button><div class="muted small-text">${escapeHtml(row.strategy_id)}</div></td><td>${escapeHtml(row.registered_date_display)}</td><td>${escapeHtml(row.hold_reason_label)}</td><td>${escapeHtml(row.external_result_status)}</td><td>${escapeHtml(row.external_result_mode)}</td><td><details class="raw-details"><summary>기술 사유</summary><pre>${escapeHtml(row.hold_reason_raw)}</pre></details></td>`;
+      tr.innerHTML = `<td><button type="button" class="link-button strategy-hold-detail-button" data-strategy-key="${escapeHtml(row.unique_key)}">${escapeHtml(row.strategy_name)}</button><div class="muted small-text">${escapeHtml(row.strategy_id)}</div></td><td>${escapeHtml(row.registered_date_display)}</td><td>${escapeHtml(row.hold_reason_label)}</td><td>${escapeHtml(row.external_result_status)}</td><td>${escapeHtml(row.external_result_mode)}</td><td><details class="raw-details"><summary>${L.holdReason}</summary><pre>${escapeHtml(row.hold_reason_raw)}</pre></details></td>`;
       holdBody.appendChild(tr);
     });
   };
+  const updateSort = (target) => {
+    const key = target.dataset.sortKey || "";
+    if (activeSortKey === key) activeSortDirection = activeSortDirection === "asc" ? "desc" : "asc";
+    else {
+      activeSortKey = key;
+      activeSortDirection = "asc";
+    }
+    if (sortStatus) sortStatus.textContent = `${L.currentSort}: ${target.textContent.replace(/[▲▼]/g, "").trim()} ${activeSortDirection === "asc" ? L.ascending : L.descending}`;
+    renderMain();
+    window.dispatchEvent(new CustomEvent("strategy-table-rendered"));
+  };
+
   renderMain();
   renderHold();
   document.addEventListener("click", (event) => {
     const target = event.target;
     if (!(target instanceof HTMLElement)) return;
+    if (target.classList.contains("table-sort-button")) updateSort(target);
+    if (target.id === "strategy-reset-order") {
+      activeSortKey = "";
+      activeSortDirection = "asc";
+      if (sortStatus) sortStatus.textContent = `${L.currentSort}: ${L.defaultOrder}`;
+      renderMain();
+      window.dispatchEvent(new CustomEvent("strategy-table-rendered"));
+    }
     if (target.classList.contains("strategy-detail-button")) {
       const row = mainRows.find((item) => item.unique_key === target.dataset.strategyKey);
       if (row) openDetail(row);
@@ -9592,8 +9754,8 @@ dl,.path-list li{grid-template-columns:1fr}
     }
     if (target.classList.contains("strategy-origin-filter")) {
       activeOriginFilter = ["all", "import", "existing"].includes(target.dataset.originFilter || "") ? target.dataset.originFilter : "all";
-      const label = activeOriginFilter === "import" ? "이번 import" : activeOriginFilter === "existing" ? "기존 연구" : "전체";
-      if (originStatus) originStatus.textContent = `현재 필터: ${label}`;
+      const label = activeOriginFilter === "import" ? L.imported : activeOriginFilter === "existing" ? L.existing : L.all;
+      if (originStatus) originStatus.textContent = `${L.currentFilter}: ${label}`;
       renderMain();
       window.dispatchEvent(new CustomEvent("strategy-table-rendered"));
     }
@@ -13424,8 +13586,8 @@ dl,.path-list li{grid-template-columns:1fr}
 </ul>
 <h3>Generated artifacts</h3>
 <ul class="path-list">
-<li><span>Beginner dashboard HTML</span><code>artifacts/beginner_research_dashboard/public_dashboard_regen_20260615_103829/INDEX.html</code></li>
-<li><span>Beginner dashboard summary JSON</span><code>artifacts/beginner_research_dashboard/public_dashboard_regen_20260615_103829/BEGINNER_RESEARCH_DASHBOARD_SUMMARY.json</code></li>
+<li><span>Beginner dashboard HTML</span><code>artifacts/beginner_research_dashboard/20260615_unified_alpha_dashboard_v1/INDEX.html</code></li>
+<li><span>Beginner dashboard summary JSON</span><code>artifacts/beginner_research_dashboard/20260615_unified_alpha_dashboard_v1/BEGINNER_RESEARCH_DASHBOARD_SUMMARY.json</code></li>
 </ul>
 </div>
 </details>
