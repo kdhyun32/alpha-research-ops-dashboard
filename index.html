@@ -147,50 +147,20 @@ dl,.path-list li{grid-template-columns:1fr}
 </div>
 <div class="summary-grid compact-grid">
 <article class="summary-card">
-<h3>Performance rows</h3>
-<p class="count small-count">128</p>
-<p>성과표 기준 row</p>
-</article>
-<article class="summary-card">
-<h3>Held rows</h3>
-<p class="count small-count">44</p>
-<p>보류표 기준 row</p>
-</article>
-<article class="summary-card">
-<h3>Reviewable rows</h3>
+<h3>전체 등록된 전략 수</h3>
 <p class="count small-count">172</p>
 <p>성과표 + 보류표</p>
 </article>
 <article class="summary-card">
-<h3>Family count - performance</h3>
-<p class="count small-count">Long trend filter 33, Momentum filter 1, Volatility brake 25, Drawdown/loss lockout 7, Multi-signal vote 5, Defensive asset switch 32, Macro/external mapping 21, State machine needed 3, Unknown 1</p>
-<p>성과표 기준 family</p>
+<h3>백테스트 완료 수</h3>
+<p class="count small-count">128</p>
+<p>성과표 기준</p>
 </article>
 <article class="summary-card">
-<h3>Family count - all</h3>
-<p class="count small-count">Long trend filter 33, Momentum filter 1, Volatility brake 25, Drawdown/loss lockout 7, Multi-signal vote 5, Defensive asset switch 32, Macro/external mapping 59, Formula engine needed 4, State machine needed 5, Unknown 1</p>
-<p>보류 포함 전체 기준 family</p>
+<h3>백테스트 미완료 수</h3>
+<p class="count small-count">44</p>
+<p>보류표 기준</p>
 </article>
-<article class="summary-card">
-<h3>Duplicate high - all</h3>
-<p class="count small-count">performance 0, held 28, all 28</p>
-<p>기본 강조는 high only; low는 기술 상세 참고</p>
-</article>
-</div>
-<p class="plain-note">Row basis: performance 128 / held 44 / total 172. Duplicate risk: none = no close duplicate hint, low = same family hint only, high = same core rule/exposure needs human review.</p>
-<div class="mini-panel review-action-board" id="review-action-board">
-<h2>오늘의 검토 액션</h2>
-<p class="plain-note">성과표 기준은 성과 row만, 보류표 기준은 held row만, 전체 검토 가능 기준은 성과 row + 보류 row입니다.</p>
-<div class="action-grid compact-action-grid">
-<button type="button" class="action-card review-action-card" data-action-filter="all"><span class="count small-count" data-action-count="all">172</span><strong>전체 검토 가능</strong><span class="muted small-text">전체 검토 가능 기준: 성과 row + 보류 row</span></button>
-<button type="button" class="action-card review-action-card" data-action-filter="unreviewed"><span class="count small-count" data-action-count="unreviewed">172</span><strong>미검토</strong><span class="muted small-text">전체 검토 가능 기준</span></button>
-<button type="button" class="action-card review-action-card" data-action-filter="interested"><span class="count small-count" data-action-count="interested">0</span><strong>관심</strong><span class="muted small-text">전체 검토 가능 기준</span></button>
-<button type="button" class="action-card review-action-card" data-action-filter="needs_more_evidence"><span class="count small-count" data-action-count="needs_more_evidence">0</span><strong>추가정보 필요</strong><span class="muted small-text">전체 검토 가능 기준</span></button>
-<button type="button" class="action-card review-action-card" data-action-filter="rerun_candidate"><span class="count small-count" data-action-count="rerun_candidate">0</span><strong>재실행 후보</strong><span class="muted small-text">성과표 기준</span></button>
-<button type="button" class="action-card review-action-card" data-action-filter="duplicate_marked"><span class="count small-count" data-action-count="duplicate_marked">170</span><strong>중복 표시됨</strong><span class="muted small-text">전체 검토 가능 기준</span></button>
-<button type="button" class="action-card review-action-card" data-action-filter="held_rows"><span class="count small-count" data-action-count="held_rows">44</span><strong>보류 row</strong><span class="muted small-text">보류표 기준</span></button>
-<button type="button" class="action-card review-action-card" data-action-filter="duplicate_high"><span class="count small-count" data-action-count="duplicate_high">28</span><strong>중복위험 높음</strong><span class="muted small-text">전체 검토 가능 기준</span></button>
-</div>
 </div>
 <div class="table-toolbar">
 <button type="button" class="export-button secondary" id="strategy-reset-order">기본 순서로 복귀</button>
@@ -11681,6 +11651,7 @@ dl,.path-list li{grid-template-columns:1fr}
     ["cagr", "CAGR", true],
     ["max_drawdown", "MDD", true],
     ["mar", "MAR", true],
+    ["trade_count_display", L.trades, true],
     ["difference_vs_tqqq_cagr", L.tqqqCagr, true],
     ["flags", "\ubcf4\ub958/\uac80\ud1a0 \ud50c\ub798\uadf8", false],
   ];
@@ -11731,6 +11702,7 @@ dl,.path-list li{grid-template-columns:1fr}
         <td>${reviewControls(row)}</td>
         <td>${escapeHtml(row.strategy_family_label || row.strategy_family || "-")}</td>
         <td>${pct(row.cagr)}</td><td>${pct(row.max_drawdown)}</td><td>${num(row.mar)}</td>
+        <td>${escapeHtml(row.trade_count_display ?? "-")}</td>
         <td>${pct(row.difference_vs_tqqq_cagr)}</td>
         <td>${periodBadges(row)}<button type="button" class="link-button period-view-button" data-period="${escapeHtml(row.period_compare_anchor)}">${L.samePeriod}</button></td>`;
       body.appendChild(tr);
@@ -15771,8 +15743,8 @@ dl,.path-list li{grid-template-columns:1fr}
 </ul>
 <h3>Generated artifacts</h3>
 <ul class="path-list">
-<li><span>Beginner dashboard HTML</span><code>artifacts/beginner_research_dashboard/20260616_audit_remaining/INDEX.html</code></li>
-<li><span>Beginner dashboard summary JSON</span><code>artifacts/beginner_research_dashboard/20260616_audit_remaining/BEGINNER_RESEARCH_DASHBOARD_SUMMARY.json</code></li>
+<li><span>Beginner dashboard HTML</span><code>artifacts/beginner_research_dashboard/20260616_compact_top_summary/INDEX.html</code></li>
+<li><span>Beginner dashboard summary JSON</span><code>artifacts/beginner_research_dashboard/20260616_compact_top_summary/BEGINNER_RESEARCH_DASHBOARD_SUMMARY.json</code></li>
 </ul>
 </div>
 </details>
