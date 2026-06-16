@@ -185,7 +185,7 @@ def test_bounded_formula_import_pattern_executes_with_synthetic_data(monkeypatch
     assert result["exposure_tiers_used"]
 
 
-def test_backtest_uses_same_day_close_after_hours_proxy(monkeypatch) -> None:
+def test_backtest_uses_next_session_open_by_default(monkeypatch) -> None:
     normalized = batch.normalize_strategy(
         strategy_with(
             {
@@ -197,16 +197,16 @@ def test_backtest_uses_same_day_close_after_hours_proxy(monkeypatch) -> None:
         0,
     )
     dates = pd.bdate_range("2020-01-01", periods=8)
-    qqq = pd.DataFrame({"Open": [100.0] * 8, "Adj Close": [100, 101, 102, 103, 104, 105, 106, 107], "Close": [100, 101, 102, 103, 104, 105, 106, 107]}, index=dates)
-    tqqq = pd.DataFrame({"Open": [100.0] * 8, "Adj Close": [100, 110, 121, 133.1, 146.41, 161.051, 177.1561, 194.87171], "Close": [100, 110, 121, 133.1, 146.41, 161.051, 177.1561, 194.87171]}, index=dates)
+    qqq = pd.DataFrame({"Open": [100, 101, 102, 103, 104, 105, 106, 107], "Adj Close": [100, 101, 102, 103, 104, 105, 106, 107], "Close": [100, 101, 102, 103, 104, 105, 106, 107]}, index=dates)
+    tqqq = pd.DataFrame({"Open": [100, 110, 121, 133.1, 146.41, 161.051, 177.1561, 194.87171], "Adj Close": [100, 110, 121, 133.1, 146.41, 161.051, 177.1561, 194.87171], "Close": [100, 110, 121, 133.1, 146.41, 161.051, 177.1561, 194.87171]}, index=dates)
 
     monkeypatch.setattr(batch, "download_symbols", lambda symbols: ({"QQQ": qqq, "TQQQ": tqqq}, []))
 
     result = batch.backtest(normalized)
 
     assert result["execution_timing"] == batch.DEFAULT_EXECUTION_TIMING
-    assert result["same_close_execution_allowed"] is True
-    assert result["execution_price_basis"] == "adjusted_close_after_hours_estimate"
+    assert result["same_close_execution_allowed"] is False
+    assert result["execution_price_basis"] == "next_session_open"
     assert result["same_close_exception"]["daily_adjusted_close_proxy_used"] is True
     assert result["same_close_exception"]["after_hours_price_source"] == "none"
     assert result["same_close_exception"]["final_review_allowed"] is False
@@ -468,6 +468,6 @@ def test_validate_output_schema_v21_has_same_close_audit_fields(tmp_path) -> Non
     assert latest["schema_name"] == "alpha_research_strategy_batch_result"
     assert latest["schema_version"] == "2.1"
     assert latest["input_schema_version"] == "2.1"
-    assert latest["execution_price_basis"] == "adjusted_close_after_hours_estimate"
+    assert latest["execution_price_basis"] == "next_session_open"
     assert latest["same_close_exception"]["warning"] == "daily data cannot verify actual after-hours fill"
     assert latest["results"][0]["same_close_exception"]["allowed_for_exploratory_only"] is True

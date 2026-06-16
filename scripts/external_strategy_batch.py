@@ -66,9 +66,9 @@ BOUNDARY_FLAGS = {
     "automatic_selection": False,
 }
 DEFAULT_SIGNAL_TIMING = "after_close"
-DEFAULT_EXECUTION_TIMING = "same_day_close_after_hours"
-DEFAULT_SAME_CLOSE_EXECUTION_ALLOWED = True
-DEFAULT_EXECUTION_PRICE_BASIS = "adjusted_close_after_hours_estimate"
+DEFAULT_EXECUTION_TIMING = "next_session_open"
+DEFAULT_SAME_CLOSE_EXECUTION_ALLOWED = False
+DEFAULT_EXECUTION_PRICE_BASIS = "next_session_open"
 LEGACY_NEXT_OPEN_TIMINGS = {"next_session_open", "next_session_open_to_next_session_open"}
 ALLOWED_EXECUTION_TIMINGS = {
     DEFAULT_EXECUTION_TIMING,
@@ -1232,7 +1232,7 @@ def normalize_strategy(strategy: dict[str, Any], index: int, total_ready_hint: i
     if strategy.get("signal_timing") != DEFAULT_SIGNAL_TIMING:
         errors.append("signal_timing must be after_close")
     if strategy.get("execution_timing") not in ALLOWED_EXECUTION_TIMINGS:
-        errors.append("execution_timing must be same_day_close_after_hours")
+        errors.append("execution_timing must be next_session_open by default; same_day_close_after_hours is a risk exception only")
     if "same_close_execution_allowed" not in strategy:
         errors.append("same_close_execution_allowed is required")
 
@@ -1406,7 +1406,7 @@ def normalize_strategy(strategy: dict[str, Any], index: int, total_ready_hint: i
         "signal_timing": DEFAULT_SIGNAL_TIMING,
         "execution_timing": DEFAULT_EXECUTION_TIMING,
         "same_close_execution_allowed": DEFAULT_SAME_CLOSE_EXECUTION_ALLOWED,
-        "timing_model": "after_close_signal_same_day_close_after_hours_execution",
+        "timing_model": "after_close_signal_next_session_open_execution",
         "execution_price_basis": DEFAULT_EXECUTION_PRICE_BASIS,
         "same_close_exception": same_close_exception(),
         "costs": strategy.get("costs") if isinstance(strategy.get("costs"), dict) else {"commission": 0, "slippage_per_trade": 0.0005},
@@ -1821,7 +1821,7 @@ def skipped_result(normalized: dict[str, Any], *, reason: str | None = None) -> 
         "signal_timing": DEFAULT_SIGNAL_TIMING,
         "execution_timing": DEFAULT_EXECUTION_TIMING,
         "same_close_execution_allowed": DEFAULT_SAME_CLOSE_EXECUTION_ALLOWED,
-        "timing_model": "after_close_signal_same_day_close_after_hours_execution",
+        "timing_model": "after_close_signal_next_session_open_execution",
         "execution_price_basis": DEFAULT_EXECUTION_PRICE_BASIS,
         "same_close_exception": same_close_exception(),
         "period": "",
@@ -1938,7 +1938,7 @@ def backtest(normalized: dict[str, Any]) -> dict[str, Any]:
         "signal_timing": DEFAULT_SIGNAL_TIMING,
         "execution_timing": DEFAULT_EXECUTION_TIMING,
         "same_close_execution_allowed": DEFAULT_SAME_CLOSE_EXECUTION_ALLOWED,
-        "timing_model": "after_close_signal_same_day_close_after_hours_execution",
+        "timing_model": "after_close_signal_next_session_open_execution",
         "execution_price_basis": DEFAULT_EXECUTION_PRICE_BASIS,
         "same_close_exception": same_close_exception(),
         "period": f"{strategy_effective_start} ~ {strategy_effective_end}",
@@ -2076,7 +2076,7 @@ def write_outputs(payload: dict[str, Any], output_dir: Path, mode: str) -> dict[
         "signal_timing": DEFAULT_SIGNAL_TIMING,
         "execution_timing": DEFAULT_EXECUTION_TIMING,
         "same_close_execution_allowed": DEFAULT_SAME_CLOSE_EXECUTION_ALLOWED,
-        "timing_model": "after_close_signal_same_day_close_after_hours_execution",
+        "timing_model": "after_close_signal_next_session_open_execution",
         "execution_price_basis": DEFAULT_EXECUTION_PRICE_BASIS,
         "same_close_exception": same_close_exception(),
         "validation_summary": {
