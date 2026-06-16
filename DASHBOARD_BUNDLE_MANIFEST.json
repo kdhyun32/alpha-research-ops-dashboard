@@ -1,14 +1,14 @@
 {
-  "bundle_build_id": "bc7ba84ebeb82a24",
+  "bundle_build_id": "469713621a3b5f46",
   "dashboard_kind": "beginner_research_dashboard_operational_v1",
   "dashboard_version": "v1.0.0-operational",
   "dirty": true,
   "embedded_css_sha256": "4d88e3c66c6630b315dd2a53df9a294c516434964365e78f459dad8161fe73ce",
   "embedded_js_sha256": "7d982638bdc311302a00a80a8f1ac184c48862937acfad5d56f64d9b3172295f",
-  "generated_at": "2026-06-12T14:11:45.480141Z",
+  "generated_at": "2026-06-16T05:45:55.216853Z",
   "generator_module": "alpha_research_ops.dashboard.build_dashboard_bundle",
   "generator_repo": "Alpha Research Ops Lab",
-  "index_html_sha256": "d52e3e1e2d6fe4dccf3d148817c04eb0cdc6ddccd1a958d755f2e58d0ef8fa50",
+  "index_html_sha256": "33c6e5dbc04d86787ecf5e796798aeb3157ecb0d2c76f282f17a6a0e8bc80973",
   "public_bundle_policy": {
     "generated_from_alpha_canonical": true,
     "manual_public_html_edit_allowed": false
@@ -16,11 +16,11 @@
   "run_metadata": {
     "artifact_kind": "dashboard_bundle_manifest",
     "command_name": "beginner-dashboard-generate",
-    "generated_at_utc": "2026-06-12T14:11:45.480141Z",
+    "generated_at_utc": "2026-06-16T05:45:55.216853Z",
     "git_commit": "0fdc2cf661ed97c2f8e4b9502557fef3dfc4b3bf",
     "input_paths": [],
     "metadata_schema_version": "artifact_run_metadata_v1",
-    "output_path": "artifacts/beginner_research_dashboard/20260616_dashboard_architecture_rebuild_v1/DASHBOARD_BUNDLE_MANIFEST.json",
+    "output_path": "artifacts/beginner_research_dashboard/20260616_dashboard_architecture_rebuild_cleanup/DASHBOARD_BUNDLE_MANIFEST.json",
     "package_name": "alpha_research_ops",
     "package_version": "0.2.0",
     "repo_root": "D:\\projects\\Alpha Research Ops Lab",
@@ -78,9 +78,9 @@
       },
       {
         "exists": true,
-        "path": "artifacts/beginner_research_dashboard/20260616_dashboard_architecture_rebuild_v1/INDEX.html",
-        "sha256": "d52e3e1e2d6fe4dccf3d148817c04eb0cdc6ddccd1a958d755f2e58d0ef8fa50",
-        "size_bytes": 807991
+        "path": "artifacts/beginner_research_dashboard/20260616_dashboard_architecture_rebuild_cleanup/INDEX.html",
+        "sha256": "33c6e5dbc04d86787ecf5e796798aeb3157ecb0d2c76f282f17a6a0e8bc80973",
+        "size_bytes": 808006
       },
       {
         "artifact_kind": "beginner_research_dashboard_operational_v1",
@@ -88,9 +88,9 @@
         "has_run_metadata": true,
         "json_parse_status": "parsed",
         "metadata_schema_version": "artifact_run_metadata_v1",
-        "path": "artifacts/beginner_research_dashboard/20260616_dashboard_architecture_rebuild_v1/BEGINNER_RESEARCH_DASHBOARD_SUMMARY.json",
-        "sha256": "7fe361160b074688bd42d425194fd3be69cefc8d90f39f8727c1274e3b1093f0",
-        "size_bytes": 2022455
+        "path": "artifacts/beginner_research_dashboard/20260616_dashboard_architecture_rebuild_cleanup/BEGINNER_RESEARCH_DASHBOARD_SUMMARY.json",
+        "sha256": "9e8b736bd019fa85421a72b17b7ff0ce729497c2e0d5e47a5071961c95ffada5",
+        "size_bytes": 2022475
       }
     ]
   },
@@ -101,5 +101,5 @@
   },
   "source_git_commit_or_dirty_marker": "dirty:0fdc2cf661ed",
   "source_git_status_short_hash": "ca337be65b89e29a",
-  "summary_json_sha256": "7fe361160b074688bd42d425194fd3be69cefc8d90f39f8727c1274e3b1093f0"
+  "summary_json_sha256": "9e8b736bd019fa85421a72b17b7ff0ce729497c2e0d5e47a5071961c95ffada5"
 }

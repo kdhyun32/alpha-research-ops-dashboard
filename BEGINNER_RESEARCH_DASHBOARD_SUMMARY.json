@@ -49923,7 +49923,7 @@
           "label": "정보 부족으로 보류"
         }
       ],
-      "source": "LEGACY_DECISION_QUEUE.json / 2026-06-12T14:11:45.480141Z"
+      "source": "LEGACY_DECISION_QUEUE.json / 2026-06-16T05:45:55.216853Z"
     },
     {
       "basis": "6개 필요 / 10개 기타",
@@ -49941,7 +49941,7 @@
           "label": "기타"
         }
       ],
-      "source": "LEGACY_DECISION_QUEUE.json / 2026-06-12T14:11:45.480141Z"
+      "source": "LEGACY_DECISION_QUEUE.json / 2026-06-16T05:45:55.216853Z"
     },
     {
       "basis": "47개 원본 기준",
@@ -49965,7 +49965,7 @@
           "label": "미확인"
         }
       ],
-      "source": "LEGACY_HUMAN_BRIEF_SUMMARY.json / 2026-06-12T14:11:45.480141Z"
+      "source": "LEGACY_HUMAN_BRIEF_SUMMARY.json / 2026-06-16T05:45:55.216853Z"
     },
     {
       "basis": "승인된 백테스트 0개",
@@ -49985,7 +49985,7 @@
           "label": "미실행 / 승인 필요"
         }
       ],
-      "source": "DASHBOARD_V0_SUMMARY.json / 2026-06-12T14:11:45.480141Z"
+      "source": "DASHBOARD_V0_SUMMARY.json / 2026-06-16T05:45:55.216853Z"
     }
   ],
   "chart_denominators": {
@@ -50443,7 +50443,7 @@
       "win_rate": "승인 후 생성"
     }
   ],
-  "dashboard_bundle_build_id": "bc7ba84ebeb82a24",
+  "dashboard_bundle_build_id": "469713621a3b5f46",
   "dashboard_sections": [
     "오늘의 결정 보드",
     "판단 요약",
@@ -50716,7 +50716,7 @@
       "group": "비용 영향"
     }
   ],
-  "generated_at": "2026-06-12T14:11:45.480141Z",
+  "generated_at": "2026-06-16T05:45:55.216853Z",
   "input_artifact_paths": {
     "dashboard_summary_json": "artifacts/dashboard_v0/20260612/DASHBOARD_V0_SUMMARY.json",
     "decision_queue_json": "artifacts/legacy_human_brief/20260612/LEGACY_DECISION_QUEUE.json",
@@ -50811,9 +50811,9 @@
     "title": "새 아이디어 준비 게이트"
   },
   "output_artifact_paths": {
-    "bundle_manifest": "artifacts/beginner_research_dashboard/20260616_dashboard_architecture_rebuild_v1/DASHBOARD_BUNDLE_MANIFEST.json",
-    "html": "artifacts/beginner_research_dashboard/20260616_dashboard_architecture_rebuild_v1/INDEX.html",
-    "summary_json": "artifacts/beginner_research_dashboard/20260616_dashboard_architecture_rebuild_v1/BEGINNER_RESEARCH_DASHBOARD_SUMMARY.json"
+    "bundle_manifest": "artifacts/beginner_research_dashboard/20260616_dashboard_architecture_rebuild_cleanup/DASHBOARD_BUNDLE_MANIFEST.json",
+    "html": "artifacts/beginner_research_dashboard/20260616_dashboard_architecture_rebuild_cleanup/INDEX.html",
+    "summary_json": "artifacts/beginner_research_dashboard/20260616_dashboard_architecture_rebuild_cleanup/BEGINNER_RESEARCH_DASHBOARD_SUMMARY.json"
   },
   "package_version": "0.2.0",
   "performance_comparison_rows": [],
@@ -51693,11 +51693,11 @@
   "run_metadata": {
     "artifact_kind": "beginner_research_dashboard_operational_v1",
     "command_name": "beginner-dashboard-generate",
-    "generated_at_utc": "2026-06-12T14:11:45.480141Z",
+    "generated_at_utc": "2026-06-16T05:45:55.216853Z",
     "git_commit": "0fdc2cf661ed97c2f8e4b9502557fef3dfc4b3bf",
     "input_paths": [],
     "metadata_schema_version": "artifact_run_metadata_v1",
-    "output_path": "artifacts/beginner_research_dashboard/20260616_dashboard_architecture_rebuild_v1/BEGINNER_RESEARCH_DASHBOARD_SUMMARY.json",
+    "output_path": "artifacts/beginner_research_dashboard/20260616_dashboard_architecture_rebuild_cleanup/BEGINNER_RESEARCH_DASHBOARD_SUMMARY.json",
     "package_name": "alpha_research_ops",
     "package_version": "0.2.0",
     "repo_root": "D:\\projects\\Alpha Research Ops Lab",
